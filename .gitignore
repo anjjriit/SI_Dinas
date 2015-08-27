@@ -1,5 +1,7 @@
 /vendor
+/.phpintel
 /node_modules
 Homestead.yaml
 Homestead.json
 .env
+ - Copy.env

@@ -6,6 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Kota;
 use App\Http\Requests;
+use App\Http\Requests\CreateKotaRequest;
+use App\Http\Requests\UpdateKotaRequest;
 use App\Http\Controllers\Controller;
 
 class KotaController extends Controller
@@ -35,7 +37,7 @@ class KotaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  Request App\Http\Requests\CreateKotaRequest $request
      * @return Response
      */
     public function store(Request $request)
@@ -54,18 +56,18 @@ class KotaController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  Kota $kota
+     * @param  App\Kota $kota
      * @return Response
      */
     public function show(Kota $kota)
     {
-        //
+        return view('kota.show', compact('kota'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  Kota $kota
+     * @param  App\Kota $kota
      * @return Response
      */
     public function edit(Kota $kota)
@@ -96,7 +98,7 @@ class KotaController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  Kota $kota
+     * @param  App\Kota $kota
      * @return Response
      */
     public function destroy(Kota $kota)
