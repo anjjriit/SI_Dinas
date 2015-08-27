@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page_title', 'Manage Kota')
+@section('page_title', 'Manage Prospek')
 
 @section('stylesheet')
     @parent
@@ -12,7 +12,7 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header text-center">
-                    <h4>List Kota</h4>
+                    <h4>List Prospek</h4>
                 </div>
             </div>
         </div>
@@ -22,26 +22,34 @@
                 <table class="table table-bordered">
                     <thead>
                         <tr>
-                            <th>Nama Kota</th>
+                            <th>Nama Prospek</th>
+                            <th>Nama Lembaga</th>
+                            <th>Alamat</th>
                             <th>Action</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach ($data_kota as $kota)
+                        @foreach ($data_prospek as $prospek)
 
                         <tr>
                             <td>
-                                {{ $kota->nama_kota }}
+                                {{ $prospek->nama_prospek }}
                             </td>
                             <td>
-                                <a href="/kota/{{ $kota->kode }}/edit" class="btn btn-xs btn-primary"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                {{ $prospek->nama_lembaga }}
+                            </td>
+                            <td>
+                                {{ $prospek->alamat }}
+                            </td>
+                            <td>
+                                <a href="/prospek/{{ $prospek->kode }}/edit" class="btn btn-xs btn-primary"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                 {!! Form::open(
                                     [
                                         'method' => 'DELETE',
-                                        'route' => ['kota.destroy', $kota->kode],
+                                        'route' => ['user.destroy', $prospek->kode],
                                         'style' => 'display: inline-block;',
-                                        'data-nama' => $kota->nama_kota,
+                                        'data-nama' => $prospek->nama_prospek,
                                     ]
                                 ) !!}
 
@@ -55,10 +63,10 @@
                     </tbody>
                 </table>
 
-                {!! $data_kota->render() !!}
+                {!! $data_prospek->render() !!}
                 <div class="clearfix"></div>
 
-                <a href="/kota/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Add Kota</a>
+                <a href="/prospek/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Add Prospek</a>
 
             </div>
         </div>
@@ -79,7 +87,7 @@
 
             $.confirm({
                 title: 'Hapus User',
-                content: 'Apakah Anda yakin akan menghapus kota <strong>' + nama + '</strong>',
+                content: 'Apakah Anda yakin akan menghapus prospek dengan nama <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-success',
                 cancelButton: 'Tidak',

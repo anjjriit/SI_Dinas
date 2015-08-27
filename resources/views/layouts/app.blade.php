@@ -27,6 +27,7 @@
                     <a href="#" class="list-group-item"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     <a href="/user" class="list-group-item"><i class="fa fa-fw fa-users"></i> Manage Users</a>
                     <a href="/kota" class="list-group-item"><i class="fa fa-fw fa-map-marker"></i> Manage Kota</a>
+                    <a href="/prospek" class="list-group-item"><i class="fa fa-fw fa-anchor"></i> Manage Prospek</a>
                 </div>
             </div>
 

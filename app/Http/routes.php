@@ -17,3 +17,4 @@ Route::get('/', function () {
 
 Route::resource('user', 'PegawaiController', ['except' => 'show']);
 Route::resource('kota', 'KotaController', ['except' => 'show']);
+Route::resource('prospek', 'ProspekController', ['except' => 'show']);
