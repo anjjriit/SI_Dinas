@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('page_title', 'Add User')
+@section('page_title', 'Edit Kota')
 
 @section('content')
 
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header text-center">
-                    <h4>Form Add User</h4>
+                    <h4>Form Edit Kota</h4>
                 </div>
             </div>
         </div>
@@ -24,12 +24,18 @@
                     </div>
                 @endif
 
-                {!! Form::open(['method' => 'POST', 'route' => 'user.store']) !!}
-                    @include('pegawai._form')
+                {!! Form::model(
+                    $kota,
+                    [
+                        'method' => 'PATCH',
+                        'url' => ['kota/' . $kota->kode]
+                    ]
+                ) !!}
+                    @include('kota._form')
 
-                    {!! Form::button('<i class="fa fa-fw fa-user-plus"></i> Add User', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                    {!! Form::button('<i class="fa fa-fw fa-edit"></i> Edit Kota', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                 {!! Form::close() !!}
+
             </div>
         </div>
-
 @endsection

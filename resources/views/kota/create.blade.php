@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('page_title', 'Add User')
+@section('page_title', 'Add Kota')
 
 @section('content')
 
@@ -24,10 +24,10 @@
                     </div>
                 @endif
 
-                {!! Form::open(['method' => 'POST', 'route' => 'user.store']) !!}
-                    @include('pegawai._form')
+                {!! Form::open(['method' => 'POST', 'route' => 'kota.store']) !!}
+                    @include('kota._form')
 
-                    {!! Form::button('<i class="fa fa-fw fa-user-plus"></i> Add User', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                    {!! Form::button('<i class="fa fa-fw fa-plus"></i> Add Kota', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                 {!! Form::close() !!}
             </div>
         </div>

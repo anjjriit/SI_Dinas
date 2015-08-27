@@ -21,11 +21,12 @@
             <div class="col-md-3">
                 <div class="list-group" style="margin-top: 40px;">
                     <div class="list-group-item text-center">
-                        <h4 class="list-group-item-heading">Username</h4>
+                        <h4 class="list-group-item-heading">Nama</h4>
                         <p class="list-group-item-text"><span class="text-danger">roles</span></p>
                     </div>
                     <a href="#" class="list-group-item"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
                     <a href="/user" class="list-group-item"><i class="fa fa-fw fa-users"></i> Manage Users</a>
+                    <a href="/kota" class="list-group-item"><i class="fa fa-fw fa-map-marker"></i> Manage Kota</a>
                 </div>
             </div>
 
