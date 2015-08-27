@@ -12,7 +12,8 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect('user');
 });
 
-Route::resource('pegawai', 'PegawaiController');
+Route::resource('user', 'PegawaiController', ['except' => 'show']);
+Route::resource('kota', 'KotaController', ['except' => 'show']);

@@ -28,7 +28,7 @@ class CreatePegawaiRequest extends Request
             'nama_lengkap' => 'required',
             'email' => 'required|unique:pegawai,email',
             'password' => 'required',
-            'role' => 'required|in:employee,finance,administation,super_admin',
+            'role' => 'required|in:employee,finance,administration,super_admin',
         ];
     }
 }

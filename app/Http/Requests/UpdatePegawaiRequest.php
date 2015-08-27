@@ -24,10 +24,10 @@ class UpdatePegawaiRequest extends Request
     public function rules()
     {
         return [
-            'nik'          => 'required|unique:pegawai,nik,'.$this->route('pegawai')->nik.',nik',
+            'nik'          => 'required|unique:pegawai,nik,'.$this->route('user')->nik.',nik',
             'nama_lengkap' => 'required',
-            'email'        => 'required|unique:pegawai,email,'.$this->route('pegawai')->nik.',nik',
-            'role'         => 'required|in:employee,finance,administation,super_admin',
+            'email'        => 'required|unique:pegawai,email,'.$this->route('user')->nik.',nik',
+            'role'         => 'required|in:employee,finance,administration,super_admin',
             'active'       => 'required|in:0,1',
         ];
     }

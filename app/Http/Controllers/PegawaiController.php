@@ -19,7 +19,7 @@ class PegawaiController extends Controller
      */
     public function index()
     {
-        $data_pegawai = Pegawai::orderBy('nik', 'asc')->paginate(20);
+        $data_pegawai = Pegawai::orderBy('nik', 'asc')->paginate(15);
 
         return view('pegawai.index', compact('data_pegawai'));
     }
@@ -46,7 +46,7 @@ class PegawaiController extends Controller
 
         Pegawai::create($input);
 
-        return redirect('/pegawai');
+        return redirect('/user');
     }
 
     /**
@@ -85,7 +85,7 @@ class PegawaiController extends Controller
 
         $pegawai->fill($input)->save();
 
-        return redirect('/pegawai');
+        return redirect('/user');
     }
 
     /**
@@ -98,6 +98,6 @@ class PegawaiController extends Controller
     {
         $pegawai->delete();
 
-        return redirect('/pegawai');
+        return redirect('/user');
     }
 }

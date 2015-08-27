@@ -1,14 +1,18 @@
 @extends('layouts.app')
 
-@section('page_title', 'Data Pegawai')
+@section('page_title', 'Manage Users')
+
+@section('stylesheet')
+    @parent
+    <link rel="stylesheet" href="/vendor/jquery-confirm/css/jquery-confirm.min.css">
+@endsection
 
 @section('content')
 
-    <div class="container">
         <div class="row">
             <div class="col-md-12">
-                <div class="page-header">
-                    <h4>Data Pegawai</h4>
+                <div class="page-header text-center">
+                    <h4>List User</h4>
                 </div>
             </div>
         </div>
@@ -43,8 +47,8 @@
                             <td>
                                 @if ($pegawai->role == 'super_admin')
                                     Super Admin
-                                @elseif ($pegawai->role == 'administrasi')
-                                    Administrasi
+                                @elseif ($pegawai->role == 'administration')
+                                    Administration
                                 @elseif ($pegawai->role == 'finance')
                                     Finance
                                 @else
@@ -53,15 +57,24 @@
                             </td>
                             <td>
                                 @if ($pegawai->active == 1)
-                                    Aktif
+                                    Active
                                 @else
-                                    Non-aktif
+                                    Non-active
                                 @endif
                             </td>
                             <td>
-                                <a href="/pegawai/{{ $pegawai->nik }}/edit" class="btn btn-xs btn-primary"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                {!! Form::open(['method' => 'DELETE', 'route' => ['pegawai.destroy', $pegawai->nik], 'style' => 'display: inline-block;']) !!}
-                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i> Hapus', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger']) !!}
+                                <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-xs btn-primary"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                {!! Form::open(
+                                    [
+                                        'method' => 'DELETE',
+                                        'route' => ['user.destroy', $pegawai->nik],
+                                        'style' => 'display: inline-block;',
+                                        'data-nama' => $pegawai->nama_lengkap,
+                                    ]
+                                ) !!}
+
+                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i> Hapus', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button',]
+                                    ) !!}
                                 {!! Form::close() !!}
                             </td>
                         </tr>
@@ -69,8 +82,48 @@
 
                     </tbody>
                 </table>
+
+                {!! $data_pegawai->render() !!}
+                <div class="clearfix"></div>
+
+                <a href="/user/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-user-plus"></i> Add User</a>
+
             </div>
         </div>
-    </div>
 
+@endsection
+
+@section('script')
+    @parent
+    <script src="/vendor/jquery-confirm/js/jquery-confirm.min.js"></script>
+
+    <script>
+        $('.delete-button').on('click', function(event) {
+            event.preventDefault();
+
+            var element = $(this).parent()
+
+            var nama = element.attr('data-nama')
+
+            $.confirm({
+                title: 'Hapus User',
+                content: 'Apakah Anda yakin akan menghapus user dengan nama <strong>' + nama + '</strong>',
+                confirmButtonClass: 'btn-danger',
+                cancelButtonClass: 'btn-success',
+                cancelButton: 'Tidak',
+                confirmButton: '<i class="fa fa-trash"></i> Ya, Hapus',
+                animation: 'top',
+                animationSpeed: 300,
+                animationBounce: 1,
+
+                confirm: function(){
+                    return element.submit()
+                },
+                cancel: function(event){
+                    return;
+                }
+            });
+        })
+
+    </script>
 @endsection
