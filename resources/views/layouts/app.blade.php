@@ -16,7 +16,24 @@
     @show
 </head>
 <body>
-    @yield('content')
+    <div class="container">
+        <div class="row">
+            <div class="col-md-3">
+                <div class="list-group" style="margin-top: 40px;">
+                    <div class="list-group-item text-center">
+                        <h4 class="list-group-item-heading">Username</h4>
+                        <p class="list-group-item-text"><span class="text-danger">roles</span></p>
+                    </div>
+                    <a href="#" class="list-group-item"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+                    <a href="/user" class="list-group-item"><i class="fa fa-fw fa-users"></i> Manage Users</a>
+                </div>
+            </div>
+
+            <div class="col-md-9">
+                @yield('content')
+            </div>
+        </div>
+    </div>
 
     @section('script')
 

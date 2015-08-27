@@ -22,6 +22,7 @@ class KotaController extends Controller
         $data_kota = Kota::orderBy('id', 'asc');
 
         return view('kota.index', compact('data_kota'));
+        //
     }
 
     /**
@@ -32,6 +33,7 @@ class KotaController extends Controller
     public function create()
     {
         return view('kota.create');
+        //
     }
 
     /**
