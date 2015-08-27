@@ -16,3 +16,4 @@ Route::get('/', function () {
 });
 
 Route::resource('pegawai', 'PegawaiController');
+Route::resource('kota', 'KotaController');
