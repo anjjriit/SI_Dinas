@@ -10,28 +10,29 @@
 
         <section class="content">
             <div class="row">
-                <div class="col-md-6">
-                    <div class="box box-widget">
-                        <div class="box-header">
-                            <h4>Form Add User</h4>
-                        </div>
-                        <div class="box-body">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <i class="fa fa-fw fa-exclamation"></i> {{ $error }}
-                                        <br>
-                                    @endforeach
-                                </div>
-                            @endif
+                <div class="col-md-12">
+                    {!! Form::open(['method' => 'POST', 'route' => 'user.store']) !!}
+                        <div class="box box-widget">
+                            <div class="box-header">
+                                <h4>Form Add User</h4>
+                            </div>
+                            <div class="box-body">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        @foreach ($errors->all() as $error)
+                                            <i class="fa fa-fw fa-exclamation"></i> {{ $error }}
+                                            <br>
+                                        @endforeach
+                                    </div>
+                                @endif
 
-                            {!! Form::open(['method' => 'POST', 'route' => 'user.store']) !!}
                                 @include('pegawai._form')
-
+                            </div>
+                            <div class="box-footer">
                                 {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
-                            {!! Form::close() !!}
+                            </div>
                         </div>
-                    </div>
+                    {!! Form::close() !!}
                 </div>
             </div>
         </section>
