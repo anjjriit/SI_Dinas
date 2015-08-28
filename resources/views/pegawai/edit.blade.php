@@ -5,7 +5,7 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Manage Users</h1>
+            <h1>Data User</h1>
         </section>
 
         <section class="content">

@@ -56,20 +56,18 @@
                         </div>
                     @else
                         <div class="alert alert-warning">
-                            Data kota belum tersedia. Klik tombol Tambah Kota untuk menambah data kota.
+                            Data kota belum tersedia. Klik tombol Tambah Kota untuk menambah kota.
                         </div>
                     @endif
+
                     {!! $data_kota->render() !!}
                     <div class="clearfix"></div>
 
                     <a href="/kota/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah Kota</a>
 
                 </div>
-
-
-
             </div>
-        </div>
+        </section>
 
 @endsection
 

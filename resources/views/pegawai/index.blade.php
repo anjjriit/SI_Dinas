@@ -16,82 +16,86 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="box box-widget">
-                        <div class="box-body no-padding">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th>NIK</th>
-                                        <th>Nama Lengkap</th>
-                                        <th>E-mail</th>
-                                        <th>Role</th>
-                                        <th>Status</th>
-                                        <th>Action</th>
-                                    </tr>
-                                </thead>
+                    @if ($data_pegawai->count() != 0)
+                        <div class="box box-widget">
+                            <div class="box-body no-padding">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>NIK</th>
+                                            <th>Nama Lengkap</th>
+                                            <th>E-mail</th>
+                                            <th>Role</th>
+                                            <th>Status</th>
+                                            <th>Action</th>
+                                        </tr>
+                                    </thead>
 
-                                <tbody>
-                                    @foreach ($data_pegawai as $pegawai)
+                                    <tbody>
+                                        @foreach ($data_pegawai as $pegawai)
 
-                                    <tr>
-                                        <td>
-                                            {{ $pegawai->nik }}
-                                        </td>
-                                        <td>
-                                            {{ $pegawai->nama_lengkap }}
-                                        </td>
-                                        <td>
-                                            {{ $pegawai->email }}
-                                        </td>
-                                        <td>
-                                            @if ($pegawai->role == 'super_admin')
-                                                Super Admin
-                                            @elseif ($pegawai->role == 'administration')
-                                                Administration
-                                            @elseif ($pegawai->role == 'finance')
-                                                Finance
-                                            @else
-                                                Employee
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($pegawai->active == 1)
-                                                Active
-                                            @else
-                                                Non-active
-                                            @endif
-                                        </td>
-                                        <td>
-                                            <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                            {!! Form::open(
-                                                [
-                                                    'method' => 'DELETE',
-                                                    'route' => ['user.destroy', $pegawai->nik],
-                                                    'style' => 'display: inline-block;',
-                                                    'data-nama' => $pegawai->nama_lengkap,
-                                                ]
-                                            ) !!}
-
-                                                {!! Form::button('<i class="fa fa-fw fa-trash"></i> Hapus', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button',]
+                                        <tr>
+                                            <td>
+                                                {{ $pegawai->nik }}
+                                            </td>
+                                            <td>
+                                                {{ $pegawai->nama_lengkap }}
+                                            </td>
+                                            <td>
+                                                {{ $pegawai->email }}
+                                            </td>
+                                            <td>
+                                                @if ($pegawai->role == 'super_admin')
+                                                    Super Admin
+                                                @elseif ($pegawai->role == 'administration')
+                                                    Administration
+                                                @elseif ($pegawai->role == 'finance')
+                                                    Finance
+                                                @else
+                                                    Employee
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($pegawai->active == 1)
+                                                    Active
+                                                @else
+                                                    Non-active
+                                                @endif
+                                            </td>
+                                            <td>
+                                                <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                {!! Form::open(
+                                                    [
+                                                        'method' => 'DELETE',
+                                                        'route' => ['user.destroy', $pegawai->nik],
+                                                        'style' => 'display: inline-block;',
+                                                        'data-nama' => $pegawai->nama_lengkap,
+                                                    ]
                                                 ) !!}
-                                            {!! Form::close() !!}
-                                        </td>
-                                    </tr>
-                                    @endforeach
 
-                                </tbody>
-                            </table>
+                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i> Hapus', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button',]
+                                                    ) !!}
+                                                {!! Form::close() !!}
+                                            </td>
+                                        </tr>
+                                        @endforeach
+
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
-                    </div>
+                    @else
+                        <div class="alert alert-warning">
+                            Data user belum tersedia. Klik tombol Tambah User untuk menambah user.
+                        </div>
+                    @endif
+
+                    {!! $data_pegawai->render() !!}
+                    <div class="clearfix"></div>
+
+                    <a href="/user/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah User</a>
                 </div>
             </div>
-
-
-            {!! $data_pegawai->render() !!}
-            <div class="clearfix"></div>
-
-            <a href="/user/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah User</a>
-
         </section>
 
 @endsection
