@@ -17,6 +17,11 @@
                     <i class="fa fa-fw fa-angle-right"></i> <span>Manage Users</span>
                 </a>
             </li>
+            <li>
+                <a href="/user">
+                    <i class="fa fa-fw fa-angle-right"></i> <span>Manage Kota</span>
+                </a>
+            </li>
         </ul>
     </section>
 </aside>
