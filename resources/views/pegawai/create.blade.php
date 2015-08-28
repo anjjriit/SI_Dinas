@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Add User')
+@section('page_title', 'Tambah User')
 
 @section('content')
 
@@ -28,7 +28,7 @@
                             {!! Form::open(['method' => 'POST', 'route' => 'user.store']) !!}
                                 @include('pegawai._form')
 
-                                {!! Form::button('<i class="fa fa-fw fa-plus"></i> Add User', ['type' => 'submit', 'class' => 'btn btn-lg btn-success']) !!}
+                                {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                             {!! Form::close() !!}
                         </div>
                     </div>

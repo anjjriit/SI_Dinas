@@ -10,7 +10,7 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Manage Users</h1>
+            <h1>Data User</h1>
         </section>
 
         <section class="content">
@@ -90,7 +90,7 @@
             {!! $data_pegawai->render() !!}
             <div class="clearfix"></div>
 
-            <a href="/user/create" class="btn btn-lg btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Add User</a>
+            <a href="/user/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah User</a>
 
         </section>
 
@@ -112,7 +112,7 @@
                 title: '<i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus User',
                 content: 'Apakah Anda yakin akan menghapus user dengan nama <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
-                cancelButtonClass: 'btn-success',
+                cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',
                 confirmButton: 'Ya, Hapus',
                 animation: 'top',

@@ -16,7 +16,7 @@ body {
 .table > tbody > tr > td,
 .table > tfoot > tr > td {
     vertical-align: middle;
-    padding: 10px 15px;
+    padding: 10px 20px;
 }
 
 .content-haeder {
@@ -37,6 +37,10 @@ body {
 .left-side {
     top: auto;
     padding-top: 0;
+}
+
+.sidebar-menu .treeview-menu > li > a {
+    padding: 10px 10px 10px 15px;
 }
 
 .skin-black .main-sidebar {
@@ -76,8 +80,8 @@ body {
 
 .box {
     border-radius: 3px;
-    -webkit-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01);
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.01);
+    -webkit-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
 }
 
 .box-header {
@@ -86,6 +90,10 @@ body {
 
 .box-body {
     padding: 10px 20px 20px;
+}
+
+.box-footer {
+    padding: 20px;
 }
 
 .form-control {
@@ -438,4 +446,13 @@ body {
 
 .jconfirm .content {
     min-height: auto;
+}
+
+.bg-yellow,
+.callout.callout-warning,
+.alert-warning,
+.label-warning,
+.modal-warning .modal-body {
+    background-color: #f2a654 !important;
+    border: none;
 }

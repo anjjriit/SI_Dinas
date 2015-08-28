@@ -34,7 +34,7 @@
                             ) !!}
                                 @include('pegawai._form')
 
-                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Update', ['type' => 'submit', 'class' => 'btn btn-lg btn-success']) !!}
+                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Update', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                             {!! Form::close() !!}
                         </div>
                     </div>

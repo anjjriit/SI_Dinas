@@ -9,18 +9,18 @@
         <ul class="sidebar-menu">
             <li>
                 <a href="pages/widgets.html">
-                    <i class="fa fa-fw fa-angle-right"></i> <span>Dashboard</span>
+                    <i class="fa fa-fw fa-th"></i> <span>Dashboard</span>
                 </a>
             </li>
-            <li>
-                <a href="/user">
-                    <i class="fa fa-fw fa-angle-right"></i> <span>Manage Users</span>
+            <li class="treeview">
+                <a href="#">
+                    <i class="fa fa-fw fa-database"></i> <span>Manage Data</span> <i class="fa fa-angle-down pull-right"></i>
                 </a>
-            </li>
-            <li>
-                <a href="/user">
-                    <i class="fa fa-fw fa-angle-right"></i> <span>Manage Kota</span>
-                </a>
+                <ul class="treeview-menu">
+                    <li><a href="/user"><i class="fa fa-fw"></i>Data User</a></li>
+                    <li><a href="/kota"><i class="fa fa-fw"></i>Data Kota</a></li>
+                    <li><a href="/prospek"><i class="fa fa-fw"></i>Data Prospek</a></li>
+                </ul>
             </li>
         </ul>
     </section>
