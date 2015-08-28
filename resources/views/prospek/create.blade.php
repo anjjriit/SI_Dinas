@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('page_title', 'Add Kota')
+@section('page_title', 'Add Prospek')
 
 @section('content')
 
         <div class="row">
             <div class="col-md-12">
                 <div class="page-header text-center">
-                    <h4>Form Add Kota</h4>
+                    <h4>Form Add Prospek</h4>
                 </div>
             </div>
         </div>
@@ -24,10 +24,10 @@
                     </div>
                 @endif
 
-                {!! Form::open(['method' => 'POST', 'route' => 'kota.store']) !!}
-                    @include('kota._form')
+                {!! Form::open(['method' => 'POST', 'route' => 'prospek.store']) !!}
+                    @include('prospek._form')
 
-                    {!! Form::button('<i class="fa fa-fw fa-plus"></i> Add Kota', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                    {!! Form::button('<i class="fa fa-fw fa-plus"></i> Add Prospek', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                 {!! Form::close() !!}
             </div>
         </div>
