@@ -17,5 +17,7 @@ elixir(function(mix) {
     mix.styles([
         'css/app.css',
         'vendor/font-awesome/css/font-awesome.css',
+        'vendor/adminLTE/css/adminLTE.css',
+        'vendor/adminLTE/css/skins/skin-black.css',
     ], null, 'public');
 });

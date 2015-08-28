@@ -1,7 +1,11 @@
 
                     <div class="form-group">
-                        {!! Form::label('nik', 'NIK') !!}
-                        {!! Form::text('nik', null, ['class' => 'form-control']) !!}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {!! Form::label('nik', 'NIK') !!}
+                                {!! Form::text('nik', null, ['class' => 'form-control']) !!}
+                            </div>
+                        </div>
                     </div>
                     <div class="form-group">
                         {!! Form::label('nama_lengkap', 'Nama') !!}
@@ -20,25 +24,29 @@
                     @endif
 
                     <div class="form-group">
-                        {!! Form::label('role', 'Role') !!}
-                        {!! Form::select(
-                            'role',
-                            [
-                                'employee' => 'Employee',
-                                'finance' => 'Finance',
-                                'administration' => 'Administration',
-                                'super_admin' => 'Super Admin'
-                            ],
-                            null,
-                            ['class' => 'form-control']
-                        ) !!}
+                        <div class="row">
+                            <div class="col-md-6">
+                                {!! Form::label('role', 'Role') !!}
+                                {!! Form::select(
+                                    'role',
+                                    [
+                                        'employee' => 'Employee',
+                                        'finance' => 'Finance',
+                                        'administration' => 'Administration',
+                                        'super_admin' => 'Super Admin'
+                                    ],
+                                    null,
+                                    ['class' => 'form-control']
+                                ) !!}
+                            </div>
+                        </div>
                     </div>
                     @if (isset($pegawai))
 
                     <div class="form-group">
                         {!! Form::label('active', 'Status') !!}
                         <div class="row">
-                            <div class="col-md-4">
+                            <div class="col-md-6">
                                 <label style="font-weight: normal;">
                                     {!! Form::radio('active', 1) !!} Active
                                 </label>
