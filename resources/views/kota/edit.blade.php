@@ -19,7 +19,7 @@
                                 $kota,
                                 [
                                     'method' => 'PATCH',
-                                    'url' => ['kota/' . $kota->kode]
+                                    'route' => ['kota.update', $kota->kode]
                                 ]
                             ) !!}
                             <div class="box-body">
@@ -34,7 +34,7 @@
                                 @include('kota._form')
                             </div>
                             <div class="box-footer">
-                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Update', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                                {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                             </div>
                         {!! Form::close() !!}
                     </div>

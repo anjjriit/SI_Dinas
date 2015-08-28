@@ -11,11 +11,11 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                {!! Form::open(['method' => 'POST', 'route' => 'prospek.store']) !!}
-                        <div class="box box-widget">
-                            <div class="box-header">
-                                <h4>Form Tambah Prospek</h4>
-                            </div>
+                    <div class="box box-widget">
+                        <div class="box-header">
+                            <h4>Form Tambah Prospek</h4>
+                        </div>
+                        {!! Form::open(['method' => 'POST', 'route' => 'prospek.store']) !!}
                             <div class="box-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -33,8 +33,8 @@
                             <div class="box-footer">
                                 {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                             </div>
-                        </div>
-                {!! Form::close() !!}
+                        {!! Form::close() !!}
+                    </div>
                 </div>
             </div>
         </section>

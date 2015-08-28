@@ -27,7 +27,7 @@
                                             <th>E-mail</th>
                                             <th>Role</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
 
@@ -91,7 +91,6 @@
                     @endif
 
                     {!! $data_pegawai->render() !!}
-                    <div class="clearfix"></div>
 
                     <a href="/user/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah User</a>
                 </div>

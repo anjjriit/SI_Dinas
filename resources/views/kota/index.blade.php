@@ -22,8 +22,8 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th class="col-md-8">Nama Kota</th>
-                                            <th class="col-md-4">Action</th>
+                                            <th>Nama Kota</th>
+                                            <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
 
@@ -61,7 +61,6 @@
                     @endif
 
                     {!! $data_kota->render() !!}
-                    <div class="clearfix"></div>
 
                     <a href="/kota/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah Kota</a>
 

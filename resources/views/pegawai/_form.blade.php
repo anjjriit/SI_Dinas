@@ -74,4 +74,14 @@
                             </div>
                         </div>
                     </div>
+
+                    <div class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                {!! Form::label('password', 'Password') !!}
+                                {!! Form::input('password', 'password', null, ['class' => 'form-control']) !!}
+                                <small><span class="text-muted">Hanya isi kolom ini jika ingin mengubah password.</span></small>
+                            </div>
+                        </div>
+                    </div>
                     @endif
