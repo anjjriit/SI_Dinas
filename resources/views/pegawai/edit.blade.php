@@ -11,17 +11,17 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    {!! Form::model(
-                        $pegawai,
-                        [
-                            'method' => 'PATCH',
-                            'url' => ['user/' . $pegawai->nik]
-                        ]
-                    ) !!}
-                        <div class="box box-widget">
-                            <div class="box-header">
-                                <h4>Form Edit User</h4>
-                            </div>
+                    <div class="box box-widget">
+                        <div class="box-header">
+                            <h4>Form Edit User</h4>
+                        </div>
+                        {!! Form::model(
+                            $pegawai,
+                            [
+                                'method' => 'PATCH',
+                                'route' => ['user.update', $pegawai->nik]
+                            ]
+                        ) !!}
                             <div class="box-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -32,12 +32,13 @@
                                     </div>
                                 @endif
                                 @include('pegawai._form')
+
                             </div>
                             <div class="box-footer">
-                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Update', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                                {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                             </div>
-                        </div>
-                    {!! Form::close() !!}
+                        {!! Form::close() !!}
+                    </div>
                 </div>
             </div>
         </section>

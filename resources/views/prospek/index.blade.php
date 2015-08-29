@@ -25,7 +25,7 @@
                                             <th>Nama Prospek</th>
                                             <th>Nama Lembaga</th>
                                             <th>Alamat</th>
-                                            <th>Action</th>
+                                            <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
 
@@ -71,7 +71,6 @@
                     @endif
 
                     {!! $data_prospek->render() !!}
-                    <div class="clearfix"></div>
 
                     <a href="/prospek/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah Prospek</a>
                 </div>

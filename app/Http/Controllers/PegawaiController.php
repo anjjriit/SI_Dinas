@@ -43,6 +43,7 @@ class PegawaiController extends Controller
     public function store(CreatePegawaiRequest $request)
     {
         $input = $request->all();
+        $input['password'] = bcrypt($input['password']);
 
         Pegawai::create($input);
 
@@ -74,14 +75,18 @@ class PegawaiController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  Request  $request
      * @param  App\Http\Requests\UpdatePegawaiRequest
      * @param  App\Pegawai $pegawai
      * @return Response
      */
     public function update(UpdatePegawaiRequest $request, Pegawai $pegawai)
     {
-        $input = $request->all();
+        if($request->has('password')) {
+            $input = $request->all();
+            $input['password'] = bcrypt($input['password']);
+        } else {
+            $input = $request->except('password');
+        }
 
         $pegawai->fill($input)->save();
 

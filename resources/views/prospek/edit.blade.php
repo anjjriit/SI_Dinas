@@ -11,17 +11,17 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    {!! Form::model(
-                        $prospek,
-                        [
-                            'method' => 'PATCH',
-                            'url' => ['prospek/' . $prospek->kode]
-                        ]
-                    ) !!}
-                        <div class="box box-widget">
-                            <div class="box-header">
-                                <h4>Form Edit Prospek</h4>
-                            </div>
+                    <div class="box box-widget">
+                        <div class="box-header">
+                            <h4>Form Edit Prospek</h4>
+                        </div>
+                        {!! Form::model(
+                            $prospek,
+                            [
+                                'method' => 'PATCH',
+                                'route' => ['prospek.update', $prospek->kode]
+                            ]
+                        ) !!}
                             <div class="box-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -37,10 +37,10 @@
                                 @include('prospek._form')
                             </div>
                             <div class="box-footer">
-                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Update', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                                {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                             </div>
-                        </div>
-                    {!! Form::close() !!}
+                        {!! Form::close() !!}
+                    </div>
                 </div>
             </div>
         </section>
