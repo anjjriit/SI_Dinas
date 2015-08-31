@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 {!! Form::label('tanggal_selesai', 'Tanggal Selesai') !!}
-                                {!! Form::input('date', 'tanggal_mulai', date('Y-m-d'), ['class' => 'form-control']) !!}
+                                {!! Form::input('date', 'tanggal_selesai', date('Y-m-d'), ['class' => 'form-control', 'id' => 'datepicker']) !!}
                             </div>
                         </div>
                     </div>
@@ -39,3 +39,17 @@
                             </div>
                         </div>
                     </div>
+   <!-- <script src="vendor/jquery/jquery.hoverdir.js"></script>
+    <script src="vendor/jquery/jquery.hoverex.min.js"></script>
+    <script src="vendor/jquery/jquery.prettyPhoto.js"></script>
+    <script src="vendor/bootstrap/js/custom.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap-datepicker.js"></script>
+    <script type="text/JavaScript">
+        $(document).ready(function () {
+                
+            $('#datepicker').datepicker({
+                format: "yyyy-mm-dd"
+            });  
+            
+        });
+    </script>-->

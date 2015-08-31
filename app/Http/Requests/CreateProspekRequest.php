@@ -26,7 +26,7 @@ class CreateProspekRequest extends Request
         return [
             'nama_prospek' => 'required',
             'nama_lembaga' => 'required',
-            'alamat' => 'required',
+            'alamat' => 'required'
         ];
     }
 }
