@@ -20,6 +20,7 @@
                     <li><a href="/user"><i class="fa fa-fw"></i>Data User</a></li>
                     <li><a href="/kota"><i class="fa fa-fw"></i>Data Kota</a></li>
                     <li><a href="/prospek"><i class="fa fa-fw"></i>Data Prospek</a></li>
+                    <li><a href="/prospek"><i class="fa fa-fw"></i>Data Project</a></li>
                 </ul>
             </li>
         </ul>
