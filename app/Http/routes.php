@@ -22,6 +22,7 @@ Route::get('logout', 'Auth\AuthController@getLogout');
 Route::resource('user', 'PegawaiController', ['except' => 'show']);
 Route::resource('kota', 'KotaController', ['except' => 'show']);
 Route::resource('prospek', 'ProspekController', ['except' => 'show']);
+Route::resource('project', 'ProjectController', ['except' => 'show']);
 
 Route::get('user/password', function () {
     return view('user.changepassword');

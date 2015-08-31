@@ -34,50 +34,50 @@
                                     <tbody>
                                         @foreach ($data_pegawai as $pegawai)
 
-                                        <tr>
-                                            <td>
-                                                {{ $pegawai->nik }}
-                                            </td>
-                                            <td>
-                                                {{ $pegawai->nama_lengkap }}
-                                            </td>
-                                            <td>
-                                                {{ $pegawai->email }}
-                                            </td>
-                                            <td>
-                                                @if ($pegawai->role == 'super_admin')
-                                                    Super Admin
-                                                @elseif ($pegawai->role == 'administration')
-                                                    Administration
-                                                @elseif ($pegawai->role == 'finance')
-                                                    Finance
-                                                @else
-                                                    Employee
-                                                @endif
-                                            </td>
-                                            <td>
-                                                @if ($pegawai->active == 1)
-                                                    Active
-                                                @else
-                                                    Non-active
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                                {!! Form::open(
-                                                    [
-                                                        'method' => 'DELETE',
-                                                        'route' => ['user.destroy', $pegawai->nik],
-                                                        'style' => 'display: inline-block;',
-                                                        'data-nama' => $pegawai->nama_lengkap,
-                                                    ]
-                                                ) !!}
+                                    <tr>
+                                        <td>
+                                            {{ $pegawai->nik }}
+                                        </td>
+                                        <td>
+                                            {{ $pegawai->nama_lengkap }}
+                                        </td>
+                                        <td>
+                                            {{ $pegawai->email }}
+                                        </td>
+                                        <td>
+                                            @if ($pegawai->role == 'super_admin')
+                                                Super Admin
+                                            @elseif ($pegawai->role == 'administration')
+                                                Administration
+                                            @elseif ($pegawai->role == 'finance')
+                                                Finance
+                                            @else
+                                                Employee
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if ($pegawai->active == 1)
+                                                Active
+                                            @else
+                                                Non-active
+                                            @endif
+                                        </td>
+                                        <td>
+                                            <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                            {!! Form::open(
+                                                [
+                                                    'method' => 'DELETE',
+                                                    'route' => ['user.destroy', $pegawai->nik],
+                                                    'style' => 'display: inline-block;',
+                                                    'data-nama' => $pegawai->nama_lengkap,
+                                                ]
+                                            ) !!}
 
-                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i> Hapus', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button',]
-                                                    ) !!}
-                                                {!! Form::close() !!}
-                                            </td>
-                                        </tr>
+                                                {!! Form::button('<i class="fa fa-fw fa-trash"></i> Hapus', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button',]
+                                                ) !!}
+                                            {!! Form::close() !!}
+                                        </td>
+                                    </tr>
                                         @endforeach
 
                                     </tbody>
