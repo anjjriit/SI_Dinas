@@ -25,7 +25,7 @@ class UpdateProjectRequest extends Request
     public function rules()
     {
         return [
-            'nama_prospek'   => 'required',
+            'nama_project'   => 'required',
             'nama_lembaga'   => 'required',
             'tanggal_mulai'  => 'required|date',
             'tanggal_selesai'=> 'required|date',

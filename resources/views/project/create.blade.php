@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Project')
+@section('page_title', 'Tambah Project')
 
 @section('stylesheet')
     @parent
@@ -18,20 +18,14 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Project</h4>
+                            <h4>Form Tambah Project</h4>
                         </div>
-                        {!! Form::model(
-                            $project,
-                            [
-                                'method' => 'PATCH',
-                                'route' => ['project.update', $project->kode]
-                            ]
-                        ) !!}
+                        {!! Form::open(['method' => 'POST', 'route' => 'project.store']) !!}
                             <div class="box-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         @foreach ($errors->all() as $error)
-                                            <i class="fa fa-fw fa-times"></i> {{ $error }}
+                                            <i class="fa fa-fw fa-exclamation"></i> {{ $error }}
                                             <br>
                                         @endforeach
                                     </div>
@@ -47,6 +41,7 @@
                 </div>
             </div>
         </section>
+
 @endsection
 
 @section('script')
