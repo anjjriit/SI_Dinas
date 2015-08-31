@@ -19,7 +19,9 @@ class ProjectController extends Controller
      */
     public function index()
     {
-        //
+        $data_project = Project::orderBy('nama_project', 'asc')->paginate(15);
+
+        return view('project.index', compact('data_project'));
     }
 
     /**
@@ -29,13 +31,13 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        //
+        return view('project.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  Request  $request
+     * @param  App\Http\Request\CreateProjectRequest  $request
      * @return Response
      */
     public function store(CreateProjectRequest $request)
