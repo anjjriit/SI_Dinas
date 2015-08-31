@@ -4,7 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use App\Project;
 use App\Http\Requests;
+use App\Http\Request\CreateProjectRequest;
+use App\Http\Request\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
@@ -35,7 +38,7 @@ class ProjectController extends Controller
      * @param  Request  $request
      * @return Response
      */
-    public function store(Request $request)
+    public function store(CreateProjectRequest $request)
     {
         //
     }
@@ -46,42 +49,49 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return Response
      */
-    public function show($id)
+    public function show(Project $project)
     {
-        //
+        return view('project.show', compact('project'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Project $project
      * @return Response
      */
-    public function edit($id)
+    public function edit(Project $project)
     {
-        //
+        return view('project.edit', compact('project'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  int  $id
+     * @param  App\Http\Request\UpdateProjectRequest
+     * @param  App\Project $project
      * @return Response
      */
-    public function update(Request $request, $id)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
-        //
+        $input = $request->all();
+
+        $project->fill($input)->save();
+
+        return redirect('/project');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  App\Project $project
      * @return Response
      */
     public function destroy($id)
     {
-        //
+        $project->delete();
+
+        return redirect('/project');
     }
 }
