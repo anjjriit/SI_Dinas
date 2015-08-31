@@ -25,7 +25,11 @@ class CreateProjectRequest extends Request
     public function rules()
     {
         return [
-            
+            'nama_project' => 'required',
+            'nama_lembaga' => 'required',
+            'tanggal_mulai' => 'required',
+            'tanggal_selesai' => 'required',
+            'alamat' => 'required'
         ];
     }
 }
