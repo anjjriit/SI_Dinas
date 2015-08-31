@@ -2,6 +2,11 @@
 
 @section('page_title', 'Tambah Project')
 
+@section('stylesheet')
+    @parent
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />
+@endsection
+
 @section('content')
 
         <section class="content-header">
@@ -36,5 +41,25 @@
                 </div>
             </div>
         </section>
+
+@endsection
+
+@section('script')
+    @parent
+    <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $('.datepicker').datepicker({
+            autoclose: true,
+            beforeShowMonth: function (date){
+                    switch (date.getMonth()){
+                      case 8:
+                        return false;
+                    }
+                },
+            format: 'yyyy/mm/dd',
+            startDate: '-3d'
+        })
+    </script>
 
 @endsection
