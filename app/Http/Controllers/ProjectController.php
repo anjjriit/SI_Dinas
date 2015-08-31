@@ -6,8 +6,8 @@ use Illuminate\Http\Request;
 
 use App\Project;
 use App\Http\Requests;
-use App\Http\Request\CreateProjectRequest;
-use App\Http\Request\UpdateProjectRequest;
+use App\Http\Requests\CreateProjectRequest;
+use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
@@ -31,24 +31,28 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        return view('project.create');
+        //
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Request\CreateProjectRequest  $request
+     * @param  Request  $request
      * @return Response
      */
     public function store(CreateProjectRequest $request)
     {
-        //
+        $input = $request->all();
+
+        Project::create($input);
+
+        return redirect('/project');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  App\Project $project
      * @return Response
      */
     public function show(Project $project)
@@ -90,7 +94,7 @@ class ProjectController extends Controller
      * @param  App\Project $project
      * @return Response
      */
-    public function destroy($id)
+    public function destroy(Project $project)
     {
         $project->delete();
 

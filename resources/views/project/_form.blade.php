@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 {!! Form::label('tanggal_mulai', 'Tanggal Mulai') !!}
-                                {!! Form::input('date', 'tanggal_mulai', date('Y-m-d'), ['class' => 'form-control']) !!}
+                                {!! Form::text('tanggal_mulai', null, ['class' => 'form-control datepicker']) !!}
                             </div>
                         </div>
                     </div>
@@ -27,7 +27,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 {!! Form::label('tanggal_selesai', 'Tanggal Selesai') !!}
-                                {!! Form::input('date', 'tanggal_mulai', date('Y-m-d'), ['class' => 'form-control']) !!}
+                                {!! Form::text('tanggal_selesai', null, ['class' => 'form-control datepicker']) !!}
                             </div>
                         </div>
                     </div>
@@ -39,3 +39,5 @@
                             </div>
                         </div>
                     </div>
+
+                    

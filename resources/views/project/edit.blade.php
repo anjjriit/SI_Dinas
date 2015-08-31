@@ -2,6 +2,11 @@
 
 @section('page_title', 'Edit Project')
 
+@section('stylesheet')
+    @parent
+    <link rel="stylesheet" type="text/css" href="/vendor/bootstrap-datepicker/css/bootstrap-datepicker.min.css" />
+@endsection
+
 @section('content')
 
         <section class="content-header">
@@ -26,9 +31,7 @@
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         @foreach ($errors->all() as $error)
-                                            <span class="text-danger">
-                                                <i class="fa fa-fw fa-times"></i> {{ $error }}
-                                            </span>
+                                            <i class="fa fa-fw fa-times"></i> {{ $error }}
                                             <br>
                                         @endforeach
                                     </div>
@@ -44,4 +47,24 @@
                 </div>
             </div>
         </section>
+@endsection
+
+@section('script')
+    @parent
+    <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+
+    <script>
+        $('.datepicker').datepicker({
+            autoclose: true,
+            beforeShowMonth: function (date){
+                    switch (date.getMonth()){
+                      case 8:
+                        return false;
+                    }
+                },
+            format: 'yyyy/mm/dd',
+            startDate: '-3d'
+        })
+    </script>
+
 @endsection
