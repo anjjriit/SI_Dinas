@@ -60,12 +60,12 @@
                             <div class="col-md-6">
                                 {!! Form::label('active', 'Status') !!}
                                 <div class="row">
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <label style="font-weight: normal;">
                                             {!! Form::radio('active', 1) !!} Active
                                         </label>
                                     </div>
-                                    <div class="col-md-6">
+                                    <div class="col-md-3">
                                         <label style="font-weight: normal;">
                                             {!! Form::radio('active', 0, null, ['class' => 'text-right']) !!} Non-active
                                         </label>

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Manage Users')
+@section('page_title', 'Data User')
 
 @section('stylesheet')
     @parent

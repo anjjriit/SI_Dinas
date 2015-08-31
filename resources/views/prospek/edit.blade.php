@@ -26,9 +26,7 @@
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         @foreach ($errors->all() as $error)
-                                            <span class="text-danger">
-                                                <i class="fa fa-fw fa-times"></i> {{ $error }}
-                                            </span>
+                                            <i class="fa fa-fw fa-exclamation"></i> {{ $error }}
                                             <br>
                                         @endforeach
                                     </div>

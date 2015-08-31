@@ -6,9 +6,17 @@
         <span class="sr-only">Toggle navigation</span>
         </a>
         <div class="navbar-custom-menu">
-        <ul class="nav navbar-nav">
-
-        </ul>
+            <ul class="nav navbar-nav">
+                <li>
+                    <p class="navbar-text">Selamat datang, <strong>{nama}</strong></p>
+                </li>
+                <li>
+                    <a href="/user/password"><i class="fa fa-fw fa-lock"></i> Ubah Password</a>
+                </li>
+                <li>
+                    <a href="/logout"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+                </li>
+            </ul>
         </div>
     </nav>
 </header>

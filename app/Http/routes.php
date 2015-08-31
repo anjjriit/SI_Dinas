@@ -15,10 +15,14 @@ Route::get('/', function () {
     return redirect('user');
 });
 
+Route::get('login', 'Auth\AuthController@getLogin');
+Route::post('login', ['as' => 'user.login', 'uses' => 'Auth\AuthController@postLogin']);
+Route::get('logout', 'Auth\AuthController@getLogout');
+
 Route::resource('user', 'PegawaiController', ['except' => 'show']);
 Route::resource('kota', 'KotaController', ['except' => 'show']);
 Route::resource('prospek', 'ProspekController', ['except' => 'show']);
 
-Route::get('layout/master', function () {
-    return view('test.master');
+Route::get('user/password', function () {
+    return view('user.changepassword');
 });

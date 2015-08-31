@@ -13,7 +13,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Add User</h4>
+                            <h4>Form Tambah User</h4>
                         </div>
                         {!! Form::open(['method' => 'POST', 'route' => 'user.store']) !!}
                             <div class="box-body">
