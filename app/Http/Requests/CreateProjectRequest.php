@@ -13,7 +13,8 @@ class CreateProjectRequest extends Request
      */
     public function authorize()
     {
-        return false;
+        //return false; disamakan dengan prospek, diubah jadi true
+        return true;
     }
 
     /**
@@ -24,7 +25,7 @@ class CreateProjectRequest extends Request
     public function rules()
     {
         return [
-            //
+            
         ];
     }
 }
