@@ -105,4 +105,34 @@ class PegawaiController extends Controller
 
         return redirect('/user');
     }
+
+    /**
+     * Show the form for editing the password.
+     *
+     * @return Response
+     */
+    public function editPassword()
+    {
+        return view('user.changepassword');
+    }
+
+    /**
+     * Update the specified resource password.
+     *
+     * @param  Request $request
+     * @return Response
+     */
+    public function changePassword(Request $request)
+    {
+        $this->validate($request, [
+            'password' => 'required|confirmed',
+        ]);
+
+        $pegawai = Auth::user();
+
+        $pegawai->password = bcrypt($request->input('password'));
+        $pegawai->fill($new_password)->save();
+
+        return redirect('/user/password')->with('success', '<i class="fa fa-fw fa-check"></i> Password berhasil diubah.');
+    }
 }

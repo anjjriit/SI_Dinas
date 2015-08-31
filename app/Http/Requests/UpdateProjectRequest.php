@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use Carbon\Carbon;
 use App\Http\Requests\Request;
 
 class UpdateProjectRequest extends Request
@@ -26,8 +27,8 @@ class UpdateProjectRequest extends Request
         return [
             'nama_prospek'   => 'required',
             'nama_lembaga'   => 'required',
-            'tanggal_mulai'  => 'required',
-            'tanggal_selesai'=> 'required',
+            'tanggal_mulai'  => 'required|date',
+            'tanggal_selesai'=> 'required|date',
             'alamat'         => 'required',
         ];
     }

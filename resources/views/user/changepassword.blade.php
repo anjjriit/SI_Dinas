@@ -11,12 +11,20 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    <div class="alert alert-warning">
-                        <i class="fa fa-fw fa-exclamation"></i> Anda baru pertama kali melakukan login, harap ubah password terlebih dahulu untuk melanjutkan
-                    </div>
+                    @if (session('status'))
+                        <div class="alert alert-warning">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
 
                     <div class="box box-widget">
-                        {!! Form::open(['method' => 'PATCH', 'url' => 'change/password']) !!}
+                        {!! Form::open(['method' => 'PATCH', 'route' => 'user.update.password']) !!}
                             <div class="box-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -31,7 +39,7 @@
                                     <div class="row">
                                         <div class="col-md-6">
                                             {!! Form::label('password', 'Password Baru') !!}
-                                            {!! Form::input('password', 'password', null, ['class' => 'form-control']) !!}
+                                            {!! Form::input('password', 'password', null, ['class' => 'form-control', 'autofocus']) !!}
                                         </div>
                                     </div>
                                 </div>

@@ -24,6 +24,10 @@ Route::resource('kota', 'KotaController', ['except' => 'show']);
 Route::resource('prospek', 'ProspekController', ['except' => 'show']);
 Route::resource('project', 'ProjectController', ['except' => 'show']);
 
-Route::get('user/password', function () {
-    return view('user.changepassword');
+Route::patch('user/password', ['as' => 'user.update.password', 'uses' => 'PegawaiController@updatePassword']);
+Route::get('user/password', 'PegawaiController@editPassword');
+
+//cek user yang login
+Route::get('cek/user', function () {
+    return dd(Auth::user());
 });

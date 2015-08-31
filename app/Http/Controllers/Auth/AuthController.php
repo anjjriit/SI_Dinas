@@ -2,16 +2,18 @@
 
 namespace App\Http\Controllers\Auth;
 
+use Auth;
 use App\User;
 use Validator;
+use Carbon\Carbon;
+use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class AuthController extends Controller
 {
 
-    use AuthenticatesUsers, ThrottlesLogins;
+    use AuthenticatesUsers;
 
     protected $redirectTo = '/';
     protected $loginPath = '/login';
@@ -28,32 +30,43 @@ class AuthController extends Controller
     }
 
     /**
-     * Get a validator for an incoming registration request.
+     * Override laravel default login method
      *
-     * @param  array  $data
-     * @return \Illuminate\Contracts\Validation\Validator
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
      */
-    protected function validator(array $data)
+    public function postLogin(Request $request)
     {
-        return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+        $this->validate($request, [
+            'email' => 'required',
+            'password' => 'required',
         ]);
-    }
 
-    /**
-     * Create a new user instance after a valid registration.
-     *
-     * @param  array  $data
-     * @return User
-     */
-    protected function create(array $data)
-    {
-        return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+        $email = $request->input('email');
+        $password = $request->input('password');
+
+        // Cek apakah user aktif
+        if(Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
+            $user = Auth::user();
+
+            $first_login = (is_null($user->last_login)) ? true : false;
+
+            //update last login
+            $user->last_login = Carbon::now()->setTimezone('Asia/Jakarta');
+            $user->save();
+
+            if ($first_login) {
+                return redirect('user/password')->with('status', 'Anda baru pertama kali melakukan login, harap ubah password terlebih dahulu untuk melanjutkan.');
+            } else {
+                return redirect('user');
+            }
+        }
+
+        // Cek apakah user tidak aktif
+        if (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 0])) {
+            Auth::logout();
+
+            return redirect('login')->with('status', 'Status akun Anda non-aktif, silahkan hubungi administrator untuk keterangan lebih lanjut.');
+        }
     }
 }

@@ -25,6 +25,11 @@
             <p>Aplikasi Sistem Informasi Perjalanan Dinas</p>
         </div>
         <div class="login-box-body">
+            @if (session('status'))
+                <div class="alert alert-warning">
+                    {{ session('status') }}
+                </div>
+            @endif
             @if ($errors->any())
                 <div class="alert alert-danger">
                     @foreach ($errors->all() as $error)
@@ -36,7 +41,7 @@
             {!! Form::open(['method' => 'POST', 'route' => 'user.login']) !!}
                 <div class="form-group has-feedback">
                     {!! Form::label('email', 'E-mail') !!}
-                    {!! Form::input('email', 'email', null, ['placeholder' => 'name@domain.com', 'class' => 'form-control']) !!}
+                    {!! Form::input('email', 'email', null, ['placeholder' => 'name@domain.com', 'class' => 'form-control', 'autofocus']) !!}
                 </div>
                 <div class="form-group has-feedback">
                     {!! Form::label('password', 'Password') !!}

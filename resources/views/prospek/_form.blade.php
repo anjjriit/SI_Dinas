@@ -3,7 +3,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 {!! Form::label('nama_prospek', 'Nama Prospek') !!}
-                                {!! Form::text('nama_prospek', null, ['class' => 'form-control']) !!}
+                                {!! Form::text('nama_prospek', null, ['class' => 'form-control', 'autofocus']) !!}
                             </div>
                         </div>
                     </div>
