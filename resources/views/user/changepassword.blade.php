@@ -11,9 +11,9 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    @if (session('status'))
+                    @if (session('warning'))
                         <div class="alert alert-warning">
-                            {{ session('status') }}
+                            {{ session('warning') }}
                         </div>
                     @endif
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use Auth;
 use App\Pegawai;
 use App\Http\Requests;
 use App\Http\Requests\CreatePegawaiRequest;
@@ -122,7 +123,7 @@ class PegawaiController extends Controller
      * @param  Request $request
      * @return Response
      */
-    public function changePassword(Request $request)
+    public function updatePassword(Request $request)
     {
         $this->validate($request, [
             'password' => 'required|confirmed',
@@ -131,8 +132,8 @@ class PegawaiController extends Controller
         $pegawai = Auth::user();
 
         $pegawai->password = bcrypt($request->input('password'));
-        $pegawai->fill($new_password)->save();
+        $pegawai->save();
 
-        return redirect('/user/password')->with('success', '<i class="fa fa-fw fa-check"></i> Password berhasil diubah.');
+        return redirect('/user/password')->with('success', 'Password berhasil diubah.');
     }
 }

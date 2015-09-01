@@ -56,17 +56,21 @@ class AuthController extends Controller
             $user->save();
 
             if ($first_login) {
-                return redirect('user/password')->with('status', 'Anda baru pertama kali melakukan login, harap ubah password terlebih dahulu untuk melanjutkan.');
+                return redirect('user/password')->with('warning', 'Anda baru pertama kali melakukan login, harap ubah password terlebih dahulu untuk melanjutkan.');
             } else {
                 return redirect('user');
             }
         }
 
         // Cek apakah user tidak aktif
-        if (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 0])) {
+        elseif (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 0])) {
             Auth::logout();
 
-            return redirect('login')->with('status', 'Status akun Anda non-aktif, silahkan hubungi administrator untuk keterangan lebih lanjut.');
+            return redirect('login')->with('warning', 'Status akun Anda non-aktif, silahkan hubungi administrator untuk keterangan lebih lanjut.');
+        }
+        // Jika email atau password salah
+        else {
+            return redirect('login')->with('warning', 'Email dan password tidak sesuai, silahkan coba lagi.');
         }
     }
 }

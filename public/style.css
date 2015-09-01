@@ -403,69 +403,6 @@ body {
     background-color: #fff
 }
 
-.btn-danger {
-    color: #fff;
-    background-color: #f96868;
-    border-color: #f96868
-}
-
-.btn-danger {
-    outline: 0 !important;
-}
-
-.btn-danger.focus,
-.btn-danger:focus {
-    color: #fff;
-    background-color: #f73737;
-    border-color: #d90909;
-}
-
-.btn-danger:hover {
-    color: #fff;
-    background-color: #f73737;
-    border-color: #f72d2d
-}
-
-.btn-danger.active,
-.btn-danger:active,
-.open>.dropdown-toggle.btn-danger {
-    color: #fff;
-    background-color: #f73737;
-    border-color: #f72d2d
-}
-
-.btn-danger.active.focus,
-.btn-danger.active:focus,
-.btn-danger.active:hover,
-.btn-danger:active.focus,
-.btn-danger:active:focus,
-.btn-danger:active:hover {
-    color: #fff;
-    background-color: #f61515;
-    border-color: #d90909
-}
-
-.btn-danger.active,
-.btn-danger:active,
-.open>.dropdown-toggle.btn-danger {
-    background-image: none
-}
-
-.btn-danger.disabled.focus,
-.btn-danger.disabled:focus,
-.btn-danger.disabled:hover,
-.btn-danger[disabled].focus,
-.btn-danger[disabled]:focus,
-.btn-danger[disabled]:hover {
-    background-color: #f96868;
-    border-color: #f96868
-}
-
-.btn-danger .badge {
-    color: #f96868;
-    background-color: #fff
-}
-
 .jconfirm .content {
     min-height: auto;
 }
@@ -478,3 +415,13 @@ body {
     background-color: #f2a654 !important;
     border: none;
 }
+
+.bg-green,
+.callout.callout-success,
+.alert-success,
+.label-success,
+.modal-success .modal-body {
+    background-color: #369b6f !important;
+    border: none;
+}
+

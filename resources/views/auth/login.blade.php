@@ -25,9 +25,9 @@
             <p>Aplikasi Sistem Informasi Perjalanan Dinas</p>
         </div>
         <div class="login-box-body">
-            @if (session('status'))
+            @if (session('warning'))
                 <div class="alert alert-warning">
-                    {{ session('status') }}
+                    {{ session('warning') }}
                 </div>
             @endif
             @if ($errors->any())
