@@ -9,7 +9,7 @@
                 @elseif (auth()->user()->role == 'finance')
                     <span class="role">Finance</span>
                 @elseif (auth()->user()->role == 'administration')
-                    <span class="role">Administation</span>
+                    <span class="role">Administration</span>
                 @else
                     <span class="role">Employee</span>
                 @endif
