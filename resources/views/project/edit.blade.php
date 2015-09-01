@@ -31,7 +31,7 @@
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         @foreach ($errors->all() as $error)
-                                            <i class="fa fa-fw fa-times"></i> {{ $error }}
+                                            <i class="fa fa-fw fa-exclamation"></i> {{ $error }}
                                             <br>
                                         @endforeach
                                     </div>

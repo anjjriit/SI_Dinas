@@ -49,7 +49,7 @@ class AuthController extends Controller
         if(Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
             $user = Auth::user();
 
-            $first_login = (is_null($user->last_login)) ? true : false;
+            $first_login = is_null($user->last_login);
 
             //update last login
             $user->last_login = Carbon::now()->setTimezone('Asia/Jakarta');

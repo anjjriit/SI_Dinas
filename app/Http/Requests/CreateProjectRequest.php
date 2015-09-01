@@ -27,7 +27,7 @@ class CreateProjectRequest extends Request
             'nama_project' => 'required',
             'nama_lembaga' => 'required',
             'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after:' . Request::input('tanggal_mulai'),
             'alamat' => 'required'
         ];
     }
