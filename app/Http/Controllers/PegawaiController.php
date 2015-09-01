@@ -48,7 +48,7 @@ class PegawaiController extends Controller
 
         Pegawai::create($input);
 
-        return redirect('/user');
+        return redirect('/user')->with('success', 'Sukses menambah ' . $input['nama_lengkap'] . '.');
     }
 
     /**
@@ -91,7 +91,7 @@ class PegawaiController extends Controller
 
         $pegawai->fill($input)->save();
 
-        return redirect('/user');
+        return redirect('/user')->with('success', 'Sukses memperbarui ' . $input['nama_lengkap'] . '.');
     }
 
     /**
@@ -104,7 +104,7 @@ class PegawaiController extends Controller
     {
         $pegawai->delete();
 
-        return redirect('/user');
+        return redirect('/user')->with('success', 'Sukses menghapus ' . $pegawai->nama_lengkap . '.');
     }
 
     /**

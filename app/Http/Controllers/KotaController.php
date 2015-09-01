@@ -50,7 +50,7 @@ class KotaController extends Controller
 
         Kota::create($input);
 
-        return redirect('/kota');
+        return redirect('/kota')->with('success', 'Sukses menambah kota ' . $input['nama_kota'] . '.');
     }
 
     /**
@@ -92,7 +92,7 @@ class KotaController extends Controller
 
         $kota->fill($input)->save();
 
-        return redirect('/kota');
+        return redirect('/kota')->with('success', 'Sukses memperbarui kota ' . $input['nama_kota'] . '.');
     }
 
     /**
@@ -105,6 +105,6 @@ class KotaController extends Controller
     {
         $kota->delete();
 
-        return redirect('/kota');
+        return redirect('/kota')->with('success', 'Sukses menghapus kota ' . $kota->nama_kota . '.');
     }
 }

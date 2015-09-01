@@ -80,7 +80,7 @@
                             <div class="col-md-6">
                                 {!! Form::label('password', 'Password') !!}
                                 {!! Form::input('password', 'password', null, ['class' => 'form-control']) !!}
-                                <small><span class="text-muted">Hanya isi kolom ini jika ingin mengubah password.</span></small>
+                                <small><span class="text-muted"><i class="fa fa-fw fa-info-circle"></i> Hanya isi kolom ini jika ingin mengubah password.</span></small>
                             </div>
                         </div>
                     </div>

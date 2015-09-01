@@ -46,7 +46,7 @@ class ProspekController extends Controller
 
         Prospek::create($input);
 
-        return redirect('/prospek');
+        return redirect('/prospek')->with('success', 'Sukses menambah prospek ' . $input['nama_prospek'] . '.');
     }
 
     /**
@@ -85,7 +85,7 @@ class ProspekController extends Controller
 
         $prospek->fill($input)->save();
 
-        return redirect('/prospek');
+        return redirect('/prospek')->with('success', 'Sukses memperbarui prospek ' . $input['nama_prospek'] . '.');
     }
 
     /**
@@ -98,6 +98,6 @@ class ProspekController extends Controller
     {
         $prospek->delete();
 
-        return redirect('/prospek');
+        return redirect('/prospek')->with('success', 'Sukses menghapus prospek ' . $prospek->nama_prospek . '.');
     }
 }

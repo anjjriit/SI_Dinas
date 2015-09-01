@@ -16,6 +16,12 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
                     @if ($data_project->count() != 0)
                         <div class="box box-widget">
                             <div class="box-body no-padding">

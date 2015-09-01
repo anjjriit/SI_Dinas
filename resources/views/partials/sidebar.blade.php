@@ -3,7 +3,16 @@
         <div class="user-panel">
             <div class="info text-center">
                 <p>{{ auth()->user()->nama_lengkap }}</p>
-                <span class="role">Employee</span>
+
+                @if (auth()->user()->role == 'super_admin')
+                    <span class="role">Super Admin</span>
+                @elseif (auth()->user()->role == 'finance')
+                    <span class="role">Finance</span>
+                @elseif (auth()->user()->role == 'administation')
+                    <span class="role">Administation</span>
+                @else
+                    <span class="role">Employee</span>
+                @endif
             </div>
         </div>
         <ul class="sidebar-menu">
