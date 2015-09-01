@@ -57,8 +57,7 @@
                         return false;
                     }
                 },
-            format: 'yyyy/mm/dd',
-            startDate: '-3d'
+            format: 'yyyy-mm-dd',
         })
     </script>
 

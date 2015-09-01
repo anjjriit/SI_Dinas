@@ -13,7 +13,7 @@ class UpdateProspekRequest extends Request
      */
     public function authorize()
     {
-        return true;
+        return auth()->user()->role == 'super_admin';
     }
 
     /**

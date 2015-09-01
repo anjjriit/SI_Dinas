@@ -8,7 +8,7 @@
         <div class="navbar-custom-menu">
             <ul class="nav navbar-nav">
                 <li>
-                    <p class="navbar-text">Selamat datang, <strong>{nama}</strong></p>
+                    <p class="navbar-text">Selamat datang, <strong>{{ auth()->user()->nama_lengkap }}</strong></p>
                 </li>
                 <li>
                     <a href="/user/password"><i class="fa fa-fw fa-lock"></i> Ubah Password</a>
