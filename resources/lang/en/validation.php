@@ -91,9 +91,6 @@ return [
         'attribute-name' => [
             'rule-name' => 'custom-message',
         ],
-        'email' => [
-            ''
-        ],
     ],
 
     /*
@@ -107,6 +104,12 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes'    => [],
+    'required'      => 'Atribut :attribute wajib diisi.',
+    'filled'        => 'Atribut :attribute wajib diisi.',
+    'after'         => 'Atribut :attribute harus berupa tanggal dan lebih dari tanggal :date',
+    'date'          => 'Atribut :attribute tidak valid, harus berupa tanggal.',
+    'email'         => 'Atribut :attribute tidak valid, harus berupa email address.',
+    'unique'        => 'Atribut :attribute harus unik, nilai tersebut telah digunakan.',
 
 ];
