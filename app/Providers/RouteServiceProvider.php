@@ -28,6 +28,8 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('kota', 'App\Kota');
         $router->model('prospek', 'App\Prospek');
         $router->model('project', 'App\Project');
+        $router->model('pelatihan','App\Pelatihan');
+        $router->model('jenisbiayapengeluaranstandard', 'App\JenisBiayaPengeluaranStandard');
 
         parent::boot($router);
     }
