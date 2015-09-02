@@ -14,14 +14,21 @@ class KotaController extends Controller
 {
     /**
      * Display a listing of the resource.
-     *
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data_kota = Kota::orderBy('nama_kota', 'asc')->paginate(15);
+        $orderBy = ($request->has('orderBy')) ? $request->input('orderBy') : 'nama_kota';
+        $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
-        return view('kota.index', compact('data_kota'));
+        if ($request->has('query')) {
+            $data_kota = Kota::orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+        } else {
+            $data_kota = Kota::orderBy($orderBy, $order)->paginate(15);
+        }
+
+        return view('kota.index', compact('data_kota', 'request'));
     }
 
     /**
@@ -106,5 +113,15 @@ class KotaController extends Controller
         $kota->delete();
 
         return redirect('/kota')->with('success', 'Sukses menghapus kota ' . $kota->nama_kota . '.');
+    }
+
+    /**
+     * Search the specified resource from storage.
+     *
+     * @param  Request  $request
+     * @return Response
+     */
+    public function search(Request $request) {
+        return view('kota.search');
     }
 }

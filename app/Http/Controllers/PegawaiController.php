@@ -16,13 +16,23 @@ class PegawaiController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data_pegawai = Pegawai::orderBy('nik', 'asc')->paginate(15);
+        $orderBy = ($request->has('orderBy')) ? $request->input('orderBy') : 'nik';
+        $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
-        return view('pegawai.index', compact('data_pegawai'));
+        if ($request->has('query')) {
+            $query = ($request->input('searchBy') == 'role') ? str_replace(' ', '_', $request->input('query')) : $request->input('query');
+
+            $data_pegawai = Pegawai::orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $query . '%')->paginate(15);
+        } else {
+            $data_pegawai = Pegawai::orderBy($orderBy, $order)->paginate(15);
+        }
+
+        return view('pegawai.index', compact('data_pegawai', 'request'));
     }
 
     /**

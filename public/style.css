@@ -32,6 +32,10 @@ body {
     padding-top: 25px;
 }
 
+.content-filter {
+    padding: 15px 15px 0 15px;
+}
+
 .main-header .logo {
     height: auto;
     padding-top: 5px
@@ -73,7 +77,8 @@ body {
     margin-bottom: 10px;
 }
 
-.skin-black .sidebar-menu > li.item-active > a {
+.skin-black .sidebar-menu > li.item-active > a,
+.skin-black .sidebar-menu > li.item-current > a {
     background-color: #1e282c;
     border-left-color: #fff;
 }
@@ -82,7 +87,10 @@ body {
 .skin-black .sidebar-menu .treeview-menu > li.item-active a {
     color: #fff;
 }
-
+.form-search {
+    position: relative;
+    top: -5px;
+}
 .user-panel {
     padding-top: 15px;
     padding-bottom: 15px;
@@ -137,6 +145,7 @@ body {
 }
 
 .btn {
+    padding: 6px 10px 7px;
     transition: background-color 0.15s ease-in-out;
 }
 
@@ -424,4 +433,3 @@ body {
     background-color: #369b6f !important;
     border: none;
 }
-

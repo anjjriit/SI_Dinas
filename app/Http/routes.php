@@ -36,7 +36,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 
-//cek user yang login
+//(tes) cek user yang login
 Route::get('cek/user', function () {
     return dd(Auth::user());
 });

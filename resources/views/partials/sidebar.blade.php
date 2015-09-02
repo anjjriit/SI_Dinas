@@ -16,7 +16,7 @@
             </div>
         </div>
         <ul class="sidebar-menu">
-            <li{{ (Request::is('dashboard') ? ' class=active' : '')}}>
+            <li{{ (Request::is('dashboard') ? ' class=item-active' : '')}}>
                 <a href="/dashboard">
                     <i class="fa fa-fw fa-th"></i> <span>Dashboard</span>
                 </a>
@@ -34,7 +34,7 @@
                     <a href="#">
                         <i class="fa fa-fw fa-database"></i> <span>Manage Data</span> <i class="fa fa-angle-down pull-right"></i>
                     </a>
-                    <ul class="treeview-menu menu-open" style="display: block;">
+                    <ul class="treeview-menu" style="display: block;">
                         <li{{ (Request::is('user*') ? ' class=item-active' : '')}}>
                             <a href="/user"><i class="fa fa-fw"></i>Data User</a>
                         </li>

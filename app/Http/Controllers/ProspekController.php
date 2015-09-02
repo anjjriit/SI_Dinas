@@ -15,13 +15,21 @@ class ProspekController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data_prospek = Prospek::orderBy('nama_prospek', 'asc')->paginate(15);
+        $orderBy = ($request->has('orderBy')) ? $request->input('orderBy') : 'nama_prospek';
+        $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
-        return view('prospek.index', compact('data_prospek'));
+        if ($request->has('query')) {
+            $data_prospek = Prospek::orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+        } else {
+            $data_prospek = Prospek::orderBy($orderBy, $order)->paginate(15);
+        }
+
+        return view('prospek.index', compact('data_prospek', 'request'));
     }
 
     /**

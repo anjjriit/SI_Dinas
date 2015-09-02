@@ -15,13 +15,21 @@ class ProjectController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data_project = Project::orderBy('nama_project', 'asc')->paginate(15);
+        $orderBy = ($request->has('orderBy')) ? $request->input('orderBy') : 'nama_project';
+        $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
-        return view('project.index', compact('data_project'));
+        if ($request->has('query')) {
+            $data_project = Project::orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+        } else {
+            $data_project = Project::orderBy($orderBy, $order)->paginate(15);
+        }
+
+        return view('project.index', compact('data_project', 'request'));
     }
 
     /**
