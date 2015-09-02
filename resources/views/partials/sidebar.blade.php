@@ -26,7 +26,8 @@
                             Request::is('user*') ||
                             Request::is('kota*') ||
                             Request::is('prospek*') ||
-                            Request::is('project*')
+                            Request::is('project*') ||
+                            Request::is('pelatihan*')
                         )
                         ? ' item-active' : ''
                     }}"
@@ -46,6 +47,9 @@
                         </li>
                         <li{{ (Request::is('project*') ? ' class=item-active' : '')}}>
                             <a href="/project"><i class="fa fa-fw"></i>Data Project</a>
+                        </li>
+                        <li {{ (Request::is('pelatihan*') ? 'class=item-active' : '') }} >
+                            <a href="/pelatihan"><i class="fa fa-fw"></i> Data Pelatihan</a>
                         </li>
                     </ul>
                 </li>
