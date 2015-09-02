@@ -27,6 +27,7 @@
                             Request::is('kota*') ||
                             Request::is('prospek*') ||
                             Request::is('project*') ||
+                            Request::is('pelatihan*') ||
                             Request::is('jenisbiayapengeluaranstandard*')
                         )
                         ? ' item-active' : ''
@@ -48,9 +49,12 @@
                         <li{{ (Request::is('project*') ? ' class=item-active' : '')}}>
                             <a href="/project"><i class="fa fa-fw"></i>Data Project</a>
                         </li>
+                         <li {{ (Request::is('pelatihan*') ? 'class=item-active' : '') }} >
+                            <a href="/pelatihan"><i class="fa fa-fw"></i> Data Pelatihan</a>
+                        </li>
                         <li{{ (Request::is('jenisbiayapengeluaranstandard*') ? ' class=item-active' : '')}}>
                             <a href="/jenisbiayapengeluaranstandard"><i class="fa fa-fw"></i>Data Jenis Biaya</a>
-                        </li>
+                       </li>
                     </ul>
                 </li>
             @endif
