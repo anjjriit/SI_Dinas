@@ -144,6 +144,7 @@
                                             <th>Nama Lengkap</th>
                                             <th>E-mail</th>
                                             <th>Role</th>
+                                            <th>Last Login</th>
                                             <th>Status</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
@@ -171,6 +172,13 @@
                                                 Finance
                                             @else
                                                 Employee
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if (is_null($pegawai->last_login))
+                                                -
+                                            @else
+                                                {{ $pegawai->last_login}}
                                             @endif
                                         </td>
                                         <td>
