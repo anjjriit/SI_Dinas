@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Jenis Biaya Pengeluaran Standard')
+@section('page_title', 'Tambah Jenis Biaya Pengeluaran Standard')
 
 @section('content')
 
@@ -13,15 +13,9 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Jenis Biaya Pengeluaran Standard</h4>
+                            <h4>Form Tambah Jenis Biaya Pengeluaran Standard</h4>
                         </div>
-                        {!! Form::model(
-                                $jenisbiayapengeluaranstandard,
-                                [
-                                    'method' => 'PATCH',
-                                    'route' => ['jenisbiayapengeluaranstandard.update', $jenisbiayapengeluaranstandard->kode]
-                                ]
-                            ) !!}
+                        {!! Form::open(['method' => 'POST', 'route' => 'jenis-biaya.store']) !!}
                             <div class="box-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -31,7 +25,8 @@
                                         @endforeach
                                     </div>
                                 @endif
-                                @include('jenisbiayapengeluaranstandard._form')
+
+                                @include('biaya._form')
                             </div>
                             <div class="box-footer">
                                 {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success']) !!}

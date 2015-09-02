@@ -52,8 +52,8 @@
                          <li {{ (Request::is('pelatihan*') ? 'class=item-active' : '') }} >
                             <a href="/pelatihan"><i class="fa fa-fw"></i>Data Pelatihan</a>
                         </li>
-                        <li{{ (Request::is('jenisbiayapengeluaranstandard*') ? ' class=item-active' : '')}}>
-                            <a href="/jenisbiayapengeluaranstandard"><i class="fa fa-fw"></i>Data Jenis Biaya</a>
+                        <li{{ (Request::is('jenis-biaya*') ? ' class=item-active' : '')}}>
+                            <a href="/jenis-biaya"><i class="fa fa-fw"></i>Data Jenis Biaya</a>
                        </li>
                     </ul>
                 </li>

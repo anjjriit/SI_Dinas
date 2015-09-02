@@ -13,6 +13,118 @@
             <h1>Data Pelatihan</h1>
         </section>
 
+        <section class="content-filter">
+            <div class="row">
+                <div class="col-md-12">
+                    {!! Form::model($request, [
+                        'method' => 'GET',
+                        'route' => 'pelatihan.index',
+                        'class' => 'form-inline pull-right'
+                    ])!!}
+                        <div class="form-group">
+                            @if ($request->has('query'))
+                                {!! Form::hidden('searchBy') !!}
+                                {!! Form::hidden('query') !!}
+                            @endif
+
+                            {!! Form::select(
+                                'orderBy',
+                                [
+                                    'nama_pelatihan' => 'Nama Pelatihan',
+                                    'nama_lembaga' => 'Nama Lembaga/Institusi',
+                                    'tanggal_mulai' => 'Tanggal Mulai',
+                                    'tanggal_selesai' => 'Tanggal Selesai',
+                                    'alamat' => 'Alamat',
+                                ],
+                                null,
+                                ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
+                            ) !!}
+
+                            {!! Form::select(
+                                'order',
+                                [
+                                    'asc' => 'Ascending',
+                                    'desc' => 'Descending'
+                                ],
+                                null,
+                                ['class' => 'form-control', 'required']
+                            ) !!}
+
+                            {!! Form::button(
+                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Sort',
+                                [
+                                    'type' => 'submit', 'class' => 'btn btn-success'
+                                ]
+                            ) !!}
+                        </div>
+                    {!! Form::close() !!}
+
+                    {!! Form::model($request,
+                        [
+                            'method' => 'GET',
+                            'route' => 'pelatihan.index',
+                            'class' => 'form-inline pull-left'
+                        ]
+                    )!!}
+                        <div class="form-group">
+                            @if ($request->has('orderBy'))
+                                {!! Form::hidden('orderBy') !!}
+                                {!! Form::hidden('order') !!}
+                            @endif
+
+                            {!! Form::select(
+                                'searchBy',
+                                [
+                                    'nama_pelatihan' => 'Nama Pelatihan',
+                                    'nama_lembaga' => 'Nama Lembaga/Institusi',
+                                    'tanggal_mulai' => 'Tanggal Mulai',
+                                    'tanggal_selesai' => 'Tanggal Selesai',
+                                    'alamat' => 'Alamat',
+                                ],
+                                null,
+                                [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'Search By',
+                                    'required'
+                                ]
+                            ) !!}
+                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Query...']) !!}
+                            {!! Form::button(
+                                '<i class="fa fa-fw fa-search"></i> Search',
+                                ['type' => 'submit', 'class' => 'btn btn-success', 'style' => 'margin-left: 3px;']
+                            ) !!}
+                        </div>
+                    {!! Form::close() !!}
+
+                    @if ($request->has('query'))
+                        {!! Form::model($request,
+                            [
+                                'method' => 'GET',
+                                'route' => 'pelatihan.index',
+                                'class' => 'form-inline pull-left',
+                                'style' => 'margin-left: 5px;'
+                            ]
+                        )!!}
+                            <div class="form-group">
+                                @if ($request->has('orderBy'))
+                                    {!! Form::hidden('orderBy') !!}
+                                    {!! Form::hidden('order') !!}
+                                @endif
+
+                                {!! Form::button(
+                                    '<i class="fa fa-fw fa-times"></i> Clear Search',
+                                    [
+                                        'type' => 'submit',
+                                        'class' => 'btn btn-info'
+                                    ]
+                                ) !!}
+                            </div>
+                        {!! Form::close() !!}
+                    @endif
+                </div>
+            </div>
+        </section>
+
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
@@ -29,7 +141,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nama Pelatihan</th>
-                                            <th>Nama Lembaga</th>
+                                            <th>Nama Lembaga/Institusi</th>
                                             <th>Tanggal Mulai</th>
                                             <th>Tanggal Selesai</th>
                                             <th>Alamat</th>
@@ -79,9 +191,15 @@
                             </div>
                         </div>
                     @else
-                        <div class="alert alert-warning">
-                            Data pelatihan belum tersedia. Klik tombol Tambah Pelatihan untuk menambah pelatihan.
-                        </div>
+                        @if ($request->has('query'))
+                            <div class="alert alert-warning">
+                                Hasil tidak ditemukan untuk kata kunci "<strong>{{ $request->input('query') }}</strong>".
+                            </div>
+                        @else
+                            <div class="alert alert-warning">
+                                Data pelatihan belum tersedia. Klik tombol Tambah Pelatihan untuk menambah pelatihan.
+                            </div>
+                        @endif
                     @endif
 
                     {!! $data_pelatihan->render() !!}

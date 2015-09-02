@@ -18,6 +18,10 @@ class Pegawai extends Model implements AuthenticatableContract
     public $primaryKey = 'nik';
     public $incrementing = false;
 
+    public function otherAdmin()
+    {
+        return ($this->role == 'super_admin') && ($this->nik != auth()->user()->nik);
+    }
 
     /*
      * Disable "remember me" token generation

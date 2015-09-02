@@ -20,7 +20,7 @@ Route::group(['middleware' => 'role:super_admin'], function () {
     Route::resource('prospek', 'ProspekController', ['except' => 'show']);
     Route::resource('project', 'ProjectController', ['except' => 'show']);
     Route::resource('pelatihan', 'PelatihanController',['except' => 'show']);
-    Route::resource('jenisbiayapengeluaranstandard', 'JenisBiayaPengeluaranStandardController', ['except' => 'show']);
+    Route::resource('jenis-biaya', 'JenisBiayaController', ['except' => 'show']);
 });
 
 Route::group(['middleware' => 'auth'], function () {

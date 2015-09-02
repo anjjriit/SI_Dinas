@@ -29,7 +29,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('prospek', 'App\Prospek');
         $router->model('project', 'App\Project');
         $router->model('pelatihan','App\Pelatihan');
-        $router->model('jenisbiayapengeluaranstandard', 'App\JenisBiayaPengeluaranStandard');
+        $router->model('jenis-biaya', 'App\JenisBiaya');
 
         parent::boot($router);
     }

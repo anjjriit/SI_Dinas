@@ -15,13 +15,21 @@ class PelatihanController extends Controller
     /**
      * Display a listing of the resource.
      *
+     * @param Request $request
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $data_pelatihan = Pelatihan::orderBy('tanggal_mulai', 'asc')->paginate(15);
+        $orderBy = ($request->has('orderBy')) ? $request->input('orderBy') : 'tanggal_mulai';
+        $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
-        return view('pelatihan.index', compact('data_pelatihan'));
+        if ($request->has('query')) {
+            $data_pelatihan = Pelatihan::orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+        } else {
+            $data_pelatihan = Pelatihan::orderBy($orderBy, $order)->paginate(15);
+        }
+
+        return view('pelatihan.index', compact('data_pelatihan', 'request'));
     }
 
     /**

@@ -80,6 +80,10 @@ class PegawaiController extends Controller
      */
     public function edit(Pegawai $pegawai)
     {
+        if (($pegawai->role == 'super_admin') && ($pegawai->nik != auth()->user()->nik)) {
+            return redirect('/user')->with('error', 'Anda tidak dapat melakukan edit terhadap super admin lain.');
+        }
+
         return view('pegawai.edit', compact('pegawai'));
     }
 
@@ -124,6 +128,10 @@ class PegawaiController extends Controller
      */
     public function editPassword()
     {
+        if (($pegawai->role == 'super_admin') && ($pegawai->nik != auth()->user()->nik)) {
+            return redirect('/user')->with('error', 'Anda tidak dapat menghapus super admin lain.');
+        }
+
         return view('user.changepassword');
     }
 
