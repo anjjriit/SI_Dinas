@@ -26,7 +26,8 @@
                             Request::is('user*') ||
                             Request::is('kota*') ||
                             Request::is('prospek*') ||
-                            Request::is('project*')
+                            Request::is('project*') ||
+                            Request::is('jenisbiayapengeluaranstandard*')
                         )
                         ? ' item-active' : ''
                     }}"
@@ -46,6 +47,9 @@
                         </li>
                         <li{{ (Request::is('project*') ? ' class=item-active' : '')}}>
                             <a href="/project"><i class="fa fa-fw"></i>Data Project</a>
+                        </li>
+                        <li{{ (Request::is('jenisbiayapengeluaranstandard*') ? ' class=item-active' : '')}}>
+                            <a href="/jenisbiayapengeluaranstandard"><i class="fa fa-fw"></i>Data Jenis Biaya</a>
                         </li>
                     </ul>
                 </li>
