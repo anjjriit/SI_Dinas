@@ -50,7 +50,7 @@
                             <a href="/project"><i class="fa fa-fw"></i>Data Project</a>
                         </li>
                          <li {{ (Request::is('pelatihan*') ? 'class=item-active' : '') }} >
-                            <a href="/pelatihan"><i class="fa fa-fw"></i> Data Pelatihan</a>
+                            <a href="/pelatihan"><i class="fa fa-fw"></i>Data Pelatihan</a>
                         </li>
                         <li{{ (Request::is('jenisbiayapengeluaranstandard*') ? ' class=item-active' : '')}}>
                             <a href="/jenisbiayapengeluaranstandard"><i class="fa fa-fw"></i>Data Jenis Biaya</a>
