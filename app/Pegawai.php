@@ -4,11 +4,13 @@ namespace App;
 
 use Illuminate\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 
 class Pegawai extends Model implements AuthenticatableContract
 {
     use Authenticatable;
+    use SoftDeletes;
 
     protected $table = 'pegawai';
     protected $fillable = ['nik', 'nama_lengkap', 'email', 'password', 'role', 'active', 'last_login'];
@@ -17,6 +19,13 @@ class Pegawai extends Model implements AuthenticatableContract
 
     public $primaryKey = 'nik';
     public $incrementing = false;
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 
     public function otherAdmin()
     {
