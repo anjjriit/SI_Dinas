@@ -145,6 +145,7 @@
                                             <th>E-mail</th>
                                             <th>Role</th>
                                             <th>Status</th>
+                                            <th>Last Login</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
@@ -178,6 +179,13 @@
                                                 Active
                                             @else
                                                 Non-active
+                                            @endif
+                                        </td>
+                                        <td>
+                                            @if (is_null($pegawai->last_login))
+                                                -
+                                            @else
+                                                {{ $pegawai->last_login}}
                                             @endif
                                         </td>
                                         <td>
