@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     {!! Form::model($request, [
                         'method' => 'GET',
-                        'route' => 'kota.index',
+                        'route' => 'jenis-biaya.index',
                         'class' => 'form-inline pull-right'
                     ])!!}
                         <div class="form-group">
