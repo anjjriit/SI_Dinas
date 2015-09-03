@@ -24,37 +24,37 @@
                 </li>
             @endif
             <li{{ (Request::is('create-rpd') ? ' class=item-active' : '')}}>
-                <a href="/create-rpd">
+                <a href="/rpd/create">
                     <i class="fa fa-fw fa-file-text"></i> <span>Create RPD</span>
                 </a>
             </li>
             <li{{ (Request::is('rpd-draft') ? ' class=item-active' : '')}}>
-                <a href="/rpd-draft">
+                <a href="/rpd/draft">
                     <i class="fa fa-fw fa-edit"></i> <span>RPD Drafts</span>
                 </a>
             </li>
             <li{{ (Request::is('rpd-submitted') ? ' class=item-active' : '')}}>
-                <a href="/rpd-submitted">
+                <a href="/rpd/submitted">
                     <i class="fa fa-fw fa-list"></i> <span>RPD Submitted</span>
                 </a>
             </li>
             <li{{ (Request::is('create-lpd') ? ' class=item-active' : '')}}>
-                <a href="/create-lpd">
+                <a href="/lpd/create">
                     <i class="fa fa-fw fa-file-text"></i> <span>Create LPD</span>
                 </a>
             </li>
             <li{{ (Request::is('lpd-draft') ? ' class=item-active' : '')}}>
-                <a href="/lpd-draft">
+                <a href="/lpd/draft">
                     <i class="fa fa-fw fa-edit"></i> <span>LPD Drafts</span>
                 </a>
             </li>
             <li{{ (Request::is('lpd-submitted') ? ' class=item-active' : '')}}>
-                <a href="/lpd-submitted">
+                <a href="/lpd/submitted">
                     <i class="fa fa-fw fa-list"></i> <span>LPD Submitted</span>
                 </a>
             </li>
             <li{{ (Request::is('log-lpd') ? ' class=item-active' : '')}}>
-                <a href="/log-lpd">
+                <a href="/lpd/log">
                     <i class="fa fa-fw fa-history"></i> <span>Logs LPD</span>
                 </a>
             </li>
