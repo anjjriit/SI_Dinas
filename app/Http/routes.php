@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('user/password/update', ['as' => 'user.update.password', 'uses' => 'PegawaiController@updatePassword']);
 });
 
+//Route::get('rpd/create/step/3');
 
 //(tes) cek user yang login
 Route::get('cek/user', function () {
