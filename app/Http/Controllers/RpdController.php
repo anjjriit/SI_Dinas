@@ -16,4 +16,9 @@ class RpdController extends Controller
 
         return view('rpd.create', compact('list_pegawai'));
     }
+
+    public function draft()
+    {
+        return view('rpd.draft');
+    }
 }
