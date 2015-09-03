@@ -37,6 +37,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('user/password/update', ['as' => 'user.update.password', 'uses' => 'PegawaiController@updatePassword']);
 });
 
+
 Route::get('/', ['middleware' => 'role:super_admin', 'uses' => function () {
         return redirect('dashboard');
     }]);
@@ -44,6 +45,11 @@ Route::get('/', ['middleware' => 'role:super_admin', 'uses' => function () {
     
 //Route::get('rpd/create/step/3');
 
+Route::get('rpd/create', 'RpdController@create');
+
+
+// JSON
+Route::get('json/pegawai', 'JsonController@pegawai');
 //(tes) cek user yang login
 Route::get('cek/user', function () {
     return dd(Auth::user());
