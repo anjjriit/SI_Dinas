@@ -16,6 +16,13 @@
             </div>
         </div>
         <ul class="sidebar-menu">
+            @if (auth()->user()->role == 'super_admin') 
+                <li{{ (Request::is('dashboard') ? ' class=item-active' : '')}}>
+                    <a href="/dashboard">
+                        <i class="fa fa-fw fa-th"></i> <span>Dashboard</span>
+                    </a>
+                </li>
+            @endif
             <li{{ (Request::is('create-rpd') ? ' class=item-active' : '')}}>
                 <a href="/create-rpd">
                     <i class="fa fa-fw fa-file-text"></i> <span>Create RPD</span>
