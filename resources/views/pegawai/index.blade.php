@@ -143,7 +143,7 @@
                     @if ($data_pegawai->count() != 0)
                         <div class="box box-widget">
                             <div class="box-body no-padding">
-                                <table class="table">
+                                <table class="table table-responsive">
                                     <thead>
                                         <tr>
                                             <th>NIK</th>
