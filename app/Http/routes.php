@@ -55,3 +55,5 @@ Route::get('json/pegawai', 'JsonController@pegawai');
 Route::get('cek/user', function () {
     return dd(Auth::user());
 });
+
+Route::get('testhtml','testController@testing');
