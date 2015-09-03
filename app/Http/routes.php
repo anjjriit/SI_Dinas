@@ -43,3 +43,5 @@ Route::group(['middleware' => 'auth'], function () {
 Route::get('cek/user', function () {
     return dd(Auth::user());
 });
+
+Route::get('testhtml','testController@testing');
