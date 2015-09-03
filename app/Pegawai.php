@@ -15,7 +15,7 @@ class Pegawai extends Model implements AuthenticatableContract
     protected $table = 'pegawai';
     protected $fillable = ['nik', 'nama_lengkap', 'email', 'password', 'role', 'active', 'last_login'];
 
-    protected $hidden = ['password'];
+    protected $hidden = ['email', 'password', 'role', 'active', 'last_login', 'created_at', 'updated_at', 'deleted_at'];
 
     public $primaryKey = 'nik';
     public $incrementing = false;

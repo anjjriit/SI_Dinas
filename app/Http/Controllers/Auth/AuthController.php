@@ -58,7 +58,7 @@ class AuthController extends Controller
             if ($first_login) {
                 return redirect('user/password')->with('warning', 'Anda baru pertama kali melakukan login, harap ubah password terlebih dahulu untuk melanjutkan.');
             } else {
-                return redirect('user');
+                return redirect('/');
             }
         }
 
