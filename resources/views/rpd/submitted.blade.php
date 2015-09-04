@@ -52,10 +52,10 @@
     						</thead>
     						<tbody>
 	    						<tr>
-	    							<td>Kode</td>
-									<td>Kota Tujuan</td>
-									<td>Tanggal Mulai</td>
-									<td>Tanggal Selesai</td>
+	    							<td>1029876509</td>
+									<td>Jakarta Pusat</td>
+									<td>2015-09-20</td>
+									<td>2015-09-30</td>
 									<td>
 										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
 											<i class="fa fa-fw fa-share"></i>Detail
@@ -63,10 +63,10 @@
 									</td>
 	    						</tr>
 	    						<tr>
-	    							<td>Kode</td>
-									<td>Kota Tujuan</td>
-									<td>Tanggal Mulai</td>
-									<td>Tanggal Selesai</td>
+	    							<td>1029876509</td>
+									<td>Jakarta Pusat</td>
+									<td>2015-09-20</td>
+									<td>2015-09-30</td>
 									<td>
 										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
 											<i class="fa fa-fw fa-share"></i>Detail

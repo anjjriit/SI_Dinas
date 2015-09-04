@@ -49,6 +49,9 @@ Route::get('rpd/create', 'RpdController@create');
 Route::get('rpd/draft', 'RpdController@draft');
 Route::get('rpd/submitted', 'RpdController@submitted');
 
+//lpd
+Route::get('lpd', 'LpdController@index');
+
 
 // JSON
 Route::get('json/pegawai', 'JsonController@pegawai');
