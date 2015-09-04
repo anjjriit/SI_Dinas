@@ -44,7 +44,7 @@
                                         <td>2015-09-04</td>
                                         <td>Approved</td>
                                         <td>
-                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-info"></i> Detail</a>
+                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-share"></i> Detail</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -54,7 +54,7 @@
                                         <td>2015-09-04</td>
                                         <td>Recall</td>
                                         <td>
-                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-info"></i> Detail</a>
+                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-share"></i> Detail</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -64,7 +64,7 @@
                                         <td>2015-09-04</td>
                                         <td>Decline</td>
                                         <td>
-                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-info"></i> Detail</a>
+                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-share"></i> Detail</a>
                                         </td>
                                 </tbody>
                             </table>
