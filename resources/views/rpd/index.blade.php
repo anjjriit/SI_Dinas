@@ -104,18 +104,58 @@
 				<div class="modal-body">
 					<div>
 						<!-- Info basic dari RPD -->
-						<label>ID : </label> {{ '1009091266' }}<br>
-						<label>Penanggung Jawab : </label> {{ 'Pegawai yang sedang login' }}<br>
-						<label>Kategori : </label> {{ 'Trip' }}<br>
-						<label>Jenis : </label> {{ 'Luar Kota' }}<br>
-						<label>Tanggal Mulai : </label> {{ '10 Mei 2015' }}<br>
-						<label>Tanggal Selesai : </label> {{ '20 Mei 2015' }}<br>
-						<label>Jumlah Hari Dinas : </label> {{ '10' }}<br>
-						<label>Asal Kota : </label> {{ 'Bandung' }}<br>
-						<label>Tujuan Kota : </label> {{ 'Jakarta Pusat' }}<br>
-						<label>Sarana Transportasi : </label> {{ 'Mobil Dinas, Travel' }}<br>
-						<label>Sarana Penginapan : </label> {{ 'Hotel' }}<br>
-						<label>Status : </label> {{ 'Submitted' }}<br>
+						<table class="table table-modal table-responsive">
+                            <tbody>
+                                <tr>
+                                    <th class="col-md-4">ID</th>
+                                    <td>1009091266</td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-4">Penanggung Jawab</th>
+                                    <td>Pegawai yang sedang login</td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-4">Kategori</th>
+                                    <td>Trip</td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-4">Jenis</th>
+                                    <td>Luar Kota</td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-4">Tanggal Mulai</th>
+                                    <td>10 Mei 2015</td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-4">Tanggal Selesai</th>
+                                    <td>20 Mei 2015</td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-4">Jumlah Hari Dinas</th>
+                                    <td>10</td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-4">Asal Kota</th>
+                                    <td>Bandung</td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-4">Tujuan Kota</th>
+                                    <td>Jakarta Pusat</td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-4">Sarana Transportasi</th>
+                                    <td>Mobil Dinas, Travel</td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-4">Sarana Penginapan</th>
+                                    <td>Hotel</td>
+                                </tr>
+                                <tr>
+                                    <th class="col-md-4">Status</th>
+                                    <td>Submitted</td>
+                                </tr>
+                            </tbody>
+                        </table>
 
 						<!-- Daftar Peserta RPD-->
 						<h3>Peserta dan Tujuan Kegiatan</h3>
