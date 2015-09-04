@@ -21,29 +21,49 @@
     					<table class="table">
     						<thead>
     							<tr>
-    								<td>Kode</td>
-    								<td>Kota Tujuan</td>
-    								<td>Tanggal Mulai</td>
-    								<td>Tanggal Selesai</td>
-    								<td>Status</td>
-    								<td>Action</td>
+    								<th>Kode</th>
+    								<th>Kota Tujuan</th>
+    								<th>Tanggal Mulai</th>
+    								<th>Tanggal Selesai</th>
+    								<th>Status</th>
+    								<th>Submitted</th>
     							</tr>
     						</thead>
     						<tbody>
-    							<td>Kode</td>
-								<td>Kota Tujuan</td>
-								<td>Tanggal Mulai</td>
-								<td>Tanggal Selesai</td>
-								<td>Status</td>
-								<td>
-									<!--Disini if-->
-									<!--{!! Form::button('<i class="fa fa-fw fa-share"></i> Detail',['class','btn btn-sm btn-info', 'data-toggle','modal', 'data-target','#detailRPD']) !!}
-									<a href="" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-share"></i>Detail</a>-->
-									<button type="button" class="btn btn-info" data-toggle="modal" data-target="#detailRPD">Detail</button>
-									<!--else if-->
-									<a href="" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-share"></i>Detail</a>
-									<!--end if-->
-								</td>
+	    						<tr>
+	    							<td>Kode</td>
+									<td>Kota Tujuan</td>
+									<td>Tanggal Mulai</td>
+									<td>Tanggal Selesai</td>
+									<td>Drafts</td>
+									<td>
+										<!--Disini if
+										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
+											<i class="fa fa-fw fa-share"></i>Detail
+										</button>
+										else if-->
+										<a href="/rpd/kode/edit" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-edit"></i> Edit</a>
+	                       
+										<!--end if-->
+									</td>
+	    						</tr>
+	    						<tr>
+	    							<td>Kode</td>
+									<td>Kota Tujuan</td>
+									<td>Tanggal Mulai</td>
+									<td>Tanggal Selesai</td>
+									<td>Submitted</td>
+									<td>
+										<!--Disini if-->
+										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
+											<i class="fa fa-fw fa-share"></i>Detail
+										</button>
+										<!--else if
+										<a href="/rpd/kode/edit" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-edit"></i> Edit</a>
+	                       
+										end if-->
+									</td>
+	    						</tr>
     						</tbody>
     					</table>
     				</div>    				
@@ -57,13 +77,82 @@
     			<div class="modal-content">
     				<div class="modal-header">
     					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    					<h4 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h4>
+    					<h1 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h1>
     				</div>
     				<div class="modal-body">
-    					
+    					<div>
+    						<!-- Info basic dari RPD -->
+    						<label>ID : </label> {{ '1009091266' }}<br>
+    						<label>Penanggung Jawab : </label> {{ 'Pegawai yang sedang login' }}<br>
+    						<label>Kategori : </label> {{ 'Trip' }}<br>
+    						<label>Jenis : </label> {{ 'Luar Kota' }}<br>
+    						<label>Tanggal Mulai : </label> {{ '10 Mei 2015' }}<br>
+    						<label>Tanggal Selesai : </label> {{ '20 Mei 2015' }}<br>
+    						<label>Jumlah Hari Dinas : </label> {{ '10' }}<br>
+    						<label>Asal Kota : </label> {{ 'Bandung' }}<br>
+    						<label>Tujuan Kota : </label> {{ 'Jakarta Pusat' }}<br>
+    						<label>Sarana Transportasi : </label> {{ 'Mobil Dinas, Travel' }}<br>
+    						<label>Sarana Penginapan : </label> {{ 'Hotel' }}<br>
+    						<label>Status : </label> {{ 'Submitted' }}<br>
+
+    						<!-- Daftar Peserta RPD-->
+    						<h3>Peserta dan Tujuan Kegiatan</h3>
+							<table class="table table-bordered table-striped">
+    							<thead>
+    								<tr>
+    									<th>Nama</th>
+    									<th>Judul Project/Prospek/Pelatihan</th>
+    									<th>Kegiatan</th>
+    								</tr>
+    							</thead>
+    							<tbody>
+    								<tr>
+    									<td>Andi suryadi</td>
+    									<td>SI PEndidikan</td>
+    									<td>Review</td>
+    								</tr>
+    								<tr>
+    									<td>Ali riwansyah</td>
+    									<td>Web E-Commerce</td>
+    									<td>Meeting</td>
+    								</tr>
+    							</tbody>
+    						</table>
+
+    						<!--Bagian Komentar atau Keterangan-->
+    						<h4>Komentar</h4>
+    						<p>
+    							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
+    							tempor incididunt ut labore et dolore magna aliqua. 
+    						</p>
+
+    						<!--Bagian Action History-->
+    						<h3>Action History</h3>
+    						<table class="table table-bordered table-striped">
+    							<thead>
+    								<tr>
+    									<th>Date Time</th>
+    									<th>Nama</th>
+    									<th>Action Taken</th>
+    								</tr>
+    							</thead>
+    							<tbody>
+    								<tr>
+    									<td>2015/09/09</td>
+    									<td>Reynaldi Sunaryo</td>
+    									<td>Submitted</td>
+    								</tr>
+    								<tr>
+    									<td>2015/09/10</td>
+    									<td>Ananda</td>
+    									<td>Approve</td>
+    								</tr>
+    							</tbody>
+    						</table>
+    					</div>
     				</div>
     				<div class="modal-footer">
-    					<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+    					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
     				</div>
     			</div>
     		</div>
@@ -73,5 +162,6 @@
 @endsection
 
 @section('script')
+	@parent
 
 @endsection
