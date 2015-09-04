@@ -9,7 +9,7 @@ use App\Http\Controllers\Controller;
 
 class testController extends Controller
 {
-    public function testing(){
+    public function index(){
         return view('rpd.index');
     }
 }

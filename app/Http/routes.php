@@ -47,6 +47,7 @@ Route::get('/', ['middleware' => 'role:super_admin', 'uses' => function () {
 
 Route::get('rpd/create', 'RpdController@create');
 Route::get('rpd/draft', 'RpdController@draft');
+Route::get('rpd/submitted', 'RpdController@submitted');
 
 
 // JSON
@@ -56,4 +57,4 @@ Route::get('cek/user', function () {
     return dd(Auth::user());
 });
 
-Route::get('testhtml','testController@testing');
+Route::get('indexpegawai','testController@index');

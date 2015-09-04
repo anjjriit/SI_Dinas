@@ -31,6 +31,7 @@
 		
 	<section class="content-header">
         <h1>Data Rencana Perjalanan Dinas</h1>
+        <label>Yang telah disubmit</label>
     </section>
 
     <section class="content">
@@ -46,7 +47,6 @@
     								<th>Kota Tujuan</th>
     								<th>Tanggal Mulai</th>
     								<th>Tanggal Selesai</th>
-    								<th>Status</th>
     								<th>Action</th>
     							</tr>
     						</thead>
@@ -56,16 +56,10 @@
 									<td>Kota Tujuan</td>
 									<td>Tanggal Mulai</td>
 									<td>Tanggal Selesai</td>
-									<td>Drafts</td>
 									<td>
-										<!--Disini if status == submitted then echo 
 										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
 											<i class="fa fa-fw fa-share"></i>Detail
 										</button>
-										else if status == draft echo-->
-										<a href="/rpd/kode/edit" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-edit"></i> Edit</a>
-	                       
-										<!--end if-->
 									</td>
 	    						</tr>
 	    						<tr>
@@ -73,16 +67,10 @@
 									<td>Kota Tujuan</td>
 									<td>Tanggal Mulai</td>
 									<td>Tanggal Selesai</td>
-									<td>Submitted</td>
 									<td>
-										<!-- Disini if status == submitted then echo -->
 										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
 											<i class="fa fa-fw fa-share"></i>Detail
 										</button>
-										<!--else if status == draft echo
-										<a href="/rpd/kode/edit" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-edit"></i> Edit</a>
-	                       
-										end if-->
 									</td>
 	    						</tr>
     						</tbody>
