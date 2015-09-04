@@ -46,6 +46,7 @@ Route::get('/', ['middleware' => 'role:super_admin', 'uses' => function () {
 //Route::get('rpd/create/step/3');
 
 Route::get('rpd/create', 'RpdController@create');
+Route::get('rpd/draft', 'RpdController@draft');
 
 
 // JSON
