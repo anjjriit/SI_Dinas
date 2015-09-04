@@ -52,10 +52,10 @@
     						</thead>
     						<tbody>
 	    						<tr>
-	    							<td>Kode</td>
-									<td>Kota Tujuan</td>
-									<td>Tanggal Mulai</td>
-									<td>Tanggal Selesai</td>
+	    							<td>101010101087</td>
+									<td>Bogor</td>
+									<td>2015-09-08</td>
+									<td>2015-09-10</td>
 									<td>Drafts</td>
 									<td>
 										<!--Disini if status == submitted then echo 
@@ -69,10 +69,10 @@
 									</td>
 	    						</tr>
 	    						<tr>
-	    							<td>Kode</td>
-									<td>Kota Tujuan</td>
-									<td>Tanggal Mulai</td>
-									<td>Tanggal Selesai</td>
+	    							<td>101010101089</td>
+									<td>Depok</td>
+									<td>2015-09-08</td>
+									<td>2015-07-06</td>
 									<td>Submitted</td>
 									<td>
 										<!-- Disini if status == submitted then echo -->
