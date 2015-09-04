@@ -38,8 +38,8 @@
                     <i class="fa fa-fw fa-list"></i> <span>RPD Submitted</span>
                 </a>
             </li>
-            <li{{ (Request::is('lpd/create') ? ' class=item-active' : '')}}>
-                <a href="/lpd/create">
+            <li{{ (Request::is('lpd') ? ' class=item-active' : '')}}>
+                <a href="/lpd">
                     <i class="fa fa-fw fa-file-text"></i> <span>Create LPD</span>
                 </a>
             </li>
