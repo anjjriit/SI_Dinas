@@ -28,4 +28,9 @@ class RpdController extends Controller
     {
         return view('rpd.submitted');
     }
+
+    public function log()
+    {
+        return view('lpd.log');
+    }
 }

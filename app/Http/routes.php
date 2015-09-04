@@ -43,18 +43,19 @@ Route::get('/', ['middleware' => 'role:super_admin', 'uses' => function () {
     }]);
 
     
-//Route::get('rpd/create/step/3');
-
+//RPD
 Route::get('rpd/create', 'RpdController@create');
 Route::get('rpd/draft', 'RpdController@draft');
 Route::get('rpd/submitted', 'RpdController@submitted');
+Route::get('lpd/log', 'RpdController@log');
 
-//lpd
+//lPD
 Route::get('lpd', 'LpdController@index');
 
 
-// JSON
+//JSON
 Route::get('json/pegawai', 'JsonController@pegawai');
+
 //(tes) cek user yang login
 Route::get('cek/user', function () {
     return dd(Auth::user());

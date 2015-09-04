@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('page_title', 'RPD Drafts')
+@section('page_title', 'Logs LPD')
 
 @section('content')
 
         <section class="content-header">
-            <h1>Draft Rencana Perjalanan Dinas</h1>
+            <h1>Logs Laporan Perjalanan Dinas</h1>
         </section>
 
         <section class="content">
@@ -18,12 +18,11 @@
                     @endif
 
                     @if (session('error'))
-                        <div class="alert alert-danger">
+                        <div class="alert alert-error">
                             {{ session('error') }}
                         </div>
                     @endif
 
-                    
                     <div class="box box-widget">
                         <div class="box-body no-padding">
                             <table class="table table-responsive">
@@ -33,6 +32,7 @@
                                         <th>Kota Tujuan</th>
                                         <th>Tanggal Mulai</th>
                                         <th>Tanggal Selesai</th>
+                                        <th>Status</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -42,8 +42,9 @@
                                         <td>Jakarta</td>
                                         <td>2015-09-01</td>
                                         <td>2015-09-04</td>
+                                        <td>Approved</td>
                                         <td>
-                                            <a href="/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-info"></i> Detail</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -51,8 +52,9 @@
                                         <td>Jakarta</td>
                                         <td>2015-09-01</td>
                                         <td>2015-09-04</td>
+                                        <td>Recall</td>
                                         <td>
-                                            <a href="/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-info"></i> Detail</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -60,10 +62,10 @@
                                         <td>Jakarta</td>
                                         <td>2015-09-01</td>
                                         <td>2015-09-04</td>
+                                        <td>Decline</td>
                                         <td>
-                                            <a href="/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-info"></i> Detail</a>
                                         </td>
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -72,8 +74,5 @@
             </div>
         </section>
 
-        <!--div class="alert alert-warning">
-            Tidak ada draft RPD yang tersimpan. Dengan menyimpan draft, Anda dapat menyimpan RPD sebelum disubmit.
-        </div-->
-                    
+
 @endsection
