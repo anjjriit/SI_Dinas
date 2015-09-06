@@ -196,9 +196,9 @@
                                         </td>
                                         <td>
                                             @if ($pegawai->otherAdmin())
-                                                <button class="btn btn-sm" disabled><i class="fa fa-fw fa-edit"></i> Edit</button>
+                                                <button class="btn btn-sm" disabled data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></button>
                                             @else
-                                                <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                             @endif
 
                                             {!! Form::open(
@@ -210,10 +210,10 @@
                                                 ]
                                             ) !!}
                                                 @if ($pegawai->otherAdmin())
-                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i> Hapus', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'disabled']
+                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'disabled', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
                                                     ) !!}
                                                 @else
-                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i> Hapus', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button',]
+                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
                                                     ) !!}
                                                 @endif
                                             {!! Form::close() !!}
