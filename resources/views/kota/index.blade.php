@@ -133,7 +133,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nama Kota</th>
-                                            <th class="col-md-2">Action</th>
+                                            <th colspan="2">Action</th>
                                         </tr>
                                     </thead>
 

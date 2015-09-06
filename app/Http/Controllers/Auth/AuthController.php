@@ -57,8 +57,10 @@ class AuthController extends Controller
 
             if ($first_login) {
                 return redirect('user/password')->with('warning', 'Anda baru pertama kali melakukan login, harap ubah password terlebih dahulu untuk melanjutkan.');
+            } elseif (auth()->user()->role == 'super_admin') {
+                return redirect('/dashboard');
             } else {
-                return redirect('/');
+                return redirect('/rpd/create');
             }
         }
 

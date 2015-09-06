@@ -31,6 +31,7 @@
 		
 	<section class="content-header">
         <h1>Data Rencana Perjalanan Dinas</h1>
+        <label>Yang telah disubmit</label>
     </section>
 
     <section class="content">
@@ -46,43 +47,30 @@
     								<th>Kota Tujuan</th>
     								<th>Tanggal Mulai</th>
     								<th>Tanggal Selesai</th>
-    								<th>Status</th>
     								<th>Action</th>
     							</tr>
     						</thead>
     						<tbody>
 	    						<tr>
-	    							<td>101010101087</td>
-									<td>Bogor</td>
-									<td>2015-09-08</td>
-									<td>2015-09-10</td>
-									<td>Drafts</td>
+	    							<td>1029876509</td>
+									<td>Jakarta Pusat</td>
+									<td>2015-09-20</td>
+									<td>2015-09-30</td>
 									<td>
-										<!--Disini if status == submitted then echo 
 										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
 											<i class="fa fa-fw fa-share"></i>Detail
 										</button>
-										else if status == draft echo-->
-										<a href="/rpd/kode/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
-	                       
-										<!--end if-->
 									</td>
 	    						</tr>
 	    						<tr>
-	    							<td>101010101089</td>
-									<td>Depok</td>
-									<td>2015-09-08</td>
-									<td>2015-07-06</td>
-									<td>Submitted</td>
+	    							<td>1029876509</td>
+									<td>Jakarta Pusat</td>
+									<td>2015-09-20</td>
+									<td>2015-09-30</td>
 									<td>
-										<!-- Disini if status == submitted then echo -->
 										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
 											<i class="fa fa-fw fa-share"></i>Detail
 										</button>
-										<!--else if status == draft echo
-										<a href="/rpd/kode/edit" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-edit"></i> Edit</a>
-	                       
-										end if-->
 									</td>
 	    						</tr>
     						</tbody>
@@ -104,7 +92,7 @@
 				<div class="modal-body">
 					<div>
 						<!-- Info basic dari RPD -->
-						<table class="table table-modal table-responsive">
+                        <table class="table table-modal table-responsive">
                             <tbody>
                                 <tr>
                                     <th class="col-md-4">ID</th>

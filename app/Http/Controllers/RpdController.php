@@ -23,4 +23,19 @@ class RpdController extends Controller
     {
         dd($request);
     }
+
+    public function draft()
+    {
+        return view('rpd.draft');
+    }
+
+    public function submitted()
+    {
+        return view('rpd.submitted');
+    }
+
+    public function log()
+    {
+        return view('lpd.log');
+    }
 }

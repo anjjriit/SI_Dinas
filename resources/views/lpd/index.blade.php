@@ -31,6 +31,7 @@
 		
 	<section class="content-header">
         <h1>Data Rencana Perjalanan Dinas</h1>
+        <label>Yang telah diapprove</label>
     </section>
 
     <section class="content">
@@ -46,43 +47,32 @@
     								<th>Kota Tujuan</th>
     								<th>Tanggal Mulai</th>
     								<th>Tanggal Selesai</th>
-    								<th>Status</th>
-    								<th>Action</th>
+    								<th colspan="2">Action</th>
     							</tr>
     						</thead>
     						<tbody>
 	    						<tr>
-	    							<td>101010101087</td>
-									<td>Bogor</td>
-									<td>2015-09-08</td>
-									<td>2015-09-10</td>
-									<td>Drafts</td>
+	    							<td>1029876509</td>
+									<td>Jakarta Pusat</td>
+									<td>2015-09-20</td>
+									<td>2015-09-30</td>
 									<td>
-										<!--Disini if status == submitted then echo 
 										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
 											<i class="fa fa-fw fa-share"></i>Detail
 										</button>
-										else if status == draft echo-->
-										<a href="/rpd/kode/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
-	                       
-										<!--end if-->
+										<a href="/lpd/kode/create" class="btn btn-sm btn-primary"> Create LPD!</a>
 									</td>
 	    						</tr>
 	    						<tr>
-	    							<td>101010101089</td>
-									<td>Depok</td>
-									<td>2015-09-08</td>
-									<td>2015-07-06</td>
-									<td>Submitted</td>
+	    							<td>1029876509</td>
+									<td>Jakarta Pusat</td>
+									<td>2015-09-20</td>
+									<td>2015-09-30</td>
 									<td>
-										<!-- Disini if status == submitted then echo -->
 										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
 											<i class="fa fa-fw fa-share"></i>Detail
 										</button>
-										<!--else if status == draft echo
-										<a href="/rpd/kode/edit" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-edit"></i> Edit</a>
-	                       
-										end if-->
+										<a href="/lpd/kode/create" class="btn btn-sm btn-primary"> Create LPD!</a>
 									</td>
 	    						</tr>
     						</tbody>
@@ -104,58 +94,18 @@
 				<div class="modal-body">
 					<div>
 						<!-- Info basic dari RPD -->
-						<table class="table table-modal table-responsive">
-                            <tbody>
-                                <tr>
-                                    <th class="col-md-4">ID</th>
-                                    <td>1009091266</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Penanggung Jawab</th>
-                                    <td>Pegawai yang sedang login</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Kategori</th>
-                                    <td>Trip</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Jenis</th>
-                                    <td>Luar Kota</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Tanggal Mulai</th>
-                                    <td>10 Mei 2015</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Tanggal Selesai</th>
-                                    <td>20 Mei 2015</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Jumlah Hari Dinas</th>
-                                    <td>10</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Asal Kota</th>
-                                    <td>Bandung</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Tujuan Kota</th>
-                                    <td>Jakarta Pusat</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Sarana Transportasi</th>
-                                    <td>Mobil Dinas, Travel</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Sarana Penginapan</th>
-                                    <td>Hotel</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Status</th>
-                                    <td>Submitted</td>
-                                </tr>
-                            </tbody>
-                        </table>
+						<label>ID : </label> {{ '1009091266' }}<br>
+						<label>Penanggung Jawab : </label> {{ 'Pegawai yang sedang login' }}<br>
+						<label>Kategori : </label> {{ 'Trip' }}<br>
+						<label>Jenis : </label> {{ 'Luar Kota' }}<br>
+						<label>Tanggal Mulai : </label> {{ '10 Mei 2015' }}<br>
+						<label>Tanggal Selesai : </label> {{ '20 Mei 2015' }}<br>
+						<label>Jumlah Hari Dinas : </label> {{ '10' }}<br>
+						<label>Asal Kota : </label> {{ 'Bandung' }}<br>
+						<label>Tujuan Kota : </label> {{ 'Jakarta Pusat' }}<br>
+						<label>Sarana Transportasi : </label> {{ 'Mobil Dinas, Travel' }}<br>
+						<label>Sarana Penginapan : </label> {{ 'Hotel' }}<br>
+						<label>Status : </label> {{ 'Submitted' }}<br>
 
 						<!-- Daftar Peserta RPD-->
 						<h3>Peserta dan Tujuan Kegiatan</h3>

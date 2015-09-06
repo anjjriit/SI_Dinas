@@ -42,12 +42,18 @@ Route::group(['middleware' => 'role:super_admin'], function () {
 
 
 
-//Route::get('rpd/create/step/3');
-
-Route::get('rpd/create', 'RpdController@create');
 Route::post('rpd', ['as' => 'rpd.store', 'uses' => 'RpdController@store']);
 
-// JSON
+//RPD
+Route::get('rpd/create', 'RpdController@create');
+Route::get('rpd/draft', 'RpdController@draft');
+Route::get('rpd/submitted', 'RpdController@submitted');
+Route::get('lpd/log', 'RpdController@log');
+
+//lPD
+Route::get('lpd', 'LpdController@index');
+
+//JSON
 Route::get('json/pegawai', 'JsonController@pegawai');
 Route::get('json/project', 'JsonController@project');
 Route::get('json/prospek', 'JsonController@prospek');
@@ -58,4 +64,4 @@ Route::get('cek/user', function () {
     return dd(Auth::user());
 });
 
-Route::get('testhtml','testController@testing');
+Route::get('indexpegawai','testController@index');
