@@ -126,6 +126,16 @@
                                 </div>
                             </div>
 
+                            <h6 class="page-header"><small>Additional Information</small></h6>
+
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        {!! Form::label('keterangan', 'Keterangan') !!}
+                                        {!! Form::textarea('keterangan', null, ['class' => 'form-control', 'placeholder' => 'Isi dengan keterangan tambahan (bila diperlukan)', 'rows' => 3]) !!}
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                         <div class="box-footer">
                             {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success pull-left']) !!}
@@ -142,13 +152,13 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Form Tambah Prospek</h4>
                         </div>
-                        {!! Form::open(['method' => 'POST', 'route' => 'prospek.store']) !!}
+                        {!! Form::open(['method' => 'POST', 'route' => 'prospek.ajax.store', 'name' => 'tambah-prospek']) !!}
                             <div class="modal-body">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-12">
                                             {!! Form::label('nama_prospek', 'Nama Prospek') !!}
-                                            {!! Form::text('nama_prospek', null, ['class' => 'form-control', 'autofocus']) !!}
+                                            {!! Form::text('nama_prospek', null, ['class' => 'form-control', 'autofocus', 'required']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -156,7 +166,7 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             {!! Form::label('nama_lembaga', 'Nama Lembaga') !!}
-                                            {!! Form::text('nama_lembaga', null, ['class' => 'form-control']) !!}
+                                            {!! Form::text('nama_lembaga', null, ['class' => 'form-control', 'required']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -164,14 +174,14 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             {!! Form::label('alamat', 'Alamat') !!}
-                                            {!! Form::textarea('alamat', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                                            {!! Form::textarea('alamat', null, ['class' => 'form-control', 'rows' => 3, 'required']) !!}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                                <button type="button" class="btn btn-success">Simpan</button>
+                                <button type="submit" class="btn btn-success">Simpan</button>
                             </div>
                         {!! Form::close() !!}
                     </div>
@@ -184,13 +194,13 @@
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
                             <h4 class="modal-title">Form Tambah Pelatihan</h4>
                         </div>
-                        {!! Form::open(['method' => 'POST', 'route' => 'pelatihan.store']) !!}
+                        {!! Form::open(['method' => 'POST', 'route' => 'pelatihan.store', 'name' => 'tambah-pelatihan']) !!}
                             <div class="modal-body">
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-12">
-                                            {!! Form::label('nama_prospek', 'Nama Prospek') !!}
-                                            {!! Form::text('nama_prospek', null, ['class' => 'form-control', 'autofocus']) !!}
+                                            {!! Form::label('nama_pelatihan', 'Nama Pelatihan') !!}
+                                            {!! Form::text('nama_pelatihan', null, ['class' => 'form-control', 'autofocus', 'required']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -198,7 +208,23 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             {!! Form::label('nama_lembaga', 'Nama Lembaga') !!}
-                                            {!! Form::text('nama_lembaga', null, ['class' => 'form-control']) !!}
+                                            {!! Form::text('nama_lembaga', null, ['class' => 'form-control', 'required']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {!! Form::label('tanggal_mulai', 'Tanggal Mulai') !!}
+                                            {!! Form::text('tanggal_mulai', null, ['class' => 'form-control datepicker', 'required']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {!! Form::label('tanggal_selesai', 'Tanggal Selesai') !!}
+                                            {!! Form::text('tanggal_selesai', null, ['class' => 'form-control datepicker', 'required']) !!}
                                         </div>
                                     </div>
                                 </div>
@@ -206,14 +232,14 @@
                                     <div class="row">
                                         <div class="col-md-12">
                                             {!! Form::label('alamat', 'Alamat') !!}
-                                            {!! Form::textarea('alamat', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                                            {!! Form::textarea('alamat', null, ['class' => 'form-control', 'rows' => 3, 'required']) !!}
                                         </div>
                                     </div>
                                 </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
-                                <button type="button" class="btn btn-success">Simpan</button>
+                                <button type="submit" class="btn btn-success">Simpan</button>
                             </div>
                         {!! Form::close() !!}
                     </div>
@@ -291,6 +317,12 @@
 
             $('select[name=kode_kota_asal]').select2();
             $('select[name=kode_kota_tujuan]').select2();
+
+            $('.modal').on('shown.bs.modal', function() {
+                $(this).find('[autofocus]').focus();
+            });
+
+
         });
 
         function attachListPesertaChangeEvent() {
@@ -315,6 +347,7 @@
                         type : 'GET',
                         url : '/json/project',
                         dataType : 'json',
+                        encode : true,
                     })
                     .done(function(response) {
                         var total = response.length;
@@ -373,6 +406,7 @@
                         type : 'GET',
                         url : '/json/prospek',
                         dataType : 'json',
+                        encode : true,
                     })
 
                     .done(function(response) {
@@ -400,9 +434,9 @@
                                         '</div>' +
                                     '</div>' +
                                     '<div class="col-md-8" style="margin-top: 24px;">' +
-                                        '<input type="hidden" name="kegiatan" value="-">' +
+                                        '<input type="hidden" name="kegiatan[]" value="-">' +
                                         '<button type="button" class="btn btn-default btn-modal-prospek">' +
-                                          '<i class="fa fa-fw fa-plus"></i> Prospek Baru' +
+                                            '<i class="fa fa-fw fa-plus"></i> Prospek Baru' +
                                         '</button>' +
                                         '<button type="button" class="btn btn-danger btn-hapus-kegiatan pull-right"><i class="fa fa-fw fa-minus"></i></button>' +
                                     '</div>' +
@@ -418,9 +452,77 @@
                             element.remove();
                         });
 
-                        $('.btn-modal-prospek').on('click', function() {
-                            console.log('tes')
+                        $('.btn-modal-prospek').on('click', function(event) {
                             $('#modal-tambah-prospek').modal('show');
+
+                            var element = $(this).closest('.col-md-12');
+
+                            $('form[name=tambah-prospek]').off('submit').on('submit', function(event) {
+                                $('.modal').modal('hide');
+
+                                var id_peserta = element.find('input[name="id_peserta[]"]').val();
+                                var tujuan = element.find('input[name="tujuan_kegiatan[]"]').val();
+
+                                element.find('select[name="kode_kegiatan[]"]').prop("disabled", true);
+
+                                var nama_prospek = $('form[name=tambah-prospek] input[name=nama_prospek]').val();
+                                var nama_lembaga = $('form[name=tambah-prospek] input[name=nama_lembaga]').val();
+                                var alamat = $('form[name=tambah-prospek] textarea[name=alamat]').val();
+                                var token = $('form[name=tambah-prospek] input[name=_token]').val();
+
+                                var form_data = {
+                                    'nama_prospek' : nama_prospek,
+                                    'nama_lembaga' : nama_lembaga,
+                                    'alamat' : alamat,
+                                    '_token' : token
+                                };
+
+                                $.ajax({
+                                    type : 'POST',
+                                    url : '/prospek/store',
+                                    data : form_data,
+                                    dataType : 'json',
+                                    encode : true,
+                                })
+
+                                .done(function(response) {
+                                    console.log('done');
+
+                                    $('form[name=tambah-prospek] input[name=nama_prospek]').val('');
+                                    $('form[name=tambah-prospek] input[name=nama_lembaga]').val('');
+                                    $('form[name=tambah-prospek] textarea[name=alamat]').val('');
+
+                                    element.find('.col-md-4').remove();
+
+                                    var total = response.length;
+                                    var list_data = '';
+
+                                    $.each(response, function(total, list) {
+                                        list_data +=
+                                            '<option value="' + list.kode + '">' +
+                                                list.nama_prospek + ' (' + list.nama_lembaga + ')' +
+                                            '</option>';
+                                    })
+
+                                    form_kegiatan =
+                                        '<div class="col-md-4">' +
+                                            '<input type="hidden" name="id_peserta[]" value="' + id_peserta + '">' +
+                                            '<input type="hidden" name="tujuan_kegiatan[]" value="' + tujuan + '">' +
+                                            '<div class="form-group">' +
+                                                '<label for="kode_kegiatan">Nama Prospek</label>' +
+                                                '<select class="form-control" id="kode_kegiatan" name="kode_kegiatan[]">' +
+                                                    list_data +
+                                                '</select>' +
+                                            '</div>' +
+                                        '</div>'
+
+                                    element.find('.row').prepend(form_kegiatan);
+
+                                    $('select[name="kode_kegiatan[]"]').select2();
+                                });
+
+                                event.preventDefault();
+                            });
                         });
 
                         $btn.button('reset');
@@ -430,6 +532,7 @@
                         type : 'GET',
                         url : '/json/pelatihan',
                         dataType : 'json',
+                        encode : true,
                     })
 
                     .done(function(response) {
@@ -455,9 +558,12 @@
                                             '</select>' +
                                         '</div>' +
                                     '</div>' +
-                                    '<div class="col-md-8">' +
-                                        '<input type="hidden" name="kegiatan" value="-">' +
-                                        '<button type="button" class="btn btn-danger btn-hapus-kegiatan pull-right" style="margin-top: 24px;"><i class="fa fa-fw fa-minus"></i></button>' +
+                                    '<div class="col-md-8" style="margin-top: 24px;">' +
+                                        '<input type="hidden" name="kegiatan[]" value="-">' +
+                                        '<button type="button" class="btn btn-default btn-modal-pelatihan">' +
+                                            '<i class="fa fa-fw fa-plus"></i> Pelatihan Baru' +
+                                        '</button>' +
+                                        '<button type="button" class="btn btn-danger btn-hapus-kegiatan pull-right"><i class="fa fa-fw fa-minus"></i></button>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>';
@@ -470,23 +576,103 @@
                             element.remove();
                         });
 
-                        $('.btn-modal-prospek').on('click', function() {
-                            console.log('tes')
-                            $('#modal-tambah-prospek').modal('show');
+                        $('.btn-modal-pelatihan').on('click', function() {
+                            $('#modal-tambah-pelatihan').find('.alert').remove();
+                            $('#modal-tambah-pelatihan').modal('show');
+
+                            var element = $(this).closest('.col-md-12');
+
+                            $('form[name=tambah-pelatihan]').off('submit').on('submit', function(event) {
+                                $('.modal').modal('hide');
+
+                                var id_peserta = element.find('input[name="id_peserta[]"]').val();
+                                var tujuan = element.find('input[name="tujuan_kegiatan[]"]').val();
+
+                                element.find('select[name="kode_kegiatan[]"]').prop("disabled", true);
+
+                                var nama_pelatihan = $('form[name=tambah-pelatihan] input[name=nama_pelatihan]').val();
+                                var nama_lembaga = $('form[name=tambah-pelatihan] input[name=nama_lembaga]').val();
+                                var tanggal_mulai = $('form[name=tambah-pelatihan] input[name=tanggal_mulai]').val();
+                                var tanggal_selesai = $('form[name=tambah-pelatihan] input[name=tanggal_selesai]').val();
+                                var alamat = $('form[name=tambah-pelatihan] textarea[name=alamat]').val();
+                                var token = $('form[name=tambah-pelatihan] input[name=_token]').val();
+
+                                var form_data = {
+                                    'nama_pelatihan' : nama_pelatihan,
+                                    'nama_lembaga' : nama_lembaga,
+                                    'tanggal_mulai' : tanggal_mulai,
+                                    'tanggal_selesai' : tanggal_selesai,
+                                    'alamat' : alamat,
+                                    '_token' : token
+                                };
+
+                                $.ajax({
+                                    type : 'POST',
+                                    url : '/pelatihan/store',
+                                    data : form_data,
+                                    dataType : 'json',
+                                    encode : true,
+                                })
+
+                                .done(function(response) {
+                                    console.log('done');
+
+                                    $('form[name=tambah-pelatihan] input[name=nama_pelatihan]').val('');
+                                    $('form[name=tambah-pelatihan] input[name=nama_lembaga]').val('');
+                                    $('form[name=tambah-pelatihan] input[name=tanggal_mulai]').val('');
+                                    $('form[name=tambah-pelatihan] input[name=tanggal_selesai]').val('');
+                                    $('form[name=tambah-pelatihan] textarea[name=alamat]').val('');
+
+                                    element.find('.col-md-4').remove();
+
+                                    var total = response.length;
+                                    var list_data = '';
+
+                                    $.each(response, function(total, list) {
+                                        list_data +=
+                                            '<option value="' + list.kode + '">' +
+                                                list.nama_pelatihan + ' (' + list.nama_lembaga + ')' +
+                                            '</option>';
+                                    });
+
+                                    form_kegiatan =
+                                        '<div class="col-md-4">' +
+                                            '<input type="hidden" name="id_peserta[]" value="' + id_peserta + '">' +
+                                            '<input type="hidden" name="tujuan_kegiatan[]" value="' + tujuan + '">' +
+                                            '<div class="form-group">' +
+                                                '<label for="kode_kegiatan">Nama Pelatihan</label>' +
+                                                '<select class="form-control" id="kode_kegiatan" name="kode_kegiatan[]">' +
+                                                    list_data +
+                                                '</select>' +
+                                            '</div>' +
+                                        '</div>';
+
+                                    element.find('.row').prepend(form_kegiatan);
+
+                                    $('select[name="kode_kegiatan[]"]').select2();
+                                })
+
+                                .fail(function(response) {
+                                    $('#modal-tambah-pelatihan').modal('show');
+
+                                    error =
+                                        '<div class="alert alert-danger">' +
+                                            JSON.parse(response.responseText).tanggal_selesai[0] +
+                                        '</div>';
+
+                                    $('#modal-tambah-pelatihan').find('.modal-body').prepend(error);
+                                })
+
+                                event.preventDefault();
+                            });
                         });
 
                         $btn.button('reset');
                     });
                 }
-
-
             });
-
-
 
             $('select[name=list_peserta]').select2();
         }
-
-
     </script>
 @endsection
