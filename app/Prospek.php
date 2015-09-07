@@ -11,6 +11,7 @@ class Prospek extends Model
 
     protected $table = 'prospek';
     protected $fillable = ['nama_prospek', 'nama_lembaga', 'alamat'];
+    protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     public $primaryKey = 'kode';
 

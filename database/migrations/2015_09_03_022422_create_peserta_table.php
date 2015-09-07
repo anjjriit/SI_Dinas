@@ -19,7 +19,7 @@ class CreatePesertaTable extends Migration
             $table->string('nik');
             $table->enum('jenis_kegiatan', ['project', 'prospek', 'pelatihan']);
             $table->integer('kode_kegiatan')->unsigned();
-            $table->enum('kegiatan', ['UAT', 'REQUIREMENT_GATHERING', 'REVIEW', 'TRAINING_USER']);
+            $table->enum('kegiatan', ['UAT', 'REQUIREMENT_GATHERING', 'REVIEW', 'TRAINING_USER'])->nullable();
             $table->timestamps();
         });
     }

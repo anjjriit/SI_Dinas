@@ -19,6 +19,11 @@ class RpdController extends Controller
         return view('rpd.create', compact('list_pegawai', 'list_kota'));
     }
 
+    public function store(Request $request)
+    {
+        dd($request);
+    }
+
     public function draft()
     {
         return view('rpd.draft');

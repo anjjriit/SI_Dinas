@@ -157,7 +157,7 @@
                                                 {{ $prospek->alamat }}
                                             </td>
                                             <td>
-                                                <a href="/prospek/{{ $prospek->kode }}/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                <a href="/prospek/{{ $prospek->kode }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                 {!! Form::open(
                                                     [
                                                         'method' => 'DELETE',
@@ -167,7 +167,7 @@
                                                     ]
                                                 ) !!}
 
-                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i> Hapus', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button',]
+                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
                                                     ) !!}
                                                 {!! Form::close() !!}
                                             </td>
