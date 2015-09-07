@@ -43,7 +43,7 @@
                                         <td>2015-09-01</td>
                                         <td>2015-09-04</td>
                                         <td>
-                                            <a href="/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                            <a href="/rpd/draft/kode/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -52,7 +52,7 @@
                                         <td>2015-09-01</td>
                                         <td>2015-09-04</td>
                                         <td>
-                                            <a href="/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                            <a href="/rpd/draft/kode/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                         </td>
                                     </tr>
                                     <tr>
@@ -61,7 +61,7 @@
                                         <td>2015-09-01</td>
                                         <td>2015-09-04</td>
                                         <td>
-                                            <a href="/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                            <a href="/rpd/draft/kode/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
                                         </td>
                                     </tr>
                                 </tbody>

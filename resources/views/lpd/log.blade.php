@@ -44,7 +44,9 @@
                                         <td>2015-09-04</td>
                                         <td>Approved</td>
                                         <td>
-                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-share"></i> Detail</a>
+                                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailLPD">
+                                            <i class="fa fa-fw fa-share"></i>Detail
+                                        </button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -54,7 +56,9 @@
                                         <td>2015-09-04</td>
                                         <td>Recall</td>
                                         <td>
-                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-share"></i> Detail</a>
+                                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailLPD">
+                                            <i class="fa fa-fw fa-share"></i>Detail
+                                        </button>
                                         </td>
                                     </tr>
                                     <tr>
@@ -64,7 +68,9 @@
                                         <td>2015-09-04</td>
                                         <td>Decline</td>
                                         <td>
-                                            <a href="/detail" class="btn btn-sm btn-success"><i class="fa fa-fw fa-share"></i> Detail</a>
+                                            <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailLPD">
+                                            <i class="fa fa-fw fa-share"></i>Detail
+                                        </button>
                                         </td>
                                 </tbody>
                             </table>
