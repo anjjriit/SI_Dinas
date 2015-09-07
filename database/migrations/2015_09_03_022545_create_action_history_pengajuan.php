@@ -19,7 +19,7 @@ class CreateActionHistoryPengajuan extends Migration
             $table->string('nik');
             $table->foreign('nik')->references('nik')->on('pegawai')->onUpdate('cascade');
             $table->enum('action', ['DRAFT', 'SUBMIT', 'RECALL', 'APPROVED', 'DECLINE', 'BACK TO INITIATOR']);
-            $table->text('comment');
+            $table->text('comment')->nullable();
             $table->timestamps();
         });
     }

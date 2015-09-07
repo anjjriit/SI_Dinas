@@ -199,6 +199,7 @@ body {
     background-image: none
 }
 
+.btn-default[disabled],
 .btn-default.disabled.focus,
 .btn-default.disabled:focus,
 .btn-default.disabled:hover,

@@ -51,7 +51,6 @@
                                         {!! Form::label('tanggal_mulai', 'Tanggal Mulai') !!}
                                         {!! Form::text('tanggal_mulai', null, ['class' => 'form-control datepicker']) !!}
                                     </div>
-
                                     <div class="col-md-3">
                                         {!! Form::label('tanggal_selesai', 'Tanggal Selesai') !!}
                                         {!! Form::text('tanggal_selesai', null, ['class' => 'form-control datepicker']) !!}
@@ -123,15 +122,99 @@
                                     </div>
                                 </div>
                                 <div class="col-md-6" style="margin-top: 24px;">
-                                    {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Kegiatan', ['type' => 'button', 'class' => 'btn btn-tambah-kegiatan',  'data-loading-text' => 'Loading...']) !!}
+                                    {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Kegiatan', ['type' => 'button', 'class' => 'btn btn-default btn-tambah-kegiatan',  'data-loading-text' => 'Loading...']) !!}
                                 </div>
                             </div>
 
                         </div>
                         <div class="box-footer">
                             {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success pull-left']) !!}
-                            {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Peserta', ['type' => 'button', 'class' => 'btn btn-tambah-peserta pull-right']) !!}
+                            {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Peserta', ['type' => 'button', 'class' => 'btn btn-default btn-tambah-peserta pull-right']) !!}
                         </div>
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modal-tambah-prospek" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Form Tambah Prospek</h4>
+                        </div>
+                        {!! Form::open(['method' => 'POST', 'route' => 'prospek.store']) !!}
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {!! Form::label('nama_prospek', 'Nama Prospek') !!}
+                                            {!! Form::text('nama_prospek', null, ['class' => 'form-control', 'autofocus']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {!! Form::label('nama_lembaga', 'Nama Lembaga') !!}
+                                            {!! Form::text('nama_lembaga', null, ['class' => 'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {!! Form::label('alamat', 'Alamat') !!}
+                                            {!! Form::textarea('alamat', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                <button type="button" class="btn btn-success">Simpan</button>
+                            </div>
+                        {!! Form::close() !!}
+                    </div>
+                </div>
+            </div>
+            <div class="modal fade" id="modal-tambah-pelatihan" tabindex="-1" role="dialog">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            <h4 class="modal-title">Form Tambah Pelatihan</h4>
+                        </div>
+                        {!! Form::open(['method' => 'POST', 'route' => 'pelatihan.store']) !!}
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {!! Form::label('nama_prospek', 'Nama Prospek') !!}
+                                            {!! Form::text('nama_prospek', null, ['class' => 'form-control', 'autofocus']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {!! Form::label('nama_lembaga', 'Nama Lembaga') !!}
+                                            {!! Form::text('nama_lembaga', null, ['class' => 'form-control']) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-md-12">
+                                            {!! Form::label('alamat', 'Alamat') !!}
+                                            {!! Form::textarea('alamat', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
+                                <button type="button" class="btn btn-success">Simpan</button>
+                            </div>
                         {!! Form::close() !!}
                     </div>
                 </div>
@@ -168,7 +251,7 @@
                             '</div>' +
                         '</div>' +
                         '<div class="col-md-6" style="margin-top: 24px;">' +
-                            '<button type="button" class="btn btn-tambah-kegiatan" data-loading-text="Loading..."><i class="fa fa-fw fa-plus"></i> Tambah Kegiatan</button> ' +
+                            '<button type="button" class="btn btn-default btn-tambah-kegiatan" data-loading-text="Loading..."><i class="fa fa-fw fa-plus"></i> Tambah Kegiatan</button> ' +
                             '<button type="button" class="btn btn-danger btn-hapus-peserta pull-right"><i class="fa fa-fw fa-minus"></i></button>' +
                         '</div>' +
                     '</div>';
@@ -208,7 +291,6 @@
 
             $('select[name=kode_kota_asal]').select2();
             $('select[name=kode_kota_tujuan]').select2();
-
         });
 
         function attachListPesertaChangeEvent() {
@@ -317,10 +399,12 @@
                                             '</select>' +
                                         '</div>' +
                                     '</div>' +
-                                    '<div class="col-md-8">' +
+                                    '<div class="col-md-8" style="margin-top: 24px;">' +
                                         '<input type="hidden" name="kegiatan" value="-">' +
-
-                                        '<button type="button" class="btn btn-danger btn-hapus-kegiatan pull-right" style="margin-top: 24px;"><i class="fa fa-fw fa-minus"></i></button>' +
+                                        '<button type="button" class="btn btn-default btn-modal-prospek">' +
+                                          '<i class="fa fa-fw fa-plus"></i> Prospek Baru' +
+                                        '</button>' +
+                                        '<button type="button" class="btn btn-danger btn-hapus-kegiatan pull-right"><i class="fa fa-fw fa-minus"></i></button>' +
                                     '</div>' +
                                 '</div>' +
                             '</div>';
@@ -332,6 +416,11 @@
                         $('.btn-hapus-kegiatan').off('click').on('click', function() {
                             var element = $(this).closest('.col-md-12');
                             element.remove();
+                        });
+
+                        $('.btn-modal-prospek').on('click', function() {
+                            console.log('tes')
+                            $('#modal-tambah-prospek').modal('show');
                         });
 
                         $btn.button('reset');
@@ -381,10 +470,19 @@
                             element.remove();
                         });
 
+                        $('.btn-modal-prospek').on('click', function() {
+                            console.log('tes')
+                            $('#modal-tambah-prospek').modal('show');
+                        });
+
                         $btn.button('reset');
                     });
                 }
+
+
             });
+
+
 
             $('select[name=list_peserta]').select2();
         }

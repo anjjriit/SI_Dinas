@@ -38,7 +38,7 @@ class JsonController extends Controller
     {
         $pelatihan = Pelatihan::all();
 
-        return $pelatihan;
+        return $pelatihan->toJson();
 
     }
 }

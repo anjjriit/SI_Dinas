@@ -24,7 +24,7 @@ class CreateRpdTable extends Migration
             $table->foreign('kode_kota_asal')->references('kode')->on('kota')->onUpdate('cascade');
             $table->integer('kode_kota_tujuan')->unsigned();
             $table->foreign('kode_kota_tujuan')->references('kode')->on('kota')->onUpdate('cascade');
-            $table->string('sarana_penginapan');
+            $table->enum('sarana_penginapan', ['kost', 'hotel', 'guest_house']);
             $table->enum('status', ['DRAFT', 'SUBMIT', 'RECALL', 'APPROVED', 'DECLINE', 'BACK TO INITIATOR']);
             $table->timestamps();
         });
