@@ -58,6 +58,21 @@ class ProspekController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  App\Http\Requests\CreateProspekRequest  $request
+     * @return Response
+     */
+    public function ajaxStore(CreateProspekRequest $request)
+    {
+        $input = $request->all();
+
+        Prospek::create($input);
+
+        return redirect('/json/prospek');
+    }
+
+    /**
      * Display the specified resource.
      *
      * @param  App\Prospek $prospek
