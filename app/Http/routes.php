@@ -50,7 +50,7 @@ Route::get('rpd/draft', 'RpdController@draft');
 Route::get('rpd/submitted', 'RpdController@submitted');
 Route::get('lpd/log', 'RpdController@log');
 
-//lPD
+//LPD
 Route::get('lpd', 'LpdController@index');
 
 //JSON

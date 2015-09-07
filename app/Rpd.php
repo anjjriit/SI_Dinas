@@ -10,4 +10,10 @@ class Rpd extends Model
     protected $fillable = ['nama_kota', 'tanggal_mulai', 'tanggal_selesai'];
 
     public $primaryKey = 'id';
+
+    public function kota()
+    {
+        return $this->hasOne('App\Kota', 'kode', 'kode_kota_tujuan');
+    }
 }
+

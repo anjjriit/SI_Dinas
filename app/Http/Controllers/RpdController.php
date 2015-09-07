@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Pegawai;
 use App\Kota;
+use App\Rpd;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -26,16 +27,13 @@ class RpdController extends Controller
 
     public function draft()
     {
-        return view('rpd.draft');
+        $draftRpds = Rpd::orderBy('id', 'asc')->paginate(15);
+
+        return view('rpd.draft', compact('draftRpds'));
     }
 
     public function submitted()
     {
         return view('rpd.submitted');
-    }
-
-    public function log()
-    {
-        return view('lpd.log');
     }
 }
