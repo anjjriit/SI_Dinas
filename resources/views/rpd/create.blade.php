@@ -20,8 +20,16 @@
                         <div class="box-header">
                             <h4>Form Pengajuan RPD</h4>
                         </div>
-                        {!! Form::open(['method' => 'POST', 'route' => 'rpd.store']) !!}
-                        <div class="box-body">
+                        {!! Form::open(['method' => 'POST', 'route' => 'rpd.action']) !!}
+                        <div class="box-body box-participants">
+                            @if ($errors->any())
+                                <div class="alert alert-danger">
+                                    @foreach ($errors->all() as $error)
+                                        <i class="fa fa-fw fa-exclamation"></i> {{ $error }}
+                                        <br>
+                                    @endforeach
+                                </div>
+                            @endif
                             <h6 class="page-header"><small>Basic Info</small></h6>
 
                             <div class="form-group">
@@ -81,17 +89,17 @@
                                             </div>
                                             <div class="col-md-6">
                                                 <label style="font-weight:normal">
-                                                    {!! Form::checkbox('sarana_transportasi[]', 'kereta') !!} Kereta
+                                                    {!! Form::checkbox('sarana_transportasi[]', 'Kereta') !!} Kereta
                                                 </label>
                                             </div>
                                             <div class="col-md-6">
                                                 <label style="font-weight:normal">
-                                                    {!! Form::checkbox('sarana_transportasi[]', 'travel') !!} Travel
+                                                    {!! Form::checkbox('sarana_transportasi[]', 'Travel') !!} Travel
                                                 </label>
                                             </div>
                                             <div class="col-md-6">
                                                 <label style="font-weight:normal">
-                                                    {!! Form::checkbox('sarana_transportasi[]', 'pesawat') !!} Pesawat
+                                                    {!! Form::checkbox('sarana_transportasi[]', 'Pesawat') !!} Pesawat
                                                 </label>
                                             </div>
                                         </div>
@@ -125,7 +133,15 @@
                                     {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Kegiatan', ['type' => 'button', 'class' => 'btn btn-default btn-tambah-kegiatan',  'data-loading-text' => 'Loading...']) !!}
                                 </div>
                             </div>
-
+                        </div>
+                        <div class="box-body box-add-participants">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Peserta', ['type' => 'button', 'class' => 'btn btn-default btn-tambah-peserta pull-right']) !!}
+                                </div>
+                            </div>
+                        </div>
+                        <div class="box-body box-information">
                             <h6 class="page-header"><small>Additional Information</small></h6>
 
                             <div class="row">
@@ -138,8 +154,8 @@
                             </div>
                         </div>
                         <div class="box-footer">
-                            {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success pull-left']) !!}
-                            {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Peserta', ['type' => 'button', 'class' => 'btn btn-default btn-tambah-peserta pull-right']) !!}
+                            {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Save as Draft', ['type' => 'submit', 'class' => 'btn btn-default', 'name' => 'action', 'value' => 'draft']) !!}
+                            {!! Form::button('<i class="fa fa-fw fa-check"></i> Submit', ['type' => 'submit', 'class' => 'btn btn-success', 'name' => 'action', 'value' => 'submit']) !!}
                         </div>
                         {!! Form::close() !!}
                     </div>
@@ -282,7 +298,7 @@
                         '</div>' +
                     '</div>';
 
-                $('.box-body').append(block);
+                $('.box-body.box-participants').append(block);
 
                 $('.btn-hapus-peserta').off('click').on('click', function() {
                     var element = $(this).closest('.row-peserta');
@@ -375,7 +391,7 @@
                                     '</div>' +
                                     '<div class="col-md-4">' +
                                         '<div class="form-group">' +
-                                            '<label for="kode_kegiatan">Nama Project</label>' +
+                                            '<label for="kode_kegiatan">Kegiatan</label>' +
                                             '<select class="form-control" id="kode_kegiatan" name="kegiatan[]">' +
                                                 '<option value="REQUIREMENT_GATHERING">Requirement Gathering</option>' +
                                                 '<option value="UAT">UAT</option>' +

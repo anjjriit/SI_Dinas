@@ -41,7 +41,7 @@ Route::group(['middleware' => 'role:super_admin'], function () {
 
 
 
-Route::post('rpd', ['as' => 'rpd.store', 'uses' => 'RpdController@store']);
+Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction']);
 
 //RPD
 Route::get('rpd/create', 'RpdController@create');
