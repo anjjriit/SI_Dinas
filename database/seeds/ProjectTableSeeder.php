@@ -13,12 +13,16 @@ class ProjectTableSeeder extends Seeder
     {
         DB::table('project')->delete();
 
+        $now = date('Y-m-d H:i:s');
+        
         DB::table('project')->insert([
         	'nama_project' 		=> 'Website Startup Muda',
         	'nama_lembaga'		=> 'Startup Muda',
         	'tanggal_mulai' 	=> '2015-08-05',
         	'tanggal_selesai'	=> '2015-08-30',
         	'alamat'			=> 'Jalan Asia Afrika No 20',
+            'created_at'    => $now,
+            'updated_at'    => $now,
         ]);
 
         DB::table('project')->insert([
@@ -27,6 +31,8 @@ class ProjectTableSeeder extends Seeder
         	'tanggal_mulai' 	=> '2015-04-05',
         	'tanggal_selesai'	=> '2015-05-30',
         	'alamat'			=> 'Komplek Permata Blok A No 10',
+            'created_at'    => $now,
+            'updated_at'    => $now,
         ]);
 
         DB::table('project')->insert([
@@ -35,6 +41,8 @@ class ProjectTableSeeder extends Seeder
         	'tanggal_mulai' 	=> '2015-09-05',
         	'tanggal_selesai'	=> '2015-10-30',
         	'alamat'			=> 'Jalan Van de Venter No 20',
+            'created_at'    => $now,
+            'updated_at'    => $now,
         ]);
 
         DB::table('project')->insert([
@@ -43,6 +51,8 @@ class ProjectTableSeeder extends Seeder
         	'tanggal_mulai' 	=> '2015-07-05',
         	'tanggal_selesai'	=> '2015-08-30',
         	'alamat'			=> 'Jalan Patuha No 20',
+            'created_at'    => $now,
+            'updated_at'    => $now,
         ]);
 
         DB::table('project')->insert([
@@ -51,6 +61,8 @@ class ProjectTableSeeder extends Seeder
         	'tanggal_mulai' 	=> '2015-10-05',
         	'tanggal_selesai'	=> '2015-10-30',
         	'alamat'			=> 'Komplek Alia Blok 3 No 20',
+            'created_at'    => $now,
+            'updated_at'    => $now,
         ]);
     }
 }

@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 use App\Pegawai;
 use App\Kota;
+use App\Rpd;
+use Auth;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\AuthController;
 
 class RpdController extends Controller
 {
@@ -31,7 +34,14 @@ class RpdController extends Controller
 
     public function submitted()
     {
-        return view('rpd.submitted');
+        $user = Auth::user();
+        $userId = $user->nik;
+        $data_rpd = Rpd::where('status','=','SUBMIT')
+                        ->where('nik','=',$userId)
+                        ->paginate(15);
+        $kota = Rpd::find(1)->kota;
+
+        return view('rpd.submitted', compact('data_rpd','kota'));
     }
 
     public function log()
