@@ -47,10 +47,10 @@ Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction'
 Route::get('rpd/create', 'RpdController@create');
 Route::get('rpd/draft', 'RpdController@draft');
 Route::get('rpd/submitted', 'RpdController@submitted');
-Route::get('lpd/log', 'RpdController@log');
 
-//lPD
+//LPD
 Route::get('lpd', 'LpdController@index');
+Route::get('lpd/log', 'LpdController@log');
 
 //JSON
 Route::get('json/pegawai', 'JsonController@pegawai');

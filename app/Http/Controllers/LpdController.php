@@ -29,4 +29,9 @@ class LpdController extends Controller
         //
     }
 
+    public function log()
+    {
+        return view('lpd.log');
+    }
+
 }
