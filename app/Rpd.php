@@ -8,9 +8,23 @@ class Rpd extends Model
 {
     //dari tabel rpd
     protected $table = 'rpd';
-    protected $fillable = ['nik','kategori','jenis_perjalanan','tanggal_mulai', 'tanggal_selesai','kode_kota_asal','kode_kota_tujuan','sarana_penginapan', 'keterangan','status'];
 
-    public $primaryKey = 'id';
+    protected $fillable = [
+        'nik',
+        'kategori',
+        'jenis_perjalanan',
+        'tanggal_mulai',
+        'tanggal_selesai',
+        'kode_kota_asal',
+        'kode_kota_tujuan',
+        'sarana_penginapan',
+        'keterangan',
+        'status'
+    ];
+
+    public function peserta() {
+        return $this->belongsToMany('App\Pegawai', 'peserta', 'id_rpd', 'nik_peserta')->withPivot('jenis_kegiatan', 'kode_kegiatan', 'kegiatan');
+    }
 
 
     //relasi one to many dengan kota
@@ -18,7 +32,12 @@ class Rpd extends Model
 
     //     return $this->belongsTo('App\kota','kode_kota_tujuan');
     // }
-    
+
+    public function saranaTransportasi()
+    {
+        return $this->hasMany('App\SaranaTransportasi', 'id_rpd');
+    }
+
     public function kota()
     {
         return $this->hasOne('App\Kota', 'kode', 'kode_kota_tujuan');
