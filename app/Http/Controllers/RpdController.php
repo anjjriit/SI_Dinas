@@ -38,11 +38,11 @@ class RpdController extends Controller
     {
         $user = Auth::user();
         $userId = $user->nik;
-        $data_rpd = Rpd::where('status','=','SUBMIT')
+        $submittedRpds = Rpd::where('status','=','SUBMIT')
                         ->where('nik','=',$userId)
                         ->paginate(15);
-        $kota = Rpd::find(1)->kota;
+        //$kota = Rpd::find(1)->kota;
 
-        return view('rpd.submitted', compact('data_rpd','kota'));
+        return view('rpd.submitted', compact('submittedRpds'));
     }
 }

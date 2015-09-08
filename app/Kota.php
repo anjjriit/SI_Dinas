@@ -21,8 +21,8 @@ class Kota extends Model
      */
     protected $dates = ['deleted_at'];
 
-    public function rpd(){
+    // public function rpd(){
 
-        return $this->hasMany('App\Rpd','kode_kota_tujuan','kode_kota_asal');
-    }
+    //     return $this->hasMany('App\Rpd','kode_kota_tujuan','kode_kota_asal');
+    // }
 }

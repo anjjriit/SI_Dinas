@@ -38,7 +38,7 @@
     	<div class="row">
     		<!--Bagian box tabel-->
     		<div class="col-md-12">
-    			@if ($data_rpd->count() != 0)
+    			@if ($submittedRpds->count() != 0)
 	    			<div class="box box-widget">
 	    				<div class="box-body no-padding">
 	    					<table class="table">
@@ -52,13 +52,13 @@
 	    							</tr>
 	    						</thead>
 	    						<tbody>
-	    							@foreach ($data_rpd as $rpd)
+	    							@foreach ($submittedRpds as $rpd)
 			    						<tr>
 			    							<td>
 			    								{{ $rpd->id }}
 			    							</td>
 											<td>
-												{{ $kota->nama_kota }}
+												{{ $rpd->kota->nama_kota }}
 											</td>
 											<td>
 												{{ $rpd->tanggal_mulai }}

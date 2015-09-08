@@ -12,16 +12,16 @@ class Rpd extends Model
 
     public $primaryKey = 'id';
 
-<<<<<<< HEAD
-    //relasi one to many dengan kota
-    public function kota(){
 
-        return $this->belongsTo('App\kota','kode_kota_tujuan');
-=======
+    //relasi one to many dengan kota
+    // public function kota(){
+
+    //     return $this->belongsTo('App\kota','kode_kota_tujuan');
+    // }
+    
     public function kota()
     {
         return $this->hasOne('App\Kota', 'kode', 'kode_kota_tujuan');
->>>>>>> a1c6d3cbf9edc17ea5d416d14995e8563781b75f
     }
 }
 
