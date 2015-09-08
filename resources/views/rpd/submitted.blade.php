@@ -67,6 +67,7 @@
 												{{ $rpd->tanggal_selesai }}
 											</td>
 											<td>
+												<form><input type="hidden" value="{{ $rpd->pegawai->nama_lengkap }}"></form>
 												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD" data-whatever="{{ $rpd }}">
 													<i class="fa fa-fw fa-share"></i>Detail
 												</button>
@@ -107,7 +108,7 @@
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Penanggung Jawab</th>
-                                    <td class="nik_rpd"></td>
+                                    <td class="pj_rpd"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Kategori</th>
@@ -127,15 +128,15 @@
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Jumlah Hari Dinas</th>
-                                    <td></td>
+                                    <td class="hari_dinas"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Asal Kota</th>
-                                    <td></td>
+                                    <td class="asal_kota"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Tujuan Kota</th>
-                                    <td></td>
+                                    <td class="tujuan_kota"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Sarana Transportasi</th>
@@ -225,18 +226,23 @@
 			var button = $(event.relatedTarget) // Button that triggered the modal
 			var rpd = button.data('whatever') // Extract info from data-* attributes
 
+			var hari_dinas = (rpd['tanggal_selesai']-rpd['tanggal_mulai']);
 			
 			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 
 			var modal = $(this)
-			modal.find('.id_rpd').text( rpd['id'] )
-			modal.find('.kategori_rpd').text( rpd['kategori'] )
-			modal.find('.jenis_rpd').text( rpd['jenis_perjalanan'] )
-			modal.find('.mulai_rpd').text( rpd['tanggal_mulai'] )
-			modal.find('.selesai_rpd').text( rpd['tanggal_selesai'] )
-			modal.find('.sarana_rpd').text( rpd['sarana_penginapan'] )
-			modal.find('.status_rpd').text( rpd['status'] )
+			modal.find('.id_rpd').text( rpd['id'] );
+			modal.find('.kategori_rpd').text( rpd['kategori'] );
+			modal.find('.jenis_rpd').text( rpd['jenis_perjalanan'] );
+			modal.find('.mulai_rpd').text( rpd['tanggal_mulai'] );
+			modal.find('.selesai_rpd').text( rpd['tanggal_selesai'] );
+			modal.find('.sarana_rpd').text( rpd['sarana_penginapan'] );
+			modal.find('.status_rpd').text( rpd['status'] );
+			modal.find('.komentar_rpd').text( rpd['keterangan'] );
+			modal.find('.tujuan_kota').text( rpd['kota']['nama_kota'] );
+			modal.find('.pj_rpd').text( rpd['pegawai']['nama_lengkap'] );
+			modal.find('.hari_dinas').text( hari_dinas );
 		})
 	</script>
 

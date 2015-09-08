@@ -117,7 +117,6 @@ class RpdController extends Controller
         $submittedRpds = Rpd::where('status','=','SUBMIT')
                         ->where('nik','=',$userId)
                         ->paginate(15);
-        //$kota = Rpd::find(1)->kota;
 
         return view('rpd.submitted', compact('submittedRpds'));
     }

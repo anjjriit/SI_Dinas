@@ -8,4 +8,5 @@ class SaranaTransportasi extends Model
 {
     protected $table = 'sarana_transportasi';
     protected $fillable = ['id_rpd', 'nama_transportasi'];
+
 }
