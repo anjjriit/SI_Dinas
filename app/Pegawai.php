@@ -59,4 +59,9 @@ class Pegawai extends Model implements AuthenticatableContract
             parent::setAttribute($key, $value);
         }
     }
+
+    public function rpd()
+    {
+        return $this->hasMany('App\Rpd','nik');
+    }
 }

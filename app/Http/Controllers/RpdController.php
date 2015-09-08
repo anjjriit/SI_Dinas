@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Rpd;
+use Auth;
 use App\Kota;
 use App\Pegawai;
 use App\HistoryRpd;
 use App\SaranaTransportasi;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\AuthController;
 
 class RpdController extends Controller
 {
@@ -155,6 +157,12 @@ class RpdController extends Controller
 
     public function submitted()
     {
-        return view('rpd.submitted');
+        $user = Auth::user();
+        $userId = $user->nik;
+        $submittedRpds = Rpd::where('status','=','SUBMIT')
+                        ->where('nik','=',$userId)
+                        ->paginate(15);
+
+        return view('rpd.submitted', compact('submittedRpds'));
     }
 }

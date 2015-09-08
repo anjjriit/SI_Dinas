@@ -28,7 +28,7 @@
             </div>		
 		</div>
     @endif
-		
+
 	<section class="content-header">
         <h1>Data Rencana Perjalanan Dinas</h1>
         <label>Yang telah disubmit</label>
@@ -38,46 +38,54 @@
     	<div class="row">
     		<!--Bagian box tabel-->
     		<div class="col-md-12">
-    			<div class="box box-widget">
-    				<div class="box-body no-padding">
-    					<table class="table">
-    						<thead>
-    							<tr>
-    								<th>Kode</th>
-    								<th>Kota Tujuan</th>
-    								<th>Tanggal Mulai</th>
-    								<th>Tanggal Selesai</th>
-    								<th>Action</th>
-    							</tr>
-    						</thead>
-    						<tbody>
-	    						<tr>
-	    							<td>1029876509</td>
-									<td>Jakarta Pusat</td>
-									<td>2015-09-20</td>
-									<td>2015-09-30</td>
-									<td>
-										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
-											<i class="fa fa-fw fa-share"></i>Detail
-										</button>
-									</td>
-	    						</tr>
-	    						<tr>
-	    							<td>1029876509</td>
-									<td>Jakarta Pusat</td>
-									<td>2015-09-20</td>
-									<td>2015-09-30</td>
-									<td>
-										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
-											<i class="fa fa-fw fa-share"></i>Detail
-										</button>
-									</td>
-	    						</tr>
-    						</tbody>
-    					</table>
-    				</div>    				
-    			</div>
-    		</div><!-- Akhir Bagian Box Table-->
+    			@if ($submittedRpds->count() != 0)
+	    			<div class="box box-widget">
+	    				<div class="box-body no-padding">
+	    					<table class="table">
+	    						<thead>
+	    							<tr>
+	    								<th>Kode</th>
+	    								<th>Kota Tujuan</th>
+	    								<th>Tanggal Mulai</th>
+	    								<th>Tanggal Selesai</th>
+	    								<th>Action</th>
+	    							</tr>
+	    						</thead>
+	    						<tbody>
+	    							@foreach ($submittedRpds as $rpd)
+			    						<tr>
+			    							<td>
+			    								{{ $rpd->id }}
+			    							</td>
+											<td>
+												{{ $rpd->kota->nama_kota }}
+											</td>
+											<td>
+												{{ $rpd->tanggal_mulai }}
+											</td>
+											<td>
+												{{ $rpd->tanggal_selesai }}
+											</td>
+											<td>
+												<form><input type="hidden" value="{{ $rpd->pegawai->nama_lengkap }}"></form>
+												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD" data-whatever="{{ $rpd }}">
+													<i class="fa fa-fw fa-share"></i>Detail
+												</button>
+											</td>
+			    						</tr>
+			    					@endforeach	
+	    						</tbody>
+	    					</table>
+	    				</div>    				
+	    			</div><!-- Akhir Bagian Box Table-->
+    			@else
+    				<div class="alert alert-warning">
+                        Data RPD yang telah disubmit belum tersedia. 
+                    </div>
+    			@endif
+
+    			
+    		</div>
     	</div>
     </section>
 
@@ -96,51 +104,51 @@
                             <tbody>
                                 <tr>
                                     <th class="col-md-4">ID</th>
-                                    <td>1009091266</td>
+                                    <td class="id_rpd"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Penanggung Jawab</th>
-                                    <td>Pegawai yang sedang login</td>
+                                    <td class="pj_rpd"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Kategori</th>
-                                    <td>Trip</td>
+                                    <td class="kategori_rpd"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Jenis</th>
-                                    <td>Luar Kota</td>
+                                    <td class="jenis_rpd"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Tanggal Mulai</th>
-                                    <td>10 Mei 2015</td>
+                                    <td class="mulai_rpd"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Tanggal Selesai</th>
-                                    <td>20 Mei 2015</td>
+                                    <td class="selesai_rpd"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Jumlah Hari Dinas</th>
-                                    <td>10</td>
+                                    <td class="hari_dinas"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Asal Kota</th>
-                                    <td>Bandung</td>
+                                    <td class="asal_kota"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Tujuan Kota</th>
-                                    <td>Jakarta Pusat</td>
+                                    <td class="tujuan_kota"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Sarana Transportasi</th>
-                                    <td>Mobil Dinas, Travel</td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Sarana Penginapan</th>
-                                    <td>Hotel</td>
+                                    <td class="sarana_rpd"></td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Status</th>
-                                    <td>Submitted</td>
+                                    <td class="status_rpd"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -171,7 +179,7 @@
 
 						<!--Bagian Komentar atau Keterangan-->
 						<h4>Komentar</h4>
-						<p>
+						<p class="komentar_rpd">
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 							tempor incididunt ut labore et dolore magna aliqua. 
 						</p>
@@ -206,11 +214,36 @@
 				</div>
 			</div>
 		</div>
-	</div><!-- Akhir Bagian Modal detail RPD-->
+	</div> <!-- Akhir Bagian Modal detail RPD-->
 
 @endsection
 
 @section('script')
 	@parent
+
+	<script type="text/javascript">
+		$('#detailRPD').on('show.bs.modal', function (event) {
+			var button = $(event.relatedTarget) // Button that triggered the modal
+			var rpd = button.data('whatever') // Extract info from data-* attributes
+
+			var hari_dinas = (rpd['tanggal_selesai']-rpd['tanggal_mulai']);
+			
+			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
+			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
+
+			var modal = $(this)
+			modal.find('.id_rpd').text( rpd['id'] );
+			modal.find('.kategori_rpd').text( rpd['kategori'] );
+			modal.find('.jenis_rpd').text( rpd['jenis_perjalanan'] );
+			modal.find('.mulai_rpd').text( rpd['tanggal_mulai'] );
+			modal.find('.selesai_rpd').text( rpd['tanggal_selesai'] );
+			modal.find('.sarana_rpd').text( rpd['sarana_penginapan'] );
+			modal.find('.status_rpd').text( rpd['status'] );
+			modal.find('.komentar_rpd').text( rpd['keterangan'] );
+			modal.find('.tujuan_kota').text( rpd['kota']['nama_kota'] );
+			modal.find('.pj_rpd').text( rpd['pegawai']['nama_lengkap'] );
+			modal.find('.hari_dinas').text( hari_dinas );
+		})
+	</script>
 
 @endsection

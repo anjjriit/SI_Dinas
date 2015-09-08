@@ -20,4 +20,9 @@ class Kota extends Model
      * @var array
      */
     protected $dates = ['deleted_at'];
+
+    // public function rpd(){
+
+    //     return $this->hasMany('App\Rpd','kode_kota_tujuan','kode_kota_asal');
+    // }
 }

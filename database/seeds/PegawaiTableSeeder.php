@@ -13,12 +13,16 @@ class PegawaiTableSeeder extends Seeder
     {
         DB::table('pegawai')->delete();
 
+        $now = date('Y-m-d H:i:s');
+
         DB::table('pegawai')->insert([
             'nik' => '100000000',
             'nama_lengkap' => 'Super Administrator',
             'email' => 'admin@javan.co.id',
             'password' => bcrypt('admin'),
             'role' => 'super_admin',
+            'created_at'    => $now,
+            'updated_at'    => $now,
         ]);
 
         DB::table('pegawai')->insert([
@@ -27,6 +31,8 @@ class PegawaiTableSeeder extends Seeder
             'email' => 'supadmin@javan.co.id',
             'password' => bcrypt('supadmin'),
             'role' => 'super_admin',
+            'created_at'    => $now,
+            'updated_at'    => $now,
         ]);
 
         DB::table('pegawai')->insert([
@@ -35,6 +41,8 @@ class PegawaiTableSeeder extends Seeder
             'email' => 'frans@javan.co.id',
             'password' => bcrypt('frans'),
             'role' => 'employee',
+            'created_at'    => $now,
+            'updated_at'    => $now,
         ]);
 
         DB::table('pegawai')->insert([
@@ -43,6 +51,8 @@ class PegawaiTableSeeder extends Seeder
             'email' => 'gio@javan.co.id',
             'password' => bcrypt('gio'),
             'role' => 'employee',
+            'created_at'    => $now,
+            'updated_at'    => $now,
         ]);
 
         DB::table('pegawai')->insert([
@@ -51,6 +61,8 @@ class PegawaiTableSeeder extends Seeder
             'email' => 'rey@javan.co.id',
             'password' => bcrypt('rey'),
             'role' => 'administration',
+            'created_at'    => $now,
+            'updated_at'    => $now,
         ]);
 
         DB::table('pegawai')->insert([
@@ -59,6 +71,8 @@ class PegawaiTableSeeder extends Seeder
             'email' => 'tommy@javan.co.id',
             'password' => bcrypt('tommy'),
             'role' => 'Finance',
+            'created_at'    => $now,
+            'updated_at'    => $now,
         ]);
     }
 }
