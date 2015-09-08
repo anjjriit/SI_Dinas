@@ -22,16 +22,15 @@ Route::group(['middleware' => 'auth'], function () {
         return view('dashboard');
     });
 
-
-
     Route::get('logout', 'Auth\AuthController@getLogout');
     Route::get('user/password', 'PegawaiController@editPassword');
     Route::patch('user/password/update', ['as' => 'user.update.password', 'uses' => 'PegawaiController@updatePassword']);
+
+    Route::post('prospek/store', ['as' => 'prospek.ajax.store', 'uses' => 'ProspekController@ajaxStore']);
+    Route::post('pelatihan/store', ['as' => 'pelatihan.ajax.store', 'uses' => 'PelatihanController@ajaxStore']);
 });
 
 Route::group(['middleware' => 'role:super_admin'], function () {
-
-
     Route::resource('user', 'PegawaiController', ['except' => 'show']);
     Route::resource('kota', 'KotaController', ['except' => 'show']);
     Route::resource('prospek', 'ProspekController', ['except' => 'show']);
@@ -48,10 +47,10 @@ Route::post('rpd', ['as' => 'rpd.store', 'uses' => 'RpdController@store']);
 Route::get('rpd/create', 'RpdController@create');
 Route::get('rpd/draft', 'RpdController@draft');
 Route::get('rpd/submitted', 'RpdController@submitted');
-Route::get('lpd/log', 'RpdController@log');
 
-//lPD
+//LPD
 Route::get('lpd', 'LpdController@index');
+Route::get('lpd/log', 'LpdController@log');
 
 //JSON
 Route::get('json/pegawai', 'JsonController@pegawai');

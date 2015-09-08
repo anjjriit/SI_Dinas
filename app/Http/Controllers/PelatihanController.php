@@ -58,6 +58,22 @@ class PelatihanController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  App\Http\Requests\CreateProspekRequest  $request
+     * @return Response
+     */
+    public function ajaxStore(CreatePelatihanRequest $request)
+    {
+        $input = $request->all();
+
+        Pelatihan::create($input);
+
+        return redirect('/json/pelatihan');
+    }
+
+
+    /**
      * Display the specified resource.
      *
      * @param  App\Pelatihan $pelatihan

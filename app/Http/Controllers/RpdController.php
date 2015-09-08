@@ -29,7 +29,9 @@ class RpdController extends Controller
 
     public function draft()
     {
-        return view('rpd.draft');
+        $draftRpds = Rpd::orderBy('id', 'asc')->paginate(15);
+
+        return view('rpd.draft', compact('draftRpds'));
     }
 
     public function submitted()
@@ -42,10 +44,5 @@ class RpdController extends Controller
         $kota = Rpd::find(1)->kota;
 
         return view('rpd.submitted', compact('data_rpd','kota'));
-    }
-
-    public function log()
-    {
-        return view('lpd.log');
     }
 }
