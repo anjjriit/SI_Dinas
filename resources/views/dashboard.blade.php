@@ -76,7 +76,7 @@
 					<div class="tab-content">
 						<div role="tabpanel" id="data_rpd" class="tab-pane active" style="position : relative">
 							<h3 class="text-center">Data Rencana Perjalanan Dinas</h3>
-							<table class="table">
+							<table class="table table-bordered">
 	    						<thead>
 	    							<tr>
 	    								<th>Kode</th>
@@ -102,7 +102,31 @@
 	    					</table>
 						</div>
 						<div role="tabpanel" id="data_lpd" class="tab-pane" style="position : relative">
-							aa
+							<h3 class="text-center">Data Laporan Perjalanan Dinas</h3>
+							<table class="table table-bordered">
+	    						<thead>
+	    							<tr>
+	    								<th>Kode</th>
+	    								<th>Kota Tujuan</th>
+	    								<th>Tanggal Selesai</th>
+	    								<th>Penanggung Jawab</th>
+	    								<th>Action</th>
+	    							</tr>
+	    						</thead>
+	    						<tbody>
+	    							<tr>
+	    								<td>1</td>
+	    								<td>Semarang</td>
+	    								<td>2015-08-09</td>
+	    								<td>Super Admin</td>
+	    								<td>
+	    									<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD" >
+												<i class="fa fa-fw fa-share"></i>Detail
+											</button>
+	    								</td>
+	    							</tr>
+	    						</tbody>
+	    					</table>
 						</div>
 					</div>
 				</div>
