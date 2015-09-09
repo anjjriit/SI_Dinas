@@ -98,9 +98,54 @@ class RpdController extends Controller
     }
 
     public function saveAsDraft(Request $request)  {
-        $this->validate($request, [
+        $inputRpd = $request->only(
+            'kategori',
+            'jenis_perjalanan',
+            'tanggal_mulai',
+            'tanggal_selesai',
+            'kode_kota_asal',
+            'kode_kota_tujuan',
+            'sarana_penginapan',
+            'keterangan'
+        );
 
-        ]);
+        $inputRpd['nik'] = auth()->user()->nik;
+        $inputRpd['status'] = 'DRAFT';
+
+        $rpd = Rpd::create($inputRpd);
+
+        if ($request->has('sarana_transportasi')) {
+            $saranaTransportasi = $request->input('sarana_transportasi');
+
+            foreach ($saranaTransportasi as $transportasi) {
+                $inputTransportasi['nama_transportasi'] = $transportasi;
+                $inputTransportasi['id_rpd'] = $rpd->id;
+
+                SaranaTransportasi::create($inputTransportasi);
+            }
+        }
+
+        if ($request->has('id_peserta')) {
+            $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan');
+
+            for ($i = 0;$i < count($kegiatanPeserta['id_peserta']);$i++) {
+                $nik = $kegiatanPeserta['id_peserta'][$i];
+                $jenis_kegiatan = $kegiatanPeserta['tujuan_kegiatan'][$i];
+                $kode_kegiatan = $kegiatanPeserta['kode_kegiatan'][$i];
+                $kegiatan = $kegiatanPeserta['kegiatan'][$i];
+
+                $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
+            }
+        }
+
+        $action = [
+            'id_rpd' => $rpd->id,
+            'nik' => auth()->user()->nik,
+            'action' => 'DRAFT',
+            'comment' => null
+        ];
+
+        HistoryRpd::create($action);
     }
 
     public function draft()

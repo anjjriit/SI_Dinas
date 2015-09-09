@@ -72,11 +72,11 @@
                                 <div class="row">
                                     <div class="col-md-6">
                                         {!! Form::label('kode_kota_asal', 'Kota Asal') !!}
-                                        {!! Form::select('kode_kota_asal', $list_kota, null, ['class' => 'form-control', 'placeholder' => 'Pilih kota asal...']) !!}
+                                        {!! Form::select('kode_kota_asal', $list_kota, null, ['class' => 'form-control']) !!}
                                         <br>
                                         <br>
                                         {!! Form::label('kode_kota_tujuan', 'Kota Tujuan') !!}
-                                        {!! Form::select('kode_kota_tujuan', $list_kota, null, ['class' => 'form-control', 'placeholder' => 'Pilih kota tujuan...']) !!}
+                                        {!! Form::select('kode_kota_tujuan', $list_kota, null, ['class' => 'form-control']) !!}
                                     </div>
 
                                     <div class="col-md-6">
