@@ -207,7 +207,7 @@
                                 <div class="tab-pane" role="tabpanel" id="complete">
                                     <div class="box-body box-finish">
                                         <div class="row">
-                                            <div class="col-md-12 text-center">
+                                            <div class="col-md-8 text-center">
                                                 <div class="form-group">
                                                     {!! Form::label('keterangan', 'Keterangan') !!}
                                                     {!! Form::textarea('keterangan', null, ['class' => 'form-control', 'placeholder' => 'Isi dengan keterangan tambahan (bila diperlukan)', 'rows' => 3]) !!}
@@ -405,8 +405,8 @@
                 $(this).find('[autofocus]').focus();
             });
 
-            $('select[name=kode_kota_asal]').select2( {width: '495px', display: 'block' } );
-            $('select[name=kode_kota_tujuan]').select2( {width: '495px', display: 'block' } );
+            $('select[name=kode_kota_asal]').select2( {width: '475px', display: 'block' } );
+            $('select[name=kode_kota_tujuan]').select2( {width: '475px', display: 'block' } );
 
             //Initialize tooltips
             $('.nav-tabs > li a[title]').tooltip();

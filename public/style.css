@@ -473,7 +473,21 @@ body {
 }
 
 .wizard .box-body {
-    margin-top: 20px;
+    border: 1px solid #ddd;
+    border-top: none;
+    border-radius: 0;
+    padding-top: 20px;
+    margin-bottom: 10px;
+}
+
+.wizard .box-body.box-add-participants {
+    border: none;
+    padding-top: 10px;
     padding-right: 0;
-    padding-left: 0;
+}
+
+.list-inline li {
+    padding-right: 0;
+    padding-top: 10px;
+    padding-bottom: 10px;
 }
