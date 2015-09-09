@@ -14,152 +14,222 @@
         </section>
 
         <section class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    <div class="box box-widget">
-                        <div class="box-header">
-                            <h4>Form Pengajuan RPD</h4>
-                        </div>
-                        {!! Form::open(['method' => 'POST', 'route' => 'rpd.action']) !!}
-                        <div class="box-body box-participants">
-                            @if ($errors->any())
-                                <div class="alert alert-danger">
-                                    @foreach ($errors->all() as $error)
-                                        <i class="fa fa-fw fa-exclamation"></i> {{ $error }}
-                                        <br>
-                                    @endforeach
-                                </div>
-                            @endif
-                            <h6 class="page-header"><small>Basic Info</small></h6>
+            <div class="box box-widget">
+                <div class="box-header">
+                    <h4>Form Pengajuan RPD</h4>
+                </div>
 
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        {!! Form::label('kategori', 'Status') !!}
+                @if ($errors->any())
+                    <div class="alert alert-danger">
+                        @foreach ($errors->all() as $error)
+                            <i class="fa fa-fw fa-exclamation"></i> {{ $error }}
+                            <br>
+                        @endforeach
+                    </div>
+                @endif
+
+                {!! Form::open(['method' => 'POST', 'route' => 'rpd.action']) !!}
+                    <div class="wizard">
+                        <div class="wizard-inner">
+                            <ul class="nav nav-tabs" role="tablist">
+                                <li role="presentation" class="active text-center">
+                                    <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab" title="Step 1">
+                                        <span class="round-tab">
+                                            <i class="fa fa-fw fa-info"></i> Basic Info
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li role="presentation" class="text-center">
+                                    <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab" title="Step 2">
+                                        <span class="round-tab">
+                                            <i class="fa fa-fw fa-calendar"></i> Time &amp; Destination
+                                        </span>
+                                    </a>
+                                </li>
+                                <li role="presentation" class="text-center">
+                                    <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab" title="Step 3">
+                                        <span class="round-tab">
+                                            <i class="fa fa-fw fa-users"></i> Participants
+                                        </span>
+                                    </a>
+                                </li>
+
+                                <li role="presentation" class="text-center">
+                                    <a href="#complete" data-toggle="tab" aria-controls="complete" role="tab" title="Complete">
+                                        <span class="round-tab">
+                                            <i class="fa fa-fw fa-check"></i> Finish
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+
+                            <div class="tab-content">
+                                <div class="tab-pane active" role="tabpanel" id="step1">
+                                    <div class="box-body box-basic-info">
                                         <div class="row">
-                                            <div class="col-md-3">
-                                                <label style="font-weight: normal;">
-                                                    {!! Form::radio('kategori', 'trip') !!} Trip
-                                                </label>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    {!! Form::label('kategori', 'Kategori') !!}
+                                                    <div class="row">
+                                                        <div class="col-md-6">
+                                                            <label style="font-weight: normal;">
+                                                                {!! Form::radio('kategori', 'trip') !!} Trip
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <label style="font-weight: normal;">
+                                                                {!! Form::radio('kategori', 'non_trip') !!} Non-trip
+                                                            </label>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
-                                            <div class="col-md-3">
-                                                <label style="font-weight: normal;">
-                                                    {!! Form::radio('kategori', 'non_trip') !!} Non-trip
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="row">
                                             <div class="col-md-6">
                                                 {!! Form::label('jenis_perjalanan', 'Jenis Perjalanan') !!}
                                                 {!! Form::select('jenis_perjalanan', ['dalam_kota' => 'Dalam Kota', 'luar_kota' => 'Luar Kota'],null, ['class' => 'form-control']) !!}
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="col-md-3">
-                                        {!! Form::label('tanggal_mulai', 'Tanggal Mulai') !!}
-                                        {!! Form::text('tanggal_mulai', null, ['class' => 'form-control datepicker']) !!}
-                                    </div>
-                                    <div class="col-md-3">
-                                        {!! Form::label('tanggal_selesai', 'Tanggal Selesai') !!}
-                                        {!! Form::text('tanggal_selesai', null, ['class' => 'form-control datepicker']) !!}
-                                    </div>
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-success next-step">Next</button></li>
+                                    </ul>
                                 </div>
-                            </div>
-
-                            <h6 class="page-header"><small>Destination</small></h6>
-
-                            <div class="form-group">
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        {!! Form::label('kode_kota_asal', 'Kota Asal') !!}
-                                        {!! Form::select('kode_kota_asal', $list_kota, null, ['class' => 'form-control']) !!}
-                                        <br>
-                                        <br>
-                                        {!! Form::label('kode_kota_tujuan', 'Kota Tujuan') !!}
-                                        {!! Form::select('kode_kota_tujuan', $list_kota, null, ['class' => 'form-control']) !!}
+                                <div class="tab-pane" role="tabpanel" id="step2">
+                                    <div class="box-body box-destination">
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        {!! Form::label('tanggal_mulai', 'Tanggal Mulai') !!}
+                                                        {!! Form::text('tanggal_mulai', null, ['class' => 'form-control datepicker']) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        {!! Form::label('tanggal_selesai', 'Tanggal Selesai') !!}
+                                                        {!! Form::text('tanggal_selesai', null, ['class' => 'form-control datepicker']) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        {!! Form::label('kode_kota_asal', 'Kota Asal') !!}
+                                                        {!! Form::select('kode_kota_asal', $list_kota, null, ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        {!! Form::label('kode_kota_tujuan', 'Kota Tujuan') !!}
+                                                        {!! Form::select('kode_kota_tujuan', $list_kota, null, ['class' => 'form-control']) !!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        {!! Form::label('sarana_penginapan', 'Sarana Penginapan') !!}
+                                                        {!! Form::select('sarana_penginapan', ['kost' => 'Kost', 'guest_house' => 'Guest House', 'hotel' => 'Hotel'], null, ['class' => 'form-control'])!!}
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                {!! Form::label('sarana_transportasi', 'Sarana Transportasi') !!}
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <label style="font-weight:normal">
+                                                            {!! Form::checkbox('sarana_transportasi[]', 'Mobil Dinas') !!} Mobil Dinas
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label style="font-weight:normal">
+                                                            {!! Form::checkbox('sarana_transportasi[]', 'Kereta') !!} Kereta
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label style="font-weight:normal">
+                                                            {!! Form::checkbox('sarana_transportasi[]', 'Travel') !!} Travel
+                                                        </label>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <label style="font-weight:normal">
+                                                            {!! Form::checkbox('sarana_transportasi[]', 'Pesawat') !!} Pesawat
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-
-                                    <div class="col-md-6">
-                                        {!! Form::label('sarana_transportasi', 'Sarana Transportasi') !!}
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                        <li><button type="button" class="btn btn-success next-step">Next</button></li>
+                                    </ul>
+                                </div>
+                                <div class="tab-pane" role="tabpanel" id="step3">
+                                    <div class="box-body box-participants">
+                                        <div class="row row-peserta">
+                                            <div class="col-md-4">
+                                                <div class="form-group">
+                                                    {!! Form::label('list_peserta', 'Peserta') !!}
+                                                    {!! Form::select('list_peserta', $list_pegawai, null, ['class' => 'form-control list-peserta']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <div class="form-group">
+                                                    {!! Form::label('list_tujuan_kegiatan', 'Tujuan Kegiatan') !!}
+                                                    {!! Form::select('list_tujuan_kegiatan', ['project' => 'Project', 'prospek' => 'Prospek', 'pelatihan' => 'Pelatihan'], null, ['class' => 'form-control']) !!}
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6" style="margin-top: 24px;">
+                                                {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Kegiatan', ['type' => 'button', 'class' => 'btn btn-default btn-tambah-kegiatan',  'data-loading-text' => 'Loading...']) !!}
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="box-body box-add-participants">
                                         <div class="row">
-                                            <div class="col-md-6">
-                                                <label style="font-weight:normal">
-                                                    {!! Form::checkbox('sarana_transportasi[]', 'Mobil Dinas') !!} Mobil Dinas
-                                                </label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label style="font-weight:normal">
-                                                    {!! Form::checkbox('sarana_transportasi[]', 'Kereta') !!} Kereta
-                                                </label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label style="font-weight:normal">
-                                                    {!! Form::checkbox('sarana_transportasi[]', 'Travel') !!} Travel
-                                                </label>
-                                            </div>
-                                            <div class="col-md-6">
-                                                <label style="font-weight:normal">
-                                                    {!! Form::checkbox('sarana_transportasi[]', 'Pesawat') !!} Pesawat
-                                                </label>
-                                            </div>
-                                        </div>
-                                        <div class="row" style="margin-top: 1px">
                                             <div class="col-md-12">
-                                                {!! Form::label('sarana_penginapan', 'Sarana Penginapan') !!}
-                                                {!! Form::select('sarana_penginapan', ['kost' => 'Kost', 'guest_house' => 'Guest House', 'hotel' => 'Hotel'], null, ['class' => 'form-control'])!!}
+                                                {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Peserta', ['type' => 'button', 'class' => 'btn btn-default btn-tambah-peserta pull-right']) !!}
                                             </div>
                                         </div>
-
                                     </div>
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                        <li><button type="button" class="btn btn-success next-step">Next</button></li>
+                                    </ul>
                                 </div>
-                            </div>
-
-                            <h6 class="page-header"><small>Participants</small></h6>
-
-                            <div class="row row-peserta">
-                                <div class="col-md-4">
-                                    <div class="form-group">
-                                        {!! Form::label('list_peserta', 'Peserta') !!}
-                                        {!! Form::select('list_peserta', $list_pegawai, null, ['class' => 'form-control list-peserta']) !!}
+                                <div class="tab-pane" role="tabpanel" id="complete">
+                                    <div class="box-body box-finish">
+                                        <div class="row">
+                                            <div class="col-md-12 text-center">
+                                                <div class="form-group">
+                                                    {!! Form::label('keterangan', 'Keterangan') !!}
+                                                    {!! Form::textarea('keterangan', null, ['class' => 'form-control', 'placeholder' => 'Isi dengan keterangan tambahan (bila diperlukan)', 'rows' => 3]) !!}
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+                                    <ul class="list-inline pull-right">
+                                        <li><button type="button" class="btn btn-default prev-step">Previous</button></li>
+                                        <li>
+                                            {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Save as Draft', ['type' => 'submit', 'class' => 'btn btn-default', 'name' => 'action', 'value' => 'draft']) !!}
+                                        </li>
+                                        <li>
+                                            {!! Form::button('<i class="fa fa-fw fa-check"></i> Submit', ['type' => 'submit', 'class' => 'btn btn-success', 'name' => 'action', 'value' => 'submit']) !!}
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="col-md-2">
-                                    <div class="form-group">
-                                        {!! Form::label('list_tujuan_kegiatan', 'Tujuan Kegiatan') !!}
-                                        {!! Form::select('list_tujuan_kegiatan', ['project' => 'Project', 'prospek' => 'Prospek', 'pelatihan' => 'Pelatihan'], null, ['class' => 'form-control']) !!}
-                                    </div>
-                                </div>
-                                <div class="col-md-6" style="margin-top: 24px;">
-                                    {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Kegiatan', ['type' => 'button', 'class' => 'btn btn-default btn-tambah-kegiatan',  'data-loading-text' => 'Loading...']) !!}
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-body box-add-participants">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Peserta', ['type' => 'button', 'class' => 'btn btn-default btn-tambah-peserta pull-right']) !!}
-                                </div>
+                                <div class="clearfix"></div>
                             </div>
                         </div>
-                        <div class="box-body box-information">
-                            <h6 class="page-header"><small>Additional Information</small></h6>
-
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <div class="form-group">
-                                        {!! Form::label('keterangan', 'Keterangan') !!}
-                                        {!! Form::textarea('keterangan', null, ['class' => 'form-control', 'placeholder' => 'Isi dengan keterangan tambahan (bila diperlukan)', 'rows' => 3]) !!}
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="box-footer">
-                            {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Save as Draft', ['type' => 'submit', 'class' => 'btn btn-default', 'name' => 'action', 'value' => 'draft']) !!}
-                            {!! Form::button('<i class="fa fa-fw fa-check"></i> Submit', ['type' => 'submit', 'class' => 'btn btn-success', 'name' => 'action', 'value' => 'submit']) !!}
-                        </div>
-                        {!! Form::close() !!}
                     </div>
-                </div>
+                {!! Form::close() !!}
             </div>
             <div class="modal fade" id="modal-tambah-prospek" tabindex="-1" role="dialog">
                 <div class="modal-dialog">
@@ -331,15 +401,48 @@
                 format: 'yyyy-mm-dd',
             });
 
-            $('select[name=kode_kota_asal]').select2();
-            $('select[name=kode_kota_tujuan]').select2();
-
             $('.modal').on('shown.bs.modal', function() {
                 $(this).find('[autofocus]').focus();
             });
 
+            $('select[name=kode_kota_asal]').select2( {width: '495px', display: 'block' } );
+            $('select[name=kode_kota_tujuan]').select2( {width: '495px', display: 'block' } );
 
+            //Initialize tooltips
+            $('.nav-tabs > li a[title]').tooltip();
+
+            //Wizard
+            $('a[data-toggle="tab"]').on('show.bs.tab', function (e) {
+
+                var $target = $(e.target);
+
+                if ($target.parent().hasClass('disabled')) {
+                    return false;
+                }
+            });
+
+            $(".next-step").click(function (e) {
+
+                var $active = $('.wizard .nav-tabs li.active');
+                $active.next().removeClass('disabled');
+                nextTab($active);
+
+            });
+            $(".prev-step").click(function (e) {
+
+                var $active = $('.wizard .nav-tabs li.active');
+                prevTab($active);
+
+            });
         });
+
+        function nextTab(elem) {
+            $(elem).next().find('a[data-toggle="tab"]').click();
+        }
+
+        function prevTab(elem) {
+            $(elem).prev().find('a[data-toggle="tab"]').click();
+        }
 
         function attachListPesertaChangeEvent() {
             $('select[name=list_peserta]').off('change.list_peserta').on('change.list_peserta', function () {
@@ -408,7 +511,7 @@
 
                         element.append(form_kegiatan);
 
-                        $('select[name="kode_kegiatan[]"]').select2();
+                        $('select[name="kode_kegiatan[]"]').select2( {width: 'resolve' } );
 
                         $('.btn-hapus-kegiatan').off('click').on('click', function() {
                             var element = $(this).closest('.col-md-12');
@@ -461,7 +564,7 @@
 
                         element.append(form_kegiatan);
 
-                        $('select[name="kode_kegiatan[]"]').select2();
+                        $('select[name="kode_kegiatan[]"]').select2( {width: 'resolve' } );
 
                         $('.btn-hapus-kegiatan').off('click').on('click', function() {
                             var element = $(this).closest('.col-md-12');
@@ -534,7 +637,7 @@
 
                                     element.find('.row').prepend(form_kegiatan);
 
-                                    $('select[name="kode_kegiatan[]"]').select2();
+                                    $('select[name="kode_kegiatan[]"]').select2( {width: 'resolve' } );
                                 });
 
                                 event.preventDefault();
@@ -585,7 +688,7 @@
                             '</div>';
                         element.append(form_kegiatan);
 
-                        $('select[name="kode_kegiatan[]"]').select2();
+                        $('select[name="kode_kegiatan[]"]').select2( {width: 'resolve' } );
 
                         $('.btn-hapus-kegiatan').off('click').on('click', function() {
                             var element = $(this).closest('.col-md-12');
@@ -665,7 +768,7 @@
 
                                     element.find('.row').prepend(form_kegiatan);
 
-                                    $('select[name="kode_kegiatan[]"]').select2();
+                                    $('select[name="kode_kegiatan[]"]').select2( {width: 'resolve' } );
                                 })
 
                                 .fail(function(response) {
@@ -688,7 +791,7 @@
                 }
             });
 
-            $('select[name=list_peserta]').select2();
+            $('select[name=list_peserta]').select2( {width: '330px', display: 'block' } );
         }
     </script>
 @endsection
