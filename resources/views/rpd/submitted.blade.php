@@ -8,14 +8,14 @@
 @endsection
 
 @section('content')
-		
+
 	@if (session('success'))
 		<div class="content">
 			<div class="row">
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
-            </div>		
+            </div>
 		</div>
     @endif
 
@@ -25,7 +25,7 @@
                 <div class="alert alert-danger">
                     {{ session('error') }}
                 </div>
-            </div>		
+            </div>
 		</div>
     @endif
 
@@ -73,18 +73,18 @@
 												</button>
 											</td>
 			    						</tr>
-			    					@endforeach	
+			    					@endforeach
 	    						</tbody>
 	    					</table>
-	    				</div>    				
+	    				</div>
 	    			</div><!-- Akhir Bagian Box Table-->
     			@else
     				<div class="alert alert-warning">
-                        Data RPD yang telah disubmit belum tersedia. 
+                        Data RPD yang telah disubmit belum tersedia.
                     </div>
     			@endif
 
-    			
+
     		</div>
     	</div>
     </section>
@@ -181,7 +181,7 @@
 						<h4>Komentar</h4>
 						<p class="komentar_rpd">
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. 
+							tempor incididunt ut labore et dolore magna aliqua.
 						</p>
 
 						<!--Bagian Action History-->
@@ -227,7 +227,7 @@
 			var rpd = button.data('whatever') // Extract info from data-* attributes
 
 			var hari_dinas = (rpd['tanggal_selesai']-rpd['tanggal_mulai']);
-			
+
 			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
 

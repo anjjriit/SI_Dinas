@@ -38,14 +38,18 @@ class Rpd extends Model
         return $this->hasMany('App\SaranaTransportasi', 'id_rpd');
     }
 
-    public function kota()
+    public function kotaAsal()
+    {
+        return $this->hasOne('App\Kota', 'kode', 'kode_kota_asal');
+    }
+
+    public function kotaTujuan()
     {
         return $this->hasOne('App\Kota', 'kode', 'kode_kota_tujuan');
     }
-
     public function pegawai()
     {
-        return $this->belongsTo('App\Pegawai', 'nik');   
+        return $this->belongsTo('App\Pegawai', 'nik');
     }
 }
 
