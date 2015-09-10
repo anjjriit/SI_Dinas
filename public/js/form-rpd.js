@@ -65,6 +65,23 @@ $(document).ready(function(){
 
         prevTab($active);
     });
+
+    $('select[name=jenis_perjalanan').on('change', function() {
+        var jenis_perjalanan = $(this).val()
+        var kode_kota_asal = $('select[name=kode_kota_asal]').val();
+
+        var $kota_tujuan = $('select[name=kode_kota_tujuan]');
+
+        if (jenis_perjalanan == 'dalam_kota') {
+            $kota_tujuan.val(kode_kota_asal).trigger('change');
+            attachCityChangesEvent();
+        }  else {
+            $('select[name=kode_kota_asal').off('change.kota.asal');
+        }
+    });
+
+    attachCityChangesEvent();
+
 });
 
 function nextTab(active) {
@@ -435,4 +452,14 @@ function attachRemoveActivityEvent() {
         var $row_activity = $(this).closest('.col-md-12');
         $row_activity.remove();
     });
+}
+
+function attachCityChangesEvent() {
+    $('select[name=kode_kota_asal').on('change.kota.asal', function () {
+        var kode_kota_asal = $('select[name=kode_kota_asal]').val();
+        var $kota_tujuan = $('select[name=kode_kota_tujuan]');
+
+        $kota_tujuan.val(kode_kota_asal).trigger('change');
+    });
+
 }

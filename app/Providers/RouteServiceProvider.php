@@ -30,6 +30,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('project', 'App\Project');
         $router->model('pelatihan','App\Pelatihan');
         $router->model('jenis-biaya', 'App\JenisBiaya');
+        $router->model('rpd', 'App\Rpd');
 
         parent::boot($router);
     }
