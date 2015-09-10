@@ -68,7 +68,7 @@
 											</td>
 											<td>
 												<form><input type="hidden" value="{{ $rpd->pegawai->nama_lengkap }}"></form>
-												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD" data-whatever="{{ $rpd }}">
+												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
 													<i class="fa fa-fw fa-share"></i>Detail
 												</button>
 											</td>
@@ -89,8 +89,10 @@
     	</div>
     </section>
 
+    
     <!-- Bagian Modal Detail RPD-->
-	<div class="modal fade" id="detailRPD" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
+    @foreach ($submittedRpds as $rpd)
+	<div class="modal fade" id="detailRPD-{{ $rpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -104,7 +106,7 @@
                             <tbody>
                                 <tr>
                                     <th class="col-md-4">ID</th>
-                                    <td class="id_rpd"></td>
+                                    <td class="id_rpd">{{ $rpd->id }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Penanggung Jawab</th>
@@ -140,7 +142,13 @@
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Sarana Transportasi</th>
-                                    <td></td>
+                                    <td>
+                                    	<ul>
+                                    		@foreach($rpd->saranaTransportasi as $saranaTransportasi)
+	                                    		<li>{{ $saranaTransportasi->nama_transportasi }}</li> 
+	                                    	@endforeach
+                                    </td>
+                                    	</ul>                                    	
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Sarana Penginapan</th>
@@ -215,6 +223,7 @@
 			</div>
 		</div>
 	</div> <!-- Akhir Bagian Modal detail RPD-->
+	@endforeach
 
 @endsection
 
@@ -240,7 +249,7 @@
 			modal.find('.sarana_rpd').text( rpd['sarana_penginapan'] );
 			modal.find('.status_rpd').text( rpd['status'] );
 			modal.find('.komentar_rpd').text( rpd['keterangan'] );
-			modal.find('.tujuan_kota').text( rpd['kotaTujuan']['nama_kota'] );
+			//modal.find('.tujuan_kota').text( rpd['kotaTujuan']['nama_kota'] );
 			modal.find('.pj_rpd').text( rpd['pegawai']['nama_lengkap'] );
 			//modal.find('.hari_dinas').text( hari_dinas );
 		})
