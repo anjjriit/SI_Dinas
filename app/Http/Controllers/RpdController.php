@@ -150,9 +150,9 @@ class RpdController extends Controller
 
     public function draft()
     {
+        //diganti supaya hanya menampilkan rpd yang user buat saja
         $user = Auth::user();
         $userId = $user->nik;
-
         $draftRpds = Rpd::where('status','=','DRAFT')
                         ->where('nik','=',$userId)
                         ->paginate(15);

@@ -51,30 +51,20 @@
     							</tr>
     						</thead>
     						<tbody>
-	    						<tr>
-	    							<td>1029876509</td>
-									<td>Jakarta Pusat</td>
-									<td>2015-09-20</td>
-									<td>2015-09-30</td>
-									<td>
-										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
-											<i class="fa fa-fw fa-share"></i>Detail
-										</button>
-										<a href="/lpd/kode/create" class="btn btn-sm btn-primary"> Create LPD!</a>
-									</td>
-	    						</tr>
-	    						<tr>
-	    							<td>1029876509</td>
-									<td>Jakarta Pusat</td>
-									<td>2015-09-20</td>
-									<td>2015-09-30</td>
-									<td>
-										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
-											<i class="fa fa-fw fa-share"></i>Detail
-										</button>
-										<a href="/lpd/kode/create" class="btn btn-sm btn-primary"> Create LPD!</a>
-									</td>
-	    						</tr>
+    							@foreach($approvedRpds as $rpd)
+		    						<tr>
+		    							<td>{{ $rpd->id }}</td>
+										<td>{{ $rpd->kotaTujuan->nama_kota }}</td>
+										<td>{{ $rpd->tanggal_mulai }}</td>
+										<td>{{ $rpd->tanggal_selesai }}</td>
+										<td>
+											<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
+												<i class="fa fa-fw fa-share"></i>Detail
+											</button>
+											<a href="/lpd/kode/create" class="btn btn-sm btn-primary"> Create LPD!</a>
+										</td>
+		    						</tr>
+	    						@endforeach
     						</tbody>
     					</table>
     				</div>    				
@@ -84,7 +74,8 @@
     </section>
 
     <!-- Bagian Modal Detail RPD-->
-	<div class="modal fade" id="detailRPD" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
+    @foreach ($approvedRpds as $rpd)
+	<div class="modal fade" id="detailRPD-{{ $rpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
 		<div class="modal-dialog" role="document">
 			<div class="modal-content">
 				<div class="modal-header">
@@ -94,55 +85,67 @@
 				<div class="modal-body">
 					<div>
 						<!-- Info basic dari RPD -->
-						<table class="table table-modal table-responsive">
+                        <table class="table table-modal table-responsive">
                             <tbody>
                                 <tr>
                                     <th class="col-md-4">ID</th>
-                                    <td>1009091266</td>
+                                    <td>{{ $rpd->id }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Penanggung Jawab</th>
-                                    <td>Pegawai yang sedang login</td>
+                                    <td>{{ $rpd->pegawai->nama_lengkap }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Kategori</th>
-                                    <td>Trip</td>
+                                    <td>{{ $rpd->kategori }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Jenis</th>
-                                    <td>Luar Kota</td>
+                                    <td>{{ $rpd->jenis_perjalanan }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Tanggal Mulai</th>
-                                    <td>10 Mei 2015</td>
+                                    <td>{{ $rpd->tanggal_mulai }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Tanggal Selesai</th>
-                                    <td>20 Mei 2015</td>
+                                    <td>{{ $rpd->tanggal_selesai }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Jumlah Hari Dinas</th>
-                                    <td>10</td>
+                                    <td>
+                                    	{{ date_diff(
+										        date_create($rpd->tanggal_mulai),
+										        date_create($rpd->tanggal_selesai)
+											)->d 
+										}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Asal Kota</th>
-                                    <td>Bandung</td>
+                                    <td>{{ $rpd->kotaAsal->nama_kota }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Tujuan Kota</th>
-                                    <td>Jakarta Pusat</td>
+                                    <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Sarana Transportasi</th>
-                                    <td>Mobil Dinas, Travel</td>
+                                    <td>
+                                    	<ul>
+                                    		@foreach($rpd->saranaTransportasi as $saranaTransportasi)
+	                                    		<li>{{ $saranaTransportasi->nama_transportasi }}</li> 
+	                                    	@endforeach
+	                                    </ul>
+                                    </td>                                    	
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Sarana Penginapan</th>
-                                    <td>Hotel</td>
+                                    <td>{{ $rpd->sarana_penginapan }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Status</th>
-                                    <td>Submitted</td>
+                                    <td style="text-transform : uppercase;">{{ $rpd->status }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -158,24 +161,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Andi suryadi</td>
-									<td>SI PEndidikan</td>
-									<td>Review</td>
-								</tr>
-								<tr>
-									<td>Ali riwansyah</td>
-									<td>Web E-Commerce</td>
-									<td>Meeting</td>
-								</tr>
+								@foreach($rpd->peserta as $peserta)
+									<tr>
+										<td>{{ $peserta->nama_lengkap }}</td>
+										<td>{{ $peserta->pivot->jenis_kegiatan }}</td>
+										<td>{{ $peserta->pivot->kegiatan }}</td>
+									</tr>
+								@endforeach
 							</tbody>
 						</table>
 
 						<!--Bagian Komentar atau Keterangan-->
 						<h4>Komentar</h4>
 						<p>
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. 
+							{{ $rpd->keterangan }}
 						</p>
 
 						<!--Bagian Action History-->
@@ -189,16 +188,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>2015/09/09</td>
-									<td>Reynaldi Sunaryo</td>
-									<td>Submitted</td>
-								</tr>
-								<tr>
-									<td>2015/09/10</td>
-									<td>Ananda</td>
-									<td>Approve</td>
-								</tr>
+								@foreach($rpd->actionHistory as $action)
+									<tr>
+										<td>{{ $action->updated_at }}</td>
+										<td>{{ $action->pegawai->nama_lengkap }}</td>
+										<td>{{ $action->action }}</td>
+									</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
@@ -208,7 +204,8 @@
 				</div>
 			</div>
 		</div>
-	</div><!-- Akhir Bagian Modal detail RPD-->
+	</div> <!-- Akhir Bagian Modal detail RPD-->
+	@endforeach
 
 @endsection
 
