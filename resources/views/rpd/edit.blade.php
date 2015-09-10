@@ -28,7 +28,7 @@
                 </div>
             @endif
 
-            {!! Form::open(['method' => 'POST', 'route' => 'rpd.action']) !!}
+            {!! Form::model($rpd, ['method' => 'POST', 'route' => 'rpd.action']) !!}
                 <div class="wizard">
                     <div class="wizard-inner">
                         <ul class="nav nav-tabs text-center" role="tablist">

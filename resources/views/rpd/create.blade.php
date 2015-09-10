@@ -437,6 +437,6 @@
     @parent
 
     <script src="/vendor/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-    <script src="/vendor/select2/js/select2.min.js"></script>
+    <script src="/vendor/select2/js/select2.full.min.js"></script>
     <script src="/js/form-rpd.js"></script>
 @endsection

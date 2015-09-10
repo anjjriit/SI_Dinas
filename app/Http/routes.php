@@ -46,6 +46,8 @@ Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction'
 //RPD
 Route::get('rpd/create', 'RpdController@create');
 Route::get('rpd/draft', 'RpdController@draft');
+Route::get('rpd/draft/{rpd}/edit', 'RpdController@editRpd');
+
 Route::get('rpd/submitted', 'RpdController@submitted');
 
 //LPD
@@ -64,9 +66,7 @@ Route::get('cek/user', function () {
 });
 //(tes) cek relasi
 Route::get('rpd/tes', function () {
-    $rpd = App\Rpd::with('actionHistory', 'actionHistory.pegawai')->find(1);
-
-    dd($rpd);
+    $rpd = App\Rpd::with('actionHistory', 'actionHistory.pegawai')->find(2);
 });
 
 Route::get('indexpegawai','testController@index');

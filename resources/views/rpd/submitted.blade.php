@@ -67,7 +67,6 @@
 												{{ $rpd->tanggal_selesai }}
 											</td>
 											<td>
-												<form><input type="hidden" value="{{ $rpd->pegawai->nama_lengkap }}"></form>
 												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
 													<i class="fa fa-fw fa-share"></i>Detail
 												</button>
@@ -106,39 +105,45 @@
                             <tbody>
                                 <tr>
                                     <th class="col-md-4">ID</th>
-                                    <td class="id_rpd">{{ $rpd->id }}</td>
+                                    <td>{{ $rpd->id }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Penanggung Jawab</th>
-                                    <td class="pj_rpd"></td>
+                                    <td>{{ $rpd->pegawai->nama_lengkap }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Kategori</th>
-                                    <td class="kategori_rpd"></td>
+                                    <td>{{ $rpd->kategori }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Jenis</th>
-                                    <td class="jenis_rpd"></td>
+                                    <td>{{ $rpd->jenis_perjalanan }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Tanggal Mulai</th>
-                                    <td class="mulai_rpd"></td>
+                                    <td>{{ $rpd->tanggal_mulai }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Tanggal Selesai</th>
-                                    <td class="selesai_rpd"></td>
+                                    <td>{{ $rpd->tanggal_selesai }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Jumlah Hari Dinas</th>
-                                    <td class="hari_dinas"></td>
+                                    <td>
+                                    	{{ date_diff(
+										        date_create($rpd->tanggal_mulai),
+										        date_create($rpd->tanggal_selesai)
+											)->d 
+										}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Asal Kota</th>
-                                    <td class="asal_kota"></td>
+                                    <td>{{ $rpd->kotaAsal->nama_kota }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Tujuan Kota</th>
-                                    <td class="tujuan_kota"></td>
+                                    <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Sarana Transportasi</th>
@@ -147,16 +152,16 @@
                                     		@foreach($rpd->saranaTransportasi as $saranaTransportasi)
 	                                    		<li>{{ $saranaTransportasi->nama_transportasi }}</li> 
 	                                    	@endforeach
-                                    </td>
-                                    	</ul>                                    	
+	                                    </ul>
+                                    </td>                                    	
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Sarana Penginapan</th>
-                                    <td class="sarana_rpd"></td>
+                                    <td>{{ $rpd->sarana_penginapan }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Status</th>
-                                    <td class="status_rpd"></td>
+                                    <td style="text-transform : uppercase;">{{ $rpd->status }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -172,24 +177,20 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>Andi suryadi</td>
-									<td>SI PEndidikan</td>
-									<td>Review</td>
-								</tr>
-								<tr>
-									<td>Ali riwansyah</td>
-									<td>Web E-Commerce</td>
-									<td>Meeting</td>
-								</tr>
+								@foreach($rpd->peserta as $peserta)
+									<tr>
+										<td>{{ $peserta->nama_lengkap }}</td>
+										<td>{{ $peserta->pivot->jenis_kegiatan }}</td>
+										<td>{{ $peserta->pivot->kegiatan }}</td>
+									</tr>
+								@endforeach
 							</tbody>
 						</table>
 
 						<!--Bagian Komentar atau Keterangan-->
 						<h4>Komentar</h4>
-						<p class="komentar_rpd">
-							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua.
+						<p>
+							{{ $rpd->keterangan }}
 						</p>
 
 						<!--Bagian Action History-->
@@ -203,16 +204,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>2015/09/09</td>
-									<td>Reynaldi Sunaryo</td>
-									<td>Submitted</td>
-								</tr>
-								<tr>
-									<td>2015/09/10</td>
-									<td>Ananda</td>
-									<td>Approve</td>
-								</tr>
+								@foreach($rpd->actionHistory as $action)
+									<tr>
+										<td>{{ $action->updated_at }}</td>
+										<td>{{ $action->pegawai->nama_lengkap }}</td>
+										<td>{{ $action->action }}</td>
+									</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
@@ -230,29 +228,5 @@
 @section('script')
 	@parent
 
-	<script type="text/javascript">
-		$('#detailRPD').on('show.bs.modal', function (event) {
-			var button = $(event.relatedTarget) // Button that triggered the modal
-			var rpd = button.data('whatever') // Extract info from data-* attributes
-
-			//var hari_dinas = (rpd['tanggal_selesai']-rpd['tanggal_mulai']);
-
-			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-
-			var modal = $(this)
-			modal.find('.id_rpd').text( rpd['id'] );
-			modal.find('.kategori_rpd').text( rpd['kategori'] );
-			modal.find('.jenis_rpd').text( rpd['jenis_perjalanan'] );
-			modal.find('.mulai_rpd').text( rpd['tanggal_mulai'] );
-			modal.find('.selesai_rpd').text( rpd['tanggal_selesai'] );
-			modal.find('.sarana_rpd').text( rpd['sarana_penginapan'] );
-			modal.find('.status_rpd').text( rpd['status'] );
-			modal.find('.komentar_rpd').text( rpd['keterangan'] );
-			//modal.find('.tujuan_kota').text( rpd['kotaTujuan']['nama_kota'] );
-			modal.find('.pj_rpd').text( rpd['pegawai']['nama_lengkap'] );
-			//modal.find('.hari_dinas').text( hari_dinas );
-		})
-	</script>
 
 @endsection

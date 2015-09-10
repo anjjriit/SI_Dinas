@@ -24,9 +24,8 @@
                                     <thead>
                                         <tr>
                                             <th>Kode</th>
-                                            <th>Kota Tujuan</th>
-                                            <th>Tanggal Mulai</th>
-                                            <th>Tanggal Selesai</th>
+                                            <th>Tanggal Dibuat</th>
+                                            <th>Terakhir Diperbarui</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
@@ -34,9 +33,8 @@
                                         @foreach ($draftRpds as $draftRpd)
                                             <tr>
                                                 <td>{{ $draftRpd->id }}</td>
-                                                <td>{{ $draftRpd->kotaTujuan->nama_kota }}</td>
-                                                <td>{{ $draftRpd->tanggal_mulai }}</td>
-                                                <td>{{ $draftRpd->tanggal_selesai }}</td>
+                                                <td>{{ date_format( date_create($draftRpd->created_at), 'd/m/Y' ) }}</td>
+                                                <td>{{ date_format( date_create($draftRpd->updated_at), 'd/m/Y H:i:s' ) }}</td>
                                                 <td>
                                                     <a href="/rpd/draft/{{ $draftRpd->id }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                 </td>
