@@ -95,6 +95,8 @@ class RpdController extends Controller
         ];
 
         ActionHistoryRpd::create($action);
+
+        return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil di submit.');
     }
 
     public function saveAsDraft(Request $request)  {
@@ -146,6 +148,8 @@ class RpdController extends Controller
         ];
 
         ActionHistoryRpd::create($action);
+
+        return redirect('/rpd/draft')->with('success', 'Pengajuan RPD berhasil di simpan sebagai draft.');
     }
 
     public function draft()

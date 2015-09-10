@@ -124,6 +124,15 @@
                                                 {!! Form::text('tanggal_selesai', null, ['class' => 'form-control datepicker']) !!}
                                             </div>
                                             <div class="form-group">
+                                                <div class="row">
+                                                    <div class="col-md-4">
+                                                        {!! Form::label('lama_hari', 'Lama Hari Dinas') !!}
+                                                        {!! Form::text('lama_hari', null, ['class' => 'form-control', 'readonly']) !!}
+                                                    </div>
+                                                </div>
+
+                                            </div>
+                                            <div class="form-group">
                                                 {!! Form::label('kode_kota_asal', 'Kota Asal') !!}
                                                 {!! Form::select('kode_kota_asal', $list_kota, null, ['class' => 'form-control']) !!}
                                             </div>

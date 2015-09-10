@@ -27,6 +27,8 @@ $(document).ready(function(){
 
         $('.box-body.box-participants').append(new_row);
 
+        $('select[name=list_tujuan_kegiatan]').select2({ width: '100%', minimumResultsForSearch: Infinity });
+
         attachAddActivityEvent();
         attachRemoveParticipantEvent();
         attachParticipantChangesEvent();
@@ -38,11 +40,13 @@ $(document).ready(function(){
     // Datepicker
     $('.datepicker').datepicker({
         autoclose: true,
+        daysOfWeekDisabled: "0,6",
+        todayHighlight: true,
         format: 'yyyy-mm-dd',
     });
 
     // Autofocus when modal shown
-    $('.modal').on('shown.bs.modal', function() {
+    $('.modal').on('shown.bs.modal', function () {
         $(this).find('[autofocus]').focus();
     });
 
@@ -66,7 +70,7 @@ $(document).ready(function(){
         prevTab($active);
     });
 
-    $('select[name=jenis_perjalanan').on('change', function() {
+    $('select[name=jenis_perjalanan').on('change', function () {
         var jenis_perjalanan = $(this).val()
         var kode_kota_asal = $('select[name=kode_kota_asal]').val();
 
@@ -81,6 +85,81 @@ $(document).ready(function(){
     });
 
     attachCityChangesEvent();
+
+    $('input[name=tanggal_mulai]').on('change', function () {
+        var $mulai = $(this);
+        var $selesai = $('input[name=tanggal_selesai]');
+
+        if ($mulai.val() && $selesai.val()) {
+            var start_date = new Date($mulai.val());
+            var end_date = new Date($selesai.val());
+
+            var jumlah_hari = countCertainDays(start_date, end_date);
+
+            if (jumlah_hari > 0) {
+                $('input[name=lama_hari]').val(jumlah_hari);
+            } else {
+                $('input[name=lama_hari]').val(0);
+            }
+        }
+    });
+
+    $('input[name=tanggal_selesai]').on('change', function () {
+        var $mulai = $('input[name=tanggal_mulai]');
+        var $selesai = $(this);
+
+        if ($mulai.val() && $selesai.val()) {
+            var start_date = new Date($mulai.val());
+            var end_date = new Date($selesai.val());
+
+            var jumlah_hari = countCertainDays(start_date, end_date);
+
+            if (jumlah_hari > 0) {
+                $('input[name=lama_hari]').val(jumlah_hari);
+            } else {
+                $('input[name=lama_hari]').val(0);
+            }
+        }
+    });
+
+    $('input[value=trip]').on('change.radio.trip', function () {
+        $('input[name=tanggal_selesai]').prop('readonly', false);
+
+        $('input[name=tanggal_mulai]').off('change.selesai');
+    });
+
+    $('input[value=non_trip]').on('change.radio.nontrip', function () {
+        $('input[name=tanggal_selesai]').prop('readonly', true);
+
+        var tanggal_mulai = $('input[name=tanggal_mulai').val()
+        var $tanggal_selesai = $('input[name=tanggal_selesai]');
+
+        if (tanggal_mulai) {
+            $tanggal_selesai.val(tanggal_mulai);
+        }
+
+        $('input[name=tanggal_mulai]').on('change.selesai', function () {
+            var tanggal_mulai = $('input[name=tanggal_mulai').val()
+
+            $('input[name=tanggal_selesai]').val(tanggal_mulai);
+        });
+
+        var $mulai = $('input[name=tanggal_mulai]');
+        var $selesai = $('input[name=tanggal_mulai]');
+
+        if ($mulai.val() && $selesai.val()) {
+            var start_date = new Date($mulai.val());
+            var end_date = new Date($selesai.val());
+
+            var jumlah_hari = countCertainDays(start_date, end_date);
+
+            if (jumlah_hari > 0) {
+                $('input[name=lama_hari]').val(jumlah_hari);
+            } else {
+                $('input[name=lama_hari]').val(0);
+            }
+        }
+    });
 
 });
 
@@ -455,11 +534,21 @@ function attachRemoveActivityEvent() {
 }
 
 function attachCityChangesEvent() {
-    $('select[name=kode_kota_asal').on('change.kota.asal', function () {
+    $('select[name=kode_kota_asal]').on('change.kota.asal', function () {
         var kode_kota_asal = $('select[name=kode_kota_asal]').val();
         var $kota_tujuan = $('select[name=kode_kota_tujuan]');
 
         $kota_tujuan.val(kode_kota_asal).trigger('change');
     });
+}
 
+function countCertainDays(start_date, end_date ) {
+    var days = [1, 2, 3, 4, 5];
+
+    var ndays = 1 + Math.round(( end_date - start_date) / (24 * 3600 * 1000));
+    var sum = function(a, b) {
+        return a + Math.floor((ndays + (start_date.getDay() + 6 - b) % 7) / 7);
+    };
+
+    return days.reduce(sum, 0);
 }
