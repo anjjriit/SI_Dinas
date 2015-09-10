@@ -34,7 +34,7 @@
                                         @foreach ($draftRpds as $draftRpd)
                                             <tr>
                                                 <td>{{ $draftRpd->id }}</td>
-                                                <td>{{ $draftRpd->kota->nama_kota }}</td>
+                                                <td>{{ $draftRpd->kotaTujuan->nama_kota }}</td>
                                                 <td>{{ $draftRpd->tanggal_mulai }}</td>
                                                 <td>{{ $draftRpd->tanggal_selesai }}</td>
                                                 <td>

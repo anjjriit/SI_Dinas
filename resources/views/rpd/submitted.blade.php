@@ -58,7 +58,7 @@
 			    								{{ $rpd->id }}
 			    							</td>
 											<td>
-												{{ $rpd->kota->nama_kota }}
+												{{ $rpd->kotaTujuan->nama_kota }}
 											</td>
 											<td>
 												{{ $rpd->tanggal_mulai }}
@@ -226,7 +226,7 @@
 			var button = $(event.relatedTarget) // Button that triggered the modal
 			var rpd = button.data('whatever') // Extract info from data-* attributes
 
-			var hari_dinas = (rpd['tanggal_selesai']-rpd['tanggal_mulai']);
+			//var hari_dinas = (rpd['tanggal_selesai']-rpd['tanggal_mulai']);
 
 			// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
 			// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
@@ -240,9 +240,9 @@
 			modal.find('.sarana_rpd').text( rpd['sarana_penginapan'] );
 			modal.find('.status_rpd').text( rpd['status'] );
 			modal.find('.komentar_rpd').text( rpd['keterangan'] );
-			modal.find('.tujuan_kota').text( rpd['kota']['nama_kota'] );
+			modal.find('.tujuan_kota').text( rpd['kotaTujuan']['nama_kota'] );
 			modal.find('.pj_rpd').text( rpd['pegawai']['nama_lengkap'] );
-			modal.find('.hari_dinas').text( hari_dinas );
+			//modal.find('.hari_dinas').text( hari_dinas );
 		})
 	</script>
 
