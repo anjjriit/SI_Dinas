@@ -67,7 +67,6 @@
 												{{ $rpd->tanggal_selesai }}
 											</td>
 											<td>
-												<form><input type="hidden" value="{{ $rpd->pegawai->nama_lengkap }}"></form>
 												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
 													<i class="fa fa-fw fa-share"></i>Detail
 												</button>
@@ -130,7 +129,13 @@
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Jumlah Hari Dinas</th>
-                                    <td></td>
+                                    <td>
+                                    	{{ date_diff(
+										        date_create($rpd->tanggal_mulai),
+										        date_create($rpd->tanggal_selesai)
+											)->d 
+										}}
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Asal Kota</th>
@@ -172,8 +177,13 @@
 								</tr>
 							</thead>
 							<tbody>
-							{{ dd($rpd->peserta) }}
-								
+								@foreach($rpd->peserta as $peserta)
+									<tr>
+										<td>{{ $peserta->nama_lengkap }}</td>
+										<td>{{ $peserta->pivot->jenis_kegiatan }}</td>
+										<td>{{ $peserta->pivot->kegiatan }}</td>
+									</tr>
+								@endforeach
 							</tbody>
 						</table>
 
@@ -194,16 +204,13 @@
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>2015/09/09</td>
-									<td>Reynaldi Sunaryo</td>
-									<td>Submitted</td>
-								</tr>
-								<tr>
-									<td>2015/09/10</td>
-									<td>Ananda</td>
-									<td>Approve</td>
-								</tr>
+								@foreach($rpd->actionHistory as $action)
+									<tr>
+										<td>{{ $action->updated_at }}</td>
+										<td>{{ $action->pegawai->nama_lengkap }}</td>
+										<td>{{ $action->action }}</td>
+									</tr>
+								@endforeach
 							</tbody>
 						</table>
 					</div>
@@ -221,29 +228,5 @@
 @section('script')
 	@parent
 
-	// <script type="text/javascript">
-	// 	$('#detailRPD').on('show.bs.modal', function (event) {
-	// 		var button = $(event.relatedTarget) // Button that triggered the modal
-	// 		var rpd = button.data('whatever') // Extract info from data-* attributes
-
-	// 		//var hari_dinas = (rpd['tanggal_selesai']-rpd['tanggal_mulai']);
-
-	// 		// If necessary, you could initiate an AJAX request here (and then do the updating in a callback).
-	// 		// Update the modal's content. We'll use jQuery here, but you could use a data binding library or other methods instead.
-
-	// 		var modal = $(this)
-	// 		modal.find('.id_rpd').text( rpd['id'] );
-	// 		modal.find('.kategori_rpd').text( rpd['kategori'] );
-	// 		modal.find('.jenis_rpd').text( rpd['jenis_perjalanan'] );
-	// 		modal.find('.mulai_rpd').text( rpd['tanggal_mulai'] );
-	// 		modal.find('.selesai_rpd').text( rpd['tanggal_selesai'] );
-	// 		modal.find('.sarana_rpd').text( rpd['sarana_penginapan'] );
-	// 		modal.find('.status_rpd').text( rpd['status'] );
-	// 		modal.find('.komentar_rpd').text( rpd['keterangan'] );
-	// 		//modal.find('.tujuan_kota').text( rpd['kotaTujuan']['nama_kota'] );
-	// 		modal.find('.pj_rpd').text( rpd['pegawai']['nama_lengkap'] );
-	// 		//modal.find('.hari_dinas').text( hari_dinas );
-	// 	})
-	// </script>
 
 @endsection

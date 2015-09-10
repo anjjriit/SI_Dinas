@@ -150,7 +150,13 @@ class RpdController extends Controller
 
     public function draft()
     {
-        $draftRpds = Rpd::orderBy('id', 'asc')->paginate(15);
+        //diganti supaya hanya menampilkan rpd yang user buat saja
+        $user = Auth::user();
+        $userId = $user->nik;
+        $draftRpds = Rpd::where('status','=','DRAFT')
+                        ->where('nik','=',$userId)
+                        ->paginate(15);
+       // $draftRpds = Rpd::orderBy('id', 'asc')->paginate(15);
 
         return view('rpd.draft', compact('draftRpds'));
     }
@@ -165,4 +171,5 @@ class RpdController extends Controller
 
         return view('rpd.submitted', compact('submittedRpds'));
     }
+
 }
