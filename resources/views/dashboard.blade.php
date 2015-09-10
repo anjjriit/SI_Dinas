@@ -62,6 +62,7 @@
 				</div>
 			</div>
 		</div>
+		
 		<div class="row">
 			<div class="col-md-12">
 				<div role="tabpanel" class="nav-tabs-custom" style="cursor: move">
@@ -132,6 +133,7 @@
 				</div>
 			</div>			
 		</div>
+
 	</section>
 
 @endsection

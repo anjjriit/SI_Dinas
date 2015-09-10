@@ -16,43 +16,43 @@ class KotaTableSeeder extends Seeder
         $now = date('Y-m-d H:i:s');
 
         DB::table('kota')->insert([
-        	'nama_kota' => 'Bandung',
+        	'nama_kota'     => 'Bandung',
             'created_at'    => $now,
             'updated_at'    => $now,
         ]);
 
         DB::table('kota')->insert([
-        	'nama_kota' => 'Jakarta Pusat',
+        	'nama_kota'     => 'Jakarta Pusat',
             'created_at'    => $now,
             'updated_at'    => $now,
         ]);
 
         DB::table('kota')->insert([
-        	'nama_kota' => 'Semarang',
+        	'nama_kota'     => 'Semarang',
             'created_at'    => $now,
             'updated_at'    => $now,
         ]);
 
         DB::table('kota')->insert([
-        	'nama_kota' => 'Jakarta Barat',
+        	'nama_kota'     => 'Jakarta Barat',
             'created_at'    => $now,
             'updated_at'    => $now,
         ]);
 
         DB::table('kota')->insert([
-        	'nama_kota' => 'Tanggerang',
+        	'nama_kota'     => 'Tanggerang',
             'created_at'    => $now,
             'updated_at'    => $now,
         ]);
 
         DB::table('kota')->insert([
-        	'nama_kota' => 'Depok',
+        	'nama_kota'     => 'Depok',
             'created_at'    => $now,
             'updated_at'    => $now,
         ]);
 
         DB::table('kota')->insert([
-        	'nama_kota' => 'Bekasi',
+        	'nama_kota'     => 'Bekasi',
             'created_at'    => $now,
             'updated_at'    => $now,
         ]);
