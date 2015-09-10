@@ -40,9 +40,14 @@ class Rpd extends Model
     {
         return $this->hasOne('App\Kota', 'kode', 'kode_kota_tujuan');
     }
+
     public function pegawai()
     {
         return $this->belongsTo('App\Pegawai', 'nik');
+    }
+
+    public function actionHistory() {
+        return $this->hasMany('App\ActionHistoryRpd', 'id_rpd');
     }
 }
 

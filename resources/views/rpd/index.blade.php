@@ -8,14 +8,14 @@
 @endsection
 
 @section('content')
-		
+
 	@if (session('success'))
 		<div class="content">
 			<div class="row">
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
-            </div>		
+            </div>
 		</div>
     @endif
 
@@ -25,10 +25,10 @@
                 <div class="alert alert-danger">
                     {{ session('error') }}
                 </div>
-            </div>		
+            </div>
 		</div>
     @endif
-		
+
 	<section class="content-header">
         <h1>Data Rencana Perjalanan Dinas</h1>
     </section>
@@ -58,13 +58,13 @@
 									<td>2015-09-10</td>
 									<td>Drafts</td>
 									<td>
-										<!--Disini if status == submitted then echo 
+										<!--Disini if status == submitted then echo
 										<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
 											<i class="fa fa-fw fa-share"></i>Detail
 										</button>
 										else if status == draft echo-->
 										<a href="/rpd/kode/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
-	                       
+
 										<!--end if-->
 									</td>
 	    						</tr>
@@ -81,13 +81,13 @@
 										</button>
 										<!--else if status == draft echo
 										<a href="/rpd/kode/edit" class="btn btn-sm btn-primary"><i class="fa fa-fw fa-edit"></i> Edit</a>
-	                       
+
 										end if-->
 									</td>
 	    						</tr>
     						</tbody>
     					</table>
-    				</div>    				
+    				</div>
     			</div>
     		</div><!-- Akhir Bagian Box Table-->
     	</div>
@@ -185,7 +185,7 @@
 						<h4>Komentar</h4>
 						<p>
 							Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-							tempor incididunt ut labore et dolore magna aliqua. 
+							tempor incididunt ut labore et dolore magna aliqua.
 						</p>
 
 						<!--Bagian Action History-->

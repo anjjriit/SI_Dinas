@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Pengajuan RPD')
+@section('page_title', 'Edit Pengajuan RPD')
 
 @section('stylesheet')
     @parent
