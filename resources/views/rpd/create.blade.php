@@ -19,18 +19,22 @@
                 <h4>Form Pengajuan RPD</h4>
             </div>
 
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    @foreach ($errors->all() as $error)
-                        <i class="fa fa-fw fa-exclamation"></i> {{ $error }}
-                        <br>
-                    @endforeach
-                </div>
-            @endif
-
             {!! Form::open(['method' => 'POST', 'route' => 'rpd.action']) !!}
                 <div class="wizard">
                     <div class="wizard-inner">
+                        <div class="row">
+                             <div class="col-md-12">
+                                @if ($errors->any())
+                                    <div class="alert alert-danger">
+                                        @foreach ($errors->all() as $error)
+                                            <i class="fa fa-fw fa-exclamation"></i> {{ $error }}
+                                            <br>
+                                        @endforeach
+                                    </div>
+                                @endif
+                            </div>
+                        </div>
+
                         <ul class="nav nav-tabs text-center" role="tablist">
                             <li role="presentation" class="active">
                                 <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab">

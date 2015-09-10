@@ -29,9 +29,11 @@ class RpdController extends Controller
         if ($request->input('action') == 'submit') {
             $this->submit($request);
 
+            return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil di submit.');
         } elseif ($request->input('action') == 'draft') {
             $this->saveAsDraft($request);
 
+            return redirect('/rpd/draft')->with('success', 'Pengajuan RPD berhasil di simpan sebagai draft.');
         }
     }
 
@@ -40,7 +42,7 @@ class RpdController extends Controller
             'kategori' => 'required|in:trip,non_trip',
             'jenis_perjalanan' => 'required|in:dalam_kota,luar_kota',
             'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'required|date|after:' . $request->input('tanggal_mulai'),
+            'tanggal_selesai' => 'required|date',
             'kode_kota_asal' => 'required|exists:kota,kode',
             'kode_kota_tujuan' => 'required|exists:kota,kode',
             'sarana_penginapan' => 'required|in:kost,guest_house,hotel',
@@ -95,8 +97,6 @@ class RpdController extends Controller
         ];
 
         ActionHistoryRpd::create($action);
-
-        return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil di submit.');
     }
 
     public function saveAsDraft(Request $request)  {
@@ -148,8 +148,6 @@ class RpdController extends Controller
         ];
 
         ActionHistoryRpd::create($action);
-
-        return redirect('/rpd/draft')->with('success', 'Pengajuan RPD berhasil di simpan sebagai draft.');
     }
 
     public function draft()
