@@ -152,7 +152,7 @@
                                             <th>Role</th>
                                             <th>Status</th>
                                             <th>Last Login</th>
-                                            <th colspan="2">Action</th>
+                                            <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
 

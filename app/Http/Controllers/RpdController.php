@@ -8,7 +8,7 @@ use App\Rpd;
 use Auth;
 use App\Kota;
 use App\Pegawai;
-use App\HistoryRpd;
+use App\ActionHistoryRpd;
 use App\SaranaTransportasi;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -94,7 +94,7 @@ class RpdController extends Controller
             'comment' => null
         ];
 
-        HistoryRpd::create($action);
+        ActionHistoryRpd::create($action);
     }
 
     public function saveAsDraft(Request $request)  {
@@ -145,7 +145,7 @@ class RpdController extends Controller
             'comment' => null
         ];
 
-        HistoryRpd::create($action);
+        ActionHistoryRpd::create($action);
     }
 
     public function draft()

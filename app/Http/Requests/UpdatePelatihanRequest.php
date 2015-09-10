@@ -14,7 +14,7 @@ class UpdatePelatihanRequest extends Request
      */
     public function authorize()
     {
-        return auth();
+        return auth()->user()->role == 'super_admin';
     }
 
     /**

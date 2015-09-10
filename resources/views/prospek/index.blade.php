@@ -139,7 +139,7 @@
                                             <th>Nama Prospek</th>
                                             <th>Nama Lembaga</th>
                                             <th>Alamat</th>
-                                            <th colspan="2">Action</th>
+                                            <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
 

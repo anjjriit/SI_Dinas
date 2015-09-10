@@ -15,6 +15,7 @@
                         <div class="box-header">
                             <h4>Form Tambah User</h4>
                         </div>
+
                         {!! Form::open(['method' => 'POST', 'route' => 'user.store']) !!}
                             <div class="box-body">
                                 @if ($errors->any())
