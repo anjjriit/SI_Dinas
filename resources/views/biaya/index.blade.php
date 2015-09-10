@@ -136,7 +136,7 @@
                                         <tr>
                                             <th>Nama Jenis Biaya</th>
                                             <th>Biaya</th>
-                                            <th colspan="2">Action</th>
+                                            <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
 

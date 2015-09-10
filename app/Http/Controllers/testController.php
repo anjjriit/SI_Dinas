@@ -12,4 +12,5 @@ class testController extends Controller
     public function index(){
         return view('rpd.index');
     }
+
 }
