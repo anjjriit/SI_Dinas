@@ -43,6 +43,7 @@ $(document).ready(function(){
         daysOfWeekDisabled: "0,6",
         todayHighlight: true,
         format: 'yyyy-mm-dd',
+        enableOnReadonly: false
     });
 
     // Autofocus when modal shown
@@ -90,36 +91,14 @@ $(document).ready(function(){
         var $mulai = $(this);
         var $selesai = $('input[name=tanggal_selesai]');
 
-        if ($mulai.val() && $selesai.val()) {
-            var start_date = new Date($mulai.val());
-            var end_date = new Date($selesai.val());
-
-            var jumlah_hari = countCertainDays(start_date, end_date);
-
-            if (jumlah_hari > 0) {
-                $('input[name=lama_hari]').val(jumlah_hari);
-            } else {
-                $('input[name=lama_hari]').val(0);
-            }
-        }
+        changeTripDaysInput($mulai, $selesai);
     });
 
     $('input[name=tanggal_selesai]').on('change', function () {
         var $mulai = $('input[name=tanggal_mulai]');
         var $selesai = $(this);
 
-        if ($mulai.val() && $selesai.val()) {
-            var start_date = new Date($mulai.val());
-            var end_date = new Date($selesai.val());
-
-            var jumlah_hari = countCertainDays(start_date, end_date);
-
-            if (jumlah_hari > 0) {
-                $('input[name=lama_hari]').val(jumlah_hari);
-            } else {
-                $('input[name=lama_hari]').val(0);
-            }
-        }
+        changeTripDaysInput($mulai, $selesai);
     });
 
     $('input[value=trip]').on('change.radio.trip', function () {
@@ -147,19 +126,26 @@ $(document).ready(function(){
         var $mulai = $('input[name=tanggal_mulai]');
         var $selesai = $('input[name=tanggal_mulai]');
 
-        if ($mulai.val() && $selesai.val()) {
-            var start_date = new Date($mulai.val());
-            var end_date = new Date($selesai.val());
-
-            var jumlah_hari = countCertainDays(start_date, end_date);
-
-            if (jumlah_hari > 0) {
-                $('input[name=lama_hari]').val(jumlah_hari);
-            } else {
-                $('input[name=lama_hari]').val(0);
-            }
-        }
+        changeTripDaysInput($mulai, $selesai);
     });
+
+
+    if ($('input[name=kategori]:checked').val() == 'non_trip') {
+        $('input[name=tanggal_selesai]').prop('readonly', true);
+
+        var $mulai = $('input[name=tanggal_mulai]');
+        var $selesai = $('input[name=tanggal_mulai]');
+
+        changeTripDaysInput($mulai, $selesai);
+
+        $('input[name=tanggal_mulai]').on('change.selesai', function () {
+            var tanggal_mulai = $('input[name=tanggal_mulai').val()
+
+            $('input[name=tanggal_selesai]').val(tanggal_mulai);
+        });
+    }
+
+
 
 });
 
@@ -551,4 +537,19 @@ function countCertainDays(start_date, end_date ) {
     };
 
     return days.reduce(sum, 0);
+}
+
+function changeTripDaysInput(mulai, selesai) {
+    if (mulai.val() && selesai.val()) {
+        var start_date = new Date(mulai.val());
+        var end_date = new Date(selesai.val());
+
+        var jumlah_hari = countCertainDays(start_date, end_date);
+
+        if (jumlah_hari > 0) {
+            $('input[name=lama_hari]').val(jumlah_hari);
+        } else {
+            $('input[name=lama_hari]').val(0);
+        }
+    }
 }
