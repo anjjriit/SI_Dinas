@@ -10,6 +10,7 @@ class Rpd extends Model
     protected $table = 'rpd';
 
     protected $fillable = [
+        'kode',
         'nik',
         'kategori',
         'jenis_perjalanan',

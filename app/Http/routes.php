@@ -65,8 +65,6 @@ Route::get('cek/user', function () {
     return dd(Auth::user());
 });
 //(tes) cek relasi
-Route::get('rpd/tes', function () {
-    $rpd = App\Rpd::with('actionHistory', 'actionHistory.pegawai')->find(2);
-});
+Route::get('rpd/tes', 'RpdController@generateCode');
 
 Route::get('indexpegawai','testController@index');

@@ -37,7 +37,8 @@ class RpdController extends Controller
         }
     }
 
-    public function submit(Request $request) {
+    public function submit(Request $request) 
+    {
         $this->validate($request, [
             'kategori' => 'required|in:trip,non_trip',
             'jenis_perjalanan' => 'required|in:dalam_kota,luar_kota',
@@ -64,6 +65,7 @@ class RpdController extends Controller
             'keterangan'
         );
 
+        $inputRpd['kode'] = $this->generateCode();
         $inputRpd['nik'] = auth()->user()->nik;
         $inputRpd['status'] = 'SUBMIT';
 
@@ -99,7 +101,8 @@ class RpdController extends Controller
         ActionHistoryRpd::create($action);
     }
 
-    public function saveAsDraft(Request $request)  {
+    public function saveAsDraft(Request $request)  
+    {
         $inputRpd = $request->only(
             'kategori',
             'jenis_perjalanan',
@@ -173,11 +176,29 @@ class RpdController extends Controller
         return view('rpd.submitted', compact('submittedRpds'));
     }
 
-    public function editRpd(Rpd $rpd) {
+    public function editRpd(Rpd $rpd) 
+    {
         $list_pegawai = Pegawai::orderBy('nama_lengkap', 'asc')->lists('nama_lengkap', 'nik');
         $list_kota = Kota::orderBy('nama_kota', 'asc')->lists('nama_kota', 'kode');
 
         return view('rpd.edit', compact('rpd', 'list_pegawai', 'list_kota'));
+    }
+
+    public function generateCode()
+    {
+        //ambil kode terakhir
+        $last = Rpd::select('kode')->orderBy('kode', 'desc')->first();
+
+        if (empty($last['kode'])) {
+            return "RPD0001";
+        } else {
+            $no = str_replace('RPD', '', $last['kode']);
+
+            $no = (int) $no + 1;
+
+            $new = 'RPD' . str_pad($no, 4, '0', STR_PAD_LEFT);
+            return $new;
+        }
     }
 
 }

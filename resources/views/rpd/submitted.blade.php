@@ -55,7 +55,7 @@
 	    							@foreach ($submittedRpds as $rpd)
 			    						<tr>
 			    							<td>
-			    								{{ $rpd->id }}
+			    								{{ $rpd->kode }}
 			    							</td>
 											<td>
 												{{ $rpd->kotaTujuan->nama_kota }}
