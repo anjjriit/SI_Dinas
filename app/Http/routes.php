@@ -81,7 +81,5 @@ Route::get('cek', function () {
 
     return;
 });
-//(tes) cek relasi
-Route::get('rpd/tes', 'RpdController@generateCode');
 
 Route::get('indexpegawai','testController@index');

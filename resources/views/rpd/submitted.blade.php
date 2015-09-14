@@ -70,6 +70,9 @@
 												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
 													<i class="fa fa-fw fa-share"></i>Detail
 												</button>
+                                                <button type="button" class="btn btn-sm btn-default">
+                                                    <i class="fa fa-fw fa-refresh"></i>Recall
+                                                </button>
 											</td>
 			    						</tr>
 			    					@endforeach
