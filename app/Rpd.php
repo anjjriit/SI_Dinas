@@ -24,7 +24,11 @@ class Rpd extends Model
     ];
 
     public function peserta() {
-        return $this->belongsToMany('App\Pegawai', 'peserta', 'id_rpd', 'nik_peserta')->withPivot('jenis_kegiatan', 'kode_kegiatan', 'kegiatan');
+        return $this->belongsToMany('App\Pegawai', 'kegiatan', 'id_rpd', 'nik_peserta')->groupBy('nik_peserta');
+    }
+
+    public function kegiatan() {
+        return $this->hasMany('App\Kegiatan', 'id_rpd');
     }
 
     public function saranaTransportasi()

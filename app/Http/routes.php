@@ -37,6 +37,21 @@ Route::group(['middleware' => 'role:super_admin'], function () {
     Route::resource('project', 'ProjectController', ['except' => 'show']);
     Route::resource('pelatihan', 'PelatihanController',['except' => 'show']);
     Route::resource('jenis-biaya', 'JenisBiayaController', ['except' => 'show']);
+
+    // transportasi
+    Route::get('transportasi/{transportasi}', 'TransportasiController@show');
+    Route::get('transportasi/create', 'TransportasiController@createTransportation');
+    Route::get('transportasi/{transportasi}/edit', 'TransportasiController@editTransportation');
+    Route::get('transportasi/{transportasi}/biaya/create', 'TransportasiController@createCost');
+    Route::get('transportasi/{transportasi}/biaya/{id}/edit', 'TransportasiController@editCost');
+    Route::post('transportasi', 'TransportasiController@storeTransportation');
+    Route::patch('transportasi/{transportasi}', 'TransportasiController@updateTransportation');
+    Route::delete('transportasi/{transportasi}', 'TransportasiController@deleteTransportation');
+    Route::post('transportasi/{transportasi}/biaya', 'TransportasiController@storeCost');
+    Route::patch('transportasi/{transportasi}/biaya/{id}', 'TransportasiController@updateCost');
+    Route::delete('transportasi{transportasi}/biaya/{id}', 'TransportasiController@deleteCost');
+
+
 });
 
 
@@ -47,6 +62,7 @@ Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction'
 Route::get('rpd/create', 'RpdController@create');
 Route::get('rpd/draft', 'RpdController@draft');
 Route::get('rpd/draft/{rpd}/edit', 'RpdController@editRpd');
+Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
 
 Route::get('rpd/submitted', 'RpdController@submitted');
 
@@ -61,8 +77,9 @@ Route::get('json/prospek', 'JsonController@prospek');
 Route::get('json/pelatihan', 'JsonController@pelatihan');
 
 //(tes) cek user yang login
-Route::get('cek/user', function () {
-    return dd(Auth::user());
+Route::get('cek', function () {
+
+    return;
 });
 //(tes) cek relasi
 Route::get('rpd/tes', 'RpdController@generateCode');
