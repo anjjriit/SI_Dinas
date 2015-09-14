@@ -17,7 +17,7 @@ class TransportasiController extends Controller
 
     public function createCost(Transportasi $transportasi)
     {
-        return view('transportasi.cost.create')
+        return view('transportasi.cost.create');
     }
 
     public function storeTransportation(Request $request, Transportasi $transportasi)
@@ -40,12 +40,17 @@ class TransportasiController extends Controller
         return view('transportasi.edit');
     }
 
-    public function editCost(Transportasi $transportasi)
+    public function editCost(Transportasi $transportasi, $id)
     {
         return view('transportasi.cost.edit');
     }
 
-    public function update(Request $request, Transportasi $transportasi)
+    public function updateTransportation(Request $request, Transportasi $transportasi)
+    {
+
+    }
+
+    public function updateCost(Request $request, Transportasi $transportasi)
     {
 
     }

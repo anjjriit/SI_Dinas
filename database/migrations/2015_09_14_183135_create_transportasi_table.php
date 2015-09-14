@@ -16,6 +16,7 @@ class CreateTransportasiTable extends Migration
             $table->increments('id');
             $table->string('nama_transportasi');
             $table->timestamps();
+            $table->timestamp('deleted_at');
         });
     }
 

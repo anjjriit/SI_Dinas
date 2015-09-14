@@ -26,6 +26,7 @@ class CreateBiayaTransportTable extends Migration
             $table->integer('harga');
 
             $table->timestamps();
+            $table->timestamp('deleted_at');
         });
     }
 
