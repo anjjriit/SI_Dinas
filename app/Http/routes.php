@@ -51,6 +51,11 @@ Route::group(['middleware' => 'role:super_admin'], function () {
     Route::patch('transportasi/{transportasi}/biaya/{id}', 'TransportasiController@updateCost');
     Route::delete('transportasi{transportasi}/biaya/{id}', 'TransportasiController@deleteCost');
 
+    //penginapan
+    Route::get('jenis-biaya/penginapan', 'PenginapanController@index');
+    Route::get('jenis-biaya/penginapan/create', 'PenginapanController@create');
+    Route::post('jenis-biaya/penginapan', 'PenginapanController@store');
+    Route::get('jenis-biaya/penginapan/{penginapan}/edit', 'PenginapanController@edit');
 
 });
 
