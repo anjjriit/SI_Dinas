@@ -16,7 +16,7 @@
             </div>
         </div>
         <ul class="sidebar-menu">
-            @if (auth()->user()->role == 'super_admin') 
+            @if(auth()->user()->role == 'super_admin') 
                 <li{{ (Request::is('dashboard') ? ' class=item-active' : '')}}>
                     <a href="/dashboard">
                         <i class="fa fa-fw fa-th"></i> <span>Dashboard</span>
