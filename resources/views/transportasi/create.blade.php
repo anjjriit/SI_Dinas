@@ -15,7 +15,7 @@
                         <div class="box-header">
                             <h4>Form Tambah Transportasi</h4>
                         </div>
-                        {!! Form::open(['method' => 'POST', 'route' => 'jenis-biaya.store']) !!}
+                        {!! Form::open(['method' => 'POST', 'url' => '/jenis-biaya/transportasi']) !!}
                             <div class="box-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
@@ -26,7 +26,7 @@
                                     </div>
                                 @endif
 
-                                @include('biaya._form')
+                                @include('transportasi._form')
                             </div>
                             <div class="box-footer">
                                 {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
