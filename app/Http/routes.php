@@ -39,17 +39,17 @@ Route::group(['middleware' => 'role:super_admin'], function () {
     Route::resource('jenis-biaya', 'JenisBiayaController', ['except' => 'show']);
 
     // transportasi
-    Route::get('transportasi/{transportasi}', 'TransportasiController@show');
-    Route::get('transportasi/create', 'TransportasiController@createTransportation');
-    Route::get('transportasi/{transportasi}/edit', 'TransportasiController@editTransportation');
-    Route::get('transportasi/{transportasi}/biaya/create', 'TransportasiController@createCost');
-    Route::get('transportasi/{transportasi}/biaya/{id}/edit', 'TransportasiController@editCost');
-    Route::post('transportasi', 'TransportasiController@storeTransportation');
-    Route::patch('transportasi/{transportasi}', 'TransportasiController@updateTransportation');
-    Route::delete('transportasi/{transportasi}', 'TransportasiController@deleteTransportation');
-    Route::post('transportasi/{transportasi}/biaya', 'TransportasiController@storeCost');
-    Route::patch('transportasi/{transportasi}/biaya/{id}', 'TransportasiController@updateCost');
-    Route::delete('transportasi{transportasi}/biaya/{id}', 'TransportasiController@deleteCost');
+    Route::get('jenis-biaya/transportasi/create', 'TransportasiController@createTransportation');
+    Route::post('jenis-biaya/transportasi', 'TransportasiController@storeTransportation');
+    Route::get('jenis-biaya/transportasi/{transportasi}', 'TransportasiController@show');
+    Route::get('jenis-biaya/transportasi/{transportasi}/edit', 'TransportasiController@editTransportation');
+    Route::patch('jenis-biaya/transportasi/{transportasi}', 'TransportasiController@updateTransportation');
+    Route::delete('jenis-biaya/transportasi/{transportasi}', 'TransportasiController@deleteTransportation');
+    Route::post('jenis-biaya/transportasi/{transportasi}/biaya', 'TransportasiController@storeCost');
+    Route::get('jenis-biaya/transportasi/{transportasi}/biaya/create', 'TransportasiController@createCost');
+    Route::get('jenis-biaya/transportasi/{transportasi}/biaya/{biaya_transportasi}/edit', 'TransportasiController@editCost');
+    Route::patch('jenis-biaya/transportasi/{transportasi}/biaya/{biaya_transportasi}', 'TransportasiController@updateCost');
+    Route::delete('jenis-biaya/transportasi{transportasi}/biaya/{biaya_transportasi}', 'TransportasiController@deleteCost');
 
 
 });
