@@ -578,7 +578,7 @@
                             <div class="tab-pane" role="tabpanel" id="step4">
                                 <div class="box-body box-finish">
                                     <div class="row">
-                                        <div class="col-md-6 col-md-offset-3">
+                                        <div class="col-md-6">
                                             <div class="form-group">
                                                 {!! Form::label('akomodasi_awal', 'Akomodasi Awal') !!}
                                                 {!! Form::text('akomodasi_awal', null, ['class' => 'form-control']) !!}
@@ -649,7 +649,6 @@
                                 {!! Form::textarea('alamat', null, ['class' => 'form-control', 'rows' => 3, 'required']) !!}
                             </div>
                         </div>
-
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-success">Simpan</button>

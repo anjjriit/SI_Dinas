@@ -44,6 +44,8 @@ Route::group(['middleware' => 'auth'], function () {
 
 Route::group(['middleware' => 'role:administration'], function () {
     Route::get('administrasi/rpd/{id}/edit', 'RpdController@editRpdAdministration');
+    Route::get('administrasi/rpd/{id}/approval', 'RpdController@approval');
+    Route::post('administrasi/rpd/{id}/approval', 'RpdController@submitApproval');
     Route::patch('administrasi/rpd/{id}', 'RpdController@updateRpdAdministration');
 });
 

@@ -336,13 +336,14 @@ class RpdController extends Controller
 
         $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan');
 
+        $rpd->kegiatan()->delete();
+
         for ($i = 0;$i < count($kegiatanPeserta['id_peserta']);$i++) {
             $nik = $kegiatanPeserta['id_peserta'][$i];
             $jenis_kegiatan = $kegiatanPeserta['tujuan_kegiatan'][$i];
             $kode_kegiatan = $kegiatanPeserta['kode_kegiatan'][$i];
             $kegiatan = $kegiatanPeserta['kegiatan'][$i];
 
-            $rpd->peserta()->detach($nik);
             $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
         }
 
@@ -446,7 +447,14 @@ class RpdController extends Controller
         return redirect('/rpd/submitted')->with('success', 'Sukses merecall RPD dengan kode ' . $rpd->kode . '.');
     }
 
-    public function approval(Request $request, $id)
+    public function approval($id)
+    {
+        $rpd = Rpd::findOrFail($id);
+
+        return view('rpd.approval', compact('rpd'));
+    }
+
+    public function submitApproval(Request $request, $id)
     {
         $rpd = Rpd::findOrFail($id);
 
@@ -463,6 +471,7 @@ class RpdController extends Controller
 
         ActionHistoryRpd::create($action);
 
+        return redirect('/rpd/submitted')->with('success', 'Status telah terupdate');
     }
 
     public function editRpdAdministration($id)
@@ -549,5 +558,4 @@ class RpdController extends Controller
         }
         return redirect('/rpd/submitted')->with('success', 'Sukses mengupdate pengajuan RPD dengan kode ' . $rpd->kode);
     }
-
 }

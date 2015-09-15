@@ -113,45 +113,45 @@
                     <table class="table table-modal table-responsive table-condensed">
                         <tbody>
                             <tr>
-                                <th class="col-md-4">Kode RPD</th>
+                                <td class="col-md-4"><strong>Kode RPD</strong></td>
                                 <td>{{ $rpd->kode }}</td>
                             </tr>
                             <tr>
-                                <th class="col-md-4">Penanggung Jawab</th>
+                                <td class="col-md-4"><strong>Penanggung Jawab</strong></td>
                                 <td>{{ $rpd->pegawai->nama_lengkap }}</td>
                             </tr>
                             <tr>
-                                <th class="col-md-4">Kategori</th>
+                                <td class="col-md-4"><strong>Kategori</strong></td>
                                 <td>{{ ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
                             </tr>
                             <tr>
-                                <th class="col-md-4">Jenis</th>
+                                <td class="col-md-4"><strong>Jenis</strong></td>
                                 <td>{{ ucwords(str_replace('_', ' ', $rpd->jenis_perjalanan)) }}</td>
                             </tr>
                             <tr>
-                                <th class="col-md-4">Tanggal Mulai</th>
+                                <td class="col-md-4"><strong>Tanggal Mulai</strong></td>
                                 <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
                             </tr>
                             <tr>
-                                <th class="col-md-4">Tanggal Selesai</th>
+                                <td class="col-md-4"><strong>Tanggal Selesai</strong></td>
                                 <td>{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}</td>
                             </tr>
                             <tr>
-                                <th class="col-md-4">Jumlah Hari Dinas</th>
+                                <td class="col-md-4"><strong>Jumlah Hari Dinas</strong></td>
                                 <td>
                                 	{{ $rpd->lama_hari }} hari
                                 </td>
                             </tr>
                             <tr>
-                                <th class="col-md-4">Asal Kota</th>
+                                <td class="col-md-4"><strong>Asal Kota</strong></td>
                                 <td>{{ $rpd->kotaAsal->nama_kota }}</td>
                             </tr>
                             <tr>
-                                <th class="col-md-4">Tujuan Kota</th>
+                                <td class="col-md-4"><strong>Tujuan Kota</strong></td>
                                 <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
                             </tr>
                             <tr>
-                                <th class="col-md-4">Sarana Transportasi</th>
+                                <td class="col-md-4"><strong>Sarana Transportasi</strong></td>
                                 <td>
                                 	<ul style="margin-top: 10px;">
                                 		@foreach($rpd->saranaTransportasi as $saranaTransportasi)
@@ -161,11 +161,17 @@
                                 </td>
                             </tr>
                             <tr>
-                                <th class="col-md-4">Sarana Penginapan</th>
+                                <td class="col-md-4"><strong>Sarana Penginapan</strong></td>
                                 <td>{{ $rpd->saranaPenginapan->nama_penginapan }}</td>
                             </tr>
+                            @if ($rpd->status == 'APPROVED' || auth()->user()->role == 'administration')
+                                <tr>
+                                    <td class="col-md-4"><strong>Akomodasi Awal</strong></td>
+                                    <td>Rp {{ number_format($rpd->akomodasi_awal, 2, ',', '.') }}</td>
+                                </tr>
+                            @endif
                             <tr>
-                                <th class="col-md-4">Status</th>
+                                <td class="col-md-4"><strong>Status</strong></td>
                                 <td style="text-transform : uppercase;">{{ $rpd->status }}</td>
                             </tr>
                         </tbody>
@@ -173,7 +179,7 @@
                     <br>
 					<!-- Daftar Peserta RPD-->
 					<h4>Peserta dan Tujuan Kegiatan</h4>
-					<table class="table table-bordered table-striped">
+					<table class="table table-bordered">
 						<thead>
 							<tr>
 								<th>Nama</th>
@@ -199,7 +205,13 @@
                                                 {{ $kegiatan->pelatihan->nama_pelatihan }}
                                             @endif
                                         </td>
-										<td>{{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}</td>
+										<td>
+                                            @if ($kegiatan->kegiatan == 'UAT')
+                                                UAT
+                                            @else
+                                                {{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
+                                            @endif
+                                        </td>
 									</tr>
                                 @endforeach
 							@endforeach
@@ -232,14 +244,15 @@
 							@endforeach
 						</tbody>
 					</table>
-
-                    <br>
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a href="/administrasi/rpd/{{ $rpd->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                            <a href="/administrasi/rpd/{{ $rpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                    @if (auth()->user()->role == 'administration')
+                        <br>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="/administrasi/rpd/{{ $rpd->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                <a href="/administrasi/rpd/{{ $rpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                            </div>
                         </div>
-                    </div>
+                    @endif
 				</div>
 				<div class="modal-footer">
 					<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
