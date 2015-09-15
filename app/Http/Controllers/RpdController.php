@@ -502,6 +502,13 @@ class RpdController extends Controller
         );
     }
 
+    public function listApproval()
+    {
+        $approvalRpds = Rpd::where('status', '=', 'SUBMIT')->paginate(10);
+
+        return view('rpd.index_administrasi', compact('approvalRpds'));
+    }
+
     public function updateRpdAdministration(Request $request, $id)
     {
         $this->validate($request, [
