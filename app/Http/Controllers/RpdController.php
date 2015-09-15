@@ -175,7 +175,7 @@ class RpdController extends Controller
         $userId = $user->nik;
         $draftRpds = Rpd::where('status','=','DRAFT')
                         ->where('nik','=',$userId)
-                        ->paginate(15);
+                        ->paginate(10);
 
         return view('rpd.draft', compact('draftRpds'));
     }
@@ -186,7 +186,7 @@ class RpdController extends Controller
         $userId = $user->nik;
         $submittedRpds = Rpd::where('status','=','SUBMIT')
                         ->where('nik','=',$userId)
-                        ->paginate(15);
+                        ->paginate(10);
 
         return view('rpd.submitted', compact('submittedRpds'));
     }
@@ -245,7 +245,6 @@ class RpdController extends Controller
             'keterangan'
         );
 
-        $inputRpd['kode'] = $this->generateCode();
         $inputRpd['nik'] = auth()->user()->nik;
         $inputRpd['status'] = 'DRAFT';
 
