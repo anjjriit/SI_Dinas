@@ -17,7 +17,7 @@ class RpdSeeder extends Seeder
         DB::table('sarana_transportasi')->delete();
         DB::table('action_history_pengajuan')->delete();
 
-        //Carbon::now()
+        Carbon::now()
 
         DB::table('rpd')->insert([
         	'nik' => '100000001',

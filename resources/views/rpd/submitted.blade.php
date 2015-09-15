@@ -157,11 +157,7 @@
 	                            <tr>
                                     <th class="col-md-4">Jumlah Hari Dinas</th>
                                     <td>
-                                    	{{ date_diff(
-										        date_create($rpd->tanggal_mulai),
-										        date_create($rpd->tanggal_selesai)
-											)->d 
-										}}
+                                    	{{ $rpd->lama_hari }}
                                     </td>
                                 </tr>
                                 <tr>
