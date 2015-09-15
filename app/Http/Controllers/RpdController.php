@@ -14,6 +14,7 @@ use App\Pelatihan;
 use App\ActionHistoryRpd;
 use App\Transportasi;
 use App\Penginapan;
+use App\JenisBiaya;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Auth\AuthController;
@@ -102,6 +103,10 @@ class RpdController extends Controller
 
             $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
         }
+
+        $akomodasi = ['akomodasi_awal' => $this->simulateCost($rpd)];
+
+        $rpd->fill($akomodasi)->save();
 
         $action = [
             'id_rpd' => $rpd->id,
@@ -342,6 +347,10 @@ class RpdController extends Controller
             $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
         }
 
+        $akomodasi = ['akomodasi_awal' => $this->simulateCost($rpd)];
+
+        $rpd->fill($akomodasi)->save();
+
         $action = [
             'id_rpd' => $rpd->id,
             'nik' => auth()->user()->nik,
@@ -368,9 +377,45 @@ class RpdController extends Controller
         }
     }
 
-    public function simulateCost()
+    public function simulateCost(Rpd $rpd)
     {
+        $akomodasi_awal = 0;
 
+        $jumlah_peserta = count($rpd->peserta->all());
+
+        foreach ($rpd->saranaTransportasi->all() as $transportasi) {
+            $biaya_transport = $transportasi->biaya()->where('id_kota_tujuan', $rpd->kode_kota_tujuan)->where('id_kota_asal', $rpd->kode_kota_asal)->first();
+
+            if (is_null($biaya_transport)) {
+                $biaya_standar = JenisBiaya::where('nama_jenis', 'like', '%' . $transportasi->nama_transportasi . '%')->first();
+
+                if (is_null($biaya_standar)) {
+                    $akomodasi_awal += 0;
+                } else {
+                    $akomodasi_awal += $biaya_standar->biaya * $jumlah_peserta;
+                }
+            } else {
+                $akomodasi_awal += $biaya_transport->harga * $jumlah_peserta;
+            }
+
+        }
+
+        $akomodasi_awal += $rpd->saranaPenginapan->biaya * $jumlah_peserta;
+
+        $jenis_biaya = JenisBiaya::get()->all();
+
+        $biaya_standar = 0;
+
+        $list_transportasi = Transportasi::lists('nama_transportasi', 'id')->all();
+
+        foreach ($jenis_biaya as $biaya) {
+            (!in_array($biaya->nama_jenis, $list_transportasi)) ?
+                $biaya_standar += $biaya->biaya * $rpd->lama_hari * $jumlah_peserta : '';
+        }
+
+        $akomodasi_awal += $biaya_standar;
+
+        return $akomodasi_awal;
     }
 
 }

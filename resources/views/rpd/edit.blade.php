@@ -163,7 +163,14 @@
                                                     @foreach ($list_transportasi as $transportasi)
                                                         <div class="col-md-6">
                                                             <label style="font-weight:normal">
-                                                                {!! Form::checkbox('id_transportasi[]', $transportasi->id) !!} {{ $transportasi->nama_transportasi }}
+                                                                {!! Form::checkbox(
+                                                                    'id_transportasi[]',
+                                                                    $transportasi->id,
+                                                                    in_array(
+                                                                        $transportasi->id,
+                                                                        $rpd->saranaTransportasi()->lists('id_transportasi')->all()
+                                                                    )
+                                                                ) !!} {{ $transportasi->nama_transportasi }}
                                                             </label>
                                                         </div>
                                                     @endforeach

@@ -21,7 +21,8 @@ class Rpd extends Model
         'kode_kota_tujuan',
         'id_penginapan',
         'keterangan',
-        'status'
+        'status',
+        'akomodasi_awal'
     ];
 
     public function peserta() {
@@ -54,6 +55,11 @@ class Rpd extends Model
     public function saranaTransportasi()
     {
         return $this->belongsToMany('App\Transportasi', 'sarana_transportasi', 'id_rpd', 'id_transportasi');
+    }
+
+    public function saranaPenginapan()
+    {
+        return $this->hasOne('App\Penginapan', 'id', 'id_penginapan');
     }
 }
 

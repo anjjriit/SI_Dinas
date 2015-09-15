@@ -14,4 +14,9 @@ class Transportasi extends Model
     protected $hidden = ['created_at', 'updated_at', 'deleted_at'];
 
     protected $dates = ['deleted_at'];
+
+    public function biaya()
+    {
+        return $this->hasMany('App\BiayaTransportasi', 'id_transportasi', 'id');
+    }
 }

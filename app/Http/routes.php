@@ -80,7 +80,10 @@ Route::get('json/pelatihan', 'JsonController@pelatihan');
 
 //(tes) cek user yang login
 Route::get('cek', function () {
+    $rpd = \App\Rpd::find(14);
+    $transport = $rpd->saranaTransportasi[0]->biaya()->where('id_kota_tujuan', 1)->where('id_kota_asal', 2)->first();
 
+    dd($transport);
     return;
 });
 
