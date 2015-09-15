@@ -171,9 +171,15 @@
                             </div>
                         </div>
                     @else
-                        <div class="alert alert-warning">
-                            Data penginapan belum tersedia. Klik tombol Tambah Data Penginapan untuk menambah data penginapan.
-                        </div>
+                        @if ($request->has('query'))
+                            <div class="alert alert-warning">
+                                Hasil tidak ditemukan untuk kata kunci "<strong>{{ $request->input('query') }}</strong>".
+                            </div>
+                        @else
+                            <div class="alert alert-warning">
+                                Data penginapan belum tersedia. Klik tombol Tambah Data Penginapan untuk menambah data penginapan.
+                            </div>
+                        @endif
                     @endif
 
                     {!! $data_penginapan->render() !!}
