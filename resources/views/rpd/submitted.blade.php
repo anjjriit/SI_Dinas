@@ -57,6 +57,9 @@
 			    							<td>
 			    								{{ $rpd->id }}
 			    							</td>
+			    							<td>
+			    								{{ $data = str_replace('_', ' ', $rpd->kategori) }}
+			    							</td>
 											<td>
 												{{ $rpd->kotaTujuan->nama_kota }}
 											</td>
@@ -64,7 +67,11 @@
 												{{ $rpd->tanggal_mulai }}
 											</td>
 											<td>
-												{{ $rpd->tanggal_selesai }}
+												@if($data == "trip")
+													{{ $rpd->tanggal_selesai }}
+												@else
+													-
+												@endif
 											</td>
 											<td>
 												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
@@ -113,21 +120,29 @@
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Kategori</th>
-                                    <td>{{ $rpd->kategori }}</td>
+                                    <td>{{ $dataKategori = str_replace('_', ' ', $rpd->kategori) }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Jenis</th>
-                                    <td>{{ $rpd->jenis_perjalanan }}</td>
+                                    <td>{{ $dataJenis = str_replace('_', ' ', $rpd->jenis_perjalanan) }}</td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-4">Tanggal Mulai</th>
+                                    @if($dataKategori == "trip")
+	                                    <th class="col-md-4">Tanggal Mulai</th>
+                                    @else
+	                                    <th class="col-md-4">Tanggal </th>
+                                    @endif
                                     <td>{{ $rpd->tanggal_mulai }}</td>
                                 </tr>
-                                <tr>
-                                    <th class="col-md-4">Tanggal Selesai</th>
-                                    <td>{{ $rpd->tanggal_selesai }}</td>
-                                </tr>
-                                <tr>
+                                @if($dataKategori == "trip")
+	                                <tr>
+	                                    <th class="col-md-4">Tanggal Selesai</th>
+	                                    <td>
+											{{ $rpd->tanggal_selesai }}
+	                                    </td>
+	                                </tr>
+	                            @endif
+	                            <tr>
                                     <th class="col-md-4">Jumlah Hari Dinas</th>
                                     <td>
                                     	{{ date_diff(
@@ -181,7 +196,7 @@
 									<tr>
 										<td>{{ $peserta->nama_lengkap }}</td>
 										<td>{{ $peserta->pivot->jenis_kegiatan }}</td>
-										<td>{{ $peserta->pivot->kegiatan }}</td>
+										<td style="text-transform: capitalize;">{{ $dataKegiatan = str_replace('_', ' ', $peserta->pivot->kegiatan) }}</td>
 									</tr>
 								@endforeach
 							</tbody>

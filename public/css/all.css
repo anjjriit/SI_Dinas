@@ -8019,7 +8019,7 @@ button.close {
   content: "\f280";
 }
 
-.table-modal, .modal-body p{
+.table-modal, .modal-body p, table{
   text-transform: capitalize;
 }
 
