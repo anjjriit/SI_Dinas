@@ -251,7 +251,7 @@
 
             $.confirm({
                 title: '<i class="fa fa-refresh"></i> Recall RPD',
-                content: 'Apakah Anda yakin akan menghapus RPD dengan kode <strong>' + nama + '</strong>',
+                content: 'Apakah Anda yakin akan merecall RPD dengan kode <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',
