@@ -15,7 +15,7 @@
                         <div class="box-header">
                             <h4>Form Tambah Data Penginapan</h4>
                         </div>
-                        {!! Form::open(['method' => 'POST', 'url' => '/penginapan']) !!}
+                        {!! Form::open(['method' => 'POST', 'route' => 'penginapan.store']) !!}
                             <div class="box-body">
                                 @if($errors->any())
                                     <div class="alert alert-danger">

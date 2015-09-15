@@ -47,6 +47,7 @@ Route::group(['middleware' => 'role:super_admin'], function () {
     Route::resource('project', 'ProjectController', ['except' => 'show']);
     Route::resource('pelatihan', 'PelatihanController',['except' => 'show']);
     Route::resource('jenis-biaya', 'JenisBiayaController', ['except' => 'show']);
+    Route::resource('penginapan', 'PenginapanController', ['except' => 'show']);
 
     // transportasi
     Route::get('transportasi', 'TransportasiController@index');
@@ -61,14 +62,6 @@ Route::group(['middleware' => 'role:super_admin'], function () {
     Route::get('transportasi/{transportasi}/biaya/{biaya_transportasi}/edit', 'TransportasiController@editCost');
     Route::patch('transportasi/{transportasi}/biaya/{biaya_transportasi}', 'TransportasiController@updateCost');
     Route::delete('transportasi/{transportasi}/biaya/{biaya_transportasi}', 'TransportasiController@deleteCost');
-
-    // penginapan
-    Route::get('penginapan', 'PenginapanController@index');
-    Route::get('penginapan/create', 'PenginapanController@create');
-    Route::post('penginapan', 'PenginapanController@store');
-    Route::get('penginapan/{penginapan}/edit', 'PenginapanController@edit');
-    Route::patch('penginapan/{penginapan}', 'PenginapanController@update');
-    Route::delete('penginapan/{penginapan}', 'PenginapanController@destroy');
 
 });
 

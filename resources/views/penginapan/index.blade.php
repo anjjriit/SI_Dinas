@@ -94,7 +94,7 @@
                         {!! Form::model($request,
                             [
                                 'method' => 'GET',
-                                'url' => '/penginapan',
+                                'route' => 'penginapan.index',
                                 'class' => 'form-inline pull-left',
                                 'style' => 'margin-left: 5px;'
                             ]
@@ -154,7 +154,7 @@
                                                 {!! Form::open(
                                                     [
                                                         'method' => 'DELETE',
-                                                        'url' => ['/penginapan/' . $penginapan->id],
+                                                        'route' => ['penginapan.destroy', $penginapan->id],
                                                         'style' => 'display: inline-block;',
                                                         'data-nama' => $penginapan->nama_penginapan,
                                                     ]

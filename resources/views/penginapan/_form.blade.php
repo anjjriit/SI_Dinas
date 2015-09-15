@@ -11,7 +11,7 @@
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         {!! Form::label('biaya', 'Biaya') !!}
-                                        {!! Form::text('biaya', 'null', ['class' => 'form-control']) !!}
+                                        {!! Form::text('biaya', null, ['class' => 'form-control']) !!}
                                     </div>
                                 </div>
                             </div>
