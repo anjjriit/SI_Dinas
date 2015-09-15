@@ -17,7 +17,18 @@ class PenginapanController extends Controller
      */
     public function index(Request $request)
     {
-        $data_penginapan = Penginapan::orderBy('nama_penginapan', 'asc')->paginate(15);
+        $orderBy = ($request->has('orderBy')) ? $request->input('orderBy') : 'nama_penginapan';
+        $order = ($request->has('order')) ? $request->input('order') : 'asc';
+
+        if ($request->has('query')) {
+            if ($request->input('searchBy') == 'biaya') {
+                $data_penginapan = Penginapan::orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', $request->input('query'))->paginate(15);
+            } else {
+                $data_penginapan = Penginapan::orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+            }
+        } else {
+            $data_penginapan = Penginapan::orderBy($orderBy, $order)->paginate(15);
+        }
 
         return view('penginapan.index', compact('data_penginapan', 'request'));
     }
@@ -47,7 +58,7 @@ class PenginapanController extends Controller
         $input = $request->all();
         Penginapan::create($input);
 
-        return redirect('/penginapan')->with('success', 'Sukses menambah penginapan' . $input['nama_penginapan'] . '.');
+        return redirect('/penginapan')->with('success', 'Sukses menambah penginapan ' . $input['nama_penginapan'] . '.');
     }
 
     /**
@@ -89,7 +100,7 @@ class PenginapanController extends Controller
 
         $penginapan->fill($input)->save();
 
-        return redirect('/penginapan')->with('success', 'Sukses memperbarui nama penginapan' . $input['nama_penginapan'] . '.' );
+        return redirect('/penginapan')->with('success', 'Sukses memperbarui nama penginapan ' . $input['nama_penginapan'] . '.' );
     }
 
     /**
@@ -102,6 +113,6 @@ class PenginapanController extends Controller
     {
         $penginapan->delete();
 
-        return redirect('/penginapan')->with('success', 'Sukses menghapus nama penginapan' . $penginapan->nama_penginapan . '.');
+        return redirect('/penginapan')->with('success', 'Sukses menghapus nama penginapan ' . $penginapan->nama_penginapan . '.');
     }
 }
