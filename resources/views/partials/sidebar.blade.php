@@ -95,6 +95,9 @@
                        <li{{ (Request::is('transportasi*') ? ' class=item-active' : '')}}>
                             <a href="/transportasi"><i class="fa fa-fw"></i>Data Transportasi</a>
                        </li>
+                       <li{{ (Request::is('penginapan') ? ' class=item-active' : '') }}>
+                            <a href="/penginapan"><i class="fa fa-fw"></i>Data Penginapan</a>
+                       </li>
                     </ul>
                 </li>
             @endif

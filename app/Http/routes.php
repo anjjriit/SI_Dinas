@@ -63,10 +63,12 @@ Route::group(['middleware' => 'role:super_admin'], function () {
     Route::delete('transportasi/{transportasi}/biaya/{biaya_transportasi}', 'TransportasiController@deleteCost');
 
     // penginapan
-    Route::get('jenis-biaya/penginapan', 'PenginapanController@index');
-    Route::get('jenis-biaya/penginapan/create', 'PenginapanController@create');
-    Route::post('jenis-biaya/penginapan', 'PenginapanController@store');
-    Route::get('jenis-biaya/penginapan/{penginapan}/edit', 'PenginapanController@edit');
+    Route::get('penginapan', 'PenginapanController@index');
+    Route::get('penginapan/create', 'PenginapanController@create');
+    Route::post('penginapan', 'PenginapanController@store');
+    Route::get('penginapan/{penginapan}/edit', 'PenginapanController@edit');
+    Route::patch('penginapan/{penginapan}', 'PenginapanController@update');
+    Route::delete('penginapan/{penginapan}', 'PenginapanController@destroy');
 
 });
 
