@@ -446,4 +446,23 @@ class RpdController extends Controller
         return redirect('/rpd/submitted')->with('success', 'Sukses merecall RPD dengan kode ' . $rpd->kode . '.');
     }
 
+    public function approval(Request $request, $id)
+    {
+        $rpd = Rpd::findOrFail($id);
+
+        // ubah parameter input() sesuai form inputnya
+        $rpd->status = $request->input('status');
+        $rpd->save();
+
+        $action = [
+            'id_rpd' => $rpd->id,
+            'nik' => auth()->user()->nik,
+            'action' => $rpd->status,
+            'comment' => $request->input('komentar')
+        ];
+
+        ActionHistoryRpd::create($action);
+
+    }
+
 }

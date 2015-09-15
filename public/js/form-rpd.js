@@ -301,7 +301,7 @@ function attachAddActivityEvent() {
 
                 attachRemoveActivityEvent();
 
-
+                attachAddProspectButtonClickEvent();
 
                 $btn.button('reset');
             });
