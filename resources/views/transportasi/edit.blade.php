@@ -19,7 +19,7 @@
                                 $transportasi,
                                 [
                                     'method' => 'PATCH',
-                                    'url' => ['/jenis-biaya/transportasi/' . $transportasi->id]
+                                    'url' => ['/transportasi/' . $transportasi->id]
                                 ]
                             ) !!}
                             <div class="box-body">

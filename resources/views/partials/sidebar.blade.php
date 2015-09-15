@@ -16,7 +16,7 @@
             </div>
         </div>
         <ul class="sidebar-menu">
-            @if(auth()->user()->role == 'super_admin') 
+            @if(auth()->user()->role == 'super_admin')
                 <li{{ (Request::is('dashboard') ? ' class=item-active' : '')}}>
                     <a href="/dashboard">
                         <i class="fa fa-fw fa-th"></i> <span>Dashboard</span>
@@ -91,6 +91,9 @@
                         </li>
                         <li{{ (Request::is('jenis-biaya*') ? ' class=item-active' : '')}}>
                             <a href="/jenis-biaya"><i class="fa fa-fw"></i>Data Jenis Biaya</a>
+                       </li>
+                       <li{{ (Request::is('transportasi*') ? ' class=item-active' : '')}}>
+                            <a href="/transportasi"><i class="fa fa-fw"></i>Data Transportasi</a>
                        </li>
                     </ul>
                 </li>

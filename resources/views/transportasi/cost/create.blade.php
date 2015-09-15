@@ -10,7 +10,7 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Transportasi</h1>
+            <h1>Data Biaya {{ $transportasi->nama_transportasi }}</h1>
         </section>
 
         <section class="content">
@@ -20,7 +20,7 @@
                         <div class="box-header">
                             <h4>Form Tambah Biaya Transportasi {{ $transportasi->nama_transportasi }}</h4>
                         </div>
-                        {!! Form::open(['method' => 'POST', 'url' => '/jenis-biaya/transportasi/' . $transportasi->id . '/biaya']) !!}
+                        {!! Form::open(['method' => 'POST', 'url' => '/transportasi/' . $transportasi->id . '/biaya']) !!}
                             <div class="box-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">

@@ -20,7 +20,7 @@
                         <div class="box-header">
                             <h4>Form Edit Biaya Transportasi {{ $transportasi->nama_transportasi }}</h4>
                         </div>
-                        {!! Form::model($biayaTransportasi, ['method' => 'PATCH', 'url' => '/jenis-biaya/transportasi/' . $transportasi->id . '/biaya/' . $biayaTransportasi->id]) !!}
+                        {!! Form::model($biayaTransportasi, ['method' => 'PATCH', 'url' => '/transportasi/' . $transportasi->id . '/biaya/' . $biayaTransportasi->id]) !!}
                             <div class="box-body">
                                 @if ($errors->any())
                                     <div class="alert alert-danger">

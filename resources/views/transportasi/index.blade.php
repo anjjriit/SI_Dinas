@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Data Biaya ' . $transportasi->nama_transportasi)
+@section('page_title', 'Data Jenis Biaya Pengeluaran Standard')
 
 @section('stylesheet')
     @parent
@@ -10,7 +10,7 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Biaya {{ $transportasi->nama_transportasi }}</h1>
+            <h1>Data Jenis Biaya Pengeluaran Standard</h1>
         </section>
 
         <section class="content-filter">
@@ -30,7 +30,7 @@
                             {!! Form::select(
                                 'orderBy',
                                 [
-                                    'harga' => 'Biaya',
+                                    'nama_transportasi' => 'Nama Transportasi',
                                 ],
                                 null,
                                 ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
@@ -71,8 +71,7 @@
                             {!! Form::select(
                                 'searchBy',
                                 [
-                                    'id_kota_asal' => 'Kota Asal',
-                                    'id_kota_tujuan' => 'Kota Tujuan',
+                                    'nama_transportasi' => 'Nama Transportasi',
                                 ],
                                 null,
                                 [
@@ -81,7 +80,7 @@
                                     'required'
                                 ]
                             ) !!}
-                            {!! Form::select('query', $list_kota, null, ['class' => 'form-control']) !!}
+                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Query...']) !!}
                             {!! Form::button(
                                 '<i class="fa fa-fw fa-search"></i> Search',
                                 ['type' => 'submit', 'class' => 'btn btn-success', 'style' => 'margin-left: 3px;']
@@ -93,7 +92,7 @@
                         {!! Form::model($request,
                             [
                                 'method' => 'GET',
-                                'url' => '/transportasi/' . $transportasi->id,
+                                'url' => '/transportasi',
                                 'class' => 'form-inline pull-left',
                                 'style' => 'margin-left: 5px;'
                             ]
@@ -127,39 +126,32 @@
                         </div>
                     @endif
 
-                    @if ($data_biayaTransportasi->count() != 0)
+                    @if ($data_transportasi->count() != 0)
                         <div class="box box-widget">
                             <div class="box-body no-padding">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Kota Asal</th>
-                                            <th>Kota Tujuan</th>
-                                            <th>Biaya</th>
+                                            <th>Nama Transportasi</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        @foreach ($data_biayaTransportasi as $biaya)
+                                        @foreach ($data_transportasi as $transportasi)
                                         <tr>
                                             <td>
-                                                {{ $biaya->kotaAsal->nama_kota }}
+                                                {{ $transportasi->nama_transportasi }}
                                             </td>
                                             <td>
-                                                {{ $biaya->kotaTujuan->nama_kota }}
-                                            </td>
-                                            <td>
-                                                Rp{{ number_format($biaya->harga, 0, ',', '.') }}
-                                            </td>
-                                            <td>
-                                                <a href="/transportasi/{{ $transportasi->id }}/biaya/{{ $biaya->id }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                <a href="/transportasi/{{ $transportasi->id }}" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Detail"><i class="fa fa-fw fa-eye"></i></a>
+                                                <a href="/transportasi/{{ $transportasi->id }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                 {!! Form::open(
                                                     [
                                                         'method' => 'DELETE',
-                                                        'url' => ['/transportasi/' . $transportasi->id . '/biaya/' . $biaya->id],
+                                                        'url' => ['/transportasi/' . $transportasi->id],
                                                         'style' => 'display: inline-block;',
-                                                        'data-nama' => $transportasi->nama_transportasi . ' dari ' . $biaya->kotaAsal->nama_kota . ' ke ' . $biaya->kotaTujuan->nama_kota,
+                                                        'data-nama' => $transportasi->nama_transportasi,
                                                     ]
                                                 ) !!}
 
@@ -180,14 +172,14 @@
                             </div>
                         @else
                             <div class="alert alert-warning">
-                                Data biaya transportasi belum tersedia. Klik tombol Tambah Biaya Transportasi untuk menambah biaya.
+                                Data transportasi belum tersedia. Klik tombol Tambah Transportasi untuk menambah transportasi.
                             </div>
                         @endif
                     @endif
 
-                    {!! $data_biayaTransportasi->render() !!}
+                    {!! $data_transportasi->render() !!}
 
-                    <a href="/transportasi/{{ $transportasi->id }}/biaya/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah Biaya </a>
+                    <a href="/transportasi/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah Transportasi </a>
 
                 </div>
             </div>
@@ -209,7 +201,7 @@
 
             $.confirm({
                 title: '<i class="fa fa-trash"></i> Hapus Kota',
-                content: 'Apakah Anda yakin akan menghapus biaya transportasi <strong>' + nama + '</strong>',
+                content: 'Apakah Anda yakin akan menghapus transportasi <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',
