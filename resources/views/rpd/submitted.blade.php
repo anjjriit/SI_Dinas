@@ -37,6 +37,7 @@
 	    						<thead>
 	    							<tr>
 	    								<th>Kode</th>
+                                        <th>Pengaju</th>
 	    								<th>Kota Tujuan</th>
 	    								<th>Tanggal Mulai</th>
 	    								<th>Tanggal Selesai</th>
@@ -49,6 +50,9 @@
 			    							<td>
 			    								{{ $rpd->kode }}
 			    							</td>
+                                            <td>
+                                                {{ $rpd->pegawai->nama_lengkap }}
+                                            </td>
 											<td>
 												{{ $rpd->kotaTujuan->nama_kota }}
 											</td>
@@ -62,18 +66,20 @@
 												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
 													<i class="fa fa-fw fa-share"></i>Detail
 												</button>
-                                                {!! Form::open(
-                                                    [
-                                                        'method' => 'POST',
-                                                        'url' => '/rpd/recall/' . $rpd->id,
-                                                        'style' => 'display: inline-block;',
-                                                        'data-nama' => $rpd->kode,
-                                                    ]
-                                                ) !!}
-
-                                                    {!! Form::button('<i class="fa fa-fw fa-refresh"></i>Recall', ['type' => 'submit', 'class' => 'btn btn-sm btn-default delete-button']
+                                                @if ($rpd->nik == auth()->user()->nik)
+                                                    {!! Form::open(
+                                                        [
+                                                            'method' => 'POST',
+                                                            'url' => '/rpd/recall/' . $rpd->id,
+                                                            'style' => 'display: inline-block;',
+                                                            'data-nama' => $rpd->kode,
+                                                        ]
                                                     ) !!}
-                                                {!! Form::close() !!}
+
+                                                        {!! Form::button('<i class="fa fa-fw fa-refresh"></i>Recall', ['type' => 'submit', 'class' => 'btn btn-sm btn-default delete-button']
+                                                        ) !!}
+                                                    {!! Form::close() !!}
+                                                @endif
 											</td>
 			    						</tr>
 			    					@endforeach
@@ -103,134 +109,140 @@
 					<h4 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h4>
 				</div>
 				<div class="modal-body">
-					<div>
-						<!-- Info basic dari RPD -->
-                        <table class="table table-modal table-responsive table-condensed">
-                            <tbody>
-                                <tr>
-                                    <th class="col-md-4">Kode RPD</th>
-                                    <td>{{ $rpd->kode }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Penanggung Jawab</th>
-                                    <td>{{ $rpd->pegawai->nama_lengkap }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Kategori</th>
-                                    <td>{{ ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Jenis</th>
-                                    <td>{{ ucwords(str_replace('_', ' ', $rpd->jenis_perjalanan)) }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Tanggal Mulai</th>
-                                    <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Tanggal Selesai</th>
-                                    <td>{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Jumlah Hari Dinas</th>
-                                    <td>
-                                    	{{ $rpd->lama_hari }} hari
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Asal Kota</th>
-                                    <td>{{ $rpd->kotaAsal->nama_kota }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Tujuan Kota</th>
-                                    <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Sarana Transportasi</th>
-                                    <td>
-                                    	<ul>
-                                    		@foreach($rpd->saranaTransportasi as $saranaTransportasi)
-	                                    		<li>{{ $saranaTransportasi->nama_transportasi }}</li>
-	                                    	@endforeach
-	                                    </ul>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Sarana Penginapan</th>
-                                    <td>{{ $rpd->saranaPenginapan->nama_penginapan }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Status</th>
-                                    <td style="text-transform : uppercase;">{{ $rpd->status }}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-
-						<!-- Daftar Peserta RPD-->
-						<h3>Peserta dan Tujuan Kegiatan</h3>
-						<table class="table table-bordered table-striped">
-							<thead>
-								<tr>
-									<th>Nama</th>
-									<th>Judul Project/Prospek/Pelatihan</th>
-									<th>Kegiatan</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach($rpd->peserta as $peserta)
-                                    @foreach($rpd->kegiatan()->where('nik_peserta', $peserta->nik)->get() as $kegiatan)
-    									<tr>
-                                            @if ($rpd->kegiatan()->where('nik_peserta', $peserta->nik)->first() == $kegiatan)
-        										<td rowspan="{{ $rpd->kegiatan()->where('nik_peserta', $peserta->nik)->count() }}" style="vertical-align: top;">
-                                                    {{ $peserta->nama_lengkap }}
-                                                </td>
-                                            @endif
-    										<td>
-                                                @if ($kegiatan->jenis_kegiatan == 'project')
-                                                    {{ $kegiatan->project->nama_project }}
-                                                @elseif ($kegiatan->jenis_kegiatan == 'prospek')
-                                                    {{ $kegiatan->prospek->nama_prospek }}
-                                                @elseif ($kegiatan->jenis_kegiatan == 'pelatihan')
-                                                    {{ $kegiatan->pelatihan->nama_pelatihan }}
-                                                @endif
-                                            </td>
-    										<td>{{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}</td>
-    									</tr>
-                                    @endforeach
-								@endforeach
-							</tbody>
-						</table>
-
-						<!--Bagian Komentar atau Keterangan-->
-						<h4>Komentar</h4>
-						<p>
-							{{ $rpd->keterangan }}
-						</p>
-
-						<!--Bagian Action History-->
-						<h3>Action History</h3>
-						<table class="table table-bordered table-striped">
-							<thead>
-								<tr>
-									<th>Date Time</th>
-									<th>Nama</th>
-									<th>Action Taken</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach($rpd->actionHistory as $action)
+					<!-- Info basic dari RPD -->
+                    <table class="table table-modal table-responsive table-condensed">
+                        <tbody>
+                            <tr>
+                                <th class="col-md-4">Kode RPD</th>
+                                <td>{{ $rpd->kode }}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-md-4">Penanggung Jawab</th>
+                                <td>{{ $rpd->pegawai->nama_lengkap }}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-md-4">Kategori</th>
+                                <td>{{ ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-md-4">Jenis</th>
+                                <td>{{ ucwords(str_replace('_', ' ', $rpd->jenis_perjalanan)) }}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-md-4">Tanggal Mulai</th>
+                                <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-md-4">Tanggal Selesai</th>
+                                <td>{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-md-4">Jumlah Hari Dinas</th>
+                                <td>
+                                	{{ $rpd->lama_hari }} hari
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-md-4">Asal Kota</th>
+                                <td>{{ $rpd->kotaAsal->nama_kota }}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-md-4">Tujuan Kota</th>
+                                <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-md-4">Sarana Transportasi</th>
+                                <td>
+                                	<ul style="margin-top: 10px;">
+                                		@foreach($rpd->saranaTransportasi as $saranaTransportasi)
+                                    		<li>{{ $saranaTransportasi->nama_transportasi }}</li>
+                                    	@endforeach
+                                    </ul>
+                                </td>
+                            </tr>
+                            <tr>
+                                <th class="col-md-4">Sarana Penginapan</th>
+                                <td>{{ $rpd->saranaPenginapan->nama_penginapan }}</td>
+                            </tr>
+                            <tr>
+                                <th class="col-md-4">Status</th>
+                                <td style="text-transform : uppercase;">{{ $rpd->status }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <br>
+					<!-- Daftar Peserta RPD-->
+					<h4>Peserta dan Tujuan Kegiatan</h4>
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Nama</th>
+								<th>Judul Project/Prospek/Pelatihan</th>
+								<th>Kegiatan</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($rpd->peserta as $peserta)
+                                @foreach($rpd->kegiatan()->where('nik_peserta', $peserta->nik)->get() as $kegiatan)
 									<tr>
-										<td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
-										<td>{{ $action->pegawai->nama_lengkap }}</td>
-										<td>{{ $action->action }}</td>
+                                        @if ($rpd->kegiatan()->where('nik_peserta', $peserta->nik)->first() == $kegiatan)
+    										<td rowspan="{{ $rpd->kegiatan()->where('nik_peserta', $peserta->nik)->count() }}" style="vertical-align: top;">
+                                                {{ $peserta->nama_lengkap }}
+                                            </td>
+                                        @endif
+										<td>
+                                            @if ($kegiatan->jenis_kegiatan == 'project')
+                                                {{ $kegiatan->project->nama_project }}
+                                            @elseif ($kegiatan->jenis_kegiatan == 'prospek')
+                                                {{ $kegiatan->prospek->nama_prospek }}
+                                            @elseif ($kegiatan->jenis_kegiatan == 'pelatihan')
+                                                {{ $kegiatan->pelatihan->nama_pelatihan }}
+                                            @endif
+                                        </td>
+										<td>{{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}</td>
 									</tr>
-								@endforeach
-							</tbody>
-						</table>
-					</div>
+                                @endforeach
+							@endforeach
+						</tbody>
+					</table>
+                    <br>
+					<!--Bagian Komentar atau Keterangan-->
+					<h4>Komentar</h4>
+					<p>
+						{{ $rpd->keterangan }}
+					</p>
+                    <br>
+					<!--Bagian Action History-->
+					<h4>Action History</h4>
+					<table class="table table-bordered table-striped">
+						<thead>
+							<tr>
+								<th>Date Time</th>
+								<th>Nama</th>
+								<th>Action Taken</th>
+							</tr>
+						</thead>
+						<tbody>
+							@foreach($rpd->actionHistory as $action)
+								<tr>
+									<td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
+									<td>{{ $action->pegawai->nama_lengkap }}</td>
+									<td>{{ $action->action }}</td>
+								</tr>
+							@endforeach
+						</tbody>
+					</table>
+
+                    <br>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <a href="administrasi/rpd/{{ $rpd->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                            <a href="administrasi/rpd/{{ $rpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                        </div>
+                    </div>
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
 				</div>
 			</div>
 		</div>

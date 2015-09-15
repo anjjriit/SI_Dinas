@@ -182,11 +182,11 @@ class RpdController extends Controller
 
     public function submitted()
     {
-        $user = Auth::user();
-        $userId = $user->nik;
-        $submittedRpds = Rpd::where('status','=','SUBMIT')
-                        ->where('nik','=',$userId)
-                        ->paginate(10);
+        if (auth()->user()->role == 'administration') {
+            $submittedRpds = Rpd::where('status','=','SUBMIT')->paginate(10);
+        } else {
+            $submittedRpds = Rpd::where('nik', auth()->user()->nik)->where('status','=','SUBMIT')->paginate(10);
+        }
 
         return view('rpd.submitted', compact('submittedRpds'));
     }
@@ -465,4 +465,31 @@ class RpdController extends Controller
 
     }
 
+    public function editAdministration($id)
+    {
+        $rpd = Rpd::findOrFail($id);
+
+        $list_pegawai = Pegawai::orderBy('nama_lengkap', 'asc')->lists('nama_lengkap', 'nik');
+        $list_kota = Kota::orderBy('nama_kota', 'asc')->lists('nama_kota', 'kode');
+        $list_project = Project::orderBy('nama_project')->select('nama_project', 'nama_lembaga', 'kode')->get();
+        $list_prospek = Prospek::orderBy('nama_prospek')->select('nama_prospek', 'nama_lembaga', 'kode')->get();
+        $list_pelatihan = Pelatihan::orderBy('nama_pelatihan')->select('nama_pelatihan', 'nama_lembaga', 'kode')->get();
+        $list_transportasi = Transportasi::orderBy('nama_transportasi', 'asc')->get()->all();
+        $list_penginapan = Penginapan::orderBy('nama_penginapan')->lists('nama_penginapan', 'id');
+
+
+        return view(
+            'rpd.edit',
+            compact(
+                'rpd',
+                'list_pegawai',
+                'list_kota',
+                'list_project',
+                'list_prospek',
+                'list_pelatihan',
+                'list_transportasi',
+                'list_penginapan'
+            )
+        );
+    }
 }

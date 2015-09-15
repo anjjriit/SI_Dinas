@@ -10,7 +10,7 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Jenis Biaya Pengeluaran Standard</h1>
+            <h1>Data Transportasi</h1>
         </section>
 
         <section class="content-filter">
