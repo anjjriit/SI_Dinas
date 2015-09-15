@@ -44,6 +44,10 @@ Route::group(['middleware' => 'auth'], function () {
 
 });
 
+Route::group(['middleware' => 'role:administration'], function () {
+    Route::get('administrasi/rpd/{id}/edit', 'RpdController@editAdministration');
+});
+
 Route::group(['middleware' => 'role:super_admin'], function () {
     Route::resource('user', 'PegawaiController', ['except' => 'show']);
     Route::resource('kota', 'KotaController', ['except' => 'show']);

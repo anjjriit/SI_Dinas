@@ -604,23 +604,12 @@
                                     </li>
                                     <li>
                                         {!! Form::button(
-                                            '<i class="fa fa-fw fa-floppy-o"></i> Save as Draft',
-                                            [
-                                                'type' => 'submit',
-                                                'class' => 'btn btn-default',
-                                                'name' => 'action',
-                                                'value' => 'draft'
-                                            ]
-                                        ) !!}
-                                    </li>
-                                    <li>
-                                        {!! Form::button(
-                                            '<i class="fa fa-fw fa-check"></i> Submit',
+                                            '<i class="fa fa-fw fa-check"></i> Simpan',
                                             [
                                                 'type' => 'submit',
                                                 'class' => 'btn btn-success',
                                                 'name' => 'action',
-                                                'value' => 'submit'
+                                                'value' => 'simpan'
                                             ]
                                         ) !!}
                                     </li>

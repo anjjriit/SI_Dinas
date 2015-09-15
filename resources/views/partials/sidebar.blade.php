@@ -23,6 +23,7 @@
                     </a>
                 </li>
             @endif
+
             <li{{ (Request::is('rpd/create') ? ' class=item-active' : '')}}>
                 <a href="/rpd/create">
                     <i class="fa fa-fw fa-file-text"></i> <span>Create RPD</span>
