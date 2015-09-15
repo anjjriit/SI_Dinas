@@ -70,7 +70,8 @@
                             Request::is('prospek*') ||
                             Request::is('project*') ||
                             Request::is('pelatihan*') ||
-                            Request::is('jenisbiayapengeluaranstandard*')
+                            Request::is('jenisbiayapengeluaranstandard*') ||
+                            Request::is('transportasi*')
                         )
                         ? ' item-active' : ''
                     }}"

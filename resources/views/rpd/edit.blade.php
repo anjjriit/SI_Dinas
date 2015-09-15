@@ -147,46 +147,26 @@
 
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                {!! Form::label('sarana_penginapan', 'Sarana Penginapan') !!}
+                                                {!! Form::label('id_penginapan', 'Sarana Penginapan') !!}
                                                 {!! Form::select(
-                                                    'sarana_penginapan',
-                                                    [
-                                                        'kost' => 'Kost',
-                                                        'guest_house' => 'Guest House',
-                                                        'hotel' => 'Hotel'
-                                                    ],
+                                                    'id_penginapan',
+                                                    $list_penginapan,
                                                     null,
                                                     ['class' => 'form-control'])
                                                 !!}
                                             </div>
 
                                             <div class="form-group">
-                                                {!! Form::label('sarana_transportasi', 'Sarana Transportasi') !!}
+                                                {!! Form::label('id_transportasi', 'Sarana Transportasi') !!}
 
                                                 <div class="row">
-                                                    <div class="col-md-6">
-                                                        <label style="font-weight:normal">
-                                                            {!! Form::checkbox('sarana_transportasi[]', 'Mobil Dinas') !!} Mobil Dinas
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <label style="font-weight:normal">
-                                                            {!! Form::checkbox('sarana_transportasi[]', 'Kereta') !!} Kereta
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <label style="font-weight:normal">
-                                                            {!! Form::checkbox('sarana_transportasi[]', 'Travel') !!} Travel
-                                                        </label>
-                                                    </div>
-
-                                                    <div class="col-md-6">
-                                                        <label style="font-weight:normal">
-                                                            {!! Form::checkbox('sarana_transportasi[]', 'Pesawat') !!} Pesawat
-                                                        </label>
-                                                    </div>
+                                                    @foreach ($list_transportasi as $transportasi)
+                                                        <div class="col-md-6">
+                                                            <label style="font-weight:normal">
+                                                                {!! Form::checkbox('id_transportasi[]', $transportasi->id) !!} {{ $transportasi->nama_transportasi }}
+                                                            </label>
+                                                        </div>
+                                                    @endforeach
                                                 </div>
                                             </div>
                                         </div>

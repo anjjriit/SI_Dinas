@@ -12,7 +12,8 @@ use App\Project;
 use App\Prospek;
 use App\Pelatihan;
 use App\ActionHistoryRpd;
-use App\SaranaTransportasi;
+use App\Transportasi;
+use App\Penginapan;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Auth\AuthController;
@@ -23,14 +24,17 @@ class RpdController extends Controller
     {
         $list_pegawai = Pegawai::orderBy('nama_lengkap', 'asc')->lists('nama_lengkap', 'nik');
         $list_kota = Kota::orderBy('nama_kota', 'asc')->lists('nama_kota', 'kode');
+        $list_transportasi = Transportasi::orderBy('nama_transportasi', 'asc')->get()->all();
+        $list_penginapan = Penginapan::orderBy('nama_penginapan')->lists('nama_penginapan', 'id');
+
         if (old('id_peserta')) {
             $list_project = Project::orderBy('nama_project')->select('nama_project', 'nama_lembaga', 'kode')->get();
             $list_prospek = Prospek::orderBy('nama_prospek')->select('nama_prospek', 'nama_lembaga', 'kode')->get();
             $list_pelatihan = Pelatihan::orderBy('nama_pelatihan')->select('nama_pelatihan', 'nama_lembaga', 'kode')->get();
 
-            return view('rpd.create', compact('list_pegawai', 'list_kota', 'list_project', 'list_prospek', 'list_pelatihan'));
+            return view('rpd.create', compact('list_pegawai', 'list_kota', 'list_transportasi', 'list_penginapan', 'list_project', 'list_prospek', 'list_pelatihan'));
         } else {
-            return view('rpd.create', compact('list_pegawai', 'list_kota'));
+            return view('rpd.create', compact('list_pegawai', 'list_kota', 'list_transportasi', 'list_penginapan'));
         }
     }
 
@@ -54,10 +58,11 @@ class RpdController extends Controller
             'jenis_perjalanan' => 'required|in:dalam_kota,luar_kota',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
+            'lama_hari' => 'required|numeric|min:1',
             'kode_kota_asal' => 'required|exists:kota,kode',
             'kode_kota_tujuan' => 'required|exists:kota,kode',
-            'sarana_penginapan' => 'required',
-            'sarana_transportasi' => 'required',
+            'id_penginapan' => 'required',
+            'id_transportasi' => 'required',
             'id_peserta' => 'required',
             'tujuan_kegiatan' => 'required',
             'kode_kegiatan' => 'required',
@@ -68,10 +73,11 @@ class RpdController extends Controller
             'kategori',
             'jenis_perjalanan',
             'tanggal_mulai',
+            'lama_hari',
             'tanggal_selesai',
             'kode_kota_asal',
             'kode_kota_tujuan',
-            'sarana_penginapan',
+            'id_penginapan',
             'keterangan'
         );
 
@@ -81,13 +87,9 @@ class RpdController extends Controller
 
         $rpd = Rpd::create($inputRpd);
 
-        $saranaTransportasi = $request->input('sarana_transportasi');
-
-        foreach ($saranaTransportasi as $transportasi) {
-            $inputTransportasi['nama_transportasi'] = $transportasi;
-            $inputTransportasi['id_rpd'] = $rpd->id;
-
-            SaranaTransportasi::create($inputTransportasi);
+        $transportasi = $request->input('id_transportasi');
+        foreach ($request->input('id_transportasi') as $id_transportasi) {
+            $rpd->saranaTransportasi()->attach($id_transportasi);
         }
 
         $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan');
@@ -364,6 +366,11 @@ class RpdController extends Controller
             $new = 'RPD' . str_pad($no, 4, '0', STR_PAD_LEFT);
             return $new;
         }
+    }
+
+    public function simulateCost()
+    {
+
     }
 
 }

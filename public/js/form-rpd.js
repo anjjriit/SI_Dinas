@@ -55,7 +55,7 @@ $(document).ready(function(){
     });
 
     // Init select2
-    $('select[name=jenis_perjalanan], select[name=sarana_penginapan], select[name=list_tujuan_kegiatan]')
+    $('select[name=jenis_perjalanan], select[name=id_penginapan], select[name=list_tujuan_kegiatan]')
         .select2({ width: '100%', minimumResultsForSearch: Infinity });
 
     $('select[name=kode_kota_asal], select[name=kode_kota_tujuan], select[name="kode_kegiatan[]"], select[name="kegiatan[]"]')

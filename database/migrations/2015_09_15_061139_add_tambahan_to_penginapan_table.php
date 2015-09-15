@@ -26,7 +26,10 @@ class AddTambahanToPenginapanTable extends Migration
     public function down()
     {
         Schema::table('penginapan', function (Blueprint $table) {
-            $table->dropColumn('timestamps()');
+            $table->dropColumn('created_at');
+            $table->dropColumn('updated_at');
+            $table->dropColumn('deleted_at');
+
         });
     }
 }
