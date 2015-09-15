@@ -16,9 +16,10 @@ class Rpd extends Model
         'jenis_perjalanan',
         'tanggal_mulai',
         'tanggal_selesai',
+        'lama_hari',
         'kode_kota_asal',
         'kode_kota_tujuan',
-        'sarana_penginapan',
+        'id_penginapan',
         'keterangan',
         'status'
     ];
@@ -29,11 +30,6 @@ class Rpd extends Model
 
     public function kegiatan() {
         return $this->hasMany('App\Kegiatan', 'id_rpd');
-    }
-
-    public function saranaTransportasi()
-    {
-        return $this->hasMany('App\SaranaTransportasi', 'id_rpd');
     }
 
     public function kotaAsal()
@@ -53,6 +49,11 @@ class Rpd extends Model
 
     public function actionHistory() {
         return $this->hasMany('App\ActionHistoryRpd', 'id_rpd');
+    }
+
+    public function saranaTransportasi()
+    {
+        return $this->belongsToMany('App\Transportasi', 'sarana_transportasi', 'id_rpd', 'id_transportasi');
     }
 }
 
