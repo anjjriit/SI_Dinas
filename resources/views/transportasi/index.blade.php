@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Data Jenis Biaya Pengeluaran Standard')
+@section('page_title', 'Data Transportasi')
 
 @section('stylesheet')
     @parent
@@ -200,7 +200,7 @@
             var nama = element.attr('data-nama')
 
             $.confirm({
-                title: '<i class="fa fa-trash"></i> Hapus Kota',
+                title: '<i class="fa fa-trash"></i> Hapus Data Transportasi',
                 content: 'Apakah Anda yakin akan menghapus transportasi <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
