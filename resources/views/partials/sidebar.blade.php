@@ -38,6 +38,11 @@
                     <i class="fa fa-fw fa-list"></i> <span>RPD Submitted</span>
                 </a>
             </li>
+            <li{{ (Request::is('rpd/log') ? ' class=item-active' : '') }}>
+                <a href="/rpd/log">
+                    <i class="fa fa-fw fa-history"></i> <span>Logs RPD</span>
+                </a>
+            </li>
             <li{{ (Request::is('lpd') ? ' class=item-active' : '')}}>
                 <a href="/lpd">
                     <i class="fa fa-fw fa-file-text"></i> <span>Create LPD</span>
