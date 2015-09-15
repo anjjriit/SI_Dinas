@@ -405,7 +405,7 @@
                                                                             <label for="kode_kegiatan">Nama Project</label>
                                                                             <select name="kode_kegiatan[]" id="kode_kegiatan" class="form-control">
                                                                                 @foreach ($list_project as $project)
-                                                                                    <option value="{{ $project->kode }}"{{ ($project->kode == $rpd->kode_kegiatan) ? ' selected' : '' }}>{{ $project->nama_project . ' (' . $project->nama_lembaga . ')' }}</option>
+                                                                                    <option value="{{ $project->kode }}"{{ ($project->kode == $kegiatan->kode_kegiatan) ? ' selected' : '' }}> {{ $project->nama_project . ' (' . $project->nama_lembaga . ')' }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
@@ -443,7 +443,7 @@
                                                                             <label for="kode_kegiatan">Nama Prospek</label>
                                                                             <select name="kode_kegiatan[]" id="kode_kegiatan" class="form-control">
                                                                                 @foreach ($list_prospek as $prospek)
-                                                                                    <option value="{{ $prospek->kode }}"{{ ($prospek->kode == $rpd->kode_kegiatan) ? ' selected' : '' }}>{{ $prospek->nama_prospek . ' (' . $prospek->nama_lembaga . ')' }}</option>
+                                                                                    <option value="{{ $prospek->kode }}"{{ ($prospek->kode == $kegiatan->kode_kegiatan) ? ' selected' : '' }}>{{ $prospek->nama_prospek . ' (' . $prospek->nama_lembaga . ')' }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
@@ -467,7 +467,7 @@
                                                                             <label for="kode_kegiatan">Nama Pelatihan</label>
                                                                             <select name="kode_kegiatan[]" id="kode_kegiatan" class="form-control">
                                                                                 @foreach ($list_pelatihan as $pelatihan)
-                                                                                    <option value="{{ $pelatihan->kode }}"{{ ($pelatihan->kode == $rpd->kode_kegiatan) ? ' selected' : '' }}>{{ $pelatihan->nama_pelatihan . ' (' . $pelatihan->nama_lembaga . ')' }}</option>
+                                                                                    <option value="{{ $pelatihan->kode }}"{{ ($pelatihan->kode == $kegiatan->kode_kegiatan) ? ' selected' : '' }}>{{ $pelatihan->nama_pelatihan . ' (' . $pelatihan->nama_lembaga . ')' }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>

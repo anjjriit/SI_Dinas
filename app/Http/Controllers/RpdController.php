@@ -119,10 +119,11 @@ class RpdController extends Controller
             'kategori',
             'jenis_perjalanan',
             'tanggal_mulai',
+            'lama_hari',
             'tanggal_selesai',
             'kode_kota_asal',
             'kode_kota_tujuan',
-            'sarana_penginapan',
+            'id_penginapan',
             'keterangan'
         );
 
@@ -131,14 +132,11 @@ class RpdController extends Controller
 
         $rpd = Rpd::create($inputRpd);
 
-        if ($request->has('sarana_transportasi')) {
-            $saranaTransportasi = $request->input('sarana_transportasi');
+        if ($request->has('id_transportasi')) {
+           $transportasi = $request->input('id_transportasi');
 
-            foreach ($saranaTransportasi as $transportasi) {
-                $inputTransportasi['nama_transportasi'] = $transportasi;
-                $inputTransportasi['id_rpd'] = $rpd->id;
-
-                SaranaTransportasi::create($inputTransportasi);
+            foreach ($request->input('id_transportasi') as $id) {
+                $rpd->saranaTransportasi()->attach($id);
             }
         }
 
@@ -197,6 +195,9 @@ class RpdController extends Controller
         $list_project = Project::orderBy('nama_project')->select('nama_project', 'nama_lembaga', 'kode')->get();
         $list_prospek = Prospek::orderBy('nama_prospek')->select('nama_prospek', 'nama_lembaga', 'kode')->get();
         $list_pelatihan = Pelatihan::orderBy('nama_pelatihan')->select('nama_pelatihan', 'nama_lembaga', 'kode')->get();
+        $list_transportasi = Transportasi::orderBy('nama_transportasi', 'asc')->get()->all();
+        $list_penginapan = Penginapan::orderBy('nama_penginapan')->lists('nama_penginapan', 'id');
+
 
         return view(
             'rpd.edit',
@@ -206,7 +207,9 @@ class RpdController extends Controller
                 'list_kota',
                 'list_project',
                 'list_prospek',
-                'list_pelatihan'
+                'list_pelatihan',
+                'list_transportasi',
+                'list_penginapan'
             )
         );
     }
@@ -233,7 +236,7 @@ class RpdController extends Controller
             'tanggal_selesai',
             'kode_kota_asal',
             'kode_kota_tujuan',
-            'sarana_penginapan',
+            'id_penginapan',
             'keterangan'
         );
 
@@ -245,17 +248,15 @@ class RpdController extends Controller
 
         $rpd->fill($inputRpd)->save();
 
-        $rpd->saranaTransportasi()->delete();
+        $rpd->saranaTransportasi()->detach();
 
-        if ($request->has('sarana_transportasi')) {
-            $saranaTransportasi = $request->input('sarana_transportasi');
+        if ($request->has('id_transportasi')) {
+            $transportasi = $request->input('id_transportasi');
 
-            foreach ($saranaTransportasi as $transportasi) {
-                $inputTransportasi['nama_transportasi'] = $transportasi;
-                $inputTransportasi['id_rpd'] = $rpd->id;
-
-                SaranaTransportasi::create($inputTransportasi);
+            foreach ($request->input('id_transportasi') as $id_transportasi) {
+                $rpd->saranaTransportasi()->attach($id_transportasi);
             }
+
         }
 
         $rpd->kegiatan()->delete();
@@ -290,10 +291,11 @@ class RpdController extends Controller
             'jenis_perjalanan' => 'required|in:dalam_kota,luar_kota',
             'tanggal_mulai' => 'required|date',
             'tanggal_selesai' => 'required|date',
+            'lama_hari' => 'required|numeric|min:1',
             'kode_kota_asal' => 'required|exists:kota,kode',
             'kode_kota_tujuan' => 'required|exists:kota,kode',
-            'sarana_penginapan' => 'required',
-            'sarana_transportasi' => 'required',
+            'id_penginapan' => 'required',
+            'id_transportasi' => 'required',
             'id_peserta' => 'required',
             'tujuan_kegiatan' => 'required',
             'kode_kegiatan' => 'required',
@@ -304,10 +306,11 @@ class RpdController extends Controller
             'kategori',
             'jenis_perjalanan',
             'tanggal_mulai',
+            'lama_hari',
             'tanggal_selesai',
             'kode_kota_asal',
             'kode_kota_tujuan',
-            'sarana_penginapan',
+            'id_penginapan',
             'keterangan'
         );
 
@@ -319,15 +322,12 @@ class RpdController extends Controller
 
         $rpd->fill($inputRpd)->save();
 
-        $saranaTransportasi = $request->input('sarana_transportasi');
+        $rpd->saranaTransportasi()->detach();
 
-        SaranaTransportasi::where('id_rpd', $rpd->id)->delete();
+        $transportasi = $request->input('id_transportasi');
 
-        foreach ($saranaTransportasi as $transportasi) {
-            $inputTransportasi['nama_transportasi'] = $transportasi;
-            $inputTransportasi['id_rpd'] = $rpd->id;
-
-            SaranaTransportasi::create($inputTransportasi);
+        foreach ($request->input('id_transportasi') as $id_transportasi) {
+            $rpd->saranaTransportasi()->attach($id_transportasi);
         }
 
         $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan');
