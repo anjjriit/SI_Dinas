@@ -43,7 +43,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'role:administration'], function () {
-    Route::get('administrasi/rpd/{id}/edit', 'RpdController@editAdministration');
+    Route::get('administrasi/rpd/{id}/edit', 'RpdController@editRpdAdministration');
+    Route::patch('administrasi/rpd/{id}', 'RpdController@updateRpdAdministration');
 });
 
 Route::group(['middleware' => 'role:super_admin'], function () {

@@ -465,7 +465,7 @@ class RpdController extends Controller
 
     }
 
-    public function editAdministration($id)
+    public function editRpdAdministration($id)
     {
         $rpd = Rpd::findOrFail($id);
 
@@ -479,7 +479,7 @@ class RpdController extends Controller
 
 
         return view(
-            'rpd.edit',
+            'rpd.edit_administrasi',
             compact(
                 'rpd',
                 'list_pegawai',
@@ -492,4 +492,62 @@ class RpdController extends Controller
             )
         );
     }
+
+    public function updateRpdAdministration(Request $request, $id)
+    {
+        $this->validate($request, [
+            'kategori' => 'required|in:trip,non_trip',
+            'jenis_perjalanan' => 'required|in:dalam_kota,luar_kota',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date',
+            'lama_hari' => 'required|numeric|min:1',
+            'kode_kota_asal' => 'required|exists:kota,kode',
+            'kode_kota_tujuan' => 'required|exists:kota,kode',
+            'id_penginapan' => 'required',
+            'id_transportasi' => 'required',
+            'id_peserta' => 'required',
+            'tujuan_kegiatan' => 'required',
+            'kode_kegiatan' => 'required',
+            'kegiatan' => 'required',
+            'akomodasi_awal' => 'required|numeric'
+        ]);
+
+        $inputRpd = $request->only(
+            'kategori',
+            'jenis_perjalanan',
+            'tanggal_mulai',
+            'lama_hari',
+            'tanggal_selesai',
+            'kode_kota_asal',
+            'kode_kota_tujuan',
+            'id_penginapan',
+            'akomodasi_awal'
+        );
+
+        $rpd = Rpd::findOrFail($id);
+
+        $rpd->fill($inputRpd)->save();
+
+        $rpd->saranaTransportasi()->detach();
+
+        $transportasi = $request->input('id_transportasi');
+
+        foreach ($request->input('id_transportasi') as $id_transportasi) {
+            $rpd->saranaTransportasi()->attach($id_transportasi);
+        }
+
+        $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan');
+
+        for ($i = 0;$i < count($kegiatanPeserta['id_peserta']);$i++) {
+            $nik = $kegiatanPeserta['id_peserta'][$i];
+            $jenis_kegiatan = $kegiatanPeserta['tujuan_kegiatan'][$i];
+            $kode_kegiatan = $kegiatanPeserta['kode_kegiatan'][$i];
+            $kegiatan = $kegiatanPeserta['kegiatan'][$i];
+
+            $rpd->peserta()->detach($nik);
+            $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
+        }
+        return redirect('/rpd/submitted')->with('success', 'Sukses mengupdate pengajuan RPD dengan kode ' . $rpd->kode);
+    }
+
 }

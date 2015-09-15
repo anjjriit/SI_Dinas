@@ -19,7 +19,7 @@
                 <h4>Form Pengajuan RPD</h4>
             </div>
 
-            {!! Form::model($rpd, ['method' => 'PATCH', 'route' => ['rpd.update', $rpd->id]]) !!}
+            {!! Form::model($rpd, ['method' => 'PATCH', 'url' => ['/administrasi/rpd/' . $rpd->id]]) !!}
                 <div class="wizard">
                     <div class="wizard-inner">
                         <div class="row">
@@ -163,7 +163,14 @@
                                                     @foreach ($list_transportasi as $transportasi)
                                                         <div class="col-md-6">
                                                             <label style="font-weight:normal">
-                                                                {!! Form::checkbox('id_transportasi[]', $transportasi->id) !!} {{ $transportasi->nama_transportasi }}
+                                                                {!! Form::checkbox(
+                                                                    'id_transportasi[]',
+                                                                    $transportasi->id,
+                                                                    in_array(
+                                                                        $transportasi->id,
+                                                                        $rpd->saranaTransportasi()->lists('id_transportasi')->all()
+                                                                    )
+                                                                ) !!} {{ $transportasi->nama_transportasi }}
                                                             </label>
                                                         </div>
                                                     @endforeach
@@ -571,22 +578,10 @@
                             <div class="tab-pane" role="tabpanel" id="step4">
                                 <div class="box-body box-finish">
                                     <div class="row">
-                                        <div class="col-md-8 col-md-offset-2">
+                                        <div class="col-md-6 col-md-offset-3">
                                             <div class="form-group">
                                                 {!! Form::label('akomodasi_awal', 'Akomodasi Awal') !!}
                                                 {!! Form::text('akomodasi_awal', null, ['class' => 'form-control']) !!}
-                                            </div>
-                                            <div class="form-group">
-                                                {!! Form::label('keterangan', 'Keterangan') !!}
-                                                {!! Form::textarea(
-                                                    'keterangan',
-                                                    null,
-                                                    [
-                                                        'class' => 'form-control',
-                                                        'placeholder' => 'Isi dengan keterangan tambahan (bila diperlukan)',
-                                                        'rows' => 3
-                                                    ]
-                                                ) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -604,7 +599,7 @@
                                     </li>
                                     <li>
                                         {!! Form::button(
-                                            '<i class="fa fa-fw fa-check"></i> Simpan',
+                                            '<i class="fa fa-fw fa-check"></i> Update',
                                             [
                                                 'type' => 'submit',
                                                 'class' => 'btn btn-success',
