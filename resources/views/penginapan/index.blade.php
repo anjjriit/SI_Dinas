@@ -199,7 +199,7 @@
             var nama = element.attr('data-nama')
 
             $.confirm({
-                title: '<i class="fa fa-trash"></i> Hapus Kota',
+                title: '<i class="fa fa-trash"></i> Hapus Data Penginapan',
                 content: 'Apakah Anda yakin akan menghapus data penginapan <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',

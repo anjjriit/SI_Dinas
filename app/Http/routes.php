@@ -37,6 +37,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
 
     Route::get('rpd/submitted', 'RpdController@submitted');
+    Route::get('rpd/log', 'RpdController@log');
+    Route::post('rpd/recall/{rpd}', 'RpdController@recall');
 
 });
 

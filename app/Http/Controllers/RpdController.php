@@ -373,4 +373,33 @@ class RpdController extends Controller
 
     }
 
+    public function log()
+    {
+        $user = Auth::user();
+        $userId = $user->nik;
+        $rpdLogs = Rpd::where('status','!=','DRAFT')
+                        ->where('nik','=',$userId)
+                        ->paginate(15);
+
+        return view('rpd.log', compact('rpdLogs'));
+    }
+
+    public function recall($id)
+    {
+        $rpd = Rpd::findOrFail($id);
+        $rpd->status = 'RECALL';
+        $rpd->save();
+
+        $action = [
+            'id_rpd' => $rpd->id,
+            'nik' => auth()->user()->nik,
+            'action' => 'RECALL',
+            'comment' => null
+        ];
+
+        ActionHistoryRpd::create($action);
+
+        return redirect('/rpd/submitted')->with('success', 'Sukses merecall RPD dengan kode ' . $rpd->kode . '.');
+    }
+
 }
