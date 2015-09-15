@@ -17,6 +17,8 @@ class PenginapanController extends Controller
      */
     public function index(Request $request)
     {
+        $data_penginapan = Penginapan::orderBy('nama_penginapan', 'asc')->paginate(15);
+
         return view('penginapan.index', compact('data_penginapan', 'request'));
     }
 

@@ -28,6 +28,16 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('prospek/store', ['as' => 'prospek.ajax.store', 'uses' => 'ProspekController@ajaxStore']);
     Route::post('pelatihan/store', ['as' => 'pelatihan.ajax.store', 'uses' => 'PelatihanController@ajaxStore']);
+    Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction']);
+
+    //RPD
+    Route::get('rpd/create', 'RpdController@create');
+    Route::get('rpd/draft', 'RpdController@draft');
+    Route::get('rpd/draft/{rpd}/edit', 'RpdController@editRpd');
+    Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
+
+    Route::get('rpd/submitted', 'RpdController@submitted');
+
 });
 
 Route::group(['middleware' => 'role:super_admin'], function () {
@@ -39,7 +49,6 @@ Route::group(['middleware' => 'role:super_admin'], function () {
     Route::resource('jenis-biaya', 'JenisBiayaController', ['except' => 'show']);
 
     // transportasi
-
     Route::get('transportasi', 'TransportasiController@index');
     Route::get('transportasi/create', 'TransportasiController@createTransportation');
     Route::post('transportasi', 'TransportasiController@storeTransportation');
@@ -52,19 +61,17 @@ Route::group(['middleware' => 'role:super_admin'], function () {
     Route::get('transportasi/{transportasi}/biaya/{biaya_transportasi}/edit', 'TransportasiController@editCost');
     Route::patch('transportasi/{transportasi}/biaya/{biaya_transportasi}', 'TransportasiController@updateCost');
     Route::delete('transportasi/{transportasi}/biaya/{biaya_transportasi}', 'TransportasiController@deleteCost');
+
+    // penginapan
+    Route::get('jenis-biaya/penginapan', 'PenginapanController@index');
+    Route::get('jenis-biaya/penginapan/create', 'PenginapanController@create');
+    Route::post('jenis-biaya/penginapan', 'PenginapanController@store');
+    Route::get('jenis-biaya/penginapan/{penginapan}/edit', 'PenginapanController@edit');
+
 });
 
 
 
-Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction']);
-
-//RPD
-Route::get('rpd/create', 'RpdController@create');
-Route::get('rpd/draft', 'RpdController@draft');
-Route::get('rpd/draft/{rpd}/edit', 'RpdController@editRpd');
-Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
-
-Route::get('rpd/submitted', 'RpdController@submitted');
 
 //LPD
 Route::get('lpd', 'LpdController@index');
