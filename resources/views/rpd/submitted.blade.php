@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
-@section('page_title', 'RPD')
+@section('page_title', 'RPD Submitted')
 
 @section('stylesheet')
 	@parent
-
+    <link rel="stylesheet" href="/vendor/jquery-confirm/css/jquery-confirm.min.css">
 @endsection
 
 @section('content')
@@ -62,9 +62,18 @@
 												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
 													<i class="fa fa-fw fa-share"></i>Detail
 												</button>
-                                                <button type="button" class="btn btn-sm btn-default">
-                                                    <i class="fa fa-fw fa-refresh"></i>Recall
-                                                </button>
+                                                {!! Form::open(
+                                                    [
+                                                        'method' => 'POST',
+                                                        'url' => '/rpd/recall/' . $rpd->id,
+                                                        'style' => 'display: inline-block;',
+                                                        'data-nama' => $rpd->kode,
+                                                    ]
+                                                ) !!}
+
+                                                    {!! Form::button('<i class="fa fa-fw fa-refresh"></i>Recall', ['type' => 'submit', 'class' => 'btn btn-sm btn-default delete-button']
+                                                    ) !!}
+                                                {!! Form::close() !!}
 											</td>
 			    						</tr>
 			    					@endforeach
@@ -232,6 +241,36 @@
 
 @section('script')
 	@parent
+    <script src="/vendor/jquery-confirm/js/jquery-confirm.min.js"></script>
 
+    <script>
+        $('.delete-button').on('click', function(event) {
+            event.preventDefault();
+
+            var element = $(this).parent()
+
+            var nama = element.attr('data-nama')
+
+            $.confirm({
+                title: '<i class="fa fa-refresh"></i> Recall RPD',
+                content: 'Apakah Anda yakin akan menghapus RPD dengan kode <strong>' + nama + '</strong>',
+                confirmButtonClass: 'btn-danger',
+                cancelButtonClass: 'btn-default',
+                cancelButton: 'Tidak',
+                confirmButton: 'Ya, Recall',
+                animation: 'top',
+                animationSpeed: 300,
+                animationBounce: 1,
+
+                confirm: function(){
+                    return element.submit()
+                },
+                cancel: function(event){
+                    return;
+                }
+            });
+        })
+
+    </script>
 
 @endsection
