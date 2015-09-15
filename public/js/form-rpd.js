@@ -27,31 +27,41 @@ $(document).ready(function(){
 
         $('.box-body.box-participants').append(new_row);
 
+        $('select[name=list_tujuan_kegiatan]').select2({ width: '100%', minimumResultsForSearch: Infinity });
+
         attachAddActivityEvent();
         attachRemoveParticipantEvent();
         attachParticipantChangesEvent();
     });
 
     attachAddActivityEvent();
+    attachRemoveParticipantEvent();
     attachParticipantChangesEvent();
+    attachAddProspectButtonClickEvent();
+    attachAddTrainingButtonClickEvent();
 
     // Datepicker
     $('.datepicker').datepicker({
         autoclose: true,
+        daysOfWeekDisabled: "0,6",
+        todayHighlight: true,
         format: 'yyyy-mm-dd',
+        enableOnReadonly: false
     });
 
     // Autofocus when modal shown
-    $('.modal').on('shown.bs.modal', function() {
+    $('.modal').on('shown.bs.modal', function () {
         $(this).find('[autofocus]').focus();
     });
 
     // Init select2
-    $('select[name=jenis_perjalanan], select[name=sarana_penginapan], select[name=list_tujuan_kegiatan]')
+    $('select[name=jenis_perjalanan], select[name=id_penginapan], select[name=list_tujuan_kegiatan]')
         .select2({ width: '100%', minimumResultsForSearch: Infinity });
 
-    $('select[name=kode_kota_asal], select[name=kode_kota_tujuan]')
+    $('select[name=kode_kota_asal], select[name=kode_kota_tujuan], select[name="kode_kegiatan[]"], select[name="kegiatan[]"]')
         .select2({ width: '100%' });
+
+    $('select[name=list_peserta]').select2( {width: '100%', display: 'block' } );
 
     // Wizard
     $(".next-step").click(function () {
@@ -66,7 +76,7 @@ $(document).ready(function(){
         prevTab($active);
     });
 
-    $('select[name=jenis_perjalanan').on('change', function() {
+    $('select[name=jenis_perjalanan').on('change', function () {
         var jenis_perjalanan = $(this).val()
         var kode_kota_asal = $('select[name=kode_kota_asal]').val();
 
@@ -81,6 +91,71 @@ $(document).ready(function(){
     });
 
     attachCityChangesEvent();
+
+    $('input[name=tanggal_mulai]').on('change', function () {
+        var $mulai = $(this);
+        var $selesai = $('input[name=tanggal_selesai]');
+
+        changeTripDaysInput($mulai, $selesai);
+    });
+
+    $('input[name=tanggal_selesai]').on('change', function () {
+        var $mulai = $('input[name=tanggal_mulai]');
+        var $selesai = $(this);
+
+        changeTripDaysInput($mulai, $selesai);
+    });
+
+    $('input[value=trip]').on('change.radio.trip', function () {
+        $('input[name=tanggal_selesai]').prop('readonly', false);
+
+        $('input[name=tanggal_mulai]').off('change.selesai');
+    });
+
+    $('input[value=non_trip]').on('change.radio.nontrip', function () {
+        $('input[name=tanggal_selesai]').prop('readonly', true);
+
+        var tanggal_mulai = $('input[name=tanggal_mulai').val()
+        var $tanggal_selesai = $('input[name=tanggal_selesai]');
+
+        if (tanggal_mulai) {
+            $tanggal_selesai.val(tanggal_mulai);
+        }
+
+        $('input[name=tanggal_mulai]').on('change.selesai', function () {
+            var tanggal_mulai = $('input[name=tanggal_mulai').val()
+
+            $('input[name=tanggal_selesai]').val(tanggal_mulai);
+        });
+
+        var $mulai = $('input[name=tanggal_mulai]');
+        var $selesai = $('input[name=tanggal_selesai]');
+
+        changeTripDaysInput($mulai, $selesai);
+    });
+
+
+    if ($('input[name=kategori]:checked').val() == 'non_trip') {
+        $('input[name=tanggal_selesai]').prop('readonly', true);
+
+        var $mulai = $('input[name=tanggal_mulai]');
+        var $selesai = $('input[name=tanggal_selesai]');
+
+        changeTripDaysInput($mulai, $selesai);
+
+        $('input[name=tanggal_mulai]').on('change.selesai', function () {
+            var tanggal_mulai = $('input[name=tanggal_mulai').val()
+
+            $('input[name=tanggal_selesai]').val(tanggal_mulai);
+        });
+    }
+
+    attachRemoveActivityEvent();
+
+    var $mulai = $('input[name=tanggal_mulai]');
+    var $selesai = $('input[name=tanggal_selesai]');
+
+    changeTripDaysInput($mulai, $selesai);
 
 });
 
@@ -174,6 +249,8 @@ function attachAddActivityEvent() {
 
                 attachRemoveActivityEvent();
 
+                attachAddProspectButtonClickEvent();
+
                 $btn.button('reset');
             });
         } else if (tujuan == 'prospek') {
@@ -224,78 +301,7 @@ function attachAddActivityEvent() {
 
                 attachRemoveActivityEvent();
 
-                $('.btn-modal-prospek').on('click', function(event) {
-                    $('#modal-tambah-prospek').modal('show');
 
-                    var $row_activity = $(this).closest('.col-md-12');
-
-                    $('form[name=tambah-prospek]').off('submit').on('submit', function(event) {
-                        $('.modal').modal('hide');
-
-                        var id_peserta = $row_activity.find('input[name="id_peserta[]"]').val();
-                        var tujuan = $row_activity.find('input[name="tujuan_kegiatan[]"]').val();
-
-                        $row_activity.find('select[name="kode_kegiatan[]"]').prop("disabled", true);
-
-                        var $form = $(this);
-
-                        var nama_prospek = $form.find('input[name=nama_prospek]').val();
-                        var nama_lembaga = $form.find('input[name=nama_lembaga]').val();
-                        var alamat = $form.find('textarea[name=alamat]').val();
-                        var token = $form.find('input[name=_token]').val();
-
-                        var form_data = {
-                            'nama_prospek' : nama_prospek,
-                            'nama_lembaga' : nama_lembaga,
-                            'alamat' : alamat,
-                            '_token' : token
-                        };
-
-                        $.ajax({
-                            type : 'POST',
-                            url : '/prospek/store',
-                            data : form_data,
-                            dataType : 'json',
-                            encode : true,
-                        })
-
-                        .done(function(response) {
-                            $form.find('input[name=nama_prospek]').val('');
-                            $form.find('input[name=nama_lembaga]').val('');
-                            $form.find('textarea[name=alamat]').val('');
-
-                            $row_activity.find('.col-md-4').remove();
-
-                            var total = response.length;
-                            var list_data = '';
-
-                            $.each(response, function(total, list) {
-                                list_data +=
-                                    '<option value="' + list.kode + '">' +
-                                        list.nama_prospek + ' (' + list.nama_lembaga + ')' +
-                                    '</option>';
-                            })
-
-                            form_prospek =
-                                '<div class="col-md-4">' +
-                                    '<input type="hidden" name="id_peserta[]" value="' + id_peserta + '">' +
-                                    '<input type="hidden" name="tujuan_kegiatan[]" value="' + tujuan + '">' +
-                                    '<div class="form-group">' +
-                                        '<label for="kode_kegiatan">Nama Prospek</label>' +
-                                        '<select class="form-control" id="kode_kegiatan" name="kode_kegiatan[]">' +
-                                            list_data +
-                                        '</select>' +
-                                    '</div>' +
-                                '</div>'
-
-                            $row_activity.find('.row').prepend(form_prospek);
-
-                            $('select[name="kode_kegiatan[]"]').select2({width: '100%' });
-                        });
-
-                        event.preventDefault();
-                    });
-                });
 
                 $btn.button('reset');
             });
@@ -347,97 +353,7 @@ function attachAddActivityEvent() {
 
                 attachRemoveActivityEvent();
 
-                $('.btn-modal-pelatihan').on('click', function() {
-                    $('#modal-tambah-pelatihan').find('.alert').remove();
-
-                    $('#modal-tambah-pelatihan').modal('show');
-
-                    var $row_activity = $(this).closest('.col-md-12');
-
-                    $('form[name=tambah-pelatihan]').off('submit').on('submit', function(event) {
-                        $('.modal').modal('hide');
-
-                        var id_peserta = $row_activity.find('input[name="id_peserta[]"]').val();
-                        var tujuan = $row_activity.find('input[name="tujuan_kegiatan[]"]').val();
-
-                        $row_activity.find('select[name="kode_kegiatan[]"]').prop("disabled", true);
-
-                        var $form = $(this);
-
-                        var nama_pelatihan = $form.find('input[name=nama_pelatihan]').val();
-                        var nama_lembaga = $form.find('input[name=nama_lembaga]').val();
-                        var tanggal_mulai = $form.find('input[name=tanggal_mulai]').val();
-                        var tanggal_selesai = $form.find('input[name=tanggal_selesai]').val();
-                        var alamat = $form.find('textarea[name=alamat]').val();
-                        var token = $form.find('input[name=_token]').val();
-
-                        var form_data = {
-                            'nama_pelatihan' : nama_pelatihan,
-                            'nama_lembaga' : nama_lembaga,
-                            'tanggal_mulai' : tanggal_mulai,
-                            'tanggal_selesai' : tanggal_selesai,
-                            'alamat' : alamat,
-                            '_token' : token
-                        };
-
-                        $.ajax({
-                            type : 'POST',
-                            url : '/pelatihan/store',
-                            data : form_data,
-                            dataType : 'json',
-                            encode : true,
-                        })
-
-                        .done(function(response) {
-                            $form.find('input[name=nama_pelatihan]').val('');
-                            $form.find('input[name=nama_lembaga]').val('');
-                            $form.find('input[name=tanggal_mulai]').val('');
-                            $form.find('input[name=tanggal_selesai]').val('');
-                            $form.find('textarea[name=alamat]').val('');
-
-                            $row_activity.find('.col-md-4').remove();
-
-                            var total = response;
-                            var list_data = '';
-
-                            $.each(response, function(total, list) {
-                                list_data +=
-                                    '<option value="' + list.kode + '">' +
-                                        list.nama_pelatihan + ' (' + list.nama_lembaga + ')' +
-                                    '</option>';
-                            });
-
-                            form_pelatihan =
-                                '<div class="col-md-4">' +
-                                    '<input type="hidden" name="id_peserta[]" value="' + id_peserta + '">' +
-                                    '<input type="hidden" name="tujuan_kegiatan[]" value="' + tujuan + '">' +
-                                    '<div class="form-group">' +
-                                        '<label for="kode_kegiatan">Nama Pelatihan</label>' +
-                                        '<select class="form-control" id="kode_kegiatan" name="kode_kegiatan[]">' +
-                                            list_data +
-                                        '</select>' +
-                                    '</div>' +
-                                '</div>';
-
-                            $row_activity.find('.row').prepend(form_pelatihan);
-
-                            $('select[name="kode_kegiatan[]"]').select2({width: '100%' });
-                        })
-
-                        .fail(function(response) {
-                            $('#modal-tambah-pelatihan').modal('show');
-
-                            error =
-                                '<div class="alert alert-danger">' +
-                                    JSON.parse(response.responseText).tanggal_selesai[0] +
-                                '</div>';
-
-                            $('#modal-tambah-pelatihan').find('.modal-body').prepend(error);
-                        })
-
-                        event.preventDefault();
-                    });
-                });
+                attachAddTrainingButtonClickEvent();
 
                 $btn.button('reset');
             });
@@ -455,11 +371,205 @@ function attachRemoveActivityEvent() {
 }
 
 function attachCityChangesEvent() {
-    $('select[name=kode_kota_asal').on('change.kota.asal', function () {
+    $('select[name=kode_kota_asal]').on('change.kota.asal', function () {
         var kode_kota_asal = $('select[name=kode_kota_asal]').val();
         var $kota_tujuan = $('select[name=kode_kota_tujuan]');
 
         $kota_tujuan.val(kode_kota_asal).trigger('change');
     });
+}
 
+function countCertainDays(start_date, end_date ) {
+    var days = [1, 2, 3, 4, 5];
+
+    var ndays = 1 + Math.round(( end_date - start_date) / (24 * 3600 * 1000));
+    var sum = function(a, b) {
+        return a + Math.floor((ndays + (start_date.getDay() + 6 - b) % 7) / 7);
+    };
+
+    return days.reduce(sum, 0);
+}
+
+function changeTripDaysInput(mulai, selesai) {
+    if (mulai.val() && selesai.val()) {
+        var start_date = new Date(mulai.val());
+        var end_date = new Date(selesai.val());
+
+        var jumlah_hari = countCertainDays(start_date, end_date);
+
+        if (jumlah_hari > 0) {
+            $('input[name=lama_hari]').val(jumlah_hari);
+        } else {
+            $('input[name=lama_hari]').val(0);
+        }
+    }
+}
+
+function attachAddProspectButtonClickEvent() {
+    $('.btn-modal-prospek').on('click', function(event) {
+        $('#modal-tambah-prospek').modal('show');
+
+        var $row_activity = $(this).closest('.col-md-12');
+
+        $('form[name=tambah-prospek]').off('submit').on('submit', function(event) {
+            $('.modal').modal('hide');
+
+            var id_peserta = $row_activity.find('input[name="id_peserta[]"]').val();
+            var tujuan = $row_activity.find('input[name="tujuan_kegiatan[]"]').val();
+
+            $row_activity.find('select[name="kode_kegiatan[]"]').prop("disabled", true);
+
+            var $form = $(this);
+
+            var nama_prospek = $form.find('input[name=nama_prospek]').val();
+            var nama_lembaga = $form.find('input[name=nama_lembaga]').val();
+            var alamat = $form.find('textarea[name=alamat]').val();
+            var token = $form.find('input[name=_token]').val();
+
+            var form_data = {
+                'nama_prospek' : nama_prospek,
+                'nama_lembaga' : nama_lembaga,
+                'alamat' : alamat,
+                '_token' : token
+            };
+
+            $.ajax({
+                type : 'POST',
+                url : '/prospek/store',
+                data : form_data,
+                dataType : 'json',
+                encode : true,
+            })
+
+            .done(function(response) {
+                $form.find('input[name=nama_prospek]').val('');
+                $form.find('input[name=nama_lembaga]').val('');
+                $form.find('textarea[name=alamat]').val('');
+
+                $row_activity.find('.col-md-4').remove();
+
+                var total = response.length;
+                var list_data = '';
+
+                $.each(response, function(total, list) {
+                    list_data +=
+                        '<option value="' + list.kode + '">' +
+                            list.nama_prospek + ' (' + list.nama_lembaga + ')' +
+                        '</option>';
+                })
+
+                form_prospek =
+                    '<div class="col-md-4">' +
+                        '<input type="hidden" name="id_peserta[]" value="' + id_peserta + '">' +
+                        '<input type="hidden" name="tujuan_kegiatan[]" value="' + tujuan + '">' +
+                        '<div class="form-group">' +
+                            '<label for="kode_kegiatan">Nama Prospek</label>' +
+                            '<select class="form-control" id="kode_kegiatan" name="kode_kegiatan[]">' +
+                                list_data +
+                            '</select>' +
+                        '</div>' +
+                    '</div>'
+
+                $row_activity.find('.row').prepend(form_prospek);
+
+                $('select[name="kode_kegiatan[]"]').select2({width: '100%' });
+            });
+
+            event.preventDefault();
+        });
+    });
+}
+
+function attachAddTrainingButtonClickEvent() {
+    $('.btn-modal-pelatihan').on('click', function() {
+        $('#modal-tambah-pelatihan').find('.alert').remove();
+
+        $('#modal-tambah-pelatihan').modal('show');
+
+        var $row_activity = $(this).closest('.col-md-12');
+
+        $('form[name=tambah-pelatihan]').off('submit').on('submit', function(event) {
+            $('.modal').modal('hide');
+
+            var id_peserta = $row_activity.find('input[name="id_peserta[]"]').val();
+            var tujuan = $row_activity.find('input[name="tujuan_kegiatan[]"]').val();
+
+            $row_activity.find('select[name="kode_kegiatan[]"]').prop("disabled", true);
+
+            var $form = $(this);
+
+            var nama_pelatihan = $form.find('input[name=nama_pelatihan]').val();
+            var nama_lembaga = $form.find('input[name=nama_lembaga]').val();
+            var tanggal_mulai = $form.find('input[name=tanggal_mulai]').val();
+            var tanggal_selesai = $form.find('input[name=tanggal_selesai]').val();
+            var alamat = $form.find('textarea[name=alamat]').val();
+            var token = $form.find('input[name=_token]').val();
+
+            var form_data = {
+                'nama_pelatihan' : nama_pelatihan,
+                'nama_lembaga' : nama_lembaga,
+                'tanggal_mulai' : tanggal_mulai,
+                'tanggal_selesai' : tanggal_selesai,
+                'alamat' : alamat,
+                '_token' : token
+            };
+
+            $.ajax({
+                type : 'POST',
+                url : '/pelatihan/store',
+                data : form_data,
+                dataType : 'json',
+                encode : true,
+            })
+
+            .done(function(response) {
+                $form.find('input[name=nama_pelatihan]').val('');
+                $form.find('input[name=nama_lembaga]').val('');
+                $form.find('input[name=tanggal_mulai]').val('');
+                $form.find('input[name=tanggal_selesai]').val('');
+                $form.find('textarea[name=alamat]').val('');
+
+                $row_activity.find('.col-md-4').remove();
+
+                var total = response;
+                var list_data = '';
+
+                $.each(response, function(total, list) {
+                    list_data +=
+                        '<option value="' + list.kode + '">' +
+                            list.nama_pelatihan + ' (' + list.nama_lembaga + ')' +
+                        '</option>';
+                });
+
+                form_pelatihan =
+                    '<div class="col-md-4">' +
+                        '<input type="hidden" name="id_peserta[]" value="' + id_peserta + '">' +
+                        '<input type="hidden" name="tujuan_kegiatan[]" value="' + tujuan + '">' +
+                        '<div class="form-group">' +
+                            '<label for="kode_kegiatan">Nama Pelatihan</label>' +
+                            '<select class="form-control" id="kode_kegiatan" name="kode_kegiatan[]">' +
+                                list_data +
+                            '</select>' +
+                        '</div>' +
+                    '</div>';
+
+                $row_activity.find('.row').prepend(form_pelatihan);
+
+                $('select[name="kode_kegiatan[]"]').select2({width: '100%' });
+            })
+
+            .fail(function(response) {
+                $('#modal-tambah-pelatihan').modal('show');
+
+                error =
+                    '<div class="alert alert-danger">' +
+                        JSON.parse(response.responseText).tanggal_selesai[0] +
+                    '</div>';
+
+                $('#modal-tambah-pelatihan').find('.modal-body').prepend(error);
+            })
+
+            event.preventDefault();
+        });
+    });
 }

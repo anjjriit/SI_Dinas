@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Data User')
+@section('page_title', 'Data Jenis Biaya Pengeluaran Standard')
 
 @section('stylesheet')
     @parent
@@ -10,7 +10,7 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data User</h1>
+            <h1>Data Jenis Biaya Pengeluaran Standard</h1>
         </section>
 
         <section class="content-filter">
@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     {!! Form::model($request, [
                         'method' => 'GET',
-                        'route' => 'user.index',
+                        'url' => '/transportasi',
                         'class' => 'form-inline pull-right'
                     ])!!}
                         <div class="form-group">
@@ -30,12 +30,7 @@
                             {!! Form::select(
                                 'orderBy',
                                 [
-                                    'nik' => 'NIK',
-                                    'nama_lengkap' => 'Nama Lengkap',
-                                    'email' => 'E-mail',
-                                    'role' => 'Role',
-                                    'active' => 'Status',
-                                    'last_login' => 'Last Login'
+                                    'nama_transportasi' => 'Nama Transportasi',
                                 ],
                                 null,
                                 ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
@@ -63,7 +58,7 @@
                     {!! Form::model($request,
                         [
                             'method' => 'GET',
-                            'route' => 'user.index',
+                            'url' => '/transportasi',
                             'class' => 'form-inline pull-left'
                         ]
                     )!!}
@@ -76,10 +71,7 @@
                             {!! Form::select(
                                 'searchBy',
                                 [
-                                    'nik' => 'NIK',
-                                    'nama_lengkap' => 'Nama Lengkap',
-                                    'email' => 'E-mail',
-                                    'role' => 'Role',
+                                    'nama_transportasi' => 'Nama Transportasi',
                                 ],
                                 null,
                                 [
@@ -100,7 +92,7 @@
                         {!! Form::model($request,
                             [
                                 'method' => 'GET',
-                                'route' => 'user.index',
+                                'url' => '/transportasi',
                                 'class' => 'form-inline pull-left',
                                 'style' => 'margin-left: 5px;'
                             ]
@@ -134,93 +126,41 @@
                         </div>
                     @endif
 
-                    @if (session('error'))
-                        <div class="alert alert-danger">
-                            {{ session('error') }}
-                        </div>
-                    @endif
-
-                    @if ($data_pegawai->count() != 0)
+                    @if ($data_transportasi->count() != 0)
                         <div class="box box-widget">
                             <div class="box-body no-padding">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>NIK</th>
-                                            <th>Nama Lengkap</th>
-                                            <th>E-mail</th>
-                                            <th>Role</th>
-                                            <th>Status</th>
-                                            <th>Last Login</th>
+                                            <th>Nama Transportasi</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        @foreach ($data_pegawai as $pegawai)
+                                        @foreach ($data_transportasi as $transportasi)
+                                        <tr>
+                                            <td>
+                                                {{ $transportasi->nama_transportasi }}
+                                            </td>
+                                            <td>
+                                                <a href="/transportasi/{{ $transportasi->id }}" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Detail"><i class="fa fa-fw fa-eye"></i></a>
+                                                <a href="/transportasi/{{ $transportasi->id }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                {!! Form::open(
+                                                    [
+                                                        'method' => 'DELETE',
+                                                        'url' => ['/transportasi/' . $transportasi->id],
+                                                        'style' => 'display: inline-block;',
+                                                        'data-nama' => $transportasi->nama_transportasi,
+                                                    ]
+                                                ) !!}
 
-                                    <tr>
-                                        <td>
-                                            {{ $pegawai->nik }}
-                                        </td>
-                                        <td>
-                                            {{ $pegawai->nama_lengkap }}
-                                        </td>
-                                        <td>
-                                            {{ $pegawai->email }}
-                                        </td>
-                                        <td>
-                                            @if ($pegawai->role == 'super_admin')
-                                                Super Admin
-                                            @elseif ($pegawai->role == 'administration')
-                                                Administration
-                                            @elseif ($pegawai->role == 'finance')
-                                                Finance
-                                            @else
-                                                Employee
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($pegawai->active == 1)
-                                                Active
-                                            @else
-                                                Non-active
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if (is_null($pegawai->last_login))
-                                                -
-                                            @else
-                                                {{ $pegawai->last_login}}
-                                            @endif
-                                        </td>
-                                        <td>
-                                            @if ($pegawai->otherAdmin())
-                                                <button class="btn btn-sm" disabled data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></button>
-                                            @else
-                                                <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
-                                            @endif
-
-                                            {!! Form::open(
-                                                [
-                                                    'method' => 'DELETE',
-                                                    'route' => ['user.destroy', $pegawai->nik],
-                                                    'style' => 'display: inline-block;',
-                                                    'data-nama' => $pegawai->nama_lengkap,
-                                                ]
-                                            ) !!}
-                                                @if ($pegawai->otherAdmin())
-                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'disabled', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
-                                                    ) !!}
-                                                @else
                                                     {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
                                                     ) !!}
-                                                @endif
-                                            {!! Form::close() !!}
-                                        </td>
-                                    </tr>
+                                                {!! Form::close() !!}
+                                            </td>
+                                        </tr>
                                         @endforeach
-
                                     </tbody>
                                 </table>
                             </div>
@@ -232,14 +172,15 @@
                             </div>
                         @else
                             <div class="alert alert-warning">
-                                Data user belum tersedia. Klik tombol Tambah User untuk menambah user.
+                                Data transportasi belum tersedia. Klik tombol Tambah Transportasi untuk menambah transportasi.
                             </div>
                         @endif
                     @endif
 
-                    {!! $data_pegawai->render() !!}
+                    {!! $data_transportasi->render() !!}
 
-                    <a href="/user/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah User</a>
+                    <a href="/transportasi/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah Transportasi </a>
+
                 </div>
             </div>
         </section>
@@ -259,8 +200,8 @@
             var nama = element.attr('data-nama')
 
             $.confirm({
-                title: '<i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus User',
-                content: 'Apakah Anda yakin akan menghapus user dengan nama <strong>' + nama + '</strong>',
+                title: '<i class="fa fa-trash"></i> Hapus Kota',
+                content: 'Apakah Anda yakin akan menghapus transportasi <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',
@@ -277,5 +218,6 @@
                 }
             });
         })
+
     </script>
 @endsection

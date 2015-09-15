@@ -10,25 +10,27 @@ class Rpd extends Model
     protected $table = 'rpd';
 
     protected $fillable = [
+        'kode',
         'nik',
         'kategori',
         'jenis_perjalanan',
         'tanggal_mulai',
         'tanggal_selesai',
+        'lama_hari',
         'kode_kota_asal',
         'kode_kota_tujuan',
-        'sarana_penginapan',
+        'id_penginapan',
         'keterangan',
-        'status'
+        'status',
+        'akomodasi_awal'
     ];
 
     public function peserta() {
-        return $this->belongsToMany('App\Pegawai', 'peserta', 'id_rpd', 'nik_peserta')->withPivot('jenis_kegiatan', 'kode_kegiatan', 'kegiatan');
+        return $this->belongsToMany('App\Pegawai', 'kegiatan', 'id_rpd', 'nik_peserta')->groupBy('nik_peserta');
     }
 
-    public function saranaTransportasi()
-    {
-        return $this->hasMany('App\SaranaTransportasi', 'id_rpd');
+    public function kegiatan() {
+        return $this->hasMany('App\Kegiatan', 'id_rpd');
     }
 
     public function kotaAsal()
@@ -48,6 +50,16 @@ class Rpd extends Model
 
     public function actionHistory() {
         return $this->hasMany('App\ActionHistoryRpd', 'id_rpd');
+    }
+
+    public function saranaTransportasi()
+    {
+        return $this->belongsToMany('App\Transportasi', 'sarana_transportasi', 'id_rpd', 'id_transportasi');
+    }
+
+    public function saranaPenginapan()
+    {
+        return $this->hasOne('App\Penginapan', 'id', 'id_penginapan');
     }
 }
 
