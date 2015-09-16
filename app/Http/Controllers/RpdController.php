@@ -112,7 +112,7 @@ class RpdController extends Controller
             'id_rpd' => $rpd->id,
             'nik' => auth()->user()->nik,
             'action' => 'SUBMIT',
-            'comment' => null
+            'comment' => $rpd->keterangan
         ];
 
         ActionHistoryRpd::create($action);
@@ -162,7 +162,7 @@ class RpdController extends Controller
             'id_rpd' => $rpd->id,
             'nik' => auth()->user()->nik,
             'action' => 'DRAFT',
-            'comment' => null
+            'comment' => $rpd->keterangan
         ];
 
         ActionHistoryRpd::create($action);
@@ -380,7 +380,7 @@ class RpdController extends Controller
             'id_rpd' => $rpd->id,
             'nik' => auth()->user()->nik,
             'action' => 'DRAFT',
-            'comment' => null
+            'comment' => $rpd->keterangan
         ];
 
         ActionHistoryRpd::create($action);
@@ -498,7 +498,7 @@ class RpdController extends Controller
 
         }
 
-        $akomodasi_awal += $rpd->saranaPenginapan->biaya * $jumlah_peserta;
+        $akomodasi_awal += $rpd->saranaPenginapan->biaya * $jumlah_peserta * $rpd->lama_hari;
 
         $jenis_biaya = JenisBiaya::get()->all();
 
@@ -657,13 +657,14 @@ class RpdController extends Controller
 
         $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan');
 
+        $rpd->kegiatan()->delete();
+
         for ($i = 0;$i < count($kegiatanPeserta['id_peserta']);$i++) {
             $nik = $kegiatanPeserta['id_peserta'][$i];
             $jenis_kegiatan = $kegiatanPeserta['tujuan_kegiatan'][$i];
             $kode_kegiatan = $kegiatanPeserta['kode_kegiatan'][$i];
             $kegiatan = $kegiatanPeserta['kegiatan'][$i];
 
-            $rpd->peserta()->detach($nik);
             $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
         }
         return redirect('/rpd/submitted')->with('success', 'Sukses mengupdate pengajuan RPD dengan kode ' . $rpd->kode);
