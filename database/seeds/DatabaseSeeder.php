@@ -20,6 +20,9 @@ class DatabaseSeeder extends Seeder
         $this->call(PelatihanTableSeeder::class);
         $this->call(JenisBiayaTableSeeder::class);
         $this->call(ProspekTableSeeder::class);
+        //$this->call(RpdSeeder::class);
+        $this->call(PenginapanTableSeeder::class);
+        $this->call(TransportasiTableSeeder::class);
 
         Model::reguard();
     }
