@@ -38,6 +38,9 @@
 	    							<tr>
 	    								<th>Kode</th>
                                         <th>Kategori</th>
+                                        @if(auth()->user()->role == 'administration')
+                                        	<th>Pengaju</th>
+                                        @endif
 	    								<th>Kota Tujuan</th>
 	    								<th>Tanggal Mulai</th>
 	    								<th>Tanggal Selesai</th>
@@ -53,9 +56,11 @@
 			    							<td>
 			    								{{ $data = str_replace('_', ' ', $rpd->kategori) }}
 			    							</td>
-                                            <!--<td>
-                                                {{ $rpd->pegawai->nama_lengkap }}
-                                            </td>-->
+			    							@if(auth()->user()->role == 'administration')
+	                                            <td>
+	                                                {{ $rpd->pegawai->nama_lengkap }}
+	                                            </td>
+	                                        @endif
 											<td>
 												{{ $rpd->kotaTujuan->nama_kota }}
 											</td>
