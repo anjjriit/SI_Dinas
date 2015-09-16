@@ -131,7 +131,7 @@
                                     <th class="col-md-4">Jumlah Hari Dinas</th>
                                     <td>
                                     	{{ 
-
+                                    		$rpd->lama_hari
 										}}
                                     </td>
                                 </tr>
