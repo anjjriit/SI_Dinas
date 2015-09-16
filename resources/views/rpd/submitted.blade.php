@@ -121,7 +121,6 @@
     					<h4 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h4>
     				</div>
     				<div class="modal-body">
-    					<div>
     						<!-- Info basic dari RPD -->
                             <table class="table table-modal table-responsive table-condensed">
                                 <tbody>
