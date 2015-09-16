@@ -13,7 +13,7 @@ class PenginapanTableSeeder extends Seeder
     {
         DB::table('penginapan')->delete();
 
-        $now = Carbon\Carbon::now();
+        $now = date('Y-m-d H:i:s');
 
         DB::table('penginapan')->insert([
         	'nama_penginapan'	=> 'Kost',

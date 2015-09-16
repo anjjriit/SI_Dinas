@@ -37,7 +37,7 @@
 	    						<thead>
 	    							<tr>
 	    								<th>Kode</th>
-                                        <th>Pengaju</th>
+                                        <th>Kategori</th>
 	    								<th>Kota Tujuan</th>
 	    								<th>Tanggal Mulai</th>
 	    								<th>Tanggal Selesai</th>
@@ -50,15 +50,12 @@
 			    							<td>
 			    								{{ $rpd->kode }}
 			    							</td>
-<<<<<<< HEAD
 			    							<td>
 			    								{{ $data = str_replace('_', ' ', $rpd->kategori) }}
 			    							</td>
-=======
-                                            <td>
+                                            <!--<td>
                                                 {{ $rpd->pegawai->nama_lengkap }}
-                                            </td>
->>>>>>> 20d36c48b7c9dd736fbbbea6332a414adb17a926
+                                            </td>-->
 											<td>
 												{{ $rpd->kotaTujuan->nama_kota }}
 											</td>
@@ -133,21 +130,21 @@
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Kategori</th>
-                                    <td>{{ ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
+                                    <td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Jenis</th>
                                     <td>{{ ucwords(str_replace('_', ' ', $rpd->jenis_perjalanan)) }}</td>
                                 </tr>
                                 <tr>
-                                    @if($dataKategori == "trip")
+                                    @if($dataKategori == "Trip")
 	                                    <th class="col-md-4">Tanggal Mulai</th>
                                     @else
 	                                    <th class="col-md-4">Tanggal </th>
                                     @endif
                                     <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
                                 </tr>
-                                @if($dataKategori == "trip")
+                                @if($dataKategori == "Trip")
 	                                <tr>
 	                                    <th class="col-md-4">Tanggal Selesai</th>
 	                                    <td>
