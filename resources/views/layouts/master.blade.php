@@ -33,7 +33,7 @@
 
     <script src="/vendor/jquery/jquery-1.11.3.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
-    <script src="/vendor/adminLTE/js/app.min.js"></script>
+    <script src="/vendor/adminLTE/js/app.js"></script>
     @show
 </body>
 </html>

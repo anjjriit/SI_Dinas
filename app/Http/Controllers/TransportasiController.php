@@ -126,7 +126,7 @@ class TransportasiController extends Controller
     {
         $transportasi->delete();
 
-        return redirect('/transportasi')->with('success', 'Sukses menghapus transportasi' . $transportasi->nama_transportasi);
+        return redirect('/transportasi')->with('success', 'Sukses menghapus transportasi ' . $transportasi->nama_transportasi);
     }
 
     public function deleteCost(Transportasi $transportasi, BiayaTransportasi $biayaTransportasi)

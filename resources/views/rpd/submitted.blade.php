@@ -37,6 +37,7 @@
 	    						<thead>
 	    							<tr>
 	    								<th>Kode</th>
+                                        <th>Pengaju</th>
 	    								<th>Kota Tujuan</th>
 	    								<th>Tanggal Mulai</th>
 	    								<th>Tanggal Selesai</th>
@@ -49,9 +50,15 @@
 			    							<td>
 			    								{{ $rpd->kode }}
 			    							</td>
+<<<<<<< HEAD
 			    							<td>
 			    								{{ $data = str_replace('_', ' ', $rpd->kategori) }}
 			    							</td>
+=======
+                                            <td>
+                                                {{ $rpd->pegawai->nama_lengkap }}
+                                            </td>
+>>>>>>> 20d36c48b7c9dd736fbbbea6332a414adb17a926
 											<td>
 												{{ $rpd->kotaTujuan->nama_kota }}
 											</td>
@@ -69,18 +76,20 @@
 												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
 													<i class="fa fa-fw fa-share"></i>Detail
 												</button>
-                                                {!! Form::open(
-                                                    [
-                                                        'method' => 'POST',
-                                                        'url' => '/rpd/recall/' . $rpd->id,
-                                                        'style' => 'display: inline-block;',
-                                                        'data-nama' => $rpd->kode,
-                                                    ]
-                                                ) !!}
-
-                                                    {!! Form::button('<i class="fa fa-fw fa-refresh"></i>Recall', ['type' => 'submit', 'class' => 'btn btn-sm btn-default delete-button']
+                                                @if ($rpd->nik == auth()->user()->nik)
+                                                    {!! Form::open(
+                                                        [
+                                                            'method' => 'POST',
+                                                            'url' => '/rpd/recall/' . $rpd->id,
+                                                            'style' => 'display: inline-block;',
+                                                            'data-nama' => $rpd->kode,
+                                                        ]
                                                     ) !!}
-                                                {!! Form::close() !!}
+
+                                                        {!! Form::button('<i class="fa fa-fw fa-refresh"></i>Recall', ['type' => 'submit', 'class' => 'btn btn-sm btn-default delete-button']
+                                                        ) !!}
+                                                    {!! Form::close() !!}
+                                                @endif
 											</td>
 			    						</tr>
 			    					@endforeach
@@ -156,31 +165,33 @@
                                     <th class="col-md-4">Asal Kota</th>
                                     <td>{{ $rpd->kotaAsal->nama_kota }}</td>
                                 </tr>
-                                <tr>
-                                    <th class="col-md-4">Tujuan Kota</th>
-                                    <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
-                                </tr>
-                                <tr>
-                                    <th class="col-md-4">Sarana Transportasi</th>
-                                    <td>
-                                    	<ul>
-                                    		@foreach($rpd->saranaTransportasi as $saranaTransportasi)
+	                            <tr>
+	                                <td class="col-md-4"><strong>Tujuan Kota</strong></td>
+	                                <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
+	                            </tr>
+	                            <tr>
+	                                <td class="col-md-4"><strong>Sarana Transportasi</strong></td>
+	                                <td>
+	                                	<ul style="margin-top: 10px;">
+	                                		@foreach($rpd->saranaTransportasi as $saranaTransportasi)
 	                                    		<li>{{ $saranaTransportasi->nama_transportasi }}</li>
 	                                    	@endforeach
 	                                    </ul>
-                                    </td>
-                                </tr>
+	                                </td>
+	                            </tr>
+	                            <tr>
+	                                <td class="col-md-4"><strong>Sarana Penginapan</strong></td>
+	                                <td>{{ $rpd->saranaPenginapan->nama_penginapan }}</td>
+	                            </tr>
+	                            @if ($rpd->status == 'APPROVED' || auth()->user()->role == 'administration')
                                 <tr>
-                                    <th class="col-md-4">Sarana Penginapan</th>
-                                    <td>{{ $rpd->saranaPenginapan->nama_penginapan }}</td>
+                                    <td class="col-md-4"><strong>Akomodasi Awal</strong></td>
+                                    <td>Rp {{ number_format($rpd->akomodasi_awal, 2, ',', '.') }}</td>
                                 </tr>
+                                @endif
                                 <tr>
                                     <th class="col-md-4">Status</th>
                                     <td style="text-transform : uppercase;">{{ $rpd->status }}</td>
-                                </tr>
-                                <tr>
-                                	<th class="col-md-4">Akomodasi Awal</th>
-                                	<td>{{ $rpd->akomodasi_awal }}</td>
                                 </tr>
                             </tbody>
                         </table>
@@ -197,13 +208,6 @@
 							</thead>
 							<tbody>
 								@foreach($rpd->peserta as $peserta)
-<<<<<<< HEAD
-									<tr>
-										<td>{{ $peserta->nama_lengkap }}</td>
-										<td>{{ $peserta->pivot->jenis_kegiatan }}</td>
-										<td style="text-transform: capitalize;">{{ $dataKegiatan = str_replace('_', ' ', $peserta->pivot->kegiatan) }}</td>
-									</tr>
-=======
                                     @foreach($rpd->kegiatan()->where('nik_peserta', $peserta->nik)->get() as $kegiatan)
     									<tr>
                                             @if ($rpd->kegiatan()->where('nik_peserta', $peserta->nik)->first() == $kegiatan)
@@ -220,10 +224,15 @@
                                                     {{ $kegiatan->pelatihan->nama_pelatihan }}
                                                 @endif
                                             </td>
-    										<td>{{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}</td>
+    										<td>
+    											@if ($kegiatan->kegiatan == 'UAT')
+    												'UAT'
+    											@else
+    												{{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
+    											@endif
+    										</td>
     									</tr>
                                     @endforeach
->>>>>>> 3cec48702ad3d67dc35fca53e76e057990536708
 								@endforeach
 							</tbody>
 						</table>
@@ -235,7 +244,7 @@
 						</p>
 
 						<!--Bagian Action History-->
-						<h3>Action History</h3>
+						<h4>Action History</h4>
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -254,10 +263,18 @@
 								@endforeach
 							</tbody>
 						</table>
-					</div>
+	                    @if (auth()->user()->role == 'administration')
+	                        <br>
+	                        <div class="row">
+	                            <div class="col-md-12">
+	                                <a href="/administrasi/rpd/{{ $rpd->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+	                                <a href="/administrasi/rpd/{{ $rpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+	                            </div>
+	                        </div>
+	                    @endif
 				</div>
 				<div class="modal-footer">
-					<button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+					<button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
 				</div>
 			</div>
 		</div>

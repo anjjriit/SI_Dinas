@@ -19,7 +19,7 @@
                 <h4>Form Pengajuan RPD</h4>
             </div>
 
-            {!! Form::model($rpd, ['method' => 'PATCH', 'url' => ['/administrasi/rpd/' . $rpd->id]]) !!}
+            {!! Form::model($rpd, ['method' => 'PATCH', 'url' => '/rpd/' . $rpd->id]) !!}
                 <div class="wizard">
                     <div class="wizard-inner">
                         <div class="row">
@@ -412,7 +412,7 @@
                                                                             <label for="kode_kegiatan">Nama Project</label>
                                                                             <select name="kode_kegiatan[]" id="kode_kegiatan" class="form-control">
                                                                                 @foreach ($list_project as $project)
-                                                                                    <option value="{{ $project->kode }}"{{ ($project->kode == $rpd->kode_kegiatan) ? ' selected' : '' }}>{{ $project->nama_project . ' (' . $project->nama_lembaga . ')' }}</option>
+                                                                                    <option value="{{ $project->kode }}"{{ ($project->kode == $kegiatan->kode_kegiatan) ? ' selected' : '' }}> {{ $project->nama_project . ' (' . $project->nama_lembaga . ')' }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
@@ -450,7 +450,7 @@
                                                                             <label for="kode_kegiatan">Nama Prospek</label>
                                                                             <select name="kode_kegiatan[]" id="kode_kegiatan" class="form-control">
                                                                                 @foreach ($list_prospek as $prospek)
-                                                                                    <option value="{{ $prospek->kode }}"{{ ($prospek->kode == $rpd->kode_kegiatan) ? ' selected' : '' }}>{{ $prospek->nama_prospek . ' (' . $prospek->nama_lembaga . ')' }}</option>
+                                                                                    <option value="{{ $prospek->kode }}"{{ ($prospek->kode == $kegiatan->kode_kegiatan) ? ' selected' : '' }}>{{ $prospek->nama_prospek . ' (' . $prospek->nama_lembaga . ')' }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
@@ -474,7 +474,7 @@
                                                                             <label for="kode_kegiatan">Nama Pelatihan</label>
                                                                             <select name="kode_kegiatan[]" id="kode_kegiatan" class="form-control">
                                                                                 @foreach ($list_pelatihan as $pelatihan)
-                                                                                    <option value="{{ $pelatihan->kode }}"{{ ($pelatihan->kode == $rpd->kode_kegiatan) ? ' selected' : '' }}>{{ $pelatihan->nama_pelatihan . ' (' . $pelatihan->nama_lembaga . ')' }}</option>
+                                                                                    <option value="{{ $pelatihan->kode }}"{{ ($pelatihan->kode == $kegiatan->kode_kegiatan) ? ' selected' : '' }}>{{ $pelatihan->nama_pelatihan . ' (' . $pelatihan->nama_lembaga . ')' }}</option>
                                                                                 @endforeach
                                                                             </select>
                                                                         </div>
@@ -578,10 +578,18 @@
                             <div class="tab-pane" role="tabpanel" id="step4">
                                 <div class="box-body box-finish">
                                     <div class="row">
-                                        <div class="col-md-6">
+                                        <div class="col-md-8 col-md-offset-2">
                                             <div class="form-group">
-                                                {!! Form::label('akomodasi_awal', 'Akomodasi Awal') !!}
-                                                {!! Form::text('akomodasi_awal', null, ['class' => 'form-control']) !!}
+                                                {!! Form::label('keterangan', 'Keterangan') !!}
+                                                {!! Form::textarea(
+                                                    'keterangan',
+                                                    null,
+                                                    [
+                                                        'class' => 'form-control',
+                                                        'placeholder' => 'Isi dengan keterangan tambahan (bila diperlukan)',
+                                                        'rows' => 3
+                                                    ]
+                                                ) !!}
                                             </div>
                                         </div>
                                     </div>
@@ -599,12 +607,12 @@
                                     </li>
                                     <li>
                                         {!! Form::button(
-                                            '<i class="fa fa-fw fa-check"></i> Update',
+                                            '<i class="fa fa-fw fa-check"></i> Submit',
                                             [
                                                 'type' => 'submit',
                                                 'class' => 'btn btn-success',
                                                 'name' => 'action',
-                                                'value' => 'simpan'
+                                                'value' => 'submit'
                                             ]
                                         ) !!}
                                     </li>
@@ -649,6 +657,7 @@
                                 {!! Form::textarea('alamat', null, ['class' => 'form-control', 'rows' => 3, 'required']) !!}
                             </div>
                         </div>
+
                         <div class="modal-footer">
                             <button type="button" class="btn btn-default" data-dismiss="modal">Tutup</button>
                             <button type="submit" class="btn btn-success">Simpan</button>

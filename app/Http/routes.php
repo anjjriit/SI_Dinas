@@ -28,18 +28,29 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('prospek/store', ['as' => 'prospek.ajax.store', 'uses' => 'ProspekController@ajaxStore']);
     Route::post('pelatihan/store', ['as' => 'pelatihan.ajax.store', 'uses' => 'PelatihanController@ajaxStore']);
-    Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction']);
 
     //RPD
+    Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction']);
     Route::get('rpd/create', 'RpdController@create');
     Route::get('rpd/draft', 'RpdController@draft');
     Route::get('rpd/draft/{rpd}/edit', 'RpdController@editRpd');
+    Route::get('rpd/{rpd}/edit', 'RpdController@editRpdBti');
+    Route::patch('rpd/{rpd}', 'RpdController@submitRpdBti');
     Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
 
     Route::get('rpd/submitted', 'RpdController@submitted');
     Route::get('rpd/log', 'RpdController@log');
     Route::post('rpd/recall/{rpd}', 'RpdController@recall');
 
+    Route::get('rpd/approval', 'RpdController@listApproval');
+
+});
+
+Route::group(['middleware' => 'role:administration'], function () {
+    Route::get('administrasi/rpd/{id}/edit', 'RpdController@editRpdAdministration');
+    Route::get('administrasi/rpd/{id}/approval', 'RpdController@approval');
+    Route::post('administrasi/rpd/{id}/approval', 'RpdController@submitApproval');
+    Route::patch('administrasi/rpd/{id}', 'RpdController@updateRpdAdministration');
 });
 
 Route::group(['middleware' => 'role:super_admin'], function () {
