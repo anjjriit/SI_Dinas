@@ -555,7 +555,7 @@ class RpdController extends Controller
     public function submitApproval(Request $request, $id)
     {
         $this->validate($request, [
-            'status' => 'required'
+            'status' => 'required',
             'comment' => 'required'
         ]);
 
