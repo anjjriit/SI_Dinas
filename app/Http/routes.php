@@ -28,12 +28,14 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::post('prospek/store', ['as' => 'prospek.ajax.store', 'uses' => 'ProspekController@ajaxStore']);
     Route::post('pelatihan/store', ['as' => 'pelatihan.ajax.store', 'uses' => 'PelatihanController@ajaxStore']);
-    Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction']);
 
     //RPD
+    Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction']);
     Route::get('rpd/create', 'RpdController@create');
     Route::get('rpd/draft', 'RpdController@draft');
     Route::get('rpd/draft/{rpd}/edit', 'RpdController@editRpd');
+    Route::get('rpd/{rpd}/edit', 'RpdController@editRpdBti');
+    Route::patch('rpd/{rpd}', 'RpdController@submitRpdBti');
     Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
 
     Route::get('rpd/submitted', 'RpdController@submitted');

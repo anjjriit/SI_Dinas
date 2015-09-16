@@ -219,6 +219,104 @@ class RpdController extends Controller
         );
     }
 
+    public function editRpdBti($id)
+    {
+        $rpd = Rpd::with('peserta', 'kegiatan')->findOrFail($id);
+
+        $list_pegawai = Pegawai::orderBy('nama_lengkap', 'asc')->lists('nama_lengkap', 'nik');
+        $list_kota = Kota::orderBy('nama_kota', 'asc')->lists('nama_kota', 'kode');
+        $list_project = Project::orderBy('nama_project')->select('nama_project', 'nama_lembaga', 'kode')->get();
+        $list_prospek = Prospek::orderBy('nama_prospek')->select('nama_prospek', 'nama_lembaga', 'kode')->get();
+        $list_pelatihan = Pelatihan::orderBy('nama_pelatihan')->select('nama_pelatihan', 'nama_lembaga', 'kode')->get();
+        $list_transportasi = Transportasi::orderBy('nama_transportasi', 'asc')->get()->all();
+        $list_penginapan = Penginapan::orderBy('nama_penginapan')->lists('nama_penginapan', 'id');
+
+
+        return view(
+            'rpd.edit_bti',
+            compact(
+                'rpd',
+                'list_pegawai',
+                'list_kota',
+                'list_project',
+                'list_prospek',
+                'list_pelatihan',
+                'list_transportasi',
+                'list_penginapan'
+            )
+        );
+    }
+
+        public function submitRpdBti(Request $request, $id)
+    {
+        $this->validate($request, [
+            'kategori' => 'required|in:trip,non_trip',
+            'jenis_perjalanan' => 'required|in:dalam_kota,luar_kota',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date',
+            'lama_hari' => 'required|numeric|min:1',
+            'kode_kota_asal' => 'required|exists:kota,kode',
+            'kode_kota_tujuan' => 'required|exists:kota,kode',
+            'id_penginapan' => 'required',
+            'id_transportasi' => 'required',
+            'id_peserta' => 'required',
+            'tujuan_kegiatan' => 'required',
+            'kode_kegiatan' => 'required',
+            'kegiatan' => 'required'
+        ]);
+
+        $inputRpd = $request->only(
+            'kategori',
+            'jenis_perjalanan',
+            'tanggal_mulai',
+            'lama_hari',
+            'tanggal_selesai',
+            'kode_kota_asal',
+            'kode_kota_tujuan',
+            'id_penginapan',
+            'keterangan'
+        );
+
+        $inputRpd['nik'] = auth()->user()->nik;
+        $inputRpd['status'] = 'SUBMIT';
+
+        $rpd = Rpd::findOrFail($id);
+
+        $rpd->fill($inputRpd)->save();
+
+        $rpd->saranaTransportasi()->detach();
+
+        $transportasi = $request->input('id_transportasi');
+
+        foreach ($request->input('id_transportasi') as $id_transportasi) {
+            $rpd->saranaTransportasi()->attach($id_transportasi);
+        }
+
+        $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan');
+
+        $rpd->kegiatan()->delete();
+
+        for ($i = 0;$i < count($kegiatanPeserta['id_peserta']);$i++) {
+            $nik = $kegiatanPeserta['id_peserta'][$i];
+            $jenis_kegiatan = $kegiatanPeserta['tujuan_kegiatan'][$i];
+            $kode_kegiatan = $kegiatanPeserta['kode_kegiatan'][$i];
+            $kegiatan = $kegiatanPeserta['kegiatan'][$i];
+
+            $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
+        }
+
+        $action = [
+            'id_rpd' => $rpd->id,
+            'nik' => auth()->user()->nik,
+            'action' => 'SUBMIT',
+            'comment' => $rpd->keterangan
+        ];
+
+        ActionHistoryRpd::create($action);
+
+        return redirect('/rpd/submitted')->with('success', 'Sukses mengupdate pengajuan RPD');
+    }
+
     public function updateAction(Request $request, $id)
     {
         if ($request->input('action') == 'submit') {
