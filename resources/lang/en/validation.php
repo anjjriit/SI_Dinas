@@ -104,7 +104,9 @@ return [
     |
     */
 
-    'attributes'    => [],
+    'attributes'    => [
+        'comment' => 'komentar',
+    ],
     'required'      => 'Atribut :attribute wajib diisi.',
     'filled'        => 'Atribut :attribute wajib diisi.',
     'after'         => 'Atribut :attribute harus berupa tanggal dan lebih dari tanggal :date',
