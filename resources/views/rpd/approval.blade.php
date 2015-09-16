@@ -50,7 +50,7 @@
                                                 [
                                                     'APPROVED' => 'Approve',
                                                     'DECLINE' => 'Decline',
-                                                    'BACK_TO_INITIATOR' => 'Back To Initiator'
+                                                    'BACK TO INITIATOR' => 'Back To Initiator'
                                                 ],
                                                 null,
                                                 ['class' => 'form-control', 'autofocus']
