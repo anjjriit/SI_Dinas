@@ -247,7 +247,7 @@ class RpdController extends Controller
         );
     }
 
-        public function submitRpdBti(Request $request, $id)
+    public function submitRpdBti(Request $request, $id)
     {
         $this->validate($request, [
             'kategori' => 'required|in:trip,non_trip',
@@ -554,6 +554,11 @@ class RpdController extends Controller
 
     public function submitApproval(Request $request, $id)
     {
+        $this->validate($request, [
+            'status' => 'required'
+            'comment' => 'required'
+        ]);
+
         $rpd = Rpd::findOrFail($id);
 
         // ubah parameter input() sesuai form inputnya
