@@ -10,6 +10,7 @@ class Lpd extends Model
 
     protected $fillable = [
         'kode',
+        'nik',
         'id_rpd',
         'tanggal_laporan',
         'total_pengeluaran',
@@ -22,9 +23,19 @@ class Lpd extends Model
         return $query->where('status', '!=', 'DRAFT');
     }
 
+    public function scopeSubmitted($query)
+    {
+        return $query->where('status', '=', 'SUBMIT');
+    }
+
     public function scopeMine($query)
     {
         return $query-where('nik', '=', auth()->user()->nik);
+    }
+
+    public function pegawai()
+    {
+        return $this->belongsTo('App\Pegawai', 'nik');
     }
 
     public function rpd()

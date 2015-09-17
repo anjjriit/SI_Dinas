@@ -14,7 +14,7 @@ class CreatePelatihanRequest extends Request
      */
     public function authorize()
     {
-        return auth();
+        return auth()->check();
     }
 
     /**

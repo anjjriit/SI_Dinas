@@ -72,6 +72,7 @@ Route::group(['middleware' => 'role:super_admin'], function () {
 // LPD
 Route::get('lpd', 'LpdController@index');
 Route::get('lpd/log', 'LpdController@log');
+Route::get('lpd/submitted/all', 'LpdController@submittedAll');
 
 // JSON Output
 Route::get('json/pegawai', 'JsonController@pegawai');
@@ -81,9 +82,7 @@ Route::get('json/pelatihan', 'JsonController@pelatihan');
 
 //tes
 Route::get('cek', function () {
-    $rpd = \App\Rpd::find(14);
-    $transport = $rpd->saranaTransportasi[0]->biaya()->where('id_kota_tujuan', 1)->where('id_kota_asal', 2)->first();
+    dd(auth()->check());
 
-    dd($transport);
     return;
 });
