@@ -144,7 +144,7 @@
                                                 {{ $transportasi->nama_transportasi }}
                                             </td>
                                             <td>
-                                                <a href="/transportasi/{{ $transportasi->id }}" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Detail"><i class="fa fa-fw fa-eye"></i></a>
+                                                <a href="/transportasi/{{ $transportasi->id }}" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Biaya"><i class="fa fa-fw fa-list-ul"></i></a>
                                                 <a href="/transportasi/{{ $transportasi->id }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                 {!! Form::open(
                                                     [

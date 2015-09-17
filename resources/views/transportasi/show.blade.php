@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     {!! Form::model($request, [
                         'method' => 'GET',
-                        'url' => '/transportasi',
+                        'url' => '/transportasi/' . $transportasi->id,
                         'class' => 'form-inline pull-right'
                     ])!!}
                         <div class="form-group">
@@ -58,7 +58,7 @@
                     {!! Form::model($request,
                         [
                             'method' => 'GET',
-                            'url' => '/transportasi',
+                            'url' => '/transportasi/' . $transportasi->id,
                             'class' => 'form-inline pull-left'
                         ]
                     )!!}
