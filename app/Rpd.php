@@ -71,5 +71,10 @@ class Rpd extends Model
     {
         return $this->hasOne('App\Penginapan', 'id', 'id_penginapan');
     }
+
+    public function lpd()
+    {
+        return $this->hasOne('App\Lpd', 'id_rpd');
+    }
 }
 
