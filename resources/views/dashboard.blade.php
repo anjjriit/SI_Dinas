@@ -24,7 +24,7 @@
 					</div>
 					<div class="box-body">
 						<input type="text" class="knob" value="{{ $prospeks->count() }}" data-skin="tron"  data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true" />
-	                    <div class="knob-label"> prospek </div>
+	                    <div class="knob-label"> {{ $prospeks->count() }} prospek</div>
 					</div>
 					<div class="box-footer">
 						sss
@@ -37,10 +37,10 @@
 						<h3 class="box-title">Proyek dan Pelatihan</h3>
 					</div>
 					<div class="box-body no-padding">
-						<input type="text" class="knob" value="80" data-skin="tron"  data-thickness="0.2" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true" />
-	                    <div class="knob-label">proyek</div>
-	                    <input type="text" class="knob" value="80" data-skin="tron"  data-thickness="0.2" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true" />
-	                    <div class="knob-label">pelatihan</div>
+						<input type="text" class="knob" value="{{ $projects->count() }}" data-skin="tron"  data-thickness="0.2" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true" />
+	                    <div class="knob-label">{{ $projects->count() }}proyek</div>
+	                    <input type="text" class="knob" value="{{ $pelatihans->count() }}" data-skin="tron"  data-thickness="0.2" data-width="90" data-height="90" data-fgColor="#3c8dbc" data-readonly="true" />
+	                    <div class="knob-label">{{ $pelatihans->count() }} pelatihan</div>
 					</div>
 					<div class="box-footer">
 						sss
@@ -53,8 +53,8 @@
 						<h3 class="box-title">User</h3>
 					</div>
 					<div class="box-body">
-						<input type="text" class="knob" value="80" data-skin="tron"  data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true" />
-	                    <div class="knob-label">user</div>                    
+						<input type="text" class="knob" value="{{ $users->count() }}" data-skin="tron"  data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true" />
+	                    <div class="knob-label">{{ $users->count() }}user</div>                    
 					</div>
 					<div class="box-footer">
 						sss
