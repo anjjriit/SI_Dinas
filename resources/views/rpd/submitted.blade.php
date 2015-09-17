@@ -268,8 +268,8 @@
     	                        <br>
     	                        <div class="row">
     	                            <div class="col-md-12">
-    	                                <a href="/administrasi/rpd/{{ $rpd->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
-    	                                <a href="/administrasi/rpd/{{ $rpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+    	                                <a href="/rpd/{{ $rpd->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+    	                                <a href="/rpd/{{ $rpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
     	                            </div>
     	                        </div>
     	                    @endif

@@ -36,7 +36,7 @@
                                                 <td>{{ date_format( date_create($draftRpd->created_at), 'd/m/Y' ) }}</td>
                                                 <td>{{ date_format( date_create($draftRpd->updated_at), 'd/m/Y H:i:s' ) }}</td>
                                                 <td>
-                                                    <a href="/rpd/draft/{{ $draftRpd->id }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                    <a href="/rpd/{{ $draftRpd->id }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
