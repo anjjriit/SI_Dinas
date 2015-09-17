@@ -30,9 +30,14 @@ class Rpd extends Model
         return $query->where('status', '=', 'SUBMIT');
     }
 
-    public function scopeInDraft($query)
+    public function scopeDraft($query)
     {
         return $query->where('status', '=', 'DRAFT');
+    }
+
+    public function scopeLog($query)
+    {
+        return $query->where('status', '!=', 'DRAFT');
     }
 
     public function scopeMine($query)

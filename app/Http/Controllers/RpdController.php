@@ -346,17 +346,6 @@ class RpdController extends Controller
         }
     }
 
-    public function log()
-    {
-        $user = Auth::user();
-        $userId = $user->nik;
-        $rpdLogs = Rpd::where('status','!=','DRAFT')
-                        ->where('nik','=',$userId)
-                        ->paginate(15);
-
-        return view('rpd.log', compact('rpdLogs'));
-    }
-
     public function recall($id)
     {
         $rpd = Rpd::findOrFail($id);
@@ -410,7 +399,7 @@ class RpdController extends Controller
 
     public function draft()
     {
-        $draftRpds = Rpd::inDraft()->mine()->paginate(10);
+        $draftRpds = Rpd::draft()->mine()->paginate(10);
 
         return view('rpd.draft', compact('draftRpds'));
     }
@@ -424,6 +413,13 @@ class RpdController extends Controller
         }
 
         return view('rpd.submitted', compact('submittedRpds'));
+    }
+
+    public function log()
+    {
+        $rpdLogs = Rpd::log()->mine()->paginate(15);
+
+        return view('rpd.log', compact('rpdLogs'));
     }
 
     public function generateCode()
@@ -462,7 +458,6 @@ class RpdController extends Controller
             } else {
                 $akomodasi_awal += $biaya_transport->harga * $jumlah_peserta;
             }
-
         }
 
         $akomodasi_awal += $rpd->saranaPenginapan->biaya * $jumlah_peserta * $rpd->lama_hari;
