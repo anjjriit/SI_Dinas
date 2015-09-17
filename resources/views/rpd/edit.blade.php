@@ -28,7 +28,7 @@
 
         @include('rpd.partials.modals.add_prospect')
 
-        @include('rpd..partials.modals.add_training')
+        @include('rpd.partials.modals.add_training')
 
     </section>
 @endsection
