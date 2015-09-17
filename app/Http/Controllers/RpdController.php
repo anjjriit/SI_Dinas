@@ -180,7 +180,6 @@ class RpdController extends Controller
         $list_transportasi = Transportasi::orderBy('nama_transportasi', 'asc')->get()->all();
         $list_penginapan = Penginapan::orderBy('nama_penginapan')->lists('nama_penginapan', 'id');
 
-
         return view(
             'rpd.edit',
             compact(
@@ -404,13 +403,6 @@ class RpdController extends Controller
         ActionHistoryRpd::create($action);
 
         return redirect('/rpd/submitted')->with('success', 'Status telah terupdate');
-    }
-
-    public function listApproval()
-    {
-        $approvalRpds = Rpd::where('status', '=', 'SUBMIT')->paginate(10);
-
-        return view('rpd.index_administrasi', compact('approvalRpds'));
     }
 
     public function draft()
