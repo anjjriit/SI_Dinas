@@ -7,9 +7,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/', function () {
         return redirect('/dashboard');
     });
-    Route::get('/dashboard', function () {
-        return view('dashboard');
-    });
+    Route::get('/dashboard', 'PagesController@dashboard');
 
     Route::get('logout', 'Auth\AuthController@getLogout');
     Route::get('user/password', 'PegawaiController@editPassword');

@@ -90,12 +90,12 @@
                 <ul class="treeview-menu" style="display: none;">
                     <li {{ (Request::is('lpd/submitted') ? ' class=item-active' : '')}}>
                         <a href="/lpd/submitted">
-                            <i class="fa fa-fw fa-list"></i> <span>Processed LPD</span>
+                            <i class="fa fa-fw fa-list"></i> <span>Submitted LPD</span>
                         </a>
                     </li>
-                    <li {{ (Request::is('lpd/approved') ? ' class=item-active' : '')}}>
-                        <a href="/lpd/approved">
-                            <i class="fa fa-fw fa-list"></i> <span>Approved LPD</span>
+                    <li {{ (Request::is('lpd/processed') ? ' class=item-active' : '')}}>
+                        <a href="/lpd/processed">
+                            <i class="fa fa-fw fa-list"></i> <span>Processed LPD</span>
                         </a>
                     </li>
                 </ul>
