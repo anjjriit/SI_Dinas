@@ -37,10 +37,10 @@
                         )
                         ? ' item-active' : ''
                     }}">
-                <a href="#"> 
+                <a href="#">
                     <i class="fa fa-fw fa-list-alt"></i><span>Approval RPD</span> <i class="fa fa-angle-down pull-right"></i>
                 </a>
-                <ul class="treeview-menu" style="display: block;">
+                <ul class="treeview-menu" style="display: none;">
                     <li {{ (Request::is('rpd/submitted') ? ' class=item-active' : '')}}>
                         <a href="/rpd/submitted">
                             <i class="fa fa-fw fa-list"></i> <span>Submitted RPD</span>
@@ -59,10 +59,10 @@
                         )
                         ? ' item-active' : ''
                     }}">
-                <a href="#"> 
+                <a href="#">
                     <i class="fa fa-fw fa-files-o"></i><span>Approval LPD</span> <i class="fa fa-angle-down pull-right"></i>
                 </a>
-                <ul class="treeview-menu" style="display: block;">
+                <ul class="treeview-menu" style="display: none;">
                     <li {{ (Request::is('lpd/processed') ? ' class=item-active' : '')}}>
                         <a href="/lpd/processed">
                             <i class="fa fa-fw fa-list"></i> <span>Processed LPD</span>
@@ -87,7 +87,7 @@
                 <a href="#">
                     <i class="fa fa-fw fa-files-o"></i><span>Approval LPD</span> <i class="fa fa-angle-down pull-right"></i>
                 </a>
-                <ul class="treeview-menu" style="display: block;">
+                <ul class="treeview-menu" style="display: none;">
                     <li {{ (Request::is('lpd/submitted') ? ' class=item-active' : '')}}>
                         <a href="/lpd/submitted">
                             <i class="fa fa-fw fa-list"></i> <span>Processed LPD</span>
@@ -100,7 +100,7 @@
                     </li>
                 </ul>
             </li>
-            @endif 
+            @endif
 
             <!--List Dropdown RPD-->
             <li class="treeview{{ (
@@ -112,7 +112,7 @@
                     <a href="#">
                         <i class="fa fa-fw fa-list-alt"></i> <span>RPD</span> <i class="fa fa-angle-down pull-right"></i>
                     </a>
-                    <ul class="treeview-menu" style="display: block;">
+                    <ul class="treeview-menu" style="display: none;">
                         <li{{ (Request::is('rpd/create') ? ' class=item-active' : '')}}>
                             <a href="/rpd/create">
                                 <i class="fa fa-fw fa-file-text"></i> <span>Create RPD</span>
@@ -146,7 +146,7 @@
                 <a href="#">
                     <i class="fa fa-fw fa-files-o"></i> <span>LPD</span> <i class="fa fa-angle-down pull-right"></i>
                 </a>
-                <ul class="treeview-menu" style="display: block;">
+                <ul class="treeview-menu" style="display: none;">
                     <li {{ (Request::is('lpd') ? ' class=item-active' : '')}}>
                         <a href="/lpd">
                             <i class="fa fa-fw fa-file-text"></i> <span>Create LPD</span>
@@ -187,7 +187,7 @@
                     <a href="#">
                         <i class="fa fa-fw fa-database"></i> <span>Manage Data</span> <i class="fa fa-angle-down pull-right"></i>
                     </a>
-                    <ul class="treeview-menu" style="display: block;">
+                    <ul class="treeview-menu" style="display: none;">
                         <li {{ (Request::is('user*') ? ' class=item-active' : '')}}>
                             <a href="/user"><i class="fa fa-fw"></i>Data User</a>
                         </li>
