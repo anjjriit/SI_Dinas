@@ -15,7 +15,7 @@
                         <div class="box-header">
                             <h4>Form Approval RPD</h4>
                         </div>
-                        {!! Form::open(['method' => 'POST', 'url' => '/administrasi/rpd/' . $rpd->id . '/approval']) !!}
+                        {!! Form::open(['method' => 'POST', 'url' => '/rpd/' . $rpd->id . '/approval']) !!}
                             <div class="box-body">
                                 @if($errors->any())
                                     <div class="alert alert-danger">
@@ -27,7 +27,7 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD">
+                                        <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#detailRPD">
                                             <i class="fa fa-fw fa-share"></i> Detail RPD
                                         </button>
                                     </div>

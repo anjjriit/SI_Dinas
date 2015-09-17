@@ -1,16 +1,5 @@
 <?php
 
-/*
-|--------------------------------------------------------------------------
-| Application Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register all of the routes for an application.
-| It's a breeze. Simply tell Laravel the URIs it should respond to
-| and give it the controller to call when that URI is requested.
-|
-*/
-
 Route::get('login', 'Auth\AuthController@getLogin');
 Route::post('login', ['as' => 'user.login', 'uses' => 'Auth\AuthController@postLogin']);
 
@@ -33,9 +22,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction']);
     Route::get('rpd/create', 'RpdController@create');
     Route::get('rpd/draft', 'RpdController@draft');
-    Route::get('rpd/draft/{rpd}/edit', 'RpdController@editRpd');
-    Route::get('rpd/{rpd}/edit', 'RpdController@editRpdBti');
-    Route::patch('rpd/{rpd}', 'RpdController@submitRpdBti');
+    Route::get('rpd/{rpd}/edit', 'RpdController@editRpd');
     Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
 
     Route::get('rpd/submitted', 'RpdController@submitted');
@@ -45,10 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'role:administration'], function () {
-    Route::get('administrasi/rpd/{id}/edit', 'RpdController@editRpdAdministration');
-    Route::get('administrasi/rpd/{id}/approval', 'RpdController@approval');
-    Route::post('administrasi/rpd/{id}/approval', 'RpdController@submitApproval');
-    Route::patch('administrasi/rpd/{id}', 'RpdController@updateRpdAdministration');
+    Route::get('rpd/{id}/approval', 'RpdController@approval');
+    Route::post('rpd/{id}/approval', 'RpdController@submitApproval');
 });
 
 Route::group(['middleware' => 'role:super_admin'], function () {
