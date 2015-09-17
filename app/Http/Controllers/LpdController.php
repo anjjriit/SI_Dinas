@@ -11,11 +11,6 @@ use App\Http\Controllers\Controller;
 
 class LpdController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return Response
-     */
     public function index()
     {
         $user = Auth::user();
@@ -27,11 +22,6 @@ class LpdController extends Controller
         return view('lpd.index', compact('approvedRpds'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return Response
-     */
     public function create()
     {
         //
