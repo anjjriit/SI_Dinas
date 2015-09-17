@@ -22,48 +22,83 @@
                         <i class="fa fa-fw fa-th"></i> <span>Dashboard</span>
                     </a>
                 </li>
+            @else
+                <li{{ (Request::is('home') ? ' class=item-active' : '')}}>
+                    <a href="/home">
+                        <i class="fa fa-fw fa-home"></i> <span>Homepage</span>
+                    </a>
+                </li>
             @endif
 
-            <li{{ (Request::is('rpd/create') ? ' class=item-active' : '')}}>
-                <a href="/rpd/create">
-                    <i class="fa fa-fw fa-file-text"></i> <span>Create RPD</span>
-                </a>
+            <!--List Dropdown RPD-->
+            <li class="treeview{{ (
+                            Request::is('rpd*')
+                        )
+                        ? ' item-active' : ''
+                    }}">
+
+                    <a href="#">
+                        <i class="fa fa-fw fa-list-alt"></i> <span>RPD</span> <i class="fa fa-angle-down pull-right"></i>
+                    </a>
+                    <ul class="treeview-menu" style="display: block;">
+                        <li{{ (Request::is('rpd/create') ? ' class=item-active' : '')}}>
+                            <a href="/rpd/create">
+                                <i class="fa fa-fw fa-file-text"></i> <span>Create RPD</span>
+                            </a>
+                        </li>
+                        <li{{ (Request::is('rpd/draft') ? ' class=item-active' : '')}}>
+                            <a href="/rpd/draft">
+                                <i class="fa fa-fw fa-edit"></i> <span>RPD Drafts</span>
+                            </a>
+                        </li>
+                        <li{{ (Request::is('rpd/submitted') ? ' class=item-active' : '')}}>
+                            <a href="/rpd/submitted">
+                                <i class="fa fa-fw fa-list"></i> <span>RPD Submitted</span>
+                            </a>
+                        </li>
+                        <li{{ (Request::is('rpd/log') ? ' class=item-active' : '') }}>
+                            <a href="/rpd/log">
+                                <i class="fa fa-fw fa-history"></i> <span>Logs RPD</span>
+                            </a>
+                        </li>
+                    </ul>
             </li>
-            <li{{ (Request::is('rpd/draft') ? ' class=item-active' : '')}}>
-                <a href="/rpd/draft">
-                    <i class="fa fa-fw fa-edit"></i> <span>RPD Drafts</span>
+
+            <!-- List Dropdown LPD-->
+            <li class="treeview{{ (
+                        Request::is('lpd*')
+                    )
+                    ? ' item-active' : ''
+                }}">
+
+                <a href="#">
+                    <i class="fa fa-fw fa-files-o"></i> <span>LPD</span> <i class="fa fa-angle-down pull-right"></i>
                 </a>
+                <ul class="treeview-menu" style="display: block;">
+                    <li {{ (Request::is('lpd') ? ' class=item-active' : '')}}>
+                        <a href="/lpd">
+                            <i class="fa fa-fw fa-file-text"></i> <span>Create LPD</span>
+                        </a>
+                    </li>
+                    <li{{ (Request::is('lpd/draft') ? ' class=item-active' : '')}}>
+                        <a href="/lpd/draft">
+                            <i class="fa fa-fw fa-edit"></i> <span>LPD Drafts</span>
+                        </a>
+                    </li>
+                    <li{{ (Request::is('lpd/submitted') ? ' class=item-active' : '')}}>
+                        <a href="/lpd/submitted">
+                            <i class="fa fa-fw fa-list"></i> <span>LPD Submitted</span>
+                        </a>
+                    </li>
+                    <li{{ (Request::is('lpd/log') ? ' class=item-active' : '')}}>
+                        <a href="/lpd/log">
+                            <i class="fa fa-fw fa-history"></i> <span>Logs LPD</span>
+                        </a>
+                    </li>
+                </ul>
             </li>
-            <li{{ (Request::is('rpd/submitted') ? ' class=item-active' : '')}}>
-                <a href="/rpd/submitted">
-                    <i class="fa fa-fw fa-list"></i> <span>RPD Submitted</span>
-                </a>
-            </li>
-            <li{{ (Request::is('rpd/log') ? ' class=item-active' : '') }}>
-                <a href="/rpd/log">
-                    <i class="fa fa-fw fa-history"></i> <span>Logs RPD</span>
-                </a>
-            </li>
-            <li{{ (Request::is('lpd') ? ' class=item-active' : '')}}>
-                <a href="/lpd">
-                    <i class="fa fa-fw fa-file-text"></i> <span>Create LPD</span>
-                </a>
-            </li>
-            <li{{ (Request::is('lpd/draft') ? ' class=item-active' : '')}}>
-                <a href="/lpd/draft">
-                    <i class="fa fa-fw fa-edit"></i> <span>LPD Drafts</span>
-                </a>
-            </li>
-            <li{{ (Request::is('lpd/submitted') ? ' class=item-active' : '')}}>
-                <a href="/lpd/submitted">
-                    <i class="fa fa-fw fa-list"></i> <span>LPD Submitted</span>
-                </a>
-            </li>
-            <li{{ (Request::is('lpd/log') ? ' class=item-active' : '')}}>
-                <a href="/lpd/log">
-                    <i class="fa fa-fw fa-history"></i> <span>Logs LPD</span>
-                </a>
-            </li>
+
+            <!-- Manage Data-->
             @if (auth()->user()->role == 'super_admin')
                 <li class="treeview{{ (
                             Request::is('user*') ||
