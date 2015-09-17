@@ -86,46 +86,59 @@
                         </div>
                         <div class="modal-body">
                             <!-- Info Detail LPD -->
-                            <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr>
-                                        <th class="col-md-4">Penanggung Jawab Akomodasi</th>
-                                        <th>Tanggal Laporan</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Nama Penanggung Jawab</td>
-                                        <td>Jumat, 25/09/2015</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr>
-                                        <th class="col-md-4">Personel</th>
-                                        <th>Proyek / Keperluan Lainnya</th>
-                                    </tr>
-                                    <tr>
-                                        <td>Nama Personel</td>
-                                        <td>Pelatihan Blog untuk Anak</td>
-                                    </tr>
-                                </tbody>
-                            </table>
-                            <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr>
-                                        <th class="col-md-4">Akomodasi Awal</th>
-                                        <td>Rp 1.000.000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Total Pengeluaran</th>
-                                        <td>Rp 800.000</td>
-                                    </tr>
-                                    <tr>
-                                        <th>Pengembalian (Reimburse)</th>
-                                        <td>Rp 200.000</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                            <div class="content">
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <table class="table table-bordered table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Penanggung Jawab Akomodasi</th>
+                                                    <th>Tanggal Laporan</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nama Penanggung Jawab</td>
+                                                    <td>Jumat, 25/09/2015</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <table class="table table-bordered table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <th>Personel</th>
+                                                    <th>Proyek / Keperluan Lainnya</th>
+                                                </tr>
+                                                <tr>
+                                                    <td>Nama Personel</td>
+                                                    <td>Pelatihan Blog untuk Anak</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-8">
+                                        <table class="table table-bordered table-striped">
+                                            <tbody>
+                                                <tr>
+                                                    <th class="col-md-5">Akomodasi Awal</th>
+                                                    <td>Rp 1.000.000</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Total Pengeluaran</th>
+                                                    <td>Rp 800.000</td>
+                                                </tr>
+                                                <tr>
+                                                    <th>Pengembalian (Reimburse)</th>
+                                                    <td>Rp 200.000</td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
                             <table class="table table-bordered table-striped">
                                 <tbody>
                                     <tr>
@@ -147,8 +160,26 @@
                                         <td>Rp 10.000</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6" align="center">Total</td>
+                                        <td>Jumat</td>
+                                        <td>25/09/2015</td>
+                                        <td>Makanan</td>
+                                        <td>Makan Pagi</td>
+                                        <td>Warung Nasi</td>
+                                        <td>Personel</td>
                                         <td>Rp 10.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Jumat</td>
+                                        <td>25/09/2015</td>
+                                        <td>Makanan</td>
+                                        <td>Makan Pagi</td>
+                                        <td>Warung Nasi</td>
+                                        <td>Personel</td>
+                                        <td>Rp 10.000</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="6" align="center">Total</td>
+                                        <td>Rp 30.000</td>
                                     </tr>
                                 </tbody>
                             </table>

@@ -429,6 +429,13 @@ class RpdController extends Controller
         return view('rpd.submitted', compact('submittedRpds'));
     }
 
+    public function approved()
+    {
+        $approvedRpds = Rpd::where('status', '=', 'APPROVED')->paginate(10);
+        
+        return view('rpd.approved', compact('approvedRpds'));
+    }
+
     public function generateCode()
     {
         $last = Rpd::select('kode')->orderBy('kode', 'desc')->first();
