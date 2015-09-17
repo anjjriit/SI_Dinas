@@ -6,8 +6,11 @@ use Illuminate\Http\Request;
 
 use Auth;
 use App\Rpd;
+use App\Pegawai;
+use App\Lpd;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\Auth\AuthController;
 
 class LpdController extends Controller
 {
@@ -31,7 +34,7 @@ class LpdController extends Controller
     {
         $user = Auth::user();
         $userId = $user->nik;
-        $lpdLogs = Lpd::where('status', '!=', 'DRAFT')
+        $lpdLogs = Rpd::where('status', '!=', 'DRAFT')
                    ->where('nik', '=', $userId)
                    ->paginate(10);
 
