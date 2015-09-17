@@ -54,7 +54,7 @@
     						<tbody>
     							@foreach($approvedRpds as $rpd)
 		    						<tr>
-		    							<td>{{ $rpd->id }}</td>
+		    							<td>{{ $rpd->kode }}</td>
 		    							<td>{{ $dataKategori = str_replace('_', ' ', $rpd->kategori) }}</td>
 										<td>{{ $rpd->kotaTujuan->nama_kota }}</td>
 										<td>{{ $rpd->tanggal_mulai }}</td>
@@ -69,7 +69,7 @@
 											<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
 												<i class="fa fa-fw fa-share"></i>Detail
 											</button>
-											<a href="/lpd/kode/create" class="btn btn-sm btn-primary"> Create LPD!</a>
+											<a href="/lpd/kode/create" class="btn btn-sm btn-primary"> Create LPD</a>
 										</td>
 		    						</tr>
 	    						@endforeach
@@ -155,7 +155,7 @@
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Sarana Penginapan</th>
-                                    <td>{{ $rpd->sarana_penginapan }}</td>
+                                    <td>{{ $rpd->saranaPenginapan->nama_penginapan }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Status</th>
@@ -176,12 +176,32 @@
 							</thead>
 							<tbody>
 								@foreach($rpd->peserta as $peserta)
-									<tr>
-										<td>{{ $peserta->nama_lengkap }}</td>
-										<td>{{ $peserta->pivot->jenis_kegiatan }}</td>
-										<td style="text-transform: capitalize;">{{ $dataKegiatan = str_replace('_', ' ', $peserta->pivot->kegiatan) }}</td>
-									</tr>
-								@endforeach
+                                    @foreach($rpd->kegiatan()->where('nik_peserta', $peserta->nik)->get() as $kegiatan)
+                                        <tr>
+                                            @if ($rpd->kegiatan()->where('nik_peserta', $peserta->nik)->first() == $kegiatan)
+                                                <td rowspan="{{ $rpd->kegiatan()->where('nik_peserta', $peserta->nik)->count() }}" style="vertical-align: top;">
+                                                    {{ $peserta->nama_lengkap }}
+                                                </td>
+                                            @endif
+                                            <td>
+                                                @if ($kegiatan->jenis_kegiatan == 'project')
+                                                    {{ $kegiatan->project->nama_project }}
+                                                @elseif ($kegiatan->jenis_kegiatan == 'prospek')
+                                                    {{ $kegiatan->prospek->nama_prospek }}
+                                                @elseif ($kegiatan->jenis_kegiatan == 'pelatihan')
+                                                    {{ $kegiatan->pelatihan->nama_pelatihan }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($kegiatan->kegiatan == 'UAT')
+                                                    'UAT'
+                                                @else
+                                                    {{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @endforeach
 							</tbody>
 						</table>
 
@@ -204,9 +224,9 @@
 							<tbody>
 								@foreach($rpd->actionHistory as $action)
 									<tr>
-										<td>{{ $action->updated_at }}</td>
-										<td>{{ $action->pegawai->nama_lengkap }}</td>
-										<td>{{ $action->action }}</td>
+										<td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
+                                        <td>{{ $action->pegawai->nama_lengkap }}</td>
+                                        <td>{{ $action->action }}</td>
 									</tr>
 								@endforeach
 							</tbody>

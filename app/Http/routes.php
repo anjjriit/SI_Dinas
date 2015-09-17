@@ -29,8 +29,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('rpd/log', 'RpdController@log');
     Route::post('rpd/recall/{rpd}', 'RpdController@recall');
 
-    Route::get('rpd/approval', 'RpdController@listApproval');
-
 });
 
 Route::group(['middleware' => 'role:administration'], function () {
