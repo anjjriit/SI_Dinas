@@ -41,4 +41,10 @@ class LpdController extends Controller
         return view('lpd.log', compact('lpdLogs'));
     }
 
+    public function submittedAll()
+    {
+        $submittedLpds = Lpd::submitted()->orderBy('kode', 'desc')->paginate(10);
+
+        return view('lpd.all_submitted', compact('submittedLpds'));
+    }
 }

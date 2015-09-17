@@ -16,6 +16,8 @@ use App\Transportasi;
 use App\Penginapan;
 use App\JenisBiaya;
 use App\Http\Requests;
+use App\Http\Requests\CreateRpdRequest;
+use App\Http\Requests\UpdateDraftRpdRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Auth\AuthController;
 
@@ -52,24 +54,8 @@ class RpdController extends Controller
         }
     }
 
-    public function submit(Request $request)
+    public function submit(CreateRpdRequest $request)
     {
-        $this->validate($request, [
-            'kategori' => 'required|in:trip,non_trip',
-            'jenis_perjalanan' => 'required|in:dalam_kota,luar_kota',
-            'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'required|date',
-            'lama_hari' => 'required|numeric|min:1',
-            'kode_kota_asal' => 'required|exists:kota,kode',
-            'kode_kota_tujuan' => 'required|exists:kota,kode',
-            'id_penginapan' => 'required',
-            'id_transportasi' => 'required',
-            'id_peserta' => 'required',
-            'tujuan_kegiatan' => 'required',
-            'kode_kegiatan' => 'required',
-            'kegiatan' => 'required'
-        ]);
-
         $inputRpd = $request->only(
             'kategori',
             'jenis_perjalanan',
@@ -83,7 +69,7 @@ class RpdController extends Controller
         );
 
         $inputRpd['kode'] = $this->generateCode();
-        $inputRpd['nik'] = auth()->user()->nik;
+        $inputRpd['nik'] = Auth::user()->nik;
         $inputRpd['status'] = 'SUBMIT';
 
         $rpd = Rpd::create($inputRpd);
@@ -111,7 +97,7 @@ class RpdController extends Controller
 
         $action = [
             'id_rpd' => $rpd->id,
-            'nik' => auth()->user()->nik,
+            'nik' => Auth::user()->nik,
             'action' => 'SUBMIT',
             'comment' => $rpd->keterangan
         ];
@@ -133,14 +119,14 @@ class RpdController extends Controller
             'keterangan'
         );
 
-        $inputRpd['nik'] = auth()->user()->nik;
+        $inputRpd['nik'] = Auth::user()->nik;
         $inputRpd['status'] = 'DRAFT';
 
         $rpd = Rpd::create($inputRpd);
 
         $action = [
             'id_rpd' => $rpd->id,
-            'nik' => auth()->user()->nik,
+            'nik' => Auth::user()->nik,
             'action' => 'DRAFT',
             'comment' => $rpd->keterangan
         ];
@@ -171,7 +157,13 @@ class RpdController extends Controller
 
     public function editRpd($id)
     {
-        $rpd = Rpd::with('peserta', 'kegiatan')->findOrFail($id);
+        $rpd = Rpd::findOrFail($id);
+
+        $user = Auth::user();
+
+        if ($rpd->nik != $user->nik && $user->role != 'administration') {
+            return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
+        }
 
         $list_pegawai = Pegawai::orderBy('nama_lengkap', 'asc')->lists('nama_lengkap', 'nik');
         $list_kota = Kota::orderBy('nama_kota', 'asc')->lists('nama_kota', 'kode');
@@ -198,7 +190,17 @@ class RpdController extends Controller
 
     public function updateAction(Request $request, $id)
     {
+        $auth = Rpd::where('id', $id)->where('nik', Auth::user()->nik)->exists();
+
+        if (!$auth) {
+            return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
+        }
+
         if ($request->input('action') == 'submit') {
+            if (Auth::user()->role != 'administration') {
+                return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
+            }
+
             $this->updateSubmit($request, $id);
 
             return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil di submit.');
@@ -228,7 +230,7 @@ class RpdController extends Controller
 
         $action = [
             'id_rpd' => $rpd->id,
-            'nik' => auth()->user()->nik,
+            'nik' => Auth::user()->nik,
             'action' => 'DRAFT',
             'comment' => $rpd->keterangan
         ];
@@ -289,7 +291,7 @@ class RpdController extends Controller
 
             $action = [
                 'id_rpd' => $rpd->id,
-                'nik' => auth()->user()->nik,
+                'nik' => Auth::user()->nik,
                 'action' => 'SUBMIT',
                 'comment' => null
             ];
@@ -342,29 +344,18 @@ class RpdController extends Controller
 
             $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
         }
-
-    }
-
-    public function log()
-    {
-        $user = Auth::user();
-        $userId = $user->nik;
-        $rpdLogs = Rpd::where('status','!=','DRAFT')
-                        ->where('nik','=',$userId)
-                        ->paginate(15);
-
-        return view('rpd.log', compact('rpdLogs'));
     }
 
     public function recall($id)
     {
         $rpd = Rpd::findOrFail($id);
+
         $rpd->status = 'RECALL';
         $rpd->save();
 
         $action = [
             'id_rpd' => $rpd->id,
-            'nik' => auth()->user()->nik,
+            'nik' => Auth::user()->nik,
             'action' => 'RECALL',
             'comment' => null
         ];
@@ -396,7 +387,7 @@ class RpdController extends Controller
 
         $action = [
             'id_rpd' => $rpd->id,
-            'nik' => auth()->user()->nik,
+            'nik' => Auth::user()->nik,
             'action' => $rpd->status,
             'comment' => $request->input('komentar')
         ];
@@ -408,19 +399,14 @@ class RpdController extends Controller
 
     public function draft()
     {
-        //diganti supaya hanya menampilkan rpd yang user buat saja
-        $user = Auth::user();
-        $userId = $user->nik;
-        $draftRpds = Rpd::where('status','=','DRAFT')
-                        ->where('nik','=',$userId)
-                        ->paginate(10);
+        $draftRpds = Rpd::draft()->mine()->paginate(10);
 
         return view('rpd.draft', compact('draftRpds'));
     }
 
     public function submitted()
     {
-        if (auth()->user()->role == 'administration') {
+        if (Auth::user()->role == 'administration') {
             $submittedRpds = Rpd::submitted()->paginate(10);
         } else {
             $submittedRpds = Rpd::submitted()->mine()->orderBy('kode', 'desc')->paginate(10);
@@ -434,6 +420,13 @@ class RpdController extends Controller
         $approvedRpds = Rpd::where('status', '=', 'APPROVED')->paginate(10);
         
         return view('rpd.approved', compact('approvedRpds'));
+    }
+
+    public function log()
+    {
+        $rpdLogs = Rpd::log()->mine()->paginate(15);
+
+        return view('rpd.log', compact('rpdLogs'));
     }
 
     public function generateCode()
@@ -472,7 +465,6 @@ class RpdController extends Controller
             } else {
                 $akomodasi_awal += $biaya_transport->harga * $jumlah_peserta;
             }
-
         }
 
         $akomodasi_awal += $rpd->saranaPenginapan->biaya * $jumlah_peserta * $rpd->lama_hari;
