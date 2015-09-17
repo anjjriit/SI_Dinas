@@ -54,7 +54,7 @@
 			    								{{ $rpd->kode }}
 			    							</td>
 			    							<td>
-			    								{{ $data = str_replace('_', ' ', $rpd->kategori) }}
+			    								{{ $data = ucwords(str_replace('_', ' ', $rpd->kategori)) }}
 			    							</td>
 			    							@if(auth()->user()->role == 'administration')
 	                                            <td>
