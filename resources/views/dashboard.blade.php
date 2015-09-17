@@ -23,8 +23,8 @@
 						<h3 class="box-title">Prospek</h3>
 					</div>
 					<div class="box-body">
-						<input type="text" class="knob" value="80" data-skin="tron"  data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true" />
-	                    <div class="knob-label">prospek</div>
+						<input type="text" class="knob" value="{{ $prospeks->count() }}" data-skin="tron"  data-thickness="0.2" data-width="120" data-height="120" data-fgColor="#3c8dbc" data-readonly="true" />
+	                    <div class="knob-label"> prospek </div>
 					</div>
 					<div class="box-footer">
 						sss

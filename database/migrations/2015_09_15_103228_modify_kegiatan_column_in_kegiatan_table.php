@@ -28,7 +28,5 @@ class ModifyKegiatanColumnInKegiatanTable extends Migration
      */
     public function down()
     {
-        Schema::table('kegiatan', function (Blueprint $table) {
-        });
     }
 }

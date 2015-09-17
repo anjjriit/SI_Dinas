@@ -30,6 +30,8 @@
                     </div>
                 @endif
 
+                {{ $submittedRpds->count() }}
+
                 @if ($submittedRpds->count() != 0)
 	    			<div class="box box-widget">
 	    				<div class="box-body no-padding">
@@ -54,7 +56,7 @@
 			    								{{ $rpd->kode }}
 			    							</td>
 			    							<td>
-			    								{{ $data = str_replace('_', ' ', $rpd->kategori) }}
+			    								{{ $data = ucwords(str_replace('_', ' ', $rpd->kategori)) }}
 			    							</td>
 			    							@if(auth()->user()->role == 'administration')
 	                                            <td>

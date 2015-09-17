@@ -25,6 +25,16 @@ class Rpd extends Model
         'akomodasi_awal'
     ];
 
+    public function scopeSubmitted($query)
+    {
+        return $query->where('status', '=', 'SUBMIT');
+    }
+
+    public function scopeMine($query)
+    {
+        return $query->where('nik', '=', auth()->user()->nik);
+    }
+
     public function peserta() {
         return $this->belongsToMany('App\Pegawai', 'kegiatan', 'id_rpd', 'nik_peserta')->groupBy('nik_peserta');
     }
@@ -60,6 +70,11 @@ class Rpd extends Model
     public function saranaPenginapan()
     {
         return $this->hasOne('App\Penginapan', 'id', 'id_penginapan');
+    }
+
+    public function lpd()
+    {
+        return $this->hasOne('App\Lpd', 'id_rpd');
     }
 }
 
