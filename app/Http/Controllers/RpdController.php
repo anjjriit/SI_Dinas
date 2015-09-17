@@ -89,6 +89,7 @@ class RpdController extends Controller
         $rpd = Rpd::create($inputRpd);
 
         $transportasi = $request->input('id_transportasi');
+
         foreach ($request->input('id_transportasi') as $id_transportasi) {
             $rpd->saranaTransportasi()->attach($id_transportasi);
         }
@@ -137,6 +138,15 @@ class RpdController extends Controller
 
         $rpd = Rpd::create($inputRpd);
 
+        $action = [
+            'id_rpd' => $rpd->id,
+            'nik' => auth()->user()->nik,
+            'action' => 'DRAFT',
+            'comment' => $rpd->keterangan
+        ];
+
+        ActionHistoryRpd::create($action);
+
         if ($request->has('id_transportasi')) {
            $transportasi = $request->input('id_transportasi');
 
@@ -157,15 +167,6 @@ class RpdController extends Controller
                 $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
             }
         }
-
-        $action = [
-            'id_rpd' => $rpd->id,
-            'nik' => auth()->user()->nik,
-            'action' => 'DRAFT',
-            'comment' => $rpd->keterangan
-        ];
-
-        ActionHistoryRpd::create($action);
     }
 
     public function editRpd($id)
@@ -225,6 +226,15 @@ class RpdController extends Controller
 
         $rpd->fill($inputRpd)->save();
 
+        $action = [
+            'id_rpd' => $rpd->id,
+            'nik' => auth()->user()->nik,
+            'action' => 'DRAFT',
+            'comment' => $rpd->keterangan
+        ];
+
+        ActionHistoryRpd::create($action);
+
         $rpd->saranaTransportasi()->detach();
 
         if ($request->has('id_transportasi')) {
@@ -249,15 +259,6 @@ class RpdController extends Controller
                 $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
             }
         }
-
-        $action = [
-            'id_rpd' => $rpd->id,
-            'nik' => auth()->user()->nik,
-            'action' => 'DRAFT',
-            'comment' => $rpd->keterangan
-        ];
-
-        ActionHistoryRpd::create($action);
     }
 
     public function updateSubmit(Request $request, $id)
@@ -420,9 +421,9 @@ class RpdController extends Controller
     public function submitted()
     {
         if (auth()->user()->role == 'administration') {
-            $submittedRpds = Rpd::where('status','=','SUBMIT')->paginate(10);
+            $submittedRpds = Rpd::submitted()->paginate(10);
         } else {
-            $submittedRpds = Rpd::where('nik', auth()->user()->nik)->where('status','=','SUBMIT')->paginate(10);
+            $submittedRpds = Rpd::submitted()->mine()->orderBy('kode', 'desc')->paginate(10);
         }
 
         return view('rpd.submitted', compact('submittedRpds'));
@@ -436,10 +437,10 @@ class RpdController extends Controller
             return "RPD0001";
         } else {
             $no = str_replace('RPD', '', $last['kode']);
-
             $no = (int) $no + 1;
 
             $new = 'RPD' . str_pad($no, 4, '0', STR_PAD_LEFT);
+
             return $new;
         }
     }
