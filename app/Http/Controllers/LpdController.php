@@ -34,7 +34,7 @@ class LpdController extends Controller
     {
         $user = Auth::user();
         $userId = $user->nik;
-        $lpdLogs = Rpd::where('status', '!=', 'DRAFT')
+        $lpdLogs = Lpd::where('status', '!=', 'DRAFT')
                    ->where('nik', '=', $userId)
                    ->paginate(10);
 

@@ -54,7 +54,7 @@ class RpdController extends Controller
         }
     }
 
-    public function submit(CreateRpdRequest $request)
+    public function submit(Request $request)
     {
         $inputRpd = $request->only(
             'kategori',
@@ -163,7 +163,7 @@ class RpdController extends Controller
 
         if ($rpd->nik != $user->nik && $user->role != 'administration') {
             return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
-        }
+        } 
 
         $list_pegawai = Pegawai::orderBy('nama_lengkap', 'asc')->lists('nama_lengkap', 'nik');
         $list_kota = Kota::orderBy('nama_kota', 'asc')->lists('nama_kota', 'kode');
@@ -190,17 +190,21 @@ class RpdController extends Controller
 
     public function updateAction(Request $request, $id)
     {
-        $auth = Rpd::where('id', $id)->where('nik', Auth::user()->nik)->exists();
+        if (Auth::user()->role != 'administration') {
+            $auth = Rpd::where('id', $id)->where('nik', Auth::user()->nik)->exists();
 
-        if (!$auth) {
-            return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
+            if (!$auth) {
+                return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
+            }
+        } else {
+            $submitted = Rpd::where('id', $id)->where('status', 'SUBMIT')->exists();
+
+            if (!$submitted) {
+                return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
+            }
         }
 
         if ($request->input('action') == 'submit') {
-            if (Auth::user()->role != 'administration') {
-                return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
-            }
-
             $this->updateSubmit($request, $id);
 
             return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil di submit.');
@@ -413,6 +417,13 @@ class RpdController extends Controller
         }
 
         return view('rpd.submitted', compact('submittedRpds'));
+    }
+
+    public function approved()
+    {
+        $approvedRpds = Rpd::where('status', '=', 'APPROVED')->paginate(10);
+        
+        return view('rpd.approved', compact('approvedRpds'));
     }
 
     public function log()

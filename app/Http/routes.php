@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth'], function () {
     // List RPD
     Route::get('rpd/draft', 'RpdController@draft');
     Route::get('rpd/submitted', 'RpdController@submitted');
+    Route::get('rpd/approved', 'RpdController@approved');
     Route::get('rpd/log', 'RpdController@log');
     // Pengajuan RPD
     Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction']);

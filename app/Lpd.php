@@ -38,7 +38,7 @@ class Lpd extends Model
 
     public function scopeMine($query)
     {
-        return $query-where('nik', '=', auth()->user()->nik);
+        return $query->where('nik', '=', auth()->user()->nik);
     }
 
     public function pegawai()
