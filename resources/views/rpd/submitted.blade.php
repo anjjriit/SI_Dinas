@@ -67,11 +67,11 @@
 												{{ $rpd->kotaTujuan->nama_kota }}
 											</td>
 											<td>
-												{{ $rpd->tanggal_mulai }}
+												{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
 											</td>
 											<td>
-												@if($data == "trip")
-													{{ $rpd->tanggal_selesai }}
+												@if($data == "Trip")
+													{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
 												@else
 													-
 												@endif

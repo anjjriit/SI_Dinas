@@ -59,6 +59,9 @@
                                                     <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailLPD-{{ $lpdLog->id }}">
                                                         <i class="fa fa-fw fa-share"></i>Detail
                                                     </button>
+                                                    @if ($lpdLog->status == 'BACK TO INITIATOR')
+                                                        <a href="/lpd/{{ $lpdLog->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -71,74 +74,96 @@
                             Logs LPD belum tersedia.
                         </div>
                     @endif
+
+                    {!! $lpdLogs->render() !!}
                 </div>
             </div>
         </section>
 
-        <!-- Bagian Modal Detail LPD -->
-        @foreach($lpdLogs as $lpd)
-            <div class="modal fade" id="detailLPD-{{ $lpdLog->id }}" tabindex="-1" role="dialog" aria-labelledby="detailLPDLabel">
-                <div class="modal-dialog modal-lg" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Laporan Perjalanan Dinas (LPD)</h4>
-                        </div>
-                        <div class="modal-body">
-                            <!-- Info Detail LPD -->
-                            <div class="content">
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <table class="table table-bordered table-striped">
-                                            <tbody>
-                                                <tr>
-                                                    <th>Penanggung Jawab Akomodasi</th>
-                                                    <th>Tanggal Laporan</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Nama Penanggung Jawab</td>
-                                                    <td>Jumat, 25/09/2015</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+        <!-- Modal Detail LPD -->
+        @foreach ($lpdLogs as $lpd)
+        <div class="modal fade" id="detailLPD-{{ $lpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailLPDLabel">
+            <div class="modal-dialog modal-lg" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title" id="myModalLabel">Laporan Perjalanan Dinas (LPD)</h4>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Info Detail LPD -->
+                        <div class="content">
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Penanggung Jawab Akomodasi</th>
+                                                <th>Tanggal Laporan</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ $lpd->pegawai->nama_lengkap }}</td>
+                                                <td>{{ date_format( date_create($lpd->updated_at), 'd/m/Y') }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <table class="table table-bordered table-striped">
-                                            <tbody>
-                                                <tr>
-                                                    <th>Personel</th>
-                                                    <th>Proyek / Keperluan Lainnya</th>
-                                                </tr>
-                                                <tr>
-                                                    <td>Nama Personel</td>
-                                                    <td>Pelatihan Blog untuk Anak</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <table class="table table-bordered table-striped">
+                                        <thead>
+                                            <tr>
+                                                <th>Personel</th>
+                                                <th>Proyek / Keperluan Lainnya</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            @foreach($lpd->rpd->peserta as $peserta)
+                                                @foreach($lpd->rpd->kegiatan()->where('nik_peserta', $peserta->nik)->get() as $kegiatan)
+                                                    <tr>
+                                                        @if ($lpd->rpd->kegiatan()->where('nik_peserta', $peserta->nik)->first() == $kegiatan)
+                                                            <td rowspan="{{ $lpd->rpd->kegiatan()->where('nik_peserta', $peserta->nik)->count() }}" style="vertical-align: top;">
+                                                                {{ $peserta->nama_lengkap }}
+                                                            </td>
+                                                        @endif
+                                                        <td>
+                                                            @if ($kegiatan->jenis_kegiatan == 'project')
+                                                                {{ $kegiatan->project->nama_project }}
+                                                            @elseif ($kegiatan->jenis_kegiatan == 'prospek')
+                                                                {{ $kegiatan->prospek->nama_prospek }}
+                                                            @elseif ($kegiatan->jenis_kegiatan == 'pelatihan')
+                                                                {{ $kegiatan->pelatihan->nama_pelatihan }}
+                                                            @endif
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
-                                <div class="row">
-                                    <div class="col-md-8">
-                                        <table class="table table-bordered table-striped">
-                                            <tbody>
-                                                <tr>
-                                                    <th class="col-md-5">Akomodasi Awal</th>
-                                                    <td>Rp 1.000.000</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Total Pengeluaran</th>
-                                                    <td>Rp 800.000</td>
-                                                </tr>
-                                                <tr>
-                                                    <th>Pengembalian (Reimburse)</th>
-                                                    <td>Rp 200.000</td>
-                                                </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-8">
+                                    <table class="table table-bordered table-striped">
+                                        <tbody>
+                                            <tr>
+                                                <th class="col-md-5">Akomodasi Awal</th>
+                                                <td>{{ 'Rp ' . number_format($lpd->rpd->akomodasi_awal, 2, ",", ".") }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Total Pengeluaran</th>
+                                                <td>{{ $lpd->total_pengeluaran }}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Pengembalian (Reimburse)</th>
+                                                <td>Rp 200.000</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
+                            </div>
                             <table class="table table-bordered table-striped">
                                 <tbody>
                                     <tr>
@@ -184,12 +209,13 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
-                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
                     </div>
                 </div>
             </div>
+        </div> <!-- Akhir Bagian Modal Detail LPD-->
         @endforeach
 
 @endsection

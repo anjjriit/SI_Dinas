@@ -55,11 +55,11 @@
     							@foreach($approvedRpds as $rpd)
 		    						<tr>
 		    							<td>{{ $rpd->kode }}</td>
-		    							<td>{{ $dataKategori = str_replace('_', ' ', $rpd->kategori) }}</td>
+		    							<td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
 										<td>{{ $rpd->kotaTujuan->nama_kota }}</td>
 										<td>{{ $rpd->tanggal_mulai }}</td>
 										<td>
-											@if($dataKategori == "trip")
+											@if($dataKategori == "Trip")
 												{{ $rpd->tanggal_selesai }}
 											@else
 												-
@@ -112,14 +112,14 @@
                                     <td>{{ $dataJenis = str_replace('_', ' ', $rpd->jenis_perjalanan) }}</td>
                                 </tr>
                                 <tr>
-                                	@if($dataKategori == "trip")
+                                	@if($dataKategori == "Trip")
 	                                    <th class="col-md-4">Tanggal Mulai</th>
                                     @else
 	                                    <th class="col-md-4">Tanggal </th>
                                     @endif
                                     <td>{{ $rpd->tanggal_mulai }}</td>
                                 </tr>
-	                            @if($dataKategori == "trip")
+	                            @if($dataKategori == "Trip")
 	                                <tr>
 	                                    <th class="col-md-4">Tanggal Selesai</th>
 	                                    <td>
