@@ -28,6 +28,14 @@ class Lpd extends Model
         return $query->where('status', '=', 'SUBMIT');
     }
 
+    public function scopeProcessed($query)
+    {
+        return $query->where('status', '=', 'PROCESS PAYMENT')
+                     ->where('status', '=', 'TAKE PAYMENT')
+                     ->where('status', '=', 'PAID')
+                     ->where('status', '=', 'PAYMENT RECEIVED');
+    }
+
     public function scopeMine($query)
     {
         return $query-where('nik', '=', auth()->user()->nik);
