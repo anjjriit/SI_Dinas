@@ -63,4 +63,5 @@ class Lpd extends Model
     {
         return $this->hasMany('App\Pengeluaran', 'id_lpd');
     }
+
 }

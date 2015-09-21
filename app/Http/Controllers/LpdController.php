@@ -26,9 +26,174 @@ class LpdController extends Controller
         return view('lpd.index', compact('approvedRpds'));
     }
 
-    public function create()
+    public function create(Rpd $rpd)
     {
-        //
+        if (is_null($rpd->lpd)) {
+            $input = [
+                'nik' => Auth::user()->nik,
+                'id_rpd' => $rpd->id,
+                'tanggal_laporan' => date('Y-m-d'),
+                'total_pengeluaran' => 0,
+                'reimburse' => false,
+                'status' => 'DRAFT'
+            ];
+
+            $lpd = Lpd::create($input);
+
+            return redirect('/lpd/' . $lpd->id . '/edit');
+        }
+    }
+
+    public function edit(Lpd $lpd)
+    {
+        $user = Auth::user();
+
+        if ($user->nik != $lpd->nik) {
+            return redirect('/lpd')->with('error', 'Anda tidak dapat melakukan edit terhadap LPD tersebut.');
+        }
+
+        return view('lpd.edit', compact('lpd'));
+    }
+
+    public function updateAction(Request $request, Lpd $lpd)
+    {
+        $user = Auth::user();
+
+        if ($user->nik != $lpd->nik) {
+            return redirect('/lpd')->with('error', 'Anda tidak dapat melakukan edit terhadap LPD tersebut.');
+        }
+
+        if ($request->input('action') == 'submit') {
+            $this->updateSubmit($request, $id);
+
+            return redirect('/lpd/submitted')->with('success', 'LPD berhasil di submit.');
+        } elseif ($request->input('action') == 'draft') {
+            $this->updateDraft($request, $id);
+
+            return redirect('/lpd/draft')->with('success', 'LPD berhasil di simpan sebagai draft.');
+        }
+    }
+
+    public function updateDraft(Request $request, Lpd $lpd)
+    {
+        $user = Auth::user();
+
+        $lpd->tanggal_laporan = date('Y-m-d');
+        $lpd->total_pengeluaran = $lpd->pengeluaran->sum('biaya');
+
+        if ($lpd->total_pengeluaran > $lpd->rpd->akomodasi_awal) {
+            $lpd->reimburse = true;
+        } else {
+            $lpd->reimburse = false;
+        }
+
+        $lpd->status = 'DRAFT';
+        $lpd->save();
+
+        $action = [
+            'id_lpd' => $lpd->id,
+            'nik' => $user->nik,
+            'action' => 'DRAFT',
+            'comment' => $request->input('comment')
+        ];
+
+        ActionHistoryLpd::create($action);
+    }
+
+    public function updateSubmit(Request $request, Lpd $lpd)
+    {
+        $user = Auth::user();
+
+        $lpd->tanggal_laporan = date('Y-m-d');
+        $lpd->total_pengeluaran = $lpd->pengeluaran->sum('biaya');
+
+        if ($lpd->total_pengeluaran > $lpd->rpd->akomodasi_awal) {
+            $lpd->reimburse = true;
+        } else {
+            $lpd->reimburse = false;
+        }
+
+        $lpd->status = 'SUBMIT';
+        $lpd->save();
+
+        $action = [
+            'id_lpd' => $lpd->id,
+            'nik' => $user->nik,
+            'action' => 'SUBMIT',
+            'comment' => $request->input('comment')
+        ];
+
+        ActionHistoryLpd::create($action);
+    }
+
+    public function addExpenditure(Request $request, Lpd $lpd)
+    {
+        $this->validate($request, [
+            'tanggal' => 'required|date',
+            'id_tipe' => 'required',
+            'keterangan' => 'required',
+            'struk' => 'required',
+            'biaya' => 'required|numeric',
+            'personel' => 'required'
+        ]);
+
+        $input = $request->only(
+            'tanggal',
+            'id_tipe',
+            'keterangan',
+            'struk',
+            'biaya'
+        );
+
+        $input['id_lpd'] = $lpd->id;
+
+        $exp = Pengeluaran::create($input);
+
+        foreach ($request->input('personel') as $personel) {
+            $exp->pegawai()->attach($personel);
+        }
+    }
+
+    public function editExpenditure(Pengeluaran $pengeluaran)
+    {
+        return view('lpd.edit_exp');
+    }
+
+    public function updateExpenditure(Request $request, Pengeluaran $pengeluaran)
+    {
+        $this->validate($request, [
+            'tanggal' => 'required|date',
+            'id_tipe' => 'required',
+            'keterangan' => 'required',
+            'struk' => 'required',
+            'biaya' => 'required|numeric',
+            'personel' => 'required'
+        ]);
+
+        $input = $request->only(
+            'tanggal',
+            'id_tipe',
+            'keterangan',
+            'struk',
+            'biaya'
+        );
+
+        $pengeluaran->fill($input)->save();
+
+        $pengeluaran->personel->delete();
+
+        foreach ($request->input('personel') as $personel) {
+            $exp->pegawai()->attach($personel);
+        }
+
+        return redirect('/lpd/' . $pengeluaran->id_lpd . '/edit')->with('status', 'Pengeluaran berhasil dihapus');
+    }
+
+    public function deleteExpenditure(Pengeluaran $pengeluaran)
+    {
+        $pengeluaran->delete();
+
+        return redirect('/lpd/' . $pengeluaran->id_lpd . '/edit')->with('status', 'Pengeluaran berhasil dihapus');
     }
 
     public function log()

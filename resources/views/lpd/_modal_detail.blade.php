@@ -139,11 +139,21 @@
                     </table>
                 </div>
                 @if (auth()->user()->role == 'finance')
-                    <div class="row">
-                        <div class="col-md-12">
-                            <a href="/lpd/{{ $lpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                    @if ($lpd->status == 'SUBMIT')
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="/lpd/{{ $lpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                            </div>
                         </div>
-                    </div>
+                    @endif
+                @elseif (auth()->user()->role == 'administration')
+                    @if ($lpd->status == 'PROCESS PAYMENT' || $lpd->status == 'TAKE PAYMENT')
+                        <div class="row">
+                            <div class="col-md-12">
+                                <a href="/lpd/{{ $lpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                            </div>
+                        </div>
+                    @endif
                 @endif
             </div>
             <div class="modal-footer">
