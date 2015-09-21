@@ -73,7 +73,7 @@
                         </div>
                     @else
                         <div class="alert alert-warning">
-                            List RPD yang telah diapproved belum tersedia.
+                            List LPD yang telah diapproved belum tersedia.
                         </div>
                     @endif
                 </div>

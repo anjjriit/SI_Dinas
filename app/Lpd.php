@@ -38,9 +38,9 @@ class Lpd extends Model
                          ->orWhere('status', 'PAID');
 
         } elseif (Auth::user()->role == 'administration') {
+
             return $query->where('status', 'TAKE PAYMENT')
                          ->orWhere('status', 'PROCESS PAYMENT');
-
         }
     }
 
