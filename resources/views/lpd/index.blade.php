@@ -90,7 +90,7 @@
     <!-- Bagian Modal Detail RPD-->
     @foreach ($approvedRpds as $rpd)
 	<div class="modal fade" id="detailRPD-{{ $rpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
-		<div class="modal-dialog" role="document">
+		<div class="modal-dialog modal-lg"  role="document">
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
@@ -99,7 +99,7 @@
 				<div class="modal-body">
 					<div>
 						<!-- Info basic dari RPD -->
-                        <table class="table table-modal table-responsive">
+                        <table class="table table-modal table-responsive table-condensed">
                             <tbody>
                                 <tr>
                                     <th class="col-md-4">ID</th>
@@ -178,6 +178,7 @@
 									<th>Nama</th>
 									<th>Judul Project/Prospek/Pelatihan</th>
 									<th>Kegiatan</th>
+                                    <th>Deskripsi</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -203,6 +204,13 @@
                                                     'UAT'
                                                 @else
                                                     {{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
+                                                @endif
+                                            </td>
+                                            <td>
+                                                @if ($kegiatan->deskripsi == '')
+                                                    -
+                                                @else
+                                                    {{ $kegiatan->deskripsi }}
                                                 @endif
                                             </td>
                                         </tr>

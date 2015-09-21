@@ -110,7 +110,7 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Laporan Perjalanan Dinas (LPD)</h4>
+                            <h1 class="modal-title" id="myModalLabel">Laporan Perjalanan Dinas (LPD)</h1>
                         </div>
                         <div class="modal-body">
                             <div class="content">
@@ -202,8 +202,28 @@
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td>Jumat</td>
-                                            <td>25/09/2015</td>
+                                            <td>
+                                                <?php
+                                                    $hari = date_format(date_create($lpd->tanggal_laporan), 'N');
+                                                ?>
+
+                                                @if ($hari == 1)
+                                                    {{ $tglLaporan = 'Senin' }}
+                                                @elseif($hari == 2)
+                                                    {{ $tglLaporan = 'Selasa' }}
+                                                @elseif($hari == 3)
+                                                    {{ $tglLaporan = 'Rabu' }}
+                                                @elseif($hari == 4)
+                                                    {{ $tglLaporan = 'Kamis' }}
+                                                @elseif($hari == 5)
+                                                    {{ $tglLaporan = 'Jum\'at' }}
+                                                @elseif($hari == 6)
+                                                    {{ $tglLaporan = 'Sabtu' }}
+                                                @else
+                                                    {{ $tglLaporan = 'Minggu' }}
+                                                @endif
+                                            </td>
+                                            <td>{{ date_format(date_create($lpd->tanggal_laporan), 'd/m/Y') }}</td>
                                             <td>Makanan</td>
                                             <td>Makan Pagi</td>
                                             <td>Warung Nasi</td>
