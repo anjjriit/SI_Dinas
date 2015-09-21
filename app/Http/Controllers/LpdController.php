@@ -92,7 +92,7 @@ class LpdController extends Controller
             return redirect('/lpd/submitted/all')->with('success', 'Status telah terupdate');
 
         } elseif ($user->role == 'administration') {
-            if ($lpd->status != 'PROCESS PAYMENT' || $lpd->status != 'TAKE PAYMENT') {
+            if ($lpd->status != 'PROCESS PAYMENT' && $lpd->status != 'TAKE PAYMENT') {
                 return redirect('/lpd/submitted')->with('error', 'Anda tidak dapat melakukan approval terhadap LPD tersebut.');
             }
 
@@ -111,7 +111,8 @@ class LpdController extends Controller
                 'comment' => $request->input('comment')
             ];
 
-            return redirect('/lpd/processed/all')->with('success', 'Status telah terupdate');
+            ActionHistoryLpd::create($action);
+            return redirect('/lpd/processed')->with('success', 'Status telah terupdate');
         }
     }
 
@@ -120,5 +121,31 @@ class LpdController extends Controller
         $approvedLpds = Lpd::where('status', '=', 'PAID')->orWhere('status', '=', 'PAYMENT RECEIVED')->paginate(10);
 
         return view('lpd.approved', compact('approvedLpds'));
+    }
+
+    public function submitted()
+    {
+        $submittedLpds = Lpd::submitted()->mine()->orderBy('kode', 'dsc')->paginate(10);
+
+        return view('lpd.submitted', compact('submittedLpds'));
+    }
+
+    public function recall($id)
+    {
+        $lpd = Rpd::findOrFail($id);
+
+        $lpd->status = 'RECALL';
+        $lpd->save();
+
+        $action = [
+            'id_rpd' => $lpd->id,
+            'nik' => Auth::user()->nik,
+            'action' => 'RECALL',
+            'comment' => null
+        ];
+
+        ActionHistoryLpd::create($action);
+
+        return redirect('/lpd/submitted')->with('success', 'Sukses merecall LPD dengan kode ' . $lpd->kode . '.');
     }
 }

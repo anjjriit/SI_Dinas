@@ -35,6 +35,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('lpd/submitted/all', 'LpdController@submittedAll');
     Route::get('lpd/processed', 'LpdController@processed');
     Route::get('lpd/approved', 'LpdController@approved');
+    Route::get('lpd/submitted', 'LpdController@submitted');
 
     Route::get('lpd/{lpd}/approval', 'LpdController@approval');
     Route::post('lpd/{lpd}/approval', 'LpdController@submitApproval');
