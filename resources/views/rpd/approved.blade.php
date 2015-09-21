@@ -164,7 +164,7 @@
                             </table>
 
                             <!-- Daftar Peserta RPD-->
-                            <h3>Peserta dan Tujuan Kegiatan</h3>
+                            <h4>Peserta dan Tujuan Kegiatan</h4>
                             <table class="table table-bordered table-striped">
                                 <thead>
                                     <tr>
