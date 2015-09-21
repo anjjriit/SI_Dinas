@@ -1,10 +1,10 @@
 @extends('layouts.master')
 
-@section('page_title', 'Logs LPD')
+@section('page_title', 'LPD Approved')
 
 @section('content')
-
-        @if (session('success'))
+        
+         @if (session('success'))
             <div class="content">
                 <div class="row">
                     <div class="alert alert-success">
@@ -24,44 +24,46 @@
             </div>
         @endif
 
-        <section class="content-header">
-            <h1>Logs Laporan Perjalanan Dinas</h1>
-        </section>
+        <div class="content-header">
+            <h1>Data Laporan Perjalanan Dinas</h1>
+            <label>Yang telah diapproved</label>
+        </div>
 
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    @if ($lpdLogs->count() != 0)
+                    @if ($approvedLpds->count() != 0)
                         <div class="box box-widget">
                             <div class="box-body no-padding">
                                 <table class="table table-responsive">
                                     <thead>
                                         <tr>
                                             <th>Kode</th>
-                                            <th>Terakhir Diperbarui</th>
+                                            <th>Pengaju</th>
                                             <th>Status</th>
+                                            <th>Terakhir Diperbarui</th>
                                             <th>Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        @foreach ($lpdLogs as $lpdLog)
+                                        @foreach ($approvedLpds as $approvedLpd)
                                             <tr>
                                                 <td>
-                                                    {{ $lpdLog->kode }}
+                                                    {{ $approvedLpd->kode }}
                                                 </td>
                                                 <td>
-                                                    {{ date_format( date_create($lpdLog->updated_at), 'd/m/Y H:i:s' ) }}
+                                                    {{ $approvedLpd->pegawai->nama_lengkap }}
                                                 </td>
                                                 <td>
-                                                    {{ $lpdLog->status }}
+                                                    {{ $approvedLpd->status }}
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailLPD-{{ $lpdLog->id }}">
+                                                    {{ date_format( date_create($approvedLpd->updated_at), 'd/m/Y H:i:s' ) }}
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailLPD-{{ $approvedLpd->id }}">
                                                         <i class="fa fa-fw fa-share"></i>Detail
                                                     </button>
-                                                    @if ($lpdLog->status == 'BACK TO INITIATOR')
-                                                        <a href="/lpd/{{ $lpdLog->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                                    @endif
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -71,17 +73,15 @@
                         </div>
                     @else
                         <div class="alert alert-warning">
-                            Logs LPD belum tersedia.
+                            List RPD yang telah diapproved belum tersedia.
                         </div>
                     @endif
-
-                    {!! $lpdLogs->render() !!}
                 </div>
             </div>
         </section>
 
-        <!-- Modal Detail LPD -->
-        @foreach ($lpdLogs as $lpd)
+         <!-- Modal Detail LPD -->
+        @foreach ($approvedLpds as $lpd)
         <div class="modal fade" id="detailLPD-{{ $lpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailLPDLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -222,5 +222,6 @@
             </div>
         </div> <!-- Akhir Bagian Modal Detail LPD-->
         @endforeach
+
 
 @endsection

@@ -38,44 +38,50 @@
     	<div class="row">
     		<!--Bagian box tabel-->
     		<div class="col-md-12">
-    			<div class="box box-widget">
-    				<div class="box-body no-padding">
-    					<table class="table">
-    						<thead>
-    							<tr>
-    								<th>Kode</th>
-    								<th>Kategori</th>
-    								<th>Kota Tujuan</th>
-    								<th>Tanggal Mulai</th>
-    								<th>Tanggal Selesai</th>
-    								<th colspan="2">Action</th>
-    							</tr>
-    						</thead>
-    						<tbody>
-    							@foreach($approvedRpds as $rpd)
-		    						<tr>
-		    							<td>{{ $rpd->kode }}</td>
-		    							<td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
-										<td>{{ $rpd->kotaTujuan->nama_kota }}</td>
-										<td>{{ $rpd->tanggal_mulai }}</td>
-										<td>
-											@if($dataKategori == "Trip")
-												{{ $rpd->tanggal_selesai }}
-											@else
-												-
-											@endif
-										</td>
-										<td>
-											<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
-												<i class="fa fa-fw fa-share"></i>Detail
-											</button>
-											<a href="/lpd/kode/create" class="btn btn-sm btn-primary"> Create LPD</a>
-										</td>
-		    						</tr>
-	    						@endforeach
-    						</tbody>
-    					</table>
-    				</div>    				
+                @if ($approvedRpds->count() != 0)
+        			<div class="box box-widget">
+        				<div class="box-body no-padding">
+        					<table class="table">
+        						<thead>
+        							<tr>
+        								<th>Kode</th>
+        								<th>Kategori</th>
+        								<th>Kota Tujuan</th>
+        								<th>Tanggal Mulai</th>
+        								<th>Tanggal Selesai</th>
+        								<th colspan="2">Action</th>
+        							</tr>
+        						</thead>
+        						<tbody>
+        							@foreach($approvedRpds as $rpd)
+    		    						<tr>
+    		    							<td>{{ $rpd->kode }}</td>
+    		    							<td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
+    										<td>{{ $rpd->kotaTujuan->nama_kota }}</td>
+    										<td>{{ $rpd->tanggal_mulai }}</td>
+    										<td>
+    											@if($dataKategori == "Trip")
+    												{{ $rpd->tanggal_selesai }}
+    											@else
+    												-
+    											@endif
+    										</td>
+    										<td>
+    											<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
+    												<i class="fa fa-fw fa-share"></i>Detail
+    											</button>
+    											<a href="/lpd/kode/create" class="btn btn-sm btn-primary"> Create LPD</a>
+    										</td>
+    		    						</tr>
+    	    						@endforeach
+        						</tbody>
+        					</table>
+        				</div>
+                    @else
+                        <div class="alert alert-warning">
+                            Anda belum memiliki list RPD yang telah diapproved.
+                        </div>
+                    @endif    				
     			</div>
     		</div><!-- Akhir Bagian Box Table-->
     	</div>

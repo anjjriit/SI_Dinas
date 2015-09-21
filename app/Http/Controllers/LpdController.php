@@ -8,6 +8,7 @@ use Auth;
 use App\Rpd;
 use App\Pegawai;
 use App\Lpd;
+use App\ActionHistoryLpd;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Auth\AuthController;
@@ -32,11 +33,7 @@ class LpdController extends Controller
 
     public function log()
     {
-        $user = Auth::user();
-        $userId = $user->nik;
-        $lpdLogs = Lpd::where('status', '!=', 'DRAFT')
-                   ->where('nik', '=', $userId)
-                   ->paginate(10);
+        $lpdLogs = Lpd::log()->mine()->paginate(15);
 
         return view('lpd.log', compact('lpdLogs'));
     }
@@ -68,4 +65,35 @@ class LpdController extends Controller
         }
     }
 
+    public function submitApproval(Request $request, Lpd $lpd)
+    {
+        $this->validate($request, [
+            'status' => 'required',
+            'comment' => 'required'
+        ]);
+
+        $lpd = Lpd::findOrFail($id);
+
+        // ubah paramater input() sesuai form inputnya
+        $lpd->status = $request->input('status');
+        $lpd->save();
+
+        $action = [
+            'id_lpd' => $lpd->id,
+            'nik' => Auth::user()->nik,
+            'action' => $lpd->status,
+            'comment' => $request('komentar')
+        ];
+
+        ActionHistoryLpd::create($action);
+
+        return redirect('/lpd/submitted')->with('success', 'Status telah terupdate');
+    }
+
+    public function approved()
+    {
+        $approvedLpds = Lpd::where('status', '=', 'PAID')->orWhere('status', '=', 'PAYMENT RECEIVED')->paginate(10);
+
+        return view('lpd.approved', compact('approvedLpds'));
+    }
 }

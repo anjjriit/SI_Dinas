@@ -106,14 +106,15 @@
                         <h4 class="modal-title" id="myModalLabel">Laporan Perjalanan Dinas (LPD)</h4>
                     </div>
                     <div class="modal-body">
+                        <!-- Info Detail LPD -->
                         <div class="content">
                             <div class="row">
                                 <div class="col-md-8">
-                                    <table class="table table-modal table-bordered">
+                                    <table class="table table-bordered table-striped">
                                         <thead>
-                                            <tr class="active">
-                                                <th class="col-md-6">Penanggung Jawab Akomodasi</th>
-                                                <th class="col-md-6">Tanggal Laporan</th>
+                                            <tr>
+                                                <th>Penanggung Jawab Akomodasi</th>
+                                                <th>Tanggal Laporan</th>
                                             </tr>
                                         </thead>
                                         <tbody>
@@ -163,19 +164,24 @@
                             </div>
                             <div class="row">
                                 <div class="col-md-8">
-                                    <table class="table table-modal table-bordered">
+                                    <table class="table table-bordered table-striped">
                                         <tbody>
                                             <tr>
-                                                <td class="col-md-6 active"><strong>Akomodasi Awal</strong></td>
-                                                <td class="text-right">{{ 'Rp ' . number_format($lpd->rpd->akomodasi_awal, 0, ',', '.') }}</td>
+                                                <th class="col-md-5">Akomodasi Awal</th>
+                                                <td>{{ 'Rp ' . number_format($lpd->rpd->akomodasi_awal, 2, ",", ".") }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="active"><strong>Total Pengeluaran</strong></td>
-                                                <td class="text-right">{{ 'Rp ' . number_format($lpd->total_pengeluaran, 0, ',', '.') }}</td>
+                                                <th>Total Pengeluaran</th>
+                                                <td>{{ 'Rp '. number_format($lpd->total_pengeluaran, 2, ",", ".") }}</td>
                                             </tr>
                                             <tr>
-                                                <td class="active"><strong>Pengembalian (Reimburse)</strong></td>
-                                                <td class="text-right">{{ 'Rp ' . number_format(2000000, 0, ',', '.') }}</td>
+                                                @if ($lpd->reimburse)
+                                                    <th>Reimburse</th>
+                                                    <td>{{ 'Rp '. number_format($lpd->total_pengeluaran - $lpd->rpd->akomodasi_awal, 2, ",", ".") }}</td>
+                                                @else
+                                                    <th>Pengembalian</th>
+                                                    <td>{{ 'Rp '. number_format($lpd->rpd->akomodasi_awal - $lpd->total_pengeluaran, 2, ",", ".") }}</td>
+                                                @endif
                                             </tr>
                                         </tbody>
                                     </table>
@@ -222,11 +228,19 @@
                                         <td>Rp 10.000</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="6" class="text-center">Total</td>
-                                        <td>Rp 30.000</td>
+                                        <td colspan="6" align="center">Total</td>
+                                        <td>{{ 'Rp '. number_format($lpd->total_pengeluaran, 2, ",", ".") }}</td>
                                     </tr>
                                 </tbody>
                             </table>
+                            @if (auth()->user()->role == 'administration')
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="/lpd/{{ $lpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                                    </div>
+                                </div>
+                            @endif
                         </div>
                     </div>
                     <div class="modal-footer">
@@ -234,8 +248,8 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> <!-- Akhir Bagian Modal Detail LPD-->
     @endforeach
 
-
 @endsection
+
