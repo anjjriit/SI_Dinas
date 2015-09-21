@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use Auth;
 use App\Rpd;
+use App\Pengeluaran;
 use App\Pegawai;
 use App\Lpd;
 use App\ActionHistoryLpd;
@@ -126,7 +127,7 @@ class LpdController extends Controller
         ActionHistoryLpd::create($action);
     }
 
-    public function addExpenditure(Request $request, Lpd $lpd)
+    public function addPengeluaran(Request $request, Lpd $lpd)
     {
         $this->validate($request, [
             'tanggal' => 'required|date',
@@ -147,19 +148,21 @@ class LpdController extends Controller
 
         $input['id_lpd'] = $lpd->id;
 
-        $exp = Pengeluaran::create($input);
+        $pengeluaran = Pengeluaran::create($input);
 
         foreach ($request->input('personel') as $personel) {
-            $exp->pegawai()->attach($personel);
+            $pengeluaran->pegawai()->attach($personel);
         }
+
+        return redirect('/lpd/' . $lpd->id . '/edit')->with('status', 'Pengeluaran telah ditambahkan.');
     }
 
-    public function editExpenditure(Pengeluaran $pengeluaran)
+    public function editPengeluaran(Pengeluaran $pengeluaran)
     {
-        return view('lpd.edit_exp');
+        return view('lpd.edit_pengeluaran');
     }
 
-    public function updateExpenditure(Request $request, Pengeluaran $pengeluaran)
+    public function updatePengeluaran(Request $request, Pengeluaran $pengeluaran)
     {
         $this->validate($request, [
             'tanggal' => 'required|date',
@@ -183,13 +186,13 @@ class LpdController extends Controller
         $pengeluaran->personel->delete();
 
         foreach ($request->input('personel') as $personel) {
-            $exp->pegawai()->attach($personel);
+            $pengeluaran->pegawai()->attach($personel);
         }
 
         return redirect('/lpd/' . $pengeluaran->id_lpd . '/edit')->with('status', 'Pengeluaran berhasil dihapus');
     }
 
-    public function deleteExpenditure(Pengeluaran $pengeluaran)
+    public function deletePengeluaran(Pengeluaran $pengeluaran)
     {
         $pengeluaran->delete();
 
