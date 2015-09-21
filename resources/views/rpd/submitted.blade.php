@@ -30,8 +30,6 @@
                     </div>
                 @endif
 
-                {{ $submittedRpds->count() }}
-
                 @if ($submittedRpds->count() != 0)
 	    			<div class="box box-widget">
 	    				<div class="box-body no-padding">

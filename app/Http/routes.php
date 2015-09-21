@@ -72,6 +72,13 @@ Route::group(['middleware' => 'role:super_admin'], function () {
 Route::get('lpd', 'LpdController@index');
 Route::get('lpd/log', 'LpdController@log');
 Route::get('lpd/submitted/all', 'LpdController@submittedAll');
+Route::get('lpd/processed', 'LpdController@processed');
+Route::get('lpd/approved', 'LpdController@approved');
+
+Route::group(['middleware' => 'role:administration'], function () {
+    Route::get('lpd/{id}/approval', 'LpdController@approval');
+    Route::post('lpd/{id}/approval', 'LpdController@submitApproval');
+});
 
 // JSON Output
 Route::get('json/pegawai', 'JsonController@pegawai');
