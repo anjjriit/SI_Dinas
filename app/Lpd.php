@@ -58,4 +58,9 @@ class Lpd extends Model
     {
         return $this->belongsTo('App\Rpd', 'id_rpd', 'id');
     }
+
+    public function pengeluaran()
+    {
+        return $this->hasMany('App\Pengeluaran', 'id_lpd');
+    }
 }
