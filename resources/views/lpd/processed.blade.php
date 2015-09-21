@@ -88,7 +88,7 @@
                     </div>
                 @else
                     <div class="alert alert-warning">
-                        Data LPD yang telah disubmit belum tersedia.
+                        Data LPD yang telah diproses belum tersedia.
                     </div>
                 @endif
 
