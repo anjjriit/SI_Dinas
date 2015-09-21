@@ -68,7 +68,7 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-4">
+                        <div class="col-md-3">
                             <div class="form-group">
                                 <label for="kode_kegiatan">Kegiatan</label>
                                 <select class="form-control" id="kode_kegiatan" name="kegiatan[]">
@@ -80,6 +80,12 @@
                             </div>
                         </div>
                         <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi</label>
+                                <input type="text" id="deskripsi" name="deskripsi[]" class="form-control" value="{{ old('deskripsi')[$i] }}">
+                            </div>
+                        </div>
+                        <div class="col-md-1">
                             <button type="button" class="btn btn-danger btn-hapus-kegiatan pull-right" style="margin-top: 24px;"><i class="fa fa-fw fa-minus"></i></button>
                         </div>
                     </div>
@@ -99,7 +105,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-8" style="margin-top: 24px;">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi</label>
+                                <input type="text" id="deskripsi" name="deskripsi[]" class="form-control" value="{{ old('deskripsi')[$i] }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="margin-top: 24px;">
                             <input type="hidden" name="kegiatan[]" value="-">
                             <button type="button" class="btn btn-default btn-modal-prospek">
                                 <i class="fa fa-fw fa-plus"></i> Prospek Baru
@@ -123,7 +135,13 @@
                                 </select>
                             </div>
                         </div>
-                        <div class="col-md-8" style="margin-top: 24px;">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="deskripsi">Deskripsi</label>
+                                <input type="text" id="deskripsi" name="deskripsi[]" class="form-control" value="{{ old('deskripsi')[$i] }}">
+                            </div>
+                        </div>
+                        <div class="col-md-4" style="margin-top: 24px;">
                             <input type="hidden" name="kegiatan[]" value="-">
                             <button type="button" class="btn btn-default btn-modal-pelatihan">
                                 <i class="fa fa-fw fa-plus"></i> Pelatihan Baru

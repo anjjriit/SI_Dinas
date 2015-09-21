@@ -2,10 +2,9 @@
 
 namespace App\Http\Requests;
 
-use Carbon\Carbon;
 use App\Http\Requests\Request;
 
-class CreatePelatihanRequest extends Request
+class CreateRpdRequest extends Request
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +24,7 @@ class CreatePelatihanRequest extends Request
     public function rules()
     {
         return [
-            'nama_pelatihan' => 'required',
-            'nama_lembaga' => 'required',
-            'tanggal_mulai' => 'required|date',
-            'tanggal_selesai' => 'required|date|after:' . Request::input('tanggal_mulai'),
-            'alamat' => 'required'
+
         ];
     }
 }

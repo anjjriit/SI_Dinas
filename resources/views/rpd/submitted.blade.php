@@ -30,8 +30,6 @@
                     </div>
                 @endif
 
-                {{ $submittedRpds->count() }}
-
                 @if ($submittedRpds->count() != 0)
 	    			<div class="box box-widget">
 	    				<div class="box-body no-padding">
@@ -67,11 +65,11 @@
 												{{ $rpd->kotaTujuan->nama_kota }}
 											</td>
 											<td>
-												{{ $rpd->tanggal_mulai }}
+												{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
 											</td>
 											<td>
-												@if($data == "trip")
-													{{ $rpd->tanggal_selesai }}
+												@if($data == "Trip")
+													{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
 												@else
 													-
 												@endif
@@ -120,7 +118,7 @@
     			<div class="modal-content">
     				<div class="modal-header">
     					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    					<h4 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h4>
+    					<h1 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h1>
     				</div>
     				<div class="modal-body">
     						<!-- Info basic dari RPD -->
@@ -207,6 +205,7 @@
     									<th>Nama</th>
     									<th>Judul Project/Prospek/Pelatihan</th>
     									<th>Kegiatan</th>
+                                        <th>Deskripsi</th>
     								</tr>
     							</thead>
     							<tbody>
@@ -234,6 +233,13 @@
         												{{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
         											@endif
         										</td>
+                                                <td>
+                                                    @if ($kegiatan->deskripsi == '')
+                                                        -
+                                                    @else
+                                                        {{ $kegiatan->deskripsi }}
+                                                    @endif
+                                                </td>
         									</tr>
                                         @endforeach
     								@endforeach
@@ -247,7 +253,7 @@
     						</p>
 
     						<!--Bagian Action History-->
-    						<h4>Action History</h4>
+    						<h3>Action History</h3>
     						<table class="table table-bordered table-striped">
     							<thead>
     								<tr>

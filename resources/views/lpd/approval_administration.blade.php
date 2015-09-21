@@ -1,93 +1,59 @@
 @extends('layouts.master')
 
-@section('page_title', 'Logs LPD')
+@section('page_title', 'Approval LPD')
 
 @section('content')
 
-        @if (session('success'))
-            <div class="content">
-                <div class="row">
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                </div>
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="content">
-                <div class="row">
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                </div>
-            </div>
-        @endif
-
         <section class="content-header">
-            <h1>Logs Laporan Perjalanan Dinas</h1>
+            <h1>Rencana Perjalanan Dinas</h1>
         </section>
 
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
-                    @if ($lpdLogs->count() != 0)
-                        <div class="box box-widget">
-                            <div class="box-body no-padding">
-                                <table class="table table-responsive">
-                                    <thead>
-                                        <tr>
-                                            <th>Kode</th>
-                                            <th>Terakhir Diperbarui</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($lpdLogs as $lpdLog)
-                                            <tr>
-                                                <td>
-                                                    {{ $lpdLog->kode }}
-                                                </td>
-                                                <td>
-                                                    {{ date_format( date_create($lpdLog->updated_at), 'd/m/Y H:i:s' ) }}
-                                                </td>
-                                                <td>
-                                                    {{ $lpdLog->status }}
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailLPD-{{ $lpdLog->id }}">
-                                                        <i class="fa fa-fw fa-share"></i>Detail
-                                                    </button>
-                                                    @if ($lpdLog->status == 'BACK TO INITIATOR')
-                                                        <a href="/lpd/{{ $lpdLog->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
+                    <div class="box box-widget">
+                        <div class="box-header">
+                            <h4>Form Approval LPD</h4>
                         </div>
-                    @else
-                        <div class="alert alert-warning">
-                            Logs LPD belum tersedia.
-                        </div>
-                    @endif
+                        {!! Form::open(['method' => 'POST', 'url' => '/lpd/' . $lpd->id . '/approval']) !!}
+                            <div class="box-body">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#detailLPD">
+                                            <i class="fa fa-fw fa-share"></i> Detail LPD
+                                        </button>
+                                    </div>
 
-                    {!! $lpdLogs->render() !!}
+                                </div>
+                                <br>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="form-group">
+                                            {!! Form::label('comment', 'Komentar') !!}
+                                            {!! Form::textarea('comment', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="box-footer">
+                                @if ($lpd->reimburse)
+                                    {!! Form::button('<i class="fa fa-fw fa-check"></i> Paid', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                                @else
+                                    {!! Form::button('<i class="fa fa-fw fa-check"></i> Take Payment', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                                @endif
+                            </div>
+                        {!! Form::close() !!}
+                    </div>
                 </div>
             </div>
         </section>
 
-        <!-- Modal Detail LPD -->
-        @foreach ($lpdLogs as $lpd)
-        <div class="modal fade" id="detailLPD-{{ $lpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailLPDLabel">
+        <div class="modal fade" id="detailLPD" tabindex="-1" role="dialog" aria-labelledby="detailLPDLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h1 class="modal-title" id="myModalLabel">Laporan Perjalanan Dinas (LPD)</h1>
+                        <h4 class="modal-title" id="myModalLabel">Laporan Perjalanan Dinas (LPD)</h4>
                     </div>
                     <div class="modal-body">
                         <!-- Info Detail LPD -->
@@ -181,28 +147,8 @@
                                         <th>Biaya</th>
                                     </tr>
                                     <tr>
-                                        <td>
-                                            <?php
-                                                $hari = date_format(date_create($lpd->tanggal_laporan), 'N');
-                                            ?>
-
-                                            @if ($hari == 1)
-                                                {{ $tglLaporan = 'Senin' }}
-                                            @elseif($hari == 2)
-                                                {{ $tglLaporan = 'Selasa' }}
-                                            @elseif($hari == 3)
-                                                {{ $tglLaporan = 'Rabu' }}
-                                            @elseif($hari == 4)
-                                                {{ $tglLaporan = 'Kamis' }}
-                                            @elseif($hari == 5)
-                                                {{ $tglLaporan = 'Jum\'at' }}
-                                            @elseif($hari == 6)
-                                                {{ $tglLaporan = 'Sabtu' }}
-                                            @else
-                                                {{ $tglLaporan = 'Minggu' }}
-                                            @endif
-                                        </td>
-                                        <td>{{ date_format(date_create($lpd->tanggal_laporan), 'd/m/Y') }}</td>
+                                        <td>Jumat</td>
+                                        <td>25/09/2015</td>
                                         <td>Makanan</td>
                                         <td>Makan Pagi</td>
                                         <td>Warung Nasi</td>
@@ -240,7 +186,5 @@
                     </div>
                 </div>
             </div>
-        </div> <!-- Akhir Bagian Modal Detail LPD-->
-        @endforeach
-
+        </div>
 @endsection

@@ -19,6 +19,7 @@ Route::group(['middleware' => 'auth'], function () {
     // List RPD
     Route::get('rpd/draft', 'RpdController@draft');
     Route::get('rpd/submitted', 'RpdController@submitted');
+    Route::get('rpd/approved', 'RpdController@approved');
     Route::get('rpd/log', 'RpdController@log');
     // Pengajuan RPD
     Route::post('rpd', ['as' => 'rpd.action', 'uses' => 'RpdController@createAction']);
@@ -26,6 +27,18 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('rpd/{rpd}/edit', 'RpdController@editRpd');
     Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
     Route::post('rpd/recall/{rpd}', 'RpdController@recall');
+    Route::get('rpd/{rpd}/pdf', 'RpdController@toPdf');
+
+    // LPD
+    Route::get('lpd', 'LpdController@index');
+    Route::get('lpd/log', 'LpdController@log');
+    Route::get('lpd/submitted/all', 'LpdController@submittedAll');
+    Route::get('lpd/processed', 'LpdController@processed');
+    Route::get('lpd/approved', 'LpdController@approved');
+    Route::get('lpd/submitted', 'LpdController@submitted');
+
+    Route::get('lpd/{lpd}/approval', 'LpdController@approval');
+    Route::post('lpd/{lpd}/approval', 'LpdController@submitApproval');
 });
 
 Route::group(['middleware' => 'role:administration'], function () {
@@ -67,10 +80,6 @@ Route::group(['middleware' => 'role:super_admin'], function () {
     });
 });
 
-// LPD
-Route::get('lpd', 'LpdController@index');
-Route::get('lpd/log', 'LpdController@log');
-
 // JSON Output
 Route::get('json/pegawai', 'JsonController@pegawai');
 Route::get('json/project', 'JsonController@project');
@@ -79,9 +88,7 @@ Route::get('json/pelatihan', 'JsonController@pelatihan');
 
 //tes
 Route::get('cek', function () {
-    $rpd = \App\Rpd::find(14);
-    $transport = $rpd->saranaTransportasi[0]->biaya()->where('id_kota_tujuan', 1)->where('id_kota_asal', 2)->first();
+    dd(auth()->check());
 
-    dd($transport);
     return;
 });

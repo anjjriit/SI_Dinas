@@ -28,15 +28,6 @@ body {
     padding: 10px 15px;
 }
 
-.table-modal > thead > tr > th,
-.table-modal > tbody > tr > th,
-.table-modal > tfoot > tr > th,
-.table-modal > thead > tr > td,
-.table-modal > tbody > tr > td,
-.table-modal > tfoot > tr > td {
-    border: none;
-}
-
 .content-haeder {
     padding-top: 25px;
 }
@@ -396,3 +387,8 @@ body {
 .line-header {
     margin-top: 10px;
 }
+
+.table-modal thead > tr > th {
+    font-size: 14px;
+}
+
