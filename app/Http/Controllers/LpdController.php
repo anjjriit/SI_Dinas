@@ -60,7 +60,7 @@ class LpdController extends Controller
             return view('lpd.approval_finance', compact('lpd'));
 
         } elseif (($lpd->status == 'PROCESS PAYMENT' || $lpd->status == 'TAKE PAYMENT') && $user->role == 'administration') {
-            return view('lpd.approval_administration', compact('lpd'));
+            return view('lpd.approval', compact('lpd'));
 
         }
     }
@@ -75,7 +75,7 @@ class LpdController extends Controller
 
         if ($user->role == 'finance') {
             if ($lpd->status != 'SUBMIT') {
-                return redirect('/lpd/submitted')->with('error', 'Anda tidak dapat melakukan approval terhadap LPD tersebut.');
+                return redirect('/lpd/submitted/all')->with('error', 'Anda tidak dapat melakukan approval terhadap LPD tersebut.');
             }
 
             $lpd->status = $request->input('status');
@@ -92,8 +92,8 @@ class LpdController extends Controller
             return redirect('/lpd/submitted/all')->with('success', 'Status telah terupdate');
 
         } elseif ($user->role == 'administration') {
-            if ($lpd->status != 'PROCESS PAYMENT' || $lpd->status != 'TAKE PAYMENT') {
-                return redirect('/lpd/submitted')->with('error', 'Anda tidak dapat melakukan approval terhadap LPD tersebut.');
+            if ($lpd->status != 'PROCESS PAYMENT' && $lpd->status != 'TAKE PAYMENT') {
+                return redirect('/lpd/submitted/all')->with('error', 'Anda tidak dapat melakukan approval terhadap LPD tersebut.');
             }
 
             if ($lpd->reimburse) {
@@ -111,6 +111,7 @@ class LpdController extends Controller
                 'comment' => $request->input('comment')
             ];
 
+            ActionHistoryLpd::create($action);
             return redirect('/lpd/processed/all')->with('success', 'Status telah terupdate');
         }
     }
