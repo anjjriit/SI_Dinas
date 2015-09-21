@@ -68,26 +68,51 @@ class LpdController extends Controller
     public function submitApproval(Request $request, Lpd $lpd)
     {
         $this->validate($request, [
-            'status' => 'required',
             'comment' => 'required'
         ]);
 
-        $lpd = Lpd::findOrFail($id);
+        $user = Auth::user();
 
-        // ubah paramater input() sesuai form inputnya
-        $lpd->status = $request->input('status');
-        $lpd->save();
+        if ($user->role == 'finance') {
+            if ($lpd->status != 'SUBMIT') {
+                return redirect('/lpd/submitted')->with('error', 'Anda tidak dapat melakukan approval terhadap LPD tersebut.');
+            }
 
-        $action = [
-            'id_lpd' => $lpd->id,
-            'nik' => Auth::user()->nik,
-            'action' => $lpd->status,
-            'comment' => $request('komentar')
-        ];
+            $lpd->status = $request->input('status');
+            $lpd->save();
 
-        ActionHistoryLpd::create($action);
+            $action = [
+                'id_lpd' => $lpd->id,
+                'nik' => $user->nik,
+                'action' => $lpd->status,
+                'comment' => $request->input('comment')
+            ];
 
-        return redirect('/lpd/submitted')->with('success', 'Status telah terupdate');
+            ActionHistoryLpd::create($action);
+            return redirect('/lpd/submitted/all')->with('success', 'Status telah terupdate');
+
+        } elseif ($user->role == 'administration') {
+            if ($lpd->status != 'PROCESS PAYMENT' || $lpd->status != 'TAKE PAYMENT') {
+                return redirect('/lpd/submitted')->with('error', 'Anda tidak dapat melakukan approval terhadap LPD tersebut.');
+            }
+
+            if ($lpd->reimburse) {
+                $lpd->status = 'PAID';
+            } else {
+                $lpd->status = 'PAYMENT RECEIVED';
+            }
+
+            $lpd->save();
+
+            $action = [
+                'id_lpd' => $lpd->id,
+                'nik' => $user->nik,
+                'action' => $lpd->status,
+                'comment' => $request->input('comment')
+            ];
+
+            return redirect('/lpd/processed/all')->with('success', 'Status telah terupdate');
+        }
     }
 
     public function approved()

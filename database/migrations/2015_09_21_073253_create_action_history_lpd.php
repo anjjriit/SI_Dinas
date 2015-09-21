@@ -18,7 +18,7 @@ class CreateActionHistoryLpd extends Migration
             $table->foreign('id_lpd')->references('id')->on('lpd')->onUpdate('cascade');
             $table->string('nik');
             $table->foreign('nik')->references('nik')->on('pegawai')->onUpdate('cascade');
-            $table->enum('action', ['DRAFT', 'SUBMIT', 'RECALL', 'APPROVED', 'DECLINE', 'BACK TO INITIATOR', 'PROCESS_PAYMENT', 'TAKE PAYMENT', 'PAID']);
+            $table->enum('action', ['DRAFT', 'SUBMIT', 'RECALL', 'APPROVED', 'DECLINE', 'BACK TO INITIATOR', 'PROCESS PAYMENT', 'TAKE PAYMENT', 'PAID', 'PAYMENT RECEIVED']);
             $table->text('comment')->nullable();
             $table->timestamps();
         });

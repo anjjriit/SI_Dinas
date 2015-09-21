@@ -28,6 +28,16 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
     Route::post('rpd/recall/{rpd}', 'RpdController@recall');
     Route::get('rpd/{rpd}/pdf', 'RpdController@toPdf');
+
+    // LPD
+    Route::get('lpd', 'LpdController@index');
+    Route::get('lpd/log', 'LpdController@log');
+    Route::get('lpd/submitted/all', 'LpdController@submittedAll');
+    Route::get('lpd/processed', 'LpdController@processed');
+    Route::get('lpd/approved', 'LpdController@approved');
+
+    Route::get('lpd/{lpd}/approval', 'LpdController@approval');
+    Route::post('lpd/{lpd}/approval', 'LpdController@submitApproval');
 });
 
 Route::group(['middleware' => 'role:administration'], function () {
@@ -67,18 +77,6 @@ Route::group(['middleware' => 'role:super_admin'], function () {
         Route::patch('{transportasi}/biaya/{biaya_transportasi}', 'TransportasiController@updateCost');
         Route::delete('{transportasi}/biaya/{biaya_transportasi}', 'TransportasiController@deleteCost');
     });
-});
-
-// LPD
-Route::get('lpd', 'LpdController@index');
-Route::get('lpd/log', 'LpdController@log');
-Route::get('lpd/submitted/all', 'LpdController@submittedAll');
-Route::get('lpd/processed', 'LpdController@processed');
-Route::get('lpd/approved', 'LpdController@approved');
-
-Route::group(['middleware' => 'role:administration'], function () {
-    Route::get('lpd/{id}/approval', 'LpdController@approval');
-    Route::post('lpd/{id}/approval', 'LpdController@submitApproval');
 });
 
 // JSON Output

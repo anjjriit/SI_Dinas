@@ -228,6 +228,13 @@
                                 </tbody>
                             </table>
                         </div>
+                        @if (auth()->user()->role == 'finance')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="/lpd/{{ $lpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
