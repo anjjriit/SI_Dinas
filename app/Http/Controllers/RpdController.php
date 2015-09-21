@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use PDF;
 use Auth;
 use App\Rpd;
 use App\Kota;
@@ -17,7 +18,6 @@ use App\Penginapan;
 use App\JenisBiaya;
 use App\Http\Requests;
 use App\Http\Requests\CreateRpdRequest;
-use App\Http\Requests\UpdateDraftRpdRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Auth\AuthController;
 
@@ -56,6 +56,22 @@ class RpdController extends Controller
 
     public function submit(Request $request)
     {
+        $this->validate($request, [
+            'kategori' => 'required|in:trip,non_trip',
+            'jenis_perjalanan' => 'required|in:dalam_kota,luar_kota',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date',
+            'lama_hari' => 'required|numeric|min:1',
+            'kode_kota_asal' => 'required|exists:kota,kode',
+            'kode_kota_tujuan' => 'required|exists:kota,kode',
+            'id_penginapan' => 'required',
+            'id_transportasi' => 'required',
+            'id_peserta' => 'required',
+            'tujuan_kegiatan' => 'required',
+            'kode_kegiatan' => 'required',
+            'kegiatan' => 'required'
+        ]);
+
         $inputRpd = $request->only(
             'kategori',
             'jenis_perjalanan',
@@ -80,15 +96,16 @@ class RpdController extends Controller
             $rpd->saranaTransportasi()->attach($id_transportasi);
         }
 
-        $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan');
+        $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan', 'deskripsi');
 
         for ($i = 0;$i < count($kegiatanPeserta['id_peserta']);$i++) {
             $nik = $kegiatanPeserta['id_peserta'][$i];
             $jenis_kegiatan = $kegiatanPeserta['tujuan_kegiatan'][$i];
             $kode_kegiatan = $kegiatanPeserta['kode_kegiatan'][$i];
             $kegiatan = $kegiatanPeserta['kegiatan'][$i];
+            $deskripsi = $kegiatanPeserta['deskripsi'][$i];
 
-            $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
+            $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan, 'deskripsi' => $deskripsi]);
         }
 
         $akomodasi = ['akomodasi_awal' => $this->simulateCost($rpd)];
@@ -142,15 +159,16 @@ class RpdController extends Controller
         }
 
         if ($request->has('id_peserta')) {
-            $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan');
+            $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan','deskripsi');
 
             for ($i = 0;$i < count($kegiatanPeserta['id_peserta']);$i++) {
                 $nik = $kegiatanPeserta['id_peserta'][$i];
                 $jenis_kegiatan = $kegiatanPeserta['tujuan_kegiatan'][$i];
                 $kode_kegiatan = $kegiatanPeserta['kode_kegiatan'][$i];
                 $kegiatan = $kegiatanPeserta['kegiatan'][$i];
+                $deskripsi = $kegiatanPeserta['deskripsi'][$i];
 
-                $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
+                $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan, 'deskripsi' => $deskripsi]);
             }
         }
     }
@@ -161,9 +179,15 @@ class RpdController extends Controller
 
         $user = Auth::user();
 
-        if ($rpd->nik != $user->nik && $user->role != 'administration') {
-            return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
-        } 
+        if ($user->role == 'administration') {
+            if ($rpd->status != 'SUBMIT' && $rpd->nik != $user->nik) {
+                return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
+            }
+        } else {
+            if ($rpd->status == 'SUBMIT' || $rpd->nik != $user->nik) {
+                return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
+            }
+        }
 
         $list_pegawai = Pegawai::orderBy('nama_lengkap', 'asc')->lists('nama_lengkap', 'nik');
         $list_kota = Kota::orderBy('nama_kota', 'asc')->lists('nama_kota', 'kode');
@@ -190,16 +214,16 @@ class RpdController extends Controller
 
     public function updateAction(Request $request, $id)
     {
-        if (Auth::user()->role != 'administration') {
-            $auth = Rpd::where('id', $id)->where('nik', Auth::user()->nik)->exists();
+        $rpd = Rpd::findOrFail($id);
 
-            if (!$auth) {
+        $user = Auth::user();
+
+        if ($user->role == 'administration') {
+            if ($rpd->status != 'SUBMIT' && $rpd->nik != $user->nik) {
                 return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
             }
         } else {
-            $submitted = Rpd::where('id', $id)->where('status', 'SUBMIT')->exists();
-
-            if (!$submitted) {
+            if ($rpd->status == 'SUBMIT' || $rpd->nik != $user->nik) {
                 return redirect('/rpd/submitted')->with('error', 'Anda tidak dapat melakukan edit terhadap RPD tersebut.');
             }
         }
@@ -254,15 +278,16 @@ class RpdController extends Controller
         $rpd->kegiatan()->delete();
 
         if ($request->has('id_peserta')) {
-            $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan');
+            $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan', 'deskripsi');
 
             for ($i = 0;$i < count($kegiatanPeserta['id_peserta']);$i++) {
                 $nik = $kegiatanPeserta['id_peserta'][$i];
                 $jenis_kegiatan = $kegiatanPeserta['tujuan_kegiatan'][$i];
                 $kode_kegiatan = $kegiatanPeserta['kode_kegiatan'][$i];
                 $kegiatan = $kegiatanPeserta['kegiatan'][$i];
+                $deskripsi = $kegiatanPeserta['deskripsi'][$i];
 
-                $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
+                $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan, 'deskripsi' => $deskripsi]);
             }
         }
     }
@@ -336,7 +361,7 @@ class RpdController extends Controller
             $rpd->saranaTransportasi()->attach($id_transportasi);
         }
 
-        $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan');
+        $kegiatanPeserta = $request->only('id_peserta', 'tujuan_kegiatan', 'kode_kegiatan', 'kegiatan', 'deskripsi');
 
         $rpd->kegiatan()->delete();
 
@@ -345,8 +370,9 @@ class RpdController extends Controller
             $jenis_kegiatan = $kegiatanPeserta['tujuan_kegiatan'][$i];
             $kode_kegiatan = $kegiatanPeserta['kode_kegiatan'][$i];
             $kegiatan = $kegiatanPeserta['kegiatan'][$i];
+            $deskripsi = $kegiatanPeserta['deskripsi'][$i];
 
-            $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan]);
+            $rpd->peserta()->attach($nik, ['jenis_kegiatan' => $jenis_kegiatan, 'kode_kegiatan' => $kode_kegiatan, 'kegiatan' => $kegiatan, 'deskripsi' => $deskripsi]);
         }
     }
 
@@ -422,7 +448,7 @@ class RpdController extends Controller
     public function approved()
     {
         $approvedRpds = Rpd::where('status', '=', 'APPROVED')->paginate(10);
-        
+
         return view('rpd.approved', compact('approvedRpds'));
     }
 
@@ -431,6 +457,26 @@ class RpdController extends Controller
         $rpdLogs = Rpd::log()->mine()->paginate(15);
 
         return view('rpd.log', compact('rpdLogs'));
+    }
+
+    public function toPdf($id)
+    {
+        $rpd = Rpd::findOrFail($id);
+
+$snappy = \App::make('snappy.pdf');
+//To file
+$snappy->generateFromHtml('<h1>Bill</h1><p>You owe me money, dude.</p>', '/tmp/bill-123.pdf');
+$snappy->generate('http://www.github.com', '/tmp/github.pdf');
+//Or output:
+return new Response(
+    $snappy->getOutputFromHtml($html),
+    200,
+    array(
+        'Content-Type'          => 'application/pdf',
+        'Content-Disposition'   => 'attachment; filename="file.pdf"'
+    )
+);
+        //return view('rpd.pdf', compact('rpd'));
     }
 
     public function generateCode()

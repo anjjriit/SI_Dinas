@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Auth;
 use Illuminate\Database\Eloquent\Model;
 
 class Lpd extends Model
@@ -30,10 +31,17 @@ class Lpd extends Model
 
     public function scopeProcessed($query)
     {
-        return $query->where('status', '=', 'PROCESS PAYMENT')
-                     ->where('status', '=', 'TAKE PAYMENT')
-                     ->where('status', '=', 'PAID')
-                     ->where('status', '=', 'PAYMENT RECEIVED');
+        if (Auth::user()->role == 'finance') {
+            return $query->where('status', 'PROCESS PAYMENT')
+                         ->orWhere('status', 'TAKE PAYMENT')
+                         ->orWhere('status', 'PAYMENT RECEIVED')
+                         ->orWhere('status', 'PAID');
+
+        } elseif (Auth::user()->role == 'administration') {
+            return $query->where('status', 'PAYMENT RECEIVED')
+                         ->orWhere('status', 'PAID');
+
+        }
     }
 
     public function scopeMine($query)

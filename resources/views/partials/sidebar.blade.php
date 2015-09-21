@@ -88,8 +88,8 @@
                     <i class="fa fa-fw fa-files-o"></i><span>Approval LPD</span> <i class="fa fa-angle-down pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li {{ (Request::is('lpd/submitted') ? ' class=item-active' : '')}}>
-                        <a href="/lpd/submitted">
+                    <li {{ (Request::is('lpd/submitted*') ? ' class=item-active' : '')}}>
+                        <a href="/lpd/submitted/all">
                             <i class="fa fa-fw fa-list"></i> <span>Submitted LPD</span>
                         </a>
                     </li>

@@ -33,6 +33,7 @@ class RouteServiceProvider extends ServiceProvider
         $router->model('transportasi', 'App\Transportasi');
         $router->model('biaya_transportasi', 'App\BiayaTransportasi');
         $router->model('penginapan', 'App\Penginapan');
+        $router->model('lpd', 'App\Lpd');
 
         parent::boot($router);
     }

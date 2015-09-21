@@ -27,6 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('rpd/{rpd}/edit', 'RpdController@editRpd');
     Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
     Route::post('rpd/recall/{rpd}', 'RpdController@recall');
+    Route::get('rpd/{rpd}/pdf', 'RpdController@toPdf');
 });
 
 Route::group(['middleware' => 'role:administration'], function () {
@@ -72,6 +73,7 @@ Route::group(['middleware' => 'role:super_admin'], function () {
 Route::get('lpd', 'LpdController@index');
 Route::get('lpd/log', 'LpdController@log');
 Route::get('lpd/submitted/all', 'LpdController@submittedAll');
+Route::get('lpd/{lpd}/approval', 'LpdController@approval');
 
 // JSON Output
 Route::get('json/pegawai', 'JsonController@pegawai');
