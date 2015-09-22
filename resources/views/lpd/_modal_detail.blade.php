@@ -75,7 +75,7 @@
                                     </tr>
                                     <tr>
                                         <td class="active"><strong>Pengembalian (Reimburse)</strong></td>
-                                        <td class="text-right">{{ 'Rp ' . number_format(2000000, 0, ',', '.') }}</td>
+                                        <td class="text-right">{{ 'Rp ' . number_format($lpd->rpd->akomodasi_awal - $lpd->total_pengeluaran, 0, ',', '.') }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -116,7 +116,7 @@
                                             {{ 'Minggu, ' }}
                                         @endif
 
-                                        {{ date_format(date_create($lpd->tanggal_laporan), 'd/m/Y') }}
+                                        {{ date_format(date_create($pengeluaran->tanggal), 'd/m/Y') }}
                                     </td>
                                     <td style="vertical-align: top;">{{ $pengeluaran->tipe->nama_kategori }}</td>
                                     <td style="vertical-align: top;">{{ $pengeluaran->keterangan }}</td>

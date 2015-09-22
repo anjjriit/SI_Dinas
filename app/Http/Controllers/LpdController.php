@@ -10,6 +10,7 @@ use App\Pengeluaran;
 use App\Pegawai;
 use App\Lpd;
 use App\ActionHistoryLpd;
+use App\TipePengeluaran;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Auth\AuthController;
@@ -40,9 +41,9 @@ class LpdController extends Controller
             ];
 
             $lpd = Lpd::create($input);
-
-            return redirect('/lpd/' . $lpd->id . '/edit');
         }
+
+        return redirect('/lpd/' . $rpd->lpd->id . '/edit');
     }
 
     public function edit(Lpd $lpd)
@@ -53,7 +54,9 @@ class LpdController extends Controller
             return redirect('/lpd')->with('error', 'Anda tidak dapat melakukan edit terhadap LPD tersebut.');
         }
 
-        return view('lpd.edit', compact('lpd'));
+        $list_tipe = TipePengeluaran::orderBy('nama_kategori', 'asc')->lists('nama_kategori', 'id');
+
+        return view('lpd.edit', compact('lpd', 'list_tipe'));
     }
 
     public function updateAction(Request $request, Lpd $lpd)
@@ -151,18 +154,20 @@ class LpdController extends Controller
         $pengeluaran = Pengeluaran::create($input);
 
         foreach ($request->input('personel') as $personel) {
-            $pengeluaran->pegawai()->attach($personel);
+            $pengeluaran->personel()->attach($personel);
         }
 
-        return redirect('/lpd/' . $lpd->id . '/edit')->with('status', 'Pengeluaran telah ditambahkan.');
+        return redirect('/lpd/' . $lpd->id . '/edit')->with('success', 'Pengeluaran telah ditambahkan.');
     }
 
-    public function editPengeluaran(Pengeluaran $pengeluaran)
+    public function editPengeluaran(Lpd $lpd, Pengeluaran $pengeluaran)
     {
-        return view('lpd.edit_pengeluaran');
+        $list_tipe = TipePengeluaran::orderBy('nama_kategori', 'asc')->lists('nama_kategori', 'id');
+
+        return view('lpd.edit_pengeluaran', compact('lpd', 'pengeluaran', 'list_tipe'));
     }
 
-    public function updatePengeluaran(Request $request, Pengeluaran $pengeluaran)
+    public function updatePengeluaran(Request $request, Lpd $lpd, Pengeluaran $pengeluaran)
     {
         $this->validate($request, [
             'tanggal' => 'required|date',
@@ -183,20 +188,20 @@ class LpdController extends Controller
 
         $pengeluaran->fill($input)->save();
 
-        $pengeluaran->personel->delete();
+        $pengeluaran->personel()->detach();
 
         foreach ($request->input('personel') as $personel) {
-            $pengeluaran->pegawai()->attach($personel);
+            $pengeluaran->personel()->attach($personel);
         }
 
-        return redirect('/lpd/' . $pengeluaran->id_lpd . '/edit')->with('status', 'Pengeluaran berhasil dihapus');
+        return redirect('/lpd/' . $pengeluaran->id_lpd . '/edit')->with('success', 'Pengeluaran berhasil diedit');
     }
 
     public function deletePengeluaran(Pengeluaran $pengeluaran)
     {
         $pengeluaran->delete();
 
-        return redirect('/lpd/' . $pengeluaran->id_lpd . '/edit')->with('status', 'Pengeluaran berhasil dihapus');
+        return redirect('/lpd/' . $pengeluaran->id_lpd . '/edit')->with('success', 'Pengeluaran berhasil dihapus');
     }
 
     public function log()

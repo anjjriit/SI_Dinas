@@ -41,8 +41,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('lpd/{lpd}/edit', 'LpdController@edit');
     Route::post('lpd/{lpd}', 'LpdController@updateAction');
     Route::post('lpd/{lpd}/pengeluaran/add', 'LpdController@addPengeluaran');
-    Route::get('lpd/pengeluaran/{pengeluaran}/edit', 'LpdController@editPengeluaran');
-    Route::patch('lpd/pengeluaran/{pengeluaran}', 'LpdController@updatePengeluaran');
+    Route::get('lpd/{lpd}/pengeluaran/{pengeluaran}/edit', 'LpdController@editPengeluaran');
+    Route::patch('lpd/{lpd}/pengeluaran/{pengeluaran}', 'LpdController@updatePengeluaran');
     Route::delete('lpd/pengeluaran/{pengeluaran}', 'LpdController@deletePengeluaran');
 
     Route::get('lpd/{lpd}/approval', 'LpdController@approval');
