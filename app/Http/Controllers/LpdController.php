@@ -30,7 +30,15 @@ class LpdController extends Controller
     {
         $rpdId = $request->get('rpdId');
         $rpd = Rpd::find($rpdId);
-        //$listpengeluaran = Pengeluaran::get()->all();
+
+        $lpd = new \App\Lpd();
+        $lpd->nik = Auth::user()->nik;
+        $lpd->id_rpd = $rpdId;
+        $lpd->save();
+        $lpd->kode = "LPD"+$lpd->id+''+$rpd->kode;
+        $lpd->save();
+       
+
         return view('lpd.create', compact('rpd'));
     }
 

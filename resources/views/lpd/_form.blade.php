@@ -6,6 +6,9 @@
             <td>{!! Form::label('keterangan', 'Keterangan') !!}</td>
             <td>{!! Form::label('biaya', 'Biaya') !!}</td>
             <td>{!! Form::label('struk', 'Struk') !!}</td>
+            <td>Pengeluaran</td>
+            <td>Personel</td>
+            <td></td>
         </tr>
         <tr>
             <td>
@@ -19,6 +22,11 @@
             </td>
             <td>
                 {!! Form::text('struk', null, ['class' => 'form-control']) !!}
+            </td>
+            <td> </td>
+            <td> </td>
+            <td>
+                <a href="#" class="btn btn-sm btn-primary"><i class="fa fa-plus" > </i></a> 
             </td>
         </tr>
     </table>
