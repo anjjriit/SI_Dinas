@@ -32,8 +32,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     // LPD
     Route::get('lpd', 'LpdController@index');
-    Route::post('lpd/store','LpdController@store');
-    Route::get('lpd/create','LpdController@create');
     Route::get('lpd/log', 'LpdController@log');
     Route::get('lpd/submitted/all', 'LpdController@submittedAll');
     Route::get('lpd/processed', 'LpdController@processed');
@@ -53,8 +51,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'role:administration'], function () {
-    Route::get('rpd/{id}/approval', 'RpdController@approval');
-    Route::post('rpd/{id}/approval', 'RpdController@submitApproval');
+    Route::get('rpd/{rpd}/approval', 'RpdController@approval');
+    Route::post('rpd/{rpd}/approval', 'RpdController@submitApproval');
 });
 
 Route::group(['middleware' => 'role:super_admin'], function () {
