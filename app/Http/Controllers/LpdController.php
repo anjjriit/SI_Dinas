@@ -26,9 +26,12 @@ class LpdController extends Controller
         return view('lpd.index', compact('approvedRpds'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        //
+        $rpdId = $request->get('rpdId');
+        $rpd = Rpd::find($rpdId);
+        //$listpengeluaran = Pengeluaran::get()->all();
+        return view('lpd.create', compact('rpd'));
     }
 
     public function log()
@@ -148,5 +151,12 @@ class LpdController extends Controller
         ActionHistoryLpd::create($action);
 
         return redirect('/lpd/submitted')->with('success', 'Sukses merecall LPD dengan kode ' . $lpd->kode . '.');
+    }
+
+    public function store(Request $request){
+
+
+
+        return redirect('lpd.item.create');
     }
 }

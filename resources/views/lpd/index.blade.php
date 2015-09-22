@@ -70,7 +70,7 @@
     											<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
     												<i class="fa fa-fw fa-share"></i>Detail
     											</button>
-    											<a href="/lpd/kode/create" class="btn btn-sm btn-primary"> Create LPD</a>
+    											<a href="/lpd/create?rpdId={{ $rpd->id }}" class="btn btn-sm btn-primary"> Create LPD</a>
     										</td>
     		    						</tr>
     	    						@endforeach

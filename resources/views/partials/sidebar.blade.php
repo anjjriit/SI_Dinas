@@ -23,8 +23,8 @@
                     </a>
                 </li>
             @else
-                <li {{ (Request::is('home') ? ' class=item-active' : '')}}>
-                    <a href="/home">
+                <li {{ (Request::is('homepage') ? ' class=item-active' : '')}}>
+                    <a href="/homepage">
                         <i class="fa fa-fw fa-home"></i> <span>Homepage</span>
                     </a>
                 </li>

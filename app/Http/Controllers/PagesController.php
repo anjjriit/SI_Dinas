@@ -11,6 +11,9 @@ use App\Rpd;
 use App\Prospek;
 use App\Project;
 use App\Pelatihan;
+use App\Lpd;
+use Auth;
+use App\Http\Controllers\Auth\AuthController;
 
 class PagesController extends Controller
 {
@@ -21,7 +24,19 @@ class PagesController extends Controller
         $pelatihans = Pelatihan::all();
         $rpds = Rpd::all();
         $users = Pegawai::all();
+        $lpds = Lpd::all();
 
-        return view('dashboard', compact('prospeks', 'projects', 'pelatihans', 'rpds', 'users'));
+        return view('dashboard', compact('prospeks', 'projects', 'pelatihans', 'rpds', 'users','lpds'));
+    }
+
+    public function homepage() {
+    	$user = Auth::user();
+        $userId = $user->nik;
+        $rpds = Rpd::mine()->paginate(10);
+        //$lpds = Lpd::where('nik','=', $userId)
+        //				->paginate(10);
+
+        return view('homepage', compact('rpds'));
+
     }
 }

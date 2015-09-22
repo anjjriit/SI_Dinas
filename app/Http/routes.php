@@ -8,6 +8,7 @@ Route::group(['middleware' => 'auth'], function () {
         return redirect('/dashboard');
     });
     Route::get('/dashboard', 'PagesController@dashboard');
+    Route::get('/homepage','PagesController@homepage');
 
     Route::get('logout', 'Auth\AuthController@getLogout');
     Route::get('user/password', 'PegawaiController@editPassword');
@@ -31,6 +32,8 @@ Route::group(['middleware' => 'auth'], function () {
 
     // LPD
     Route::get('lpd', 'LpdController@index');
+    Route::post('lpd/store','LpdController@store');
+    Route::get('lpd/create','LpdController@create');
     Route::get('lpd/log', 'LpdController@log');
     Route::get('lpd/submitted/all', 'LpdController@submittedAll');
     Route::get('lpd/processed', 'LpdController@processed');
