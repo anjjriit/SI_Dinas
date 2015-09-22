@@ -173,10 +173,8 @@ class RpdController extends Controller
         }
     }
 
-    public function editRpd($id)
+    public function editRpd(Rpd $rpd)
     {
-        $rpd = Rpd::findOrFail($id);
-
         $user = Auth::user();
 
         if ($user->role == 'administration') {
@@ -212,10 +210,8 @@ class RpdController extends Controller
         );
     }
 
-    public function updateAction(Request $request, $id)
+    public function updateAction(Request $request, Rpd $rpd)
     {
-        $rpd = Rpd::findOrFail($id);
-
         $user = Auth::user();
 
         if ($user->role == 'administration') {
@@ -229,17 +225,17 @@ class RpdController extends Controller
         }
 
         if ($request->input('action') == 'submit') {
-            $this->updateSubmit($request, $id);
+            $this->updateSubmit($request, $rpd);
 
             return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil di submit.');
         } elseif ($request->input('action') == 'draft') {
-            $this->updateDraft($request, $id);
+            $this->updateDraft($request, $rpd);
 
             return redirect('/rpd/draft')->with('success', 'Pengajuan RPD berhasil di simpan sebagai draft.');
         }
     }
 
-    public function updateDraft(Request $request, $id)
+    public function updateDraft(Request $request, Rpd $rpd)
     {
         $inputRpd = $request->only(
             'kategori',
@@ -251,8 +247,6 @@ class RpdController extends Controller
             'id_penginapan',
             'keterangan'
         );
-
-        $rpd = Rpd::findOrFail($id);
 
         $rpd->fill($inputRpd)->save();
 
@@ -292,7 +286,7 @@ class RpdController extends Controller
         }
     }
 
-    public function updateSubmit(Request $request, $id)
+    public function updateSubmit(Request $request, Rpd $rpd)
     {
         $this->validate($request, [
             'kategori' => 'required|in:trip,non_trip',
@@ -309,8 +303,6 @@ class RpdController extends Controller
             'kode_kegiatan' => 'required',
             'kegiatan' => 'required'
         ]);
-
-        $rpd = Rpd::findOrFail($id);
 
         if ($rpd->status != 'SUBMIT')
         {
@@ -376,10 +368,8 @@ class RpdController extends Controller
         }
     }
 
-    public function recall($id)
+    public function recall(Rpd $rpd)
     {
-        $rpd = Rpd::findOrFail($id);
-
         $rpd->status = 'RECALL';
         $rpd->save();
 
@@ -395,23 +385,18 @@ class RpdController extends Controller
         return redirect('/rpd/submitted')->with('success', 'Sukses merecall RPD dengan kode ' . $rpd->kode . '.');
     }
 
-    public function approval($id)
+    public function approval(Rpd $rpd)
     {
-        $rpd = Rpd::findOrFail($id);
-
         return view('rpd.approval', compact('rpd'));
     }
 
-    public function submitApproval(Request $request, $id)
+    public function submitApproval(Request $request, Rpd $rpd)
     {
         $this->validate($request, [
             'status' => 'required',
             'comment' => 'required'
         ]);
 
-        $rpd = Rpd::findOrFail($id);
-
-        // ubah parameter input() sesuai form inputnya
         $rpd->status = $request->input('status');
         $rpd->save();
 
@@ -459,23 +444,8 @@ class RpdController extends Controller
         return view('rpd.log', compact('rpdLogs'));
     }
 
-    public function toPdf($id)
+    public function toPdf(Rpd $rpd)
     {
-        $rpd = Rpd::findOrFail($id);
-
-        $snappy = \App::make('snappy.pdf');
-        //To file
-        $snappy->generateFromHtml('<h1>Bill</h1><p>You owe me money, dude.</p>', '/tmp/bill-123.pdf');
-        $snappy->generate('http://www.github.com', '/tmp/github.pdf');
-        //Or output:
-        return new Response(
-            $snappy->getOutputFromHtml($html),
-            200,
-            array(
-                'Content-Type'          => 'application/pdf',
-                'Content-Disposition'   => 'attachment; filename="file.pdf"'
-            )
-        );
         //return view('rpd.pdf', compact('rpd'));
     }
 

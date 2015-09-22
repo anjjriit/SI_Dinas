@@ -6,7 +6,7 @@
 </head>
 <body>
     <h4>RENCANA PERJALANAN DINAS (RPD)</h4>
-    <table class="table table-modal">
+    <table>
         <tr>
             <td>Kode RPD</td>
             <td>{{ $rpd->kode }}</td>

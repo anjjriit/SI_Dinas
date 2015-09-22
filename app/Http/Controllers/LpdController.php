@@ -28,25 +28,8 @@ class LpdController extends Controller
         return view('lpd.index', compact('approvedRpds'));
     }
 
-    // public function create(Request $request)
-    // {
-    //     $rpdId = $request->get('rpdId');
-    //     $rpd = Rpd::find($rpdId);
-
-    //     $lpd = new \App\Lpd();
-    //     $lpd->nik = Auth::user()->nik;
-    //     $lpd->id_rpd = $rpdId;
-    //     $lpd->save();
-    //     $lpd->kode = "LPD"+$lpd->id+''+$rpd->kode;
-    //     $lpd->save();
-       
-
-    //     return view('lpd.create', compact('rpd'));
-
-    public function create(Request $request)
+    public function create(Rpd $rpd)
     {
-        $rpd = Rpd::find($request->get('rpdId'));
-
         if (is_null($rpd->lpd)) {
             $input = [
                 'nik' => Auth::user()->nik,
@@ -134,6 +117,7 @@ class LpdController extends Controller
             $lpd->reimburse = false;
         }
 
+        $lpd->kode = $this->generateCode();
         $lpd->status = 'SUBMIT';
         $lpd->save();
 
@@ -344,5 +328,21 @@ class LpdController extends Controller
     public function store(Request $request){
 
         return redirect('lpd.item.create');
+    }
+
+    public function generateCode()
+    {
+        $last = Lpd::select('kode')->orderBy('kode', 'desc')->first();
+
+        if (empty($last['kode'])) {
+            return "LPD0001";
+        } else {
+            $no = str_replace('LPD', '', $last['kode']);
+            $no = (int) $no + 1;
+
+            $new = 'LPD' . str_pad($no, 4, '0', STR_PAD_LEFT);
+
+            return $new;
+        }
     }
 }

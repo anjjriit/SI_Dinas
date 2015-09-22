@@ -8,14 +8,14 @@
 @endsection
 
 @section('content')
-		
+
 	@if (session('success'))
 		<div class="content">
 			<div class="row">
                 <div class="alert alert-success">
                     {{ session('success') }}
                 </div>
-            </div>		
+            </div>
 		</div>
     @endif
 
@@ -25,10 +25,10 @@
                 <div class="alert alert-danger">
                     {{ session('error') }}
                 </div>
-            </div>		
+            </div>
 		</div>
     @endif
-		
+
 	<section class="content-header">
         <h1>Data Rencana Perjalanan Dinas</h1>
         <label>Yang telah diapprove</label>
@@ -70,7 +70,7 @@
     											<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
     												<i class="fa fa-fw fa-share"></i>Detail
     											</button>
-    											<a href="/lpd/create?rpdId={{ $rpd->id }}" class="btn btn-sm btn-primary"> Create LPD</a>
+    											<a href="/lpd/create/{{ $rpd->id }}" class="btn btn-sm btn-primary"> Create LPD</a>
     										</td>
     		    						</tr>
     	    						@endforeach
@@ -79,9 +79,9 @@
         				</div>
                     @else
                         <div class="alert alert-warning">
-                            Anda belum memiliki list RPD yang telah diapproved.
+                            Tidak ada laporan yang harus dibuat.
                         </div>
-                    @endif    				
+                    @endif
     			</div>
     		</div><!-- Akhir Bagian Box Table-->
     	</div>
@@ -136,7 +136,7 @@
 	                            <tr>
                                     <th class="col-md-4">Jumlah Hari Dinas</th>
                                     <td>
-                                    	{{ 
+                                    	{{
                                     		$rpd->lama_hari
 										}}
                                     </td>
@@ -154,10 +154,10 @@
                                     <td>
                                     	<ul>
                                     		@foreach($rpd->saranaTransportasi as $saranaTransportasi)
-	                                    		<li>{{ $saranaTransportasi->nama_transportasi }}</li> 
+	                                    		<li>{{ $saranaTransportasi->nama_transportasi }}</li>
 	                                    	@endforeach
 	                                    </ul>
-                                    </td>                                    	
+                                    </td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Sarana Penginapan</th>

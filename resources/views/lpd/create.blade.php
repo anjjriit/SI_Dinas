@@ -57,7 +57,7 @@
                                     </table>
                                 </fieldset>
 
-                                @include('lpd._form')
+                                @include('lpd._form_pengeluaran')
 
 
                                 {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Tambah LPD', ['type' => 'submit', 'class' => 'btn btn-lg btn-success']) !!}
