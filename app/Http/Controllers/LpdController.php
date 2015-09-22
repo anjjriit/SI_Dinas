@@ -68,11 +68,11 @@ class LpdController extends Controller
         }
 
         if ($request->input('action') == 'submit') {
-            $this->updateSubmit($request, $id);
+            $this->updateSubmit($request, $lpd);
 
             return redirect('/lpd/submitted')->with('success', 'LPD berhasil di submit.');
         } elseif ($request->input('action') == 'draft') {
-            $this->updateDraft($request, $id);
+            $this->updateDraft($request, $lpd);
 
             return redirect('/lpd/draft')->with('success', 'LPD berhasil di simpan sebagai draft.');
         }
