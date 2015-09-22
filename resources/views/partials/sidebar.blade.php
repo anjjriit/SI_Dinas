@@ -179,7 +179,8 @@
                             Request::is('project*') ||
                             Request::is('pelatihan*') ||
                             Request::is('jenisbiayapengeluaranstandard*') ||
-                            Request::is('transportasi*')
+                            Request::is('transportasi*')||
+                            Request::is('tipepengeluaran*')
                         )
                         ? ' item-active' : ''
                     }}"
@@ -212,6 +213,9 @@
                        <li {{ (Request::is('penginapan') ? ' class=item-active' : '') }}>
                             <a href="/penginapan"><i class="fa fa-fw"></i>Data Penginapan</a>
                        </li>
+                        <li {{ (Request::is('tipepengeluaran*') ? ' class=item-active' : '') }}>
+                            <a href="/tipepengeluaran"><i class="fa fa-fw"></i>Data Tipe Pengeluaran</a>
+                        </li>
                     </ul>
                 </li>
             @endif

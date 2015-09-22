@@ -87,6 +87,8 @@ Route::group(['middleware' => 'role:super_admin'], function () {
         Route::patch('{transportasi}/biaya/{biaya_transportasi}', 'TransportasiController@updateCost');
         Route::delete('{transportasi}/biaya/{biaya_transportasi}', 'TransportasiController@deleteCost');
     });
+    //CRUD pengeluaran
+    Route::resource('tipepengeluaran','TipePengeluaranController',['except' => 'show']);
 });
 
 // JSON Output
