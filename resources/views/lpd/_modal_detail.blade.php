@@ -20,7 +20,7 @@
                                     <tr>
                                         <td>{{ $lpd->pegawai->nama_lengkap }}</td>
                                         <td>
-                                            {{ $tglLaporan }}
+                                            {{ date_format(date_create($lpd->tanggal_laporan), 'd/m/Y') }}
                                         </td>
                                     </tr>
                                 </tbody>
