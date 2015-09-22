@@ -446,6 +446,9 @@ class RpdController extends Controller
 
     public function toPdf(Rpd $rpd)
     {
+        $pdf = PDF::loadView('rpd.pdf', ['rpd' => $rpd]);
+
+        return $pdf->stream($rpd->kode . '.pdf');
         //return view('rpd.pdf', compact('rpd'));
     }
 

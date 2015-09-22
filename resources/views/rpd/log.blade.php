@@ -89,58 +89,58 @@
                     </div>
                     <div class="modal-body">
                         <!-- Info basic dari RPD -->
-                        <table class="table table-modal table-responsive table-condensed">
+                        <table class="table table-plain table-responsive">
                             <tbody>
                                 <tr>
-                                    <th class="col-md-4">Kode RPD</th>
+                                    <td class="col-md-3">Kode RPD</td>
                                     <td>{{ $rpd->kode }}</td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-4">Penanggung Jawab</th>
+                                    <td class="col-md-3">Penanggung Jawab</td>
                                     <td>{{ $rpd->pegawai->nama_lengkap }}</td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-4">Kategori</th>
+                                    <td class="col-md-3">Kategori</td>
                                     <td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-4">Jenis</th>
+                                    <td class="col-md-3">Jenis</td>
                                     <td>{{ ucwords(str_replace('_', ' ', $rpd->jenis_perjalanan)) }}</td>
                                 </tr>
                                 <tr>
                                     @if($dataKategori == "Trip")
-                                        <th class="col-md-4">Tanggal Mulai</th>
+                                        <td class="col-md-3">Tanggal Mulai</td>
                                     @else
-                                        <th class="col-md-4">Tanggal </th>
+                                        <td class="col-md-3">Tanggal </td>
                                     @endif
                                     <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
                                 </tr>
                                 @if($dataKategori == "Trip")
                                     <tr>
-                                        <th class="col-md-4">Tanggal Selesai</th>
+                                        <td class="col-md-3">Tanggal Selesai</td>
                                         <td>
                                             {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
                                         </td>
                                     </tr>
                                 @endif
                                 <tr>
-                                    <th class="col-md-4">Jumlah Hari Dinas</th>
+                                    <td class="col-md-3">Jumlah Hari Dinas</td>
                                     <td>
                                         {{ $rpd->lama_hari }} hari
                                     </td>
                                 </tr>
                                 <tr>
-                                    <th class="col-md-4">Asal Kota</th>
+                                    <td class="col-md-3">Asal Kota</td>
                                     <td>{{ $rpd->kotaAsal->nama_kota }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"><strong>Tujuan Kota</strong></td>
+                                    <td class="col-md-3">Tujuan Kota</td>
                                     <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"><strong>Sarana Transportasi</strong></td>
+                                    <td class="col-md-3">Sarana Transportasi</td>
                                     <td>
-                                        <ul style="margin-top: 10px;">
+                                        <ul class="list-unstyled">
                                             @foreach($rpd->saranaTransportasi as $saranaTransportasi)
                                                 <li>{{ $saranaTransportasi->nama_transportasi }}</li>
                                             @endforeach
@@ -148,23 +148,24 @@
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"><strong>Sarana Penginapan</strong></td>
+                                    <td class="col-md-3">Sarana Penginapan</td>
                                     <td>{{ $rpd->saranaPenginapan->nama_penginapan }}</td>
                                 </tr>
                                 @if ($rpd->status == 'APPROVED' || auth()->user()->role == 'administration')
                                 <tr>
-                                    <td class="col-md-4"><strong>Akomodasi Awal</strong></td>
+                                    <td class="col-md-3">Akomodasi Awal</td>
                                     <td>Rp {{ number_format($rpd->akomodasi_awal, 2, ',', '.') }}</td>
                                 </tr>
                                 @endif
                                 <tr>
-                                    <th class="col-md-4">Status</th>
+                                    <td class="col-md-3">Status</td>
                                     <td style="text-transform : uppercase;">{{ $rpd->status }}</td>
                                 </tr>
                             </tbody>
                         </table>
 
                         <!-- Daftar Peserta RPD-->
+                        <br>
                         <h4>Peserta dan Tujuan Kegiatan</h4>
                         <table class="table table-bordered table-striped">
                             <thead>
@@ -214,12 +215,14 @@
                         </table>
 
                         <!--Bagian Komentar atau Keterangan-->
+                        <br>
                         <h4>Komentar</h4>
                         <p>
                             {{ $rpd->keterangan }}
                         </p>
 
                         <!--Bagian Action History-->
+                        <br>
                         <h4>Action History</h4>
                         <table class="table table-bordered table-striped">
                             <thead>

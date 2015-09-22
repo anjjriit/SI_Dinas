@@ -89,21 +89,29 @@
                                     <td>{{ $rpd->pegawai->nama_lengkap }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"><strong>Kategori</strong></td>
-                                    <td>{{ ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
+                                    <td class="col-md-4">Kategori</td>
+                                    <td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"><strong>Jenis</strong></td>
+                                    <td class="col-md-4">Jenis</td>
                                     <td>{{ ucwords(str_replace('_', ' ', $rpd->jenis_perjalanan)) }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"><strong>Tanggal Mulai</strong></td>
+                                    @if($dataKategori == "Trip")
+                                        <td class="col-md-4">Tanggal Mulai</td>
+                                    @else
+                                        <td class="col-md-4">Tanggal </td>
+                                    @endif
                                     <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
                                 </tr>
-                                <tr>
-                                    <td class="col-md-4"><strong>Tanggal Selesai</strong></td>
-                                    <td>{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}</td>
-                                </tr>
+                                @if($dataKategori == "Trip")
+                                    <tr>
+                                        <td class="col-md-4">Tanggal Selesai</td>
+                                        <td>
+                                            {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
+                                        </td>
+                                    </tr>
+                                @endif
                                 <tr>
                                     <td class="col-md-4"><strong>Jumlah Hari Dinas</strong></td>
                                     <td>
@@ -121,7 +129,7 @@
                                 <tr>
                                     <td class="col-md-4"><strong>Sarana Transportasi</strong></td>
                                     <td>
-                                        <ul style="margin-top: 10px;">
+                                        <ul class="list-unstyled">
                                             @foreach($rpd->saranaTransportasi as $saranaTransportasi)
                                                 <li>{{ $saranaTransportasi->nama_transportasi }}</li>
                                             @endforeach

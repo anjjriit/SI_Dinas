@@ -28,6 +28,16 @@ body {
     padding: 10px 15px;
 }
 
+.table-plain > thead > tr > th,
+.table-plain > tbody > tr > th,
+.table-plain > tfoot > tr > th,
+.table-plain > thead > tr > td,
+.table-plain > tbody > tr > td,
+.table-plain > tfoot > tr > td {
+    border: none;
+    padding: 4px 0;
+}
+
 .content-haeder {
     padding-top: 25px;
 }

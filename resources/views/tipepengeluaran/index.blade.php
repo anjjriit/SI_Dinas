@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Data Kota')
+@section('page_title', 'Data Tipe Pengeluaran')
 
 @section('stylesheet')
     @parent
@@ -10,7 +10,7 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Kota</h1>
+            <h1>Data Tipe Pengeluaran</h1>
         </section>
 
         <section class="content-filter">
@@ -18,7 +18,7 @@
                 <div class="col-md-12">
                     {!! Form::model($request, [
                         'method' => 'GET',
-                        'route' => 'kota.index',
+                        'route' => 'tipepengeluaran.index',
                         'class' => 'form-inline pull-right'
                     ])!!}
                         <div class="form-group">
@@ -30,7 +30,7 @@
                             {!! Form::select(
                                 'orderBy',
                                 [
-                                    'nama_kota' => 'Nama Kota'
+                                    'nama_tipepengeluaran' => 'Nama Kategori'
                                 ],
                                 null,
                                 ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
@@ -58,7 +58,7 @@
                     {!! Form::model($request,
                         [
                             'method' => 'GET',
-                            'route' => 'kota.index',
+                            'route' => 'tipepengeluaran.index',
                             'class' => 'form-inline pull-left'
                         ]
                     )!!}
@@ -71,7 +71,7 @@
                             {!! Form::select(
                                 'searchBy',
                                 [
-                                    'nama_kota' => 'Nama Kota'
+                                    'nama_tipepengeluaran' => 'Nama Kategori'
                                 ],
                                 null,
                                 [
@@ -92,7 +92,7 @@
                         {!! Form::model($request,
                             [
                                 'method' => 'GET',
-                                'route' => 'kota.index',
+                                'route' => 'tipepengeluaran.index',
                                 'class' => 'form-inline pull-left',
                                 'style' => 'margin-left: 5px;'
                             ]
@@ -126,31 +126,31 @@
                         </div>
                     @endif
 
-                    @if ($data_kota->count() != 0)
+                    @if ($data_tipepengeluaran->count() != 0)
                         <div class="box box-widget">
                             <div class="box-body no-padding">
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Nama Kota</th>
+                                            <th>Nama Kategori</th>
                                             <th class="col-md-2">Action</th>
                                         </tr>
                                     </thead>
 
                                     <tbody>
-                                        @foreach ($data_kota as $kota)
+                                        @foreach ($data_tipepengeluaran as $tipepengeluaran)
                                         <tr>
                                             <td>
-                                                {{ $kota->nama_kota }}
+                                                {{ $tipepengeluaran->nama_kategori }}
                                             </td>
                                             <td>
-                                                <a href="/kota/{{ $kota->kode }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                <a href="/tipepengeluaran/{{ $tipepengeluaran->id }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                 {!! Form::open(
                                                     [
                                                         'method' => 'DELETE',
-                                                        'route' => ['kota.destroy', $kota->kode],
+                                                        'route' => ['tipepengeluaran.destroy', $tipepengeluaran->id],
                                                         'style' => 'display: inline-block;',
-                                                        'data-nama' => $kota->nama_kota,
+                                                        'data-nama' => $tipepengeluaran->nama_tipepengeluaran,
                                                     ]
                                                 ) !!}
 
@@ -171,14 +171,14 @@
                             </div>
                         @else
                             <div class="alert alert-warning">
-                                Data kota belum tersedia. Klik tombol Tambah Kota untuk menambah kota.
+                                Data tipepengeluaran belum tersedia. Klik tombol Tambah tipepengeluaran untuk menambah tipepengeluaran.
                             </div>
                         @endif
                     @endif
 
-                    {!! $data_kota->render() !!}
+                    {!! $data_tipepengeluaran->render() !!}
 
-                    <a href="/kota/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah Kota</a>
+                    <a href="/tipepengeluaran/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah Tipe Pengeluaran</a>
 
                 </div>
             </div>
@@ -199,8 +199,8 @@
             var nama = element.attr('data-nama')
 
             $.confirm({
-                title: '<i class="fa fa-trash"></i> Hapus Kota',
-                content: 'Apakah Anda yakin akan menghapus kota <strong>' + nama + '</strong>',
+                title: '<i class="fa fa-trash"></i> Hapus tipepengeluaran',
+                content: 'Apakah Anda yakin akan menghapus tipepengeluaran <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',

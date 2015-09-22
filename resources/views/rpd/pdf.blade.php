@@ -3,12 +3,18 @@
 <head>
     <meta charset="utf-8">
     <title></title>
+    <style>
+        html {font-family: sans-serif; /* 1 */-ms-text-size-adjust: 100%; /* 2 */-webkit-text-size-adjust: 100%; /* 2 */}body {margin: 0;}article,aside,details,figcaption,figure,footer,header,hgroup,main,menu,nav,section,summary {display: block;}audio,canvas,progress,video {display: inline-block; /* 1 */vertical-align: baseline; /* 2 */}audio:not([controls]) {display: none;height: 0;}[hidden],template {display: none;}a {background-color: transparent;}a:active,a:hover {outline: 0;}abbr[title] {border-bottom: 1px dotted;}b,strong {font-weight: bold;}dfn {font-style: italic;}h1 {font-size: 2em;margin: 0.67em 0;}mark {background: #ff0;color: #000;}small {font-size: 80%;}sub,sup {font-size: 75%;line-height: 0;position: relative;vertical-align: baseline;}sup {top: -0.5em;}sub {bottom: -0.25em;}img {border: 0;}svg:not(:root) {overflow: hidden;}figure {margin: 1em 40px;}hr {box-sizing: content-box;height: 0;}pre {overflow: auto;}code,kbd,pre,samp {font-family: monospace, monospace;font-size: 1em;}button,input,optgroup,select,textarea {color: inherit; /* 1 */font: inherit; /* 2 */margin: 0; /* 3 */}button {overflow: visible;}button,select {text-transform: none;}button,html input[type="button"], /* 1 */input[type="reset"],input[type="submit"] {-webkit-appearance: button; /* 2 */cursor: pointer; /* 3 */}button[disabled],html input[disabled] {cursor: default;}button::-moz-focus-inner,input::-moz-focus-inner {border: 0;padding: 0;}input {line-height: normal;}input[type="checkbox"],input[type="radio"] {box-sizing: border-box; /* 1 */padding: 0; /* 2 */}input[type="number"]::-webkit-inner-spin-button,input[type="number"]::-webkit-outer-spin-button {height: auto;}input[type="search"] {-webkit-appearance: textfield; /* 1 */box-sizing: content-box; /* 2 */}input[type="search"]::-webkit-search-cancel-button,input[type="search"]::-webkit-search-decoration {-webkit-appearance: none;}fieldset {border: 1px solid #c0c0c0;margin: 0 2px;padding: 0.35em 0.625em 0.75em;}legend {border: 0; /* 1 */padding: 0; /* 2 */}textarea {overflow: auto;}optgroup {font-weight: bold;}table {border-collapse: collapse;border-spacing: 0;}td,th {padding: 0;}
+
+        body { font-size: 12px; padding: 20px 30px;} .table { font-size: 11px; } .table-bordered th, .table-bordered td { padding: 2px 4px;border: 1px solid #999;} th { text-align: left; }
+    </style>
 </head>
 <body>
     <h4>RENCANA PERJALANAN DINAS (RPD)</h4>
-    <table>
+    <br>
+    <table width="100%">
         <tr>
-            <td>Kode RPD</td>
+            <td width="25%">Kode RPD</td>
             <td>{{ $rpd->kode }}</td>
         </tr>
         <tr>
@@ -27,7 +33,7 @@
             @if($dataKategori == "Trip")
                 <td>Tanggal Mulai</td>
             @else
-                <td>Tanggal </td>
+                <td>Tanggal</td>
             @endif
             <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
         </tr>
@@ -50,25 +56,23 @@
             <td>{{ $rpd->kotaAsal->nama_kota }}</td>
         </tr>
         <tr>
-            <td><strong>Tujuan Kota</strong></td>
+            <td>Tujuan Kota</td>
             <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
         </tr>
         <tr>
-            <td><strong>Sarana Transportasi</strong></td>
+            <td>Sarana Transportasi</td>
             <td>
-                <ul>
-                    @foreach($rpd->saranaTransportasi as $saranaTransportasi)
-                        <li>{{ $saranaTransportasi->nama_transportasi }}</li>
-                    @endforeach
-                </ul>
+                @foreach($rpd->saranaTransportasi as $saranaTransportasi)
+                    {{ $saranaTransportasi->nama_transportasi }} <br>
+                @endforeach
             </td>
         </tr>
         <tr>
-            <td><strong>Sarana Penginapan</strong></td>
+            <td>Sarana Penginapan</td>
             <td>{{ $rpd->saranaPenginapan->nama_penginapan }}</td>
         </tr>
         <tr>
-            <td><strong>Akomodasi Awal</strong></td>
+            <td>Akomodasi Awal</td>
             <td>Rp {{ number_format($rpd->akomodasi_awal, 2, ',', '.') }}</td>
         </tr>
         <tr>
@@ -78,13 +82,14 @@
     </table>
 
     <br>
-    <h3>Peserta dan Tujuan Kegiatan</h3>
-    <table class="table table-bordered table-striped">
+    <h4>Peserta dan Tujuan Kegiatan</h4>
+    <table class="table table-bordered" width="100%">
         <thead>
             <tr>
-                <th>Nama</th>
-                <th>Judul Project/Prospek/Pelatihan</th>
-                <th>Kegiatan</th>
+                <th width="25%">Nama</th>
+                <th width="30%">Judul Project/Prospek/Pelatihan</th>
+                <th width="20%">Kegiatan</th>
+                <th width="25%">Deskripsi</th>
             </tr>
         </thead>
         <tbody>
@@ -112,26 +117,25 @@
                                 {{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
                             @endif
                         </td>
+                        <td>
+                            {{ $kegiatan->deskripsi }}
+                        </td>
                     </tr>
                 @endforeach
             @endforeach
         </tbody>
     </table>
 
-            <!--Bagian Komentar atau Keterangan-->
-    <h4>Komentar</h4>
-    <p>
-        {{ $rpd->keterangan }}
-    </p>
-
+    <br>
     <!--Bagian Action History-->
     <h4>Action History</h4>
-    <table class="table table-bordered table-striped">
+    <table class="table table-bordered" width="100%">
         <thead>
             <tr>
-                <th>Date Time</th>
-                <th>Nama</th>
-                <th>Action Taken</th>
+                <th width="25%">Date Time</th>
+                <th width="30%">Nama</th>
+                <th width="20%">Action Taken</th>
+                <th width="25%">Komentar</th>
             </tr>
         </thead>
         <tbody>
@@ -140,6 +144,7 @@
                     <td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
                     <td>{{ $action->pegawai->nama_lengkap }}</td>
                     <td>{{ $action->action }}</td>
+                    <td>{{ $action->comment }}</td>
                 </tr>
             @endforeach
         </tbody>
