@@ -94,7 +94,7 @@
 			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-					<h1 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h1>
+					<h4 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h4>
 				</div>
 				<div class="modal-body">
 					<div>
@@ -171,7 +171,7 @@
                         </table>
 
 						<!-- Daftar Peserta RPD-->
-						<h3>Peserta dan Tujuan Kegiatan</h3>
+						<h4>Peserta dan Tujuan Kegiatan</h4>
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
@@ -226,7 +226,7 @@
 						</p>
 
 						<!--Bagian Action History-->
-						<h3>Action History</h3>
+						<h4>Action History</h4>
 						<table class="table table-bordered table-striped">
 							<thead>
 								<tr>
