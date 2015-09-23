@@ -71,11 +71,11 @@
                                     </tr>
                                     <tr>
                                         <td class="active"><strong>Total Pengeluaran</strong></td>
-                                        <td class="text-right">{{ 'Rp ' . number_format($lpd->total_pengeluaran, 0, ',', '.') }}</td>
+                                        <td class="text-right">Rp {{ number_format($lpd->pengeluaran->sum('biaya'), 0, ',', '.') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="active"><strong>Pengembalian (Reimburse)</strong></td>
-                                        <td class="text-right">{{ 'Rp ' . number_format($lpd->rpd->akomodasi_awal - $lpd->total_pengeluaran, 0, ',', '.') }}</td>
+                                        <td class="text-right">Rp {{ number_format($lpd->rpd->akomodasi_awal - $lpd->pengeluaran->sum('biaya'), 0, ',', '.') }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -133,7 +133,7 @@
                             @endforeach
                             <tr>
                                 <td colspan="5" class="text-center">Total</td>
-                                <td>Rp 30.000</td>
+                                <td>Rp {{ number_format($lpd->pengeluaran->sum('biaya'), 0, ',', '.') }}</td>
                             </tr>
                         </tbody>
                     </table>
