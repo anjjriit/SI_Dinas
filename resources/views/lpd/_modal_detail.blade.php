@@ -8,8 +8,8 @@
             <div class="modal-body">
                 <div class="content">
                     <div class="row">
-                        <div class="col-md-8">
-                            <table class="table table-modal table-bordered">
+                        <div class="col-md-8 table-responsive">
+                            <table class="table table-bordered table-condensed">
                                 <thead>
                                     <tr class="active">
                                         <th class="col-md-6">Penanggung Jawab Akomodasi</th>
@@ -28,8 +28,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-8">
-                            <table class="table table-modal table-bordered">
+                        <div class="col-md-8 table-responsive">
+                            <table class="table table-bordered table-condensed">
                                 <thead>
                                     <tr class="active">
                                         <th class="col-md-6">Personel</th>
@@ -62,8 +62,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-8">
-                            <table class="table table-modal table-bordered">
+                        <div class="col-md-8 table-responsive">
+                            <table class="table table-bordered table-condensed">
                                 <tbody>
                                     <tr>
                                         <td class="col-md-6 active"><strong>Akomodasi Awal</strong></td>
@@ -81,7 +81,7 @@
                             </table>
                         </div>
                     </div>
-                    <table class="table table-modal table-bordered">
+                    <table class="table table-condensed table-bordered">
                         <thead>
                             <tr class="active">
                                 <th>Tanggal</th>

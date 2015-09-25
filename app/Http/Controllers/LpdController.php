@@ -41,6 +41,8 @@ class LpdController extends Controller
             ];
 
             $lpd = Lpd::create($input);
+
+            return redirect('/lpd/' . $lpd->id . '/edit');
         }
 
         return redirect('/lpd/' . $rpd->lpd->id . '/edit');
@@ -50,7 +52,7 @@ class LpdController extends Controller
     {
         $user = Auth::user();
 
-        if ($user->nik != $lpd->nik) {
+        if ($user->nik != $lpd->nik || $lpd->status == 'SUBMIT') {
             return redirect('/lpd')->with('error', 'Anda tidak dapat melakukan edit terhadap LPD tersebut.');
         }
 
@@ -301,9 +303,16 @@ class LpdController extends Controller
 
     public function submitted()
     {
-        $submittedLpds = Lpd::submitted()->mine()->orderBy('kode', 'dsc')->paginate(10);
+        $submittedLpds = Lpd::submitted()->mine()->orderBy('kode', 'desc')->paginate(10);
 
         return view('lpd.submitted', compact('submittedLpds'));
+    }
+
+    public function draft()
+    {
+        $approvedRpds = Rpd::approved()->mine()->paginate(15);
+
+        return view('lpd.draft', compact('approvedRpds'));
     }
 
     public function recall($id)

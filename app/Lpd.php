@@ -44,6 +44,11 @@ class Lpd extends Model
         }
     }
 
+    public function scopeDraft($query)
+    {
+        return $query->where('status', 'DRAFT');
+    }
+
     public function scopeMine($query)
     {
         return $query->where('nik', '=', auth()->user()->nik);

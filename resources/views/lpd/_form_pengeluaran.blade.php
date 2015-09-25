@@ -31,18 +31,22 @@
                     {!! Form::label('personel', 'Personel') !!}
                     <div class="row" style="margin-top: 5px;">
                         <div class="col-md-12">
-                            @foreach ($lpd->rpd->peserta as $peserta)
-                                <label style="font-weight:normal">
-                                    {!! Form::checkbox(
-                                        'personel[]',
-                                        $peserta->nik,
-                                        in_array(
-                                            $peserta->nik,
-                                            (isset($pengeluaran)) ? $pengeluaran->personel->lists('nik')->all() : []
-                                        )
-                                    ) !!} {{ $peserta->nama_lengkap }}
-                                </label>
-                            @endforeach
+                            <div class="row">
+                                @foreach ($lpd->rpd->peserta as $peserta)
+                                    <div class="col-md-6">
+                                        <label style="font-weight:normal">
+                                            {!! Form::checkbox(
+                                                'personel[]',
+                                                $peserta->nik,
+                                                in_array(
+                                                    $peserta->nik,
+                                                    (isset($pengeluaran)) ? $pengeluaran->personel->lists('nik')->all() : []
+                                                )
+                                            ) !!} {{ $peserta->nama_lengkap }}
+                                        </label>
+                                    </div>
+                                @endforeach
+                            </div>
                         </div>
                     </div>
                 </div>

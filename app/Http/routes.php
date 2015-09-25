@@ -32,6 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
 
     // LPD
     Route::get('lpd', 'LpdController@index');
+    Route::get('lpd/draft', 'LpdController@draft');
     Route::get('lpd/log', 'LpdController@log');
     Route::get('lpd/submitted/all', 'LpdController@submittedAll');
     Route::get('lpd/processed', 'LpdController@processed');

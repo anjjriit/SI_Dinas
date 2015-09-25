@@ -40,6 +40,11 @@ class Rpd extends Model
         return $query->where('status', '!=', 'DRAFT');
     }
 
+    public function scopeApproved($query)
+    {
+        return $query->where('status', '!=', 'APPROVED');
+    }
+
     public function scopeMine($query)
     {
         return $query->where('nik', '=', auth()->user()->nik);
