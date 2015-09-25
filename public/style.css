@@ -440,7 +440,7 @@ strong, th, label {
     border-color: #ddd;
 }
 
-.modal .page-header {
+.modal .page-header, .page-header.alt {
     display: inline-block;
     padding: 3px 8px;
     background-color: #f6f6f6;

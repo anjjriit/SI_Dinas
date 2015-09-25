@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Laporan Perjalanan Dinas')
+@section('page_title', 'Laporan ' . $lpd->rpd->kode)
 
 @section('stylesheet')
     @parent
@@ -11,7 +11,18 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Laporan Perjalanan Dinas (LPD)</h1>
+            <p>Edit LPD</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                @if (Auth::user()->role == 'super_admin')
+                    <a href="/dashboard">Dashboard</a>
+                @else
+                    <a href="/homepage">Homepage</a>
+                @endif
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/lpd/draft">Laporan Perjalanan Dinas</a>
+                <i class="fa fa-angle-right fa-fw"></i> Laporan <strong>{{ $lpd->rpd->kode }}</strong>
+                <i class="fa fa-angle-right fa-fw"></i> Edit
+            </span>
         </section>
 
         <section class="content">
@@ -22,6 +33,8 @@
                             <h4>Form Edit LPD</h4>
                         </div>
 
+                        <hr style="margin-top: 10px;">
+
                         <div class="box-body">
                             {!! Form::open(
                                 [
@@ -29,7 +42,7 @@
                                     'url' => '/lpd/' . $lpd->id . '/pengeluaran/add'
                                 ]
                             ) !!}
-                                <h5 class="page-header"><small>Pengeluaran</small></h5>
+                                <div class="page-header alt"><strong>Pengeluaran</strong></div>
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         @foreach ($errors->all() as $error)
@@ -45,13 +58,14 @@
                                 @endif
                                 @include('lpd._form_pengeluaran')
 
-                                <hr>
                                 {!! Form::button('<i class="fa fa-fw fa-plus"></i> Tambah Pengeluaran', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                             {!! Form::close() !!}
 
-                            <h5 class="page-header" style="margin-top: 50px;"><small>List Pengeluaran</small></h5>
+                            <br>
+                            <br>
+                            <div class="page-header alt"><strong>List Pengeluaran</strong></div>
                             @if ($lpd->pengeluaran->count() > 0)
-                                <table class="table table-modal table-bordered">
+                                <table class="table table-condensed table-bordered">
                                     <thead>
                                         <tr class="active">
                                             <th>Tanggal</th>
@@ -60,7 +74,7 @@
                                             <th>Struk</th>
                                             <th>Personel</th>
                                             <th>Biaya</th>
-                                            <th>Action</th>
+                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -101,7 +115,7 @@
                                                 </td>
                                                 <td style="vertical-align: top;">Rp {{ number_format($pengeluaran->biaya, 0, ',', '.' ) }}</td>
                                                 <td>
-                                                    <a href="/lpd/{{ $lpd->id }}/pengeluaran/{{ $pengeluaran->id }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                    <a href="/lpd/{{ $lpd->id }}/pengeluaran/{{ $pengeluaran->id }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                     {!! Form::open(
                                                         [
                                                             'method' => 'DELETE',
@@ -111,7 +125,7 @@
                                                         ]
                                                     ) !!}
 
-                                                        {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
+                                                        {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
                                                         ) !!}
                                                     {!! Form::close() !!}
                                                 </td>
@@ -137,8 +151,8 @@
                                     'url' => '/lpd/' . $lpd->id
                                 ]
                             ) !!}
-                                {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Save as Draft', ['type' => 'submit', 'class' => 'btn btn-default', 'value' => 'draft']) !!}
-                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Submit', ['type' => 'submit', 'class' => 'btn btn-success', 'value' => 'submit']) !!}
+                                {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Save as Draft', ['type' => 'submit', 'class' => 'btn btn-default', 'value' => 'draft', 'name' => 'action']) !!}
+                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Submit', ['type' => 'submit', 'class' => 'btn btn-success', 'value' => 'submit', 'name' => 'action']) !!}
                             {!! Form::close() !!}
                         </div>
                     </div>
@@ -156,14 +170,9 @@
     <script>
         $('.datepicker').datepicker({
             autoclose: true,
-            beforeShowMonth: function (date){
-                    switch (date.getMonth()){
-                      case 8:
-                        return false;
-                    }
-                },
+            todayHighlight: true,
             format: 'yyyy-mm-dd',
-        })
+        });
 
         $('.delete-button').on('click', function(event) {
             event.preventDefault();

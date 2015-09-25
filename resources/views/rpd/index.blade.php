@@ -9,25 +9,7 @@
 
 @section('content')
 
-	@if (session('success'))
-		<div class="content">
-			<div class="row">
-                <div class="alert alert-success">
-                    {{ session('success') }}
-                </div>
-            </div>
-		</div>
-    @endif
 
-    @if (session('error'))
-    	<div class="content">
-			<div class="row">
-                <div class="alert alert-danger">
-                    {{ session('error') }}
-                </div>
-            </div>
-		</div>
-    @endif
 
 	<section class="content-header">
         <h1>Data Rencana Perjalanan Dinas</h1>
@@ -39,6 +21,25 @@
     		<div class="col-md-12">
     			<div class="box box-widget">
     				<div class="box-body no-padding">
+                        @if (session('success'))
+                            <div class="content">
+                                <div class="row">
+                                    <div class="alert alert-success">
+                                        {{ session('success') }}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="content">
+                                <div class="row">
+                                    <div class="alert alert-danger">
+                                        {{ session('error') }}
+                                    </div>
+                                </div>
+                            </div>
+                        @endif
     					<table class="table">
     						<thead>
     							<tr>

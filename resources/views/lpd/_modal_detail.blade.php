@@ -8,8 +8,8 @@
             <div class="modal-body">
                 <div class="content">
                     <div class="row">
-                        <div class="col-md-8">
-                            <table class="table table-modal table-bordered">
+                        <div class="col-md-8 table-responsive">
+                            <table class="table table-bordered table-condensed">
                                 <thead>
                                     <tr class="active">
                                         <th class="col-md-6">Penanggung Jawab Akomodasi</th>

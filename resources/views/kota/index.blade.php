@@ -10,13 +10,13 @@
 @section('content')
 
         <section class="content-header">
-        <p>Data Kota</p>
-        <span class="bcumb">
-            <i class="fa fa-fw fa-bookmark"></i>
-            <a href="/dashboard">Dashboard</a>
-            <i class="fa fa-angle-right fa-fw"></i> Kota
-        </span>
-    </section>
+            <p>Data Kota</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> Kota
+            </span>
+        </section>
 
         <section class="content-filter">
             <div class="row">

@@ -10,8 +10,17 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Laporan Perjalanan Dinas</h1>
-            <label>Yang telah disubmit</label>
+            <p>LPD Yang Di Submit</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                @if (Auth::user()->role == 'super_admin')
+                    <a href="/dashboard">Dashboard</a>
+                @else
+                    <a href="/homepage">Homepage</a>
+                @endif
+                <i class="fa fa-angle-right fa-fw"></i> Laporan Perjalanan Dinas
+                <i class="fa fa-angle-right fa-fw"></i> Submitted
+            </span>
         </section>
 
         <section class="content">
@@ -35,14 +44,19 @@
                                 <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Kode</th>
+                                            <th>No. RPD</th>
+                                            <th>No. Laporan</th>
                                             <th>Tanggal Laporan</th>
-                                            <th>Action</th>
+                                            <th>Total Pengeluaran</th>
+                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
                                         @foreach ($submittedLpds as $lpd)
                                             <tr>
+                                                <td>
+                                                    {{ $lpd->rpd->kode }}
+                                                </td>
                                                 <td>
                                                     {{ $lpd->kode }}
                                                 </td>
@@ -69,8 +83,11 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailLPD-{{ $lpd->id }}">
-                                                        <i class="fa fa-fw fa-share"></i> Detail
+                                                    Rp {{ number_format($lpd->total_pengeluaran, 0, ',', '.') }}
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailLPD-{{ $lpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
+                                                        <i class="fa fa-fw fa-share"></i>
                                                     </button>
                                                     @if ($lpd->nik == auth()->user()->nik)
                                                         {!! Form::open(
@@ -82,7 +99,7 @@
                                                             ]
                                                         ) !!}
 
-                                                            {!! Form::button('<i class="fa fa-fw fa-refresh"></i>Recall', ['type' => 'submit', 'class' => 'btn btn-sm btn-default delete-button']
+                                                            {!! Form::button('<i class="fa fa-fw fa-refresh"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Recall']
                                                             ) !!}
                                                         {!! Form::close() !!}
                                                     @endif
@@ -142,6 +159,7 @@
             });
         })
 
+        $('[data-toggle-alt="tooltip"]').tooltip();
     </script>
 
 @endsection
