@@ -205,29 +205,27 @@
                             </tbody>
                         </table>
                         <br>
-                        <!--Bagian Komentar atau Keterangan-->
-                        <h4>Komentar</h4>
-                        <p>
-                            {{ $rpd->keterangan }}
-                        </p>
-                        <br>
                         <!--Bagian Action History-->
-                        <h4>Action History</h4>
-                        <table class="table table-bordered table-striped">
+                        <div class="page-header"><strong>Action History</strong></div>
+                        <table class="table table-bordered table-condensed" width="100%">
                             <thead>
-                                <tr>
-                                    <th>Date Time</th>
-                                    <th>Nama</th>
-                                    <th>Action Taken</th>
+                                <tr class="active">
+                                    <th width="25%">Date Time</th>
+                                    <th width="30%">Nama</th>
+                                    <th width="20%">Action Taken</th>
+                                    <th width="25%">Comment</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($rpd->actionHistory as $action)
-                                    <tr>
-                                        <td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
-                                        <td>{{ $action->pegawai->nama_lengkap }}</td>
-                                        <td>{{ $action->action }}</td>
-                                    </tr>
+                                    @if ($action->action != 'DRAFT')
+                                        <tr>
+                                            <td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
+                                            <td>{{ $action->pegawai->nama_lengkap }}</td>
+                                            <td>{{ ucwords(strtolower($action->action)) }}</td>
+                                            <td>{{ $action->comment }}</td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>

@@ -5,7 +5,14 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Prospek</h1>
+            <p>Edit Prospek</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/prospek">List Kota</a>
+                <i class="fa fa-angle-right fa-fw"></i> {{ $prospek->nama_prospek }}
+                <i class="fa fa-angle-right fa-fw"></i> Edit
+            </span>
         </section>
 
         <section class="content">

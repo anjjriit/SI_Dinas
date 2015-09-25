@@ -5,7 +5,13 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Prospek</h1>
+            <p>Tambah Prospek</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/prospek">List Prospek</a>
+                <i class="fa fa-angle-right fa-fw"></i> Add
+            </span>
         </section>
 
         <section class="content">

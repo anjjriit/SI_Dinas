@@ -10,7 +10,12 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Prospek</h1>
+            <p>Data Prospek</p>
+            <span class="bcumb">
+            <i class="fa fa-fw fa-bookmark"></i>
+            <a href="/dashboard">Dashboard</a>
+            <i class="fa fa-angle-right fa-fw"></i> Prospek
+        </span>
         </section>
 
         <section class="content-filter">

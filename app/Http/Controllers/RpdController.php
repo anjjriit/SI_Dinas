@@ -408,7 +408,7 @@ class RpdController extends Controller
             'id_rpd' => $rpd->id,
             'nik' => Auth::user()->nik,
             'action' => $rpd->status,
-            'comment' => $request->input('komentar')
+            'comment' => $request->input('keterangan')
         ];
 
         ActionHistoryRpd::create($action);
@@ -437,11 +437,20 @@ class RpdController extends Controller
         return view('rpd.all_submitted', compact('submittedRpds'));
     }
 
-    public function approved()
+    public function approved(Request $request)
     {
-        $approvedRpds = Rpd::where('status', '=', 'APPROVED')->paginate(10);
+        $orderBy = ($request->has('orderBy')) ? $request->input('orderBy') : 'kode';
+        $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
-        return view('rpd.approved', compact('approvedRpds'));
+        if ($request->has('query')) {
+            $approvedRpds = Rpd::orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+        } else {
+            $approvedRpds = Rpd::orderBy($orderBy, $order)->paginate(15);
+        }
+
+        $approvedRpds = Rpd::where('status', '=', 'APPROVED')->orderBy('kode', 'asc')->paginate(10);
+
+        return view('rpd.approved', compact('approvedRpds', 'request'));
     }
 
     public function log()

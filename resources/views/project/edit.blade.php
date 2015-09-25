@@ -10,7 +10,14 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Project</h1>
+            <p>Edit Project</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/project">List Project</a>
+                <i class="fa fa-angle-right fa-fw"></i> {{ $project->nama_project }}
+                <i class="fa fa-angle-right fa-fw"></i> Edit
+            </span>
         </section>
 
         <section class="content">

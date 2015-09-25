@@ -10,7 +10,13 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Biaya {{ $transportasi->nama_transportasi }}</h1>
+            <p>Data Biaya {{ $transportasi->nama_transportasi }}</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/transportasi">List Transportasi</a>
+                <i class="fa fa-angle-right fa-fw"></i> Data Biaya {{ $transportasi->nama_transportasi }}
+            </span>
         </section>
 
         <section class="content-filter">

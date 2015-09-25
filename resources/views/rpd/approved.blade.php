@@ -29,6 +29,115 @@
             <label>Yang telah diapproved</label>
         </div>
 
+        <section class="content-filter">
+            <div class="row">
+                <div class="col-md-12">
+                    {!! Form::model($request, [
+                        'method' => 'GET',
+                        'url' => '/rpd/approved',
+                        'class' => 'form-inline pull-right'
+                    ])!!}
+                        <div class="form-group">
+                            @if ($request->has('query'))
+                                {!! Form::hidden('searchBy') !!}
+                                {!! Form::hidden('query') !!}
+                            @endif
+
+                            {!! Form::select(
+                                'orderBy',
+                                [
+                                    'kode' => 'No. RPD',
+                                    'rpd->pegawai->nama_lengkap' => 'Pengaju',
+                                    'updated_at' => 'Terakhir Diperbarui',
+                                ],
+                                null,
+                                ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
+                            ) !!}
+
+                            {!! Form::select(
+                                'order',
+                                [
+                                    'asc' => 'Ascending',
+                                    'desc' => 'Descending'
+                                ],
+                                null,
+                                ['class' => 'form-control', 'required']
+                            ) !!}
+
+                            {!! Form::button(
+                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Sort',
+                                [
+                                    'type' => 'submit', 'class' => 'btn btn-success'
+                                ]
+                            ) !!}
+                        </div>
+                    {!! Form::close() !!}
+
+                    {!! Form::model($request,
+                        [
+                            'method' => 'GET',
+                            'url' => '/rpd/approved',
+                            'class' => 'form-inline pull-left'
+                        ]
+                    )!!}
+                        <div class="form-group">
+                            @if ($request->has('orderBy'))
+                                {!! Form::hidden('orderBy') !!}
+                                {!! Form::hidden('order') !!}
+                            @endif
+
+                            {!! Form::select(
+                                'searchBy',
+                                [
+                                    'kode' => 'No. RPD',
+                                    'nama_lengkap' => 'Pengaju',
+                                    'updated_at' => 'Terakhir Diperbarui',
+                                ],
+                                null,
+                                [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'Search By',
+                                    'required'
+                                ]
+                            ) !!}
+                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Query...']) !!}
+                            {!! Form::button(
+                                '<i class="fa fa-fw fa-search"></i> Search',
+                                ['type' => 'submit', 'class' => 'btn btn-success', 'style' => 'margin-left: 3px;']
+                            ) !!}
+                        </div>
+                    {!! Form::close() !!}
+
+                    @if ($request->has('query'))
+                        {!! Form::model($request,
+                            [
+                                'method' => 'GET',
+                                'url' => '/rpd/approved',
+                                'class' => 'form-inline pull-left',
+                                'style' => 'margin-left: 5px;'
+                            ]
+                        )!!}
+                            <div class="form-group">
+                                @if ($request->has('orderBy'))
+                                    {!! Form::hidden('orderBy') !!}
+                                    {!! Form::hidden('order') !!}
+                                @endif
+
+                                {!! Form::button(
+                                    '<i class="fa fa-fw fa-times"></i> Clear Search',
+                                    [
+                                        'type' => 'submit',
+                                        'class' => 'btn btn-info',
+                                        'style' => 'margin-top: 1px;'
+                                    ]
+                                ) !!}
+                            </div>
+                        {!! Form::close() !!}
+                    @endif
+                </div>
+            </div>
+        </section>
+
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
@@ -72,6 +181,8 @@
                             List RPD yang telah diapproved belum tersedia.
                         </div>
                     @endif
+
+                    {!! $approvedRpds->render() !!}
                 </div>
             </div>
         </section>
@@ -205,29 +316,27 @@
                                 </tbody>
                             </table>
 
-                            <!--Bagian Komentar atau Keterangan-->
-                            <h4>Komentar</h4>
-                            <p>
-                                {{ $rpd->keterangan }}
-                            </p>
-
                             <!--Bagian Action History-->
-                            <h4>Action History</h4>
-                            <table class="table table-bordered table-striped">
+                            <div class="page-header"><strong>Action History</strong></div>
+                            <table class="table table-bordered table-condensed" width="100%">
                                 <thead>
-                                    <tr>
-                                        <th>Date Time</th>
-                                        <th>Nama</th>
-                                        <th>Action Taken</th>
+                                    <tr class="active">
+                                        <th width="25%">Date Time</th>
+                                        <th width="30%">Nama</th>
+                                        <th width="20%">Action Taken</th>
+                                        <th width="25%">Comment</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach($rpd->actionHistory as $action)
-                                        <tr>
-                                            <td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
-                                            <td>{{ $action->pegawai->nama_lengkap }}</td>
-                                            <td>{{ $action->action }}</td>
-                                        </tr>
+                                        @if ($action->action != 'DRAFT')
+                                            <tr>
+                                                <td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
+                                                <td>{{ $action->pegawai->nama_lengkap }}</td>
+                                                <td>{{ ucwords(strtolower($action->action)) }}</td>
+                                                <td>{{ $action->comment }}</td>
+                                            </tr>
+                                        @endif
                                     @endforeach
                                 </tbody>
                             </table>

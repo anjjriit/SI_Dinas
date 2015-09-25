@@ -10,7 +10,12 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Jenis Biaya Pengeluaran Standard</h1>
+            <p>Data Jenis Biaya Pengeluaran Standard</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> Jenis Biaya
+            </span>
         </section>
 
         <section class="content-filter">

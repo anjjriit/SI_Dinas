@@ -229,7 +229,7 @@
                                             </td>
                                             <td>
                                                 @if ($kegiatan->kegiatan == 'UAT')
-                                                    'UAT'
+                                                    UAT
                                                 @else
                                                     {{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
                                                 @endif
