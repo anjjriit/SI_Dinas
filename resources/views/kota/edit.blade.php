@@ -5,7 +5,14 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Kota</h1>
+            <p>Edit Kota</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/kota">List Kota</a>
+                <i class="fa fa-angle-right fa-fw"></i> {{ $kota->nama_kota }}
+                <i class="fa fa-angle-right fa-fw"></i> Edit
+            </span>
         </section>
 
         <section class="content">
@@ -15,6 +22,9 @@
                         <div class="box-header">
                             <h4>Form Edit Kota</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::model(
                                 $kota,
                                 [

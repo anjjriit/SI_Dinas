@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Logs RPD')
+@section('page_title', 'Log RPD')
 
 @section('content')
 
@@ -25,7 +25,17 @@
         @endif
 
         <section class="content-header">
-            <h1>Logs Rencana Perjalanan Dinas</h1>
+            <p>Log Rencana Perjalanan Dinas</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                @if (Auth::user()->role == 'super_admin')
+                    <a href="/dashboard">Dashboard</a>
+                @else
+                    <a href="/homepage">Homepage</a>
+                @endif
+                <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
+                <i class="fa fa-angle-right fa-fw"></i> Log
+            </span>
         </section>
 
         <section class="content">
@@ -33,14 +43,16 @@
                 <div class="col-md-12">
                     @if ($rpdLogs->count() != 0)
                         <div class="box box-widget">
-                            <div class="box-body no-padding">
-                                <table class="table table-responsive">
+                            <div class="box-body no-padding table-responsive">
+                                <table class="table">
                                     <thead>
                                         <tr>
-                                            <th>Kode</th>
+                                            <th class="col-md-1">No. RPD</th>
+                                            <th>Kota Asal</th>
+                                            <th>Kota Tujuan</th>
                                             <th>Terakhir Diperbarui</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -50,17 +62,23 @@
                                                     {{ $rpdLog->kode }}
                                                 </td>
                                                 <td>
-                                                    {{ date_format( date_create($rpdLog->updated_at), 'd/m/Y H:i:s' ) }}
+                                                    {{ $rpdLog->kotaAsal->nama_kota }}
                                                 </td>
                                                 <td>
-                                                    {{ $rpdLog->status }}
+                                                    {{ $rpdLog->kotaTujuan->nama_kota }}
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpdLog->id }}">
-                                                        <i class="fa fa-fw fa-share"></i>Detail
+                                                    {{ date_format( date_create($rpdLog->updated_at), 'd/m/Y H:i' ) }}
+                                                </td>
+                                                <td>
+                                                    {{ ucwords(strtolower($rpdLog->status)) }}
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailRPD-{{ $rpdLog->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
+                                                        <i class="fa fa-share"></i>
                                                     </button>
                                                     @if ($rpdLog->status == 'BACK TO INITIATOR')
-                                                        <a href="/rpd/{{ $rpdLog->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                        <a href="/rpd/{{ $rpdLog->id }}/edit" class="btn btn-xs btn-default" data-toggle-alt="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -85,14 +103,15 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h4>
+                        <h4 class="modal-title"><strong>Rencana Perjalanan Dinas (RPD)</strong></h4>
                     </div>
                     <div class="modal-body">
                         <!-- Info basic dari RPD -->
+                        <div class="page-header"><strong>Detail</strong></div>
                         <table class="table table-plain table-responsive">
                             <tbody>
                                 <tr>
-                                    <td class="col-md-3">Kode RPD</td>
+                                    <td class="col-md-3">Nomor RPD</td>
                                     <td>{{ $rpd->kode }}</td>
                                 </tr>
                                 <tr>
@@ -108,21 +127,15 @@
                                     <td>{{ ucwords(str_replace('_', ' ', $rpd->jenis_perjalanan)) }}</td>
                                 </tr>
                                 <tr>
-                                    @if($dataKategori == "Trip")
-                                        <td class="col-md-3">Tanggal Mulai</td>
-                                    @else
-                                        <td class="col-md-3">Tanggal </td>
-                                    @endif
+                                    <td class="col-md-3">Tanggal Mulai</td>
                                     <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
                                 </tr>
-                                @if($dataKategori == "Trip")
-                                    <tr>
-                                        <td class="col-md-3">Tanggal Selesai</td>
-                                        <td>
-                                            {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
-                                        </td>
-                                    </tr>
-                                @endif
+                                <tr>
+                                    <td class="col-md-3">Tanggal Selesai</td>
+                                    <td>
+                                        {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
+                                    </td>
+                                </tr>
                                 <tr>
                                     <td class="col-md-3">Jumlah Hari Dinas</td>
                                     <td>
@@ -138,13 +151,11 @@
                                     <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-3">Sarana Transportasi</td>
+                                    <td class="col-md-3" style="vertical-align: top;">Sarana Transportasi</td>
                                     <td>
-                                        <ul class="list-unstyled">
-                                            @foreach($rpd->saranaTransportasi as $saranaTransportasi)
-                                                <li>{{ $saranaTransportasi->nama_transportasi }}</li>
-                                            @endforeach
-                                        </ul>
+                                        @foreach($rpd->saranaTransportasi as $saranaTransportasi)
+                                            {{ $saranaTransportasi->nama_transportasi }}@if ($saranaTransportasi != $rpd->saranaTransportasi[$rpd->saranaTransportasi->count() - 1]), @endif
+                                        @endforeach
                                     </td>
                                 </tr>
                                 <tr>
@@ -159,21 +170,20 @@
                                 @endif
                                 <tr>
                                     <td class="col-md-3">Status</td>
-                                    <td style="text-transform : uppercase;">{{ $rpd->status }}</td>
+                                    <td>{{ $rpd->status }}</td>
                                 </tr>
                             </tbody>
                         </table>
 
                         <!-- Daftar Peserta RPD-->
-                        <br>
-                        <h4>Peserta dan Tujuan Kegiatan</h4>
-                        <table class="table table-bordered table-striped">
+                        <div class="page-header"><strong>Peserta &amp; Tujuan Kegiatan</strong></div>
+                        <table class="table table-bordered table-condensed" width="100%">
                             <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Judul Project/Prospek/Pelatihan</th>
-                                    <th>Kegiatan</th>
-                                    <th>Deskripsi</th>
+                                <tr class="active">
+                                    <th width="25%">Nama</th>
+                                    <th width="30%">Judul Project/Prospek/Pelatihan</th>
+                                    <th width="20%">Kegiatan</th>
+                                    <th width="25%">Deskripsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -214,31 +224,27 @@
                             </tbody>
                         </table>
 
-                        <!--Bagian Komentar atau Keterangan-->
-                        <br>
-                        <h4>Komentar</h4>
-                        <p>
-                            {{ $rpd->keterangan }}
-                        </p>
-
-                        <!--Bagian Action History-->
-                        <br>
-                        <h4>Action History</h4>
-                        <table class="table table-bordered table-striped">
+                       <!--Bagian Action History-->
+                        <div class="page-header"><strong>Action History</strong></div>
+                        <table class="table table-bordered table-condensed" width="100%">
                             <thead>
-                                <tr>
-                                    <th>Date Time</th>
-                                    <th>Nama</th>
-                                    <th>Action Taken</th>
+                                <tr class="active">
+                                    <th width="25%">Date Time</th>
+                                    <th width="30%">Nama</th>
+                                    <th width="20%">Action Taken</th>
+                                    <th width="25%">Comment</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($rpd->actionHistory as $action)
-                                    <tr>
-                                        <td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
-                                        <td>{{ $action->pegawai->nama_lengkap }}</td>
-                                        <td>{{ $action->action }}</td>
-                                    </tr>
+                                    @if ($action->action != 'DRAFT')
+                                        <tr>
+                                            <td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
+                                            <td>{{ $action->pegawai->nama_lengkap }}</td>
+                                            <td>{{ ucwords(strtolower($action->action)) }}</td>
+                                            <td>{{ $action->comment }}</td>
+                                        </tr>
+                                    @endif
                                 @endforeach
                             </tbody>
                         </table>
@@ -250,6 +256,12 @@
             </div>
         </div> <!-- Akhir Bagian Modal detail RPD-->
         @endforeach
+@endsection
 
+@section('script')
+    @parent
 
+    <script>
+    $('[data-toggle-alt="tooltip"]').tooltip();
+    </script>
 @endsection

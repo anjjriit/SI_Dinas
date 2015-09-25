@@ -81,6 +81,7 @@ $(document).ready(function(){
         var kode_kota_asal = $('select[name=kode_kota_asal]').val();
 
         var $kota_tujuan = $('select[name=kode_kota_tujuan]');
+        $kota_tujuan.parent().toggleClass('hidden');
 
         if (jenis_perjalanan == 'dalam_kota') {
             $kota_tujuan.val(kode_kota_asal).trigger('change');
@@ -291,17 +292,17 @@ function attachAddActivityEvent() {
                                     '</select>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="col-md-3" style="margin-top: 24px;">' +
-                                '<input type="hidden" name="kegiatan[]" value="-">' +
-                                '<button type="button" class="btn btn-default btn-modal-prospek">' +
-                                    '<i class="fa fa-fw fa-plus"></i> Prospek Baru' +
-                                '</button>' +
-                            '</div>' +
                             '<div class="col-md-4">' +
                                 '<div class="form-group">' +
                                     '<label for="deskripsi">Deskripsi</label>' +
                                     '<input type="text" id="deskripsi" name="deskripsi[]" class="form-control">' +
                                 '</div>' +
+                            '</div>' +
+                            '<div class="col-md-3" style="margin-top: 24px;">' +
+                                '<input type="hidden" name="kegiatan[]" value="-">' +
+                                '<button type="button" class="btn btn-default btn-modal-prospek">' +
+                                    '<i class="fa fa-fw fa-plus"></i> Prospek Baru' +
+                                '</button>' +
                             '</div>' +
                             '<div class="col-md-1" style="margin-top: 24px;">' +
                                 '<button type="button" class="btn btn-danger btn-hapus-kegiatan pull-right"><i class="fa fa-fw fa-minus"></i></button>' +
@@ -351,17 +352,17 @@ function attachAddActivityEvent() {
                                     '</select>' +
                                 '</div>' +
                             '</div>' +
-                            '<div class="col-md-3" style="margin-top: 24px;">' +
-                                '<input type="hidden" name="kegiatan[]" value="-">' +
-                                '<button type="button" class="btn btn-default btn-modal-pelatihan">' +
-                                    '<i class="fa fa-fw fa-plus"></i> Pelatihan Baru' +
-                                '</button>' +
-                            '</div>' +
                             '<div class="col-md-4">' +
                                 '<div class="form-group">' +
                                     '<label for="deskripsi">Deskripsi</label>' +
                                     '<input type="text" id="deskripsi" name="deskripsi[]" class="form-control">' +
                                 '</div>' +
+                            '</div>' +
+                            '<div class="col-md-3" style="margin-top: 24px;">' +
+                                '<input type="hidden" name="kegiatan[]" value="-">' +
+                                '<button type="button" class="btn btn-default btn-modal-pelatihan">' +
+                                    '<i class="fa fa-fw fa-plus"></i> Pelatihan Baru' +
+                                '</button>' +
                             '</div>' +
                             '<div class="col-md-1" style="margin-top: 24px;">' +
                                 '<button type="button" class="btn btn-danger btn-hapus-kegiatan pull-right"><i class="fa fa-fw fa-minus"></i></button>' +

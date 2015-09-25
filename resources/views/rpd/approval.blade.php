@@ -5,7 +5,18 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Rencana Perjalanan Dinas</h1>
+            <p>Approval RPD</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                @if (Auth::user()->role == 'super_admin')
+                    <a href="/dashboard">Dashboard</a>
+                @else
+                    <a href="/homepage">Homepage</a>
+                @endif
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/rpd/submitted/all">Submitted RPD</a>
+                <i class="fa fa-angle-right fa-fw"></i> {{ $rpd->kode }}
+                <i class="fa fa-angle-right fa-fw"></i> Approval
+            </span>
         </section>
 
         <section class="content">

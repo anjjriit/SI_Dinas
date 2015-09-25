@@ -3,13 +3,13 @@
 @section('page_title', 'RPD Yang Di Submit')
 
 @section('stylesheet')
-	@parent
+    @parent
     <link rel="stylesheet" href="/vendor/jquery-confirm/css/jquery-confirm.min.css">
 @endsection
 
 @section('content')
 
-	<section class="content-header">
+    <section class="content-header">
         <p>RPD Yang Di Submit</p>
         <span class="bcumb">
             <i class="fa fa-fw fa-bookmark"></i>
@@ -24,9 +24,9 @@
     </section>
 
     <section class="content">
-    	<div class="row">
-    		<div class="col-md-12">
-    			@if (session('success'))
+        <div class="row">
+            <div class="col-md-12">
+                @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
@@ -39,51 +39,51 @@
                 @endif
 
                 @if ($submittedRpds->count() != 0)
-	    			<div class="box box-widget">
-	    				<div class="box-body no-padding table-responsive">
-	    					<table class="table">
-	    						<thead>
-	    							<tr>
-	    								<th class="col-md-1">No. RPD</th>
+                    <div class="box box-widget">
+                        <div class="box-body no-padding table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1">No. RPD</th>
                                         <th>Kategori</th>
                                         @if(auth()->user()->role == 'administration')
-                                        	<th>Pengaju</th>
+                                            <th>Pengaju</th>
                                         @endif
-	    								<th>Asal Kota</th>
+                                        <th>Asal Kota</th>
                                         <th>Kota Tujuan</th>
-	    								<th>Tanggal Mulai</th>
-	    								<th>Tanggal Selesai</th>
-	    								<th class="col-md-1">Action</th>
-	    							</tr>
-	    						</thead>
-	    						<tbody>
-	    							@foreach ($submittedRpds as $rpd)
-			    						<tr>
-			    							<td>
-			    								{{ $rpd->kode }}
-			    							</td>
-			    							<td>
-			    								{{ $data = ucwords(str_replace('_', ' ', $rpd->kategori)) }}
-			    							</td>
-			    							@if(auth()->user()->role == 'administration')
-	                                            <td>
-	                                                {{ $rpd->pegawai->nama_lengkap }}
-	                                            </td>
-	                                        @endif
-											<td>
+                                        <th>Tanggal Mulai</th>
+                                        <th>Tanggal Selesai</th>
+                                        <th class="col-md-1">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($submittedRpds as $rpd)
+                                        <tr>
+                                            <td>
+                                                {{ $rpd->kode }}
+                                            </td>
+                                            <td>
+                                                {{ $data = ucwords(str_replace('_', ' ', $rpd->kategori)) }}
+                                            </td>
+                                            @if(auth()->user()->role == 'administration')
+                                                <td>
+                                                    {{ $rpd->pegawai->nama_lengkap }}
+                                                </td>
+                                            @endif
+                                            <td>
                                                 {{ $rpd->kotaTujuan->nama_kota }}
                                             </td>
                                             <td>
                                                 {{ $rpd->kotaAsal->nama_kota }}
                                             </td>
                                             <td>
-												{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
-											</td>
-											<td>
-												{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
-											</td>
-											<td>
-												<button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
+                                                {{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
+                                            </td>
+                                            <td>
+                                                {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
                                                         <i class="fa fa-share"></i>
                                                     </button>
                                                 @if ($rpd->nik == auth()->user()->nik)
@@ -100,28 +100,28 @@
                                                         ) !!}
                                                     {!! Form::close() !!}
                                                 @endif
-											</td>
-			    						</tr>
-			    					@endforeach
-	    						</tbody>
-	    					</table>
-	    				</div>
-	    			</div><!-- Akhir Bagian Box Table-->
-    			@else
-    				<div class="alert alert-warning">
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- Akhir Bagian Box Table-->
+                @else
+                    <div class="alert alert-warning">
                         Data RPD yang telah disubmit belum tersedia.
                     </div>
-    			@endif
+                @endif
 
                 {!! $submittedRpds->render() !!}
-    		</div>
-    	</div>
+            </div>
+        </div>
     </section>
 
 
     <!-- Bagian Modal Detail RPD-->
     @foreach ($submittedRpds as $rpd)
-    	<div class="modal fade" id="detailRPD-{{ $rpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
+        <div class="modal fade" id="detailRPD-{{ $rpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -271,6 +271,15 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        @if (auth()->user()->role == 'administration')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="/rpd/{{ $rpd->id }}/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-check-square-o"></i> Edit</a>
+                                    <a href="/rpd/{{ $rpd->id }}/approval" class="btn btn-sm btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
@@ -278,12 +287,12 @@
                 </div>
             </div>
         </div> <!-- Akhir Bagian Modal detail RPD-->
-	@endforeach
+    @endforeach
 
 @endsection
 
 @section('script')
-	@parent
+    @parent
     <script src="/vendor/jquery-confirm/js/jquery-confirm.min.js"></script>
 
     <script>

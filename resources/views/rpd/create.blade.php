@@ -10,7 +10,17 @@
 
 @section('content')
     <section class="content-header">
-        <h1>Rencana Perjalanan Dinas</h1>
+        <p>Pengajuan RPD</p>
+        <span class="bcumb">
+            <i class="fa fa-fw fa-bookmark"></i>
+            @if (Auth::user()->role == 'super_admin')
+                <a href="/dashboard">Dashboard</a>
+            @else
+                <a href="/homepage">Homepage</a>
+            @endif
+            <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
+            <i class="fa fa-angle-right fa-fw"></i> Create
+        </span>
     </section>
 
     <section class="content">
@@ -18,6 +28,8 @@
             <div class="box-header">
                 <h4>Form Pengajuan RPD</h4>
             </div>
+
+            <hr style="margin-top: 10px;">
 
             {!! Form::open(['method' => 'POST', 'route' => 'rpd.action']) !!}
 

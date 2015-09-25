@@ -10,6 +10,11 @@
     </style>
 </head>
 <body>
+    <table>
+        <tr>
+            <td><img src="{{ asset('images/logo.png') }}"></td>
+        </tr>
+    </table>
     <h4>RENCANA PERJALANAN DINAS (RPD)</h4>
     <br>
     <table width="100%">

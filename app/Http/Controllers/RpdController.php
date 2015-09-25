@@ -227,7 +227,11 @@ class RpdController extends Controller
         if ($request->input('action') == 'submit') {
             $this->updateSubmit($request, $rpd);
 
-            return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil di submit.');
+            if ($user->role == 'administration' && $rpd->status == 'SUBMIT') {
+                return redirect('/rpd/submitted/all')->with('success', 'Pengajuan RPD berhasil di update.');
+            } else {
+                return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil di submit.');
+            }
         } elseif ($request->input('action') == 'draft') {
             $this->updateDraft($request, $rpd);
 
@@ -421,13 +425,16 @@ class RpdController extends Controller
 
     public function submitted()
     {
-        if (Auth::user()->role == 'administration') {
-            $submittedRpds = Rpd::submitted()->paginate(10);
-        } else {
-            $submittedRpds = Rpd::submitted()->mine()->orderBy('kode', 'desc')->paginate(10);
-        }
+        $submittedRpds = Rpd::submitted()->mine()->orderBy('kode', 'desc')->paginate(10);
 
         return view('rpd.submitted', compact('submittedRpds'));
+    }
+
+    public function submittedAll()
+    {
+        $submittedRpds = Rpd::submitted()->orderBy('kode')->paginate(10);
+
+        return view('rpd.all_submitted', compact('submittedRpds'));
     }
 
     public function approved()

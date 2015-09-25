@@ -10,7 +10,13 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Pelatihan</h1>
+            <p>Tambah Pelatihan</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/pelatihan">List Pelatihan</a>
+                <i class="fa fa-fw fa-angle-right"></i> Add
+            </span>
         </section>
 
         <section class="content">
@@ -20,6 +26,9 @@
                         <div class="box-header">
                             <h4>Form Tambah Pelatihan</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::open(['method' => 'POST', 'route' => 'pelatihan.store']) !!}
                             <div class="box-body">
                                 @if ($errors->any())

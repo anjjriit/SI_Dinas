@@ -5,7 +5,13 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Kota</h1>
+            <p>Tambah Kota</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/kota">List Kota</a>
+                <i class="fa fa-angle-right fa-fw"></i> Add
+            </span>
         </section>
 
         <section class="content">
@@ -15,6 +21,9 @@
                         <div class="box-header">
                             <h4>Form Tambah Kota</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::open(['method' => 'POST', 'route' => 'kota.store']) !!}
                             <div class="box-body">
                                 @if ($errors->any())
