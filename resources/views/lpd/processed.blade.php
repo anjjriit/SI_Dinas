@@ -31,7 +31,7 @@
                                 <thead>
                                     <tr>
                                         <th class="col-md-1"></th>
-                                        <th>Kode LPD</th>
+                                        <th>No. LPD</th>
                                         <th>Penanggung Jawab</th>
                                         <th>Tanggal Laporan</th>
                                         <th>Action</th>

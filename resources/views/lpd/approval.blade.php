@@ -5,7 +5,7 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Rencana Perjalanan Dinas</h1>
+            <h1>Laporan Perjalanan Dinas</h1>
         </section>
 
         <section class="content">

@@ -42,7 +42,7 @@
     					<table class="table">
     						<thead>
     							<tr>
-    								<th>Kode</th>
+    								<th>No. RPD</th>
     								<th>Kota Tujuan</th>
     								<th>Tanggal Mulai</th>
     								<th>Tanggal Selesai</th>

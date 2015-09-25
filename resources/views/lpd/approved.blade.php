@@ -38,7 +38,7 @@
                                 <table class="table table-responsive">
                                     <thead>
                                         <tr>
-                                            <th>Kode</th>
+                                            <th>No. LPD</th>
                                             <th>Pengaju</th>
                                             <th>Status</th>
                                             <th>Terakhir Diperbarui</th>

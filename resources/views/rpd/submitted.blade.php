@@ -36,7 +36,7 @@
 	    					<table class="table">
 	    						<thead>
 	    							<tr>
-	    								<th>Kode</th>
+	    								<th>No. RPD</th>
                                         <th>Kategori</th>
                                         @if(auth()->user()->role == 'administration')
                                         	<th>Pengaju</th>
@@ -69,10 +69,10 @@
 											</td>
 											<td>
 												@if($data == "Trip")
-													{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
-												@else
-													-
-												@endif
+                                                    {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
+                                                @else
+                                                    {{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
+                                                @endif
 											</td>
 											<td>
 												<button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
@@ -125,7 +125,7 @@
                             <table class="table table-modal table-responsive table-condensed">
                                 <tbody>
                                     <tr>
-                                        <th class="col-md-4">Kode RPD</th>
+                                        <th class="col-md-4">No. RPD</th>
                                         <td>{{ $rpd->kode }}</td>
                                     </tr>
                                     <tr>
@@ -141,21 +141,22 @@
                                         <td>{{ ucwords(str_replace('_', ' ', $rpd->jenis_perjalanan)) }}</td>
                                     </tr>
                                     <tr>
-                                        @if($dataKategori == "Trip")
-    	                                    <th class="col-md-4">Tanggal Mulai</th>
-                                        @else
-    	                                    <th class="col-md-4">Tanggal </th>
-                                        @endif
+                                        <th class="col-md-4">Tanggal Mulai</th>
                                         <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
                                     </tr>
                                     @if($dataKategori == "Trip")
-    	                                <tr>
-    	                                    <th class="col-md-4">Tanggal Selesai</th>
-    	                                    <td>
-    											{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
-    	                                    </td>
-    	                                </tr>
-    	                            @endif
+                                        <tr>
+                                            <th class="col-md-4">Tanggal Selesai</th>
+                                            <td>
+                                                {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
+                                            </td>
+                                            @else
+                                            <th class="col-md-4">Tanggal Selesai</th>
+                                            <td>
+                                                {{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
+                                            </td>
+                                        </tr>
+                                    @endif
                                     <tr>
                                         <th class="col-md-4">Jumlah Hari Dinas</th>
                                         <td>
@@ -228,7 +229,7 @@
                                                 </td>
         										<td>
         											@if ($kegiatan->kegiatan == 'UAT')
-        												'UAT'
+        												UAT
         											@else
         												{{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
         											@endif
@@ -260,7 +261,7 @@
     									<th>Date Time</th>
     									<th>Nama</th>
     									<th>Action Taken</th>
-    								</tr>
+                                    </tr>
     							</thead>
     							<tbody>
     								@foreach($rpd->actionHistory as $action)

@@ -44,7 +44,7 @@
         					<table class="table">
         						<thead>
         							<tr>
-        								<th>Kode</th>
+        								<th>No. RPD</th>
         								<th>Kategori</th>
         								<th>Kota Tujuan</th>
         								<th>Tanggal Mulai</th>
@@ -58,12 +58,12 @@
     		    							<td>{{ $rpd->kode }}</td>
     		    							<td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
     										<td>{{ $rpd->kotaTujuan->nama_kota }}</td>
-    										<td>{{ $rpd->tanggal_mulai }}</td>
+    										<td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
     										<td>
     											@if($dataKategori == "Trip")
-    												{{ $rpd->tanggal_selesai }}
+    												{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
     											@else
-    												-
+    												{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
     											@endif
     										</td>
     										<td>
@@ -102,8 +102,8 @@
                         <table class="table table-modal table-responsive table-condensed">
                             <tbody>
                                 <tr>
-                                    <th class="col-md-4">ID</th>
-                                    <td>{{ $rpd->id }}</td>
+                                    <th class="col-md-4">No. RPD</th>
+                                    <td>{{ $rpd->kode }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Penanggung Jawab</th>
@@ -111,34 +111,33 @@
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Kategori</th>
-                                    <td>{{ $dataKategori = str_replace('_', ' ', $rpd->kategori) }}</td>
+                                    <td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
                                 </tr>
                                 <tr>
                                     <th class="col-md-4">Jenis</th>
-                                    <td>{{ $dataJenis = str_replace('_', ' ', $rpd->jenis_perjalanan) }}</td>
+                                    <td>{{ ucwords(str_replace('_', ' ', $rpd->jenis_perjalanan)) }}</td>
                                 </tr>
                                 <tr>
-                                	@if($dataKategori == "Trip")
-	                                    <th class="col-md-4">Tanggal Mulai</th>
-                                    @else
-	                                    <th class="col-md-4">Tanggal </th>
-                                    @endif
-                                    <td>{{ $rpd->tanggal_mulai }}</td>
+                                	<th class="col-md-4">Tanggal Mulai</th>
+                                    <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
                                 </tr>
 	                            @if($dataKategori == "Trip")
 	                                <tr>
 	                                    <th class="col-md-4">Tanggal Selesai</th>
 	                                    <td>
-											{{ $rpd->tanggal_selesai }}
+											{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
 	                                    </td>
+                                        @else
+                                        <th class="col-md-4">Tanggal Selesai</th>
+                                        <td>
+                                            {{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
+                                        </td>
 	                                </tr>
 	                            @endif
 	                            <tr>
                                     <th class="col-md-4">Jumlah Hari Dinas</th>
                                     <td>
-                                    	{{
-                                    		$rpd->lama_hari
-										}}
+                                    	{{ $rpd->lama_hari }}
                                     </td>
                                 </tr>
                                 <tr>

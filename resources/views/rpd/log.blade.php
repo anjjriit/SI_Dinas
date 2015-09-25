@@ -37,7 +37,7 @@
                                 <table class="table table-responsive">
                                     <thead>
                                         <tr>
-                                            <th>Kode</th>
+                                            <th>No.RPD</th>
                                             <th>Terakhir Diperbarui</th>
                                             <th>Status</th>
                                             <th>Action</th>
@@ -92,7 +92,7 @@
                         <table class="table table-modal table-responsive table-condensed">
                             <tbody>
                                 <tr>
-                                    <th class="col-md-4">Kode RPD</th>
+                                    <th class="col-md-4">No. RPD</th>
                                     <td>{{ $rpd->kode }}</td>
                                 </tr>
                                 <tr>
@@ -195,7 +195,7 @@
                                             </td>
                                             <td>
                                                 @if ($kegiatan->kegiatan == 'UAT')
-                                                    'UAT'
+                                                    UAT
                                                 @else
                                                     {{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
                                                 @endif

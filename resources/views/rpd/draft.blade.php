@@ -23,7 +23,6 @@
                                 <table class="table table-responsive">
                                     <thead>
                                         <tr>
-                                            <!--th>Kode</th-->
                                             <th>Tanggal Dibuat</th>
                                             <th>Terakhir Diperbarui</th>
                                             <th>Action</th>
@@ -32,7 +31,6 @@
                                     <tbody>
                                         @foreach ($draftRpds as $draftRpd)
                                             <tr>
-                                                <!--td>{{ $draftRpd->id }}</td-->
                                                 <td>{{ date_format( date_create($draftRpd->created_at), 'd/m/Y' ) }}</td>
                                                 <td>{{ date_format( date_create($draftRpd->updated_at), 'd/m/Y H:i:s' ) }}</td>
                                                 <td>
