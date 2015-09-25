@@ -10,7 +10,20 @@
 
 @section('content')
     <section class="content-header">
-        <h1>Rencana Perjalanan Dinas</h1>
+        <p>Edit Pengajuan RPD</p>
+        <span class="bcumb">
+            <i class="fa fa-fw fa-bookmark"></i>
+            @if (Auth::user()->role == 'super_admin')
+                <a href="/dashboard">Dashboard</a>
+            @else
+                <a href="/homepage">Homepage</a>
+            @endif
+            <i class="fa fa-angle-right fa-fw"></i> <a href="/rpd/submitted/all">Rencana Perjalanan Dinas</a>
+            @if ($rpd->status == 'SUBMIT')
+                <i class="fa fa-angle-right fa-fw"></i> {{ $rpd->kode}}
+            @endif
+            <i class="fa fa-angle-right fa-fw"></i> Edit
+        </span>
     </section>
 
     <section class="content">

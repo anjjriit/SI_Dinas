@@ -13,8 +13,7 @@
     <link rel="stylesheet" href="/vendor/adminLTE/css/AdminLTE.css">
     <link rel="stylesheet" href="/vendor/adminLTE/css/skins/skin-black.css">
 
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Lato:400,700">
-
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:400,500">
     @show
     <link rel="stylesheet" href="/style.css">
 </head>
@@ -24,8 +23,12 @@
 
         @include('partials.sidebar')
 
-        <div class="content-wrapper">
+        <div class="content-wrapper" style="min-height: 100%;">
             @yield('content')
+        </div>
+
+        <div class="main-footer">
+            &copy; {{ date('Y') }} Javan Cipta Solusi.
         </div>
     </div>
 
@@ -33,6 +36,7 @@
 
     <script src="/vendor/jquery/jquery-1.11.3.min.js"></script>
     <script src="/vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/vendor/slimScroll/jquery.slimscroll.min.js"></script>
     <script src="/vendor/adminLTE/js/app.js"></script>
     @show
 </body>

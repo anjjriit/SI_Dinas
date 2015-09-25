@@ -51,6 +51,7 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'role:administration'], function () {
+    Route::get('rpd/submitted/all', 'RpdController@submittedAll');
     Route::get('rpd/{rpd}/approval', 'RpdController@approval');
     Route::post('rpd/{rpd}/approval', 'RpdController@submitApproval');
 });

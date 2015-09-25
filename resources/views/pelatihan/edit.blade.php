@@ -10,7 +10,14 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Pelatihan</h1>
+            <p>Edit Pelatihan</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/pelatihan">List Pelatihan</a>
+                <i class="fa fa-angle-right fa-fw"></i> {{ $pelatihan->nama_pelatihan }}
+                <i class="fa fa-fw fa-angle-right"></i> Edit
+            </span>
         </section>
 
         <section class="content">
@@ -20,6 +27,9 @@
                         <div class="box-header">
                             <h4>Form Edit Pelatihan</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::model(
                             $pelatihan,
                             [

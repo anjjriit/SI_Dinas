@@ -10,8 +10,13 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Kota</h1>
-        </section>
+        <p>Data Kota</p>
+        <span class="bcumb">
+            <i class="fa fa-fw fa-bookmark"></i>
+            <a href="/dashboard">Dashboard</a>
+            <i class="fa fa-angle-right fa-fw"></i> Kota
+        </span>
+    </section>
 
         <section class="content-filter">
             <div class="row">
@@ -107,7 +112,8 @@
                                     '<i class="fa fa-fw fa-times"></i> Clear Search',
                                     [
                                         'type' => 'submit',
-                                        'class' => 'btn btn-info'
+                                        'class' => 'btn btn-info',
+                                        'style' => 'margin-top: 1px;'
                                     ]
                                 ) !!}
                             </div>
@@ -133,7 +139,7 @@
                                     <thead>
                                         <tr>
                                             <th>Nama Kota</th>
-                                            <th class="col-md-2">Action</th>
+                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
 
@@ -144,7 +150,7 @@
                                                 {{ $kota->nama_kota }}
                                             </td>
                                             <td>
-                                                <a href="/kota/{{ $kota->kode }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                <a href="/kota/{{ $kota->kode }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                 {!! Form::open(
                                                     [
                                                         'method' => 'DELETE',
@@ -154,7 +160,7 @@
                                                     ]
                                                 ) !!}
 
-                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
+                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
                                                     ) !!}
                                                 {!! Form::close() !!}
                                             </td>

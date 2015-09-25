@@ -1,11 +1,21 @@
 @extends('layouts.master')
 
-@section('page_title', 'RPD Drafts')
+@section('page_title', 'Draft RPD')
 
 @section('content')
 
         <section class="content-header">
-            <h1>Draft Rencana Perjalanan Dinas</h1>
+            <p>Draft RPD</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                @if (Auth::user()->role == 'super_admin')
+                    <a href="/dashboard">Dashboard</a>
+                @else
+                    <a href="/homepage">Homepage</a>
+                @endif
+                <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
+                <i class="fa fa-angle-right fa-fw"></i> Draft
+            </span>
         </section>
 
         <section class="content">
@@ -23,18 +33,22 @@
                                 <table class="table table-responsive">
                                     <thead>
                                         <tr>
+                                            <th class="col-md-1">No.</th>
                                             <th>Tanggal Dibuat</th>
                                             <th>Terakhir Diperbarui</th>
-                                            <th>Action</th>
+                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
+                                        <?php $i = 1; ?>
                                         @foreach ($draftRpds as $draftRpd)
                                             <tr>
+                                                <!--td>{{ $draftRpd->id }}</td-->
+                                                <td>{{ $i++ }}.</td>
                                                 <td>{{ date_format( date_create($draftRpd->created_at), 'd/m/Y' ) }}</td>
-                                                <td>{{ date_format( date_create($draftRpd->updated_at), 'd/m/Y H:i:s' ) }}</td>
+                                                <td>{{ date_format( date_create($draftRpd->updated_at), 'd/m/Y H:i' ) }}</td>
                                                 <td>
-                                                    <a href="/rpd/{{ $draftRpd->id }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                    <a href="/rpd/{{ $draftRpd->id }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach

@@ -5,7 +5,13 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data User</h1>
+            <p>Tambah User</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/user">List User</a>
+                <i class="fa fa-angle-right fa-fw"></i> Add
+            </span>
         </section>
 
         <section class="content">
@@ -15,6 +21,8 @@
                         <div class="box-header">
                             <h4>Form Tambah User</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
 
                         {!! Form::open(['method' => 'POST', 'route' => 'user.store']) !!}
                             <div class="box-body">

@@ -1,5 +1,13 @@
 body {
-    font-family: 'Lato', Arial, sans-serif;
+    font-family: 'Roboto', Arial, sans-serif;
+}
+
+.wrapper {
+    overflow-y: hidden;
+}
+
+strong, th, label {
+    font-weight: 500;
 }
 
 .login-logo img {
@@ -8,14 +16,18 @@ body {
 
 .login-logo {
     font-size: 18px;
-    font-weight: bold;
+    font-weight: 500;
 }
 
 .table > thead > tr > th {
     border-bottom-width: 1px;
-    font-size: 16px;
+    font-size: 14px;
     padding-top: 10px;
     padding-bottom: 10px;
+}
+
+.table td {
+    font-size: 13px;
 }
 
 .table > thead > tr > th,
@@ -28,8 +40,31 @@ body {
     padding: 10px 15px;
 }
 
-.content-haeder {
-    padding-top: 25px;
+.table-plain > thead > tr > th,
+.table-plain > tbody > tr > th,
+.table-plain > tfoot > tr > th,
+.table-plain > thead > tr > td,
+.table-plain > tbody > tr > td,
+.table-plain > tfoot > tr > td {
+    border: none;
+    padding: 4px 0;
+}
+
+.content-header {
+    background: #fbfbfb !important;
+    border-bottom:1px solid #ececec;
+    padding-bottom: 16px;
+}
+.content-header p {
+    font-weight: 500;
+    font-size: 16px;
+    padding-top: 3px;
+    margin-bottom: 5px;
+}
+
+.content-header .bcumb {
+     margin-top: 8px;
+     font-size:12px;
 }
 
 .content-filter {
@@ -38,12 +73,13 @@ body {
 
 .main-header .logo {
     height: auto;
-    padding-top: 5px
+    padding-top: 5px;
+    padding-bottom: 1px;
 }
 
 .skin-black .main-header {
-    -webkit-box-shadow: 0px 1px 0 rgba(0, 0, 0, 0.02);
-    box-shadow: 0px 1px 0 rgba(0, 0, 0, 0.02);
+    -webkit-box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.04);
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.04);
 }
 
 .main-sidebar,
@@ -100,6 +136,7 @@ body {
 
 .user-panel .info p {
     font-size: 16px;
+    font-weight: 500;
     overflow: hidden;
     text-overflow: ellipsis;
     padding-bottom: 2px;
@@ -107,11 +144,16 @@ body {
 
 .user-panel .role {
     color: #ddd;
+    font-size: 12px;
 }
 
 .login-page,
 .content-wrapper {
-    background-color: #f1f4f5;
+    background-color: #eee;
+}
+
+.fixed .content-wrapper {
+    padding-top: 0;
 }
 
 .content-header {
@@ -119,9 +161,9 @@ body {
 }
 
 .box {
-    border-radius: 3px;
-    -webkit-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
-    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.05);
+    border-radius: 0;
+    -webkit-box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.02);
+    box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.02);
 }
 
 .box-header {
@@ -139,11 +181,6 @@ body {
 .form-control {
     border-radius: 3px;
     padding-left: 12px !important;
-}
-
-.btn {
-    padding: 6px 10px 7px;
-    transition: background-color 0.15s ease-in-out;
 }
 
 .btn-default {
@@ -401,4 +438,21 @@ body {
 
 .table-bordered {
     border-color: #ddd;
+}
+
+.modal .page-header {
+    display: inline-block;
+    padding: 3px 8px;
+    background-color: #f6f6f6;
+    font-size: 14px;
+    color: #000;
+}
+
+.table-condensed > thead > tr > th,
+.table-condensed > tbody > tr > th,
+.table-condensed > tfoot > tr > th,
+.table-condensed > thead > tr > td,
+.table-condensed > tbody > tr > td,
+.table-condensed > tfoot > tr > td {
+  padding: 6px 12px !important;
 }

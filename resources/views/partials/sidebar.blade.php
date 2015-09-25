@@ -42,7 +42,7 @@
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li {{ (Request::is('rpd/submitted') ? ' class=item-active' : '')}}>
-                        <a href="/rpd/submitted">
+                        <a href="/rpd/submitted/all">
                             <i class="fa fa-fw fa-list"></i> <span>Submitted RPD</span>
                         </a>
                     </li>
@@ -125,7 +125,7 @@
                         </li>
                         <li{{ (Request::is('rpd/submitted') ? ' class=item-active' : '')}}>
                             <a href="/rpd/submitted">
-                                <i class="fa fa-fw fa-list"></i> <span>RPD Submitted</span>
+                                <i class="fa fa-fw fa-list"></i> <span>Submitted RPD</span>
                             </a>
                         </li>
                         <li{{ (Request::is('rpd/log') ? ' class=item-active' : '') }}>

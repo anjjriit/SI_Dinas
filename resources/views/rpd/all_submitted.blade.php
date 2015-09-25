@@ -1,103 +1,126 @@
 @extends('layouts.master')
 
-@section('page_title', 'Log RPD')
+@section('page_title', 'RPD Yang Di Submit')
+
+@section('stylesheet')
+    @parent
+    <link rel="stylesheet" href="/vendor/jquery-confirm/css/jquery-confirm.min.css">
+@endsection
 
 @section('content')
 
-        @if (session('success'))
-            <div class="content">
-                <div class="row">
+    <section class="content-header">
+        <p>RPD Yang Di Submit</p>
+        <span class="bcumb">
+            <i class="fa fa-fw fa-bookmark"></i>
+            @if (Auth::user()->role == 'super_admin')
+                <a href="/dashboard">Dashboard</a>
+            @else
+                <a href="/homepage">Homepage</a>
+            @endif
+            <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
+            <i class="fa fa-angle-right fa-fw"></i> Submitted
+        </span>
+    </section>
+
+    <section class="content">
+        <div class="row">
+            <div class="col-md-12">
+                @if (session('success'))
                     <div class="alert alert-success">
                         {{ session('success') }}
                     </div>
-                </div>
-            </div>
-        @endif
+                @endif
 
-        @if (session('error'))
-            <div class="content">
-                <div class="row">
+                @if (session('error'))
                     <div class="alert alert-danger">
                         {{ session('error') }}
                     </div>
-                </div>
-            </div>
-        @endif
-
-        <section class="content-header">
-            <p>Log Rencana Perjalanan Dinas</p>
-            <span class="bcumb">
-                <i class="fa fa-fw fa-bookmark"></i>
-                @if (Auth::user()->role == 'super_admin')
-                    <a href="/dashboard">Dashboard</a>
-                @else
-                    <a href="/homepage">Homepage</a>
                 @endif
-                <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
-                <i class="fa fa-angle-right fa-fw"></i> Log
-            </span>
-        </section>
 
-        <section class="content">
-            <div class="row">
-                <div class="col-md-12">
-                    @if ($rpdLogs->count() != 0)
-                        <div class="box box-widget">
-                            <div class="box-body no-padding table-responsive">
-                                <table class="table">
-                                    <thead>
+                @if ($submittedRpds->count() != 0)
+                    <div class="box box-widget">
+                        <div class="box-body no-padding table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th class="col-md-1">No. RPD</th>
+                                        <th>Kategori</th>
+                                        @if(auth()->user()->role == 'administration')
+                                            <th>Pengaju</th>
+                                        @endif
+                                        <th>Asal Kota</th>
+                                        <th>Kota Tujuan</th>
+                                        <th>Tanggal Mulai</th>
+                                        <th>Tanggal Selesai</th>
+                                        <th class="col-md-1">Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($submittedRpds as $rpd)
                                         <tr>
-                                            <th class="col-md-1">No. RPD</th>
-                                            <th>Kota Asal</th>
-                                            <th>Kota Tujuan</th>
-                                            <th>Terakhir Diperbarui</th>
-                                            <th>Status</th>
-                                            <th class="col-md-1">Action</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($rpdLogs as $rpdLog)
-                                            <tr>
+                                            <td>
+                                                {{ $rpd->kode }}
+                                            </td>
+                                            <td>
+                                                {{ $data = ucwords(str_replace('_', ' ', $rpd->kategori)) }}
+                                            </td>
+                                            @if(auth()->user()->role == 'administration')
                                                 <td>
-                                                    {{ $rpdLog->kode }}
+                                                    {{ $rpd->pegawai->nama_lengkap }}
                                                 </td>
-                                                <td>
-                                                    {{ $rpdLog->kotaAsal->nama_kota }}
-                                                </td>
-                                                <td>
-                                                    {{ $rpdLog->kotaTujuan->nama_kota }}
-                                                </td>
-                                                <td>
-                                                    {{ date_format( date_create($rpdLog->updated_at), 'd/m/Y H:i' ) }}
-                                                </td>
-                                                <td>
-                                                    {{ ucwords(strtolower($rpdLog->status)) }}
-                                                </td>
-                                                <td>
-                                                    <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailRPD-{{ $rpdLog->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
+                                            @endif
+                                            <td>
+                                                {{ $rpd->kotaTujuan->nama_kota }}
+                                            </td>
+                                            <td>
+                                                {{ $rpd->kotaAsal->nama_kota }}
+                                            </td>
+                                            <td>
+                                                {{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
+                                            </td>
+                                            <td>
+                                                {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
+                                            </td>
+                                            <td>
+                                                <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
                                                         <i class="fa fa-share"></i>
                                                     </button>
-                                                    @if ($rpdLog->status == 'BACK TO INITIATOR')
-                                                        <a href="/rpd/{{ $rpdLog->id }}/edit" class="btn btn-xs btn-default" data-toggle-alt="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
-                                                    @endif
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
-                            </div>
-                        </div>
-                    @else
-                        <div class="alert alert-warning">
-                            Logs RPD belum tersedia.
-                        </div>
-                    @endif
-                </div>
-            </div>
-        </section>
+                                                @if ($rpd->nik == auth()->user()->nik)
+                                                    {!! Form::open(
+                                                        [
+                                                            'method' => 'POST',
+                                                            'url' => '/rpd/recall/' . $rpd->id,
+                                                            'style' => 'display: inline-block;',
+                                                            'data-nama' => $rpd->kode,
+                                                        ]
+                                                    ) !!}
 
-        <!-- Bagian Modal Detail RPD-->
-        @foreach ($rpdLogs as $rpd)
+                                                        {!! Form::button('<i class="fa fa-fw fa-refresh"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Recall']
+                                                        ) !!}
+                                                    {!! Form::close() !!}
+                                                @endif
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
+                    </div><!-- Akhir Bagian Box Table-->
+                @else
+                    <div class="alert alert-warning">
+                        Data RPD yang telah disubmit belum tersedia.
+                    </div>
+                @endif
+
+                {!! $submittedRpds->render() !!}
+            </div>
+        </div>
+    </section>
+
+
+    <!-- Bagian Modal Detail RPD-->
+    @foreach ($submittedRpds as $rpd)
         <div class="modal fade" id="detailRPD-{{ $rpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
@@ -206,7 +229,7 @@
                                             </td>
                                             <td>
                                                 @if ($kegiatan->kegiatan == 'UAT')
-                                                    UAT
+                                                    'UAT'
                                                 @else
                                                     {{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
                                                 @endif
@@ -248,6 +271,15 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        @if (auth()->user()->role == 'administration')
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <a href="/rpd/{{ $rpd->id }}/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-check-square-o"></i> Edit</a>
+                                    <a href="/rpd/{{ $rpd->id }}/approval" class="btn btn-sm btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                                </div>
+                            </div>
+                        @endif
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
@@ -255,13 +287,43 @@
                 </div>
             </div>
         </div> <!-- Akhir Bagian Modal detail RPD-->
-        @endforeach
+    @endforeach
+
 @endsection
 
 @section('script')
     @parent
+    <script src="/vendor/jquery-confirm/js/jquery-confirm.min.js"></script>
 
     <script>
-    $('[data-toggle-alt="tooltip"]').tooltip();
+        $('.delete-button').on('click', function(event) {
+            event.preventDefault();
+
+            var element = $(this).parent()
+
+            var nama = element.attr('data-nama')
+
+            $.confirm({
+                title: '<i class="fa fa-refresh"></i> Recall RPD',
+                content: 'Apakah Anda yakin akan merecall RPD dengan kode <strong>' + nama + '</strong>',
+                confirmButtonClass: 'btn-danger',
+                cancelButtonClass: 'btn-default',
+                cancelButton: 'Tidak',
+                confirmButton: 'Ya, Recall',
+                animation: 'top',
+                animationSpeed: 300,
+                animationBounce: 1,
+
+                confirm: function(){
+                    return element.submit()
+                },
+                cancel: function(event){
+                    return;
+                }
+            });
+        })
+
+        $('[data-toggle-alt="tooltip"]').tooltip();
     </script>
+
 @endsection

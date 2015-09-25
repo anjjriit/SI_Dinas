@@ -25,8 +25,8 @@
                 {!! Form::label('jenis_perjalanan', 'Jenis Perjalanan') !!}
                 {!! Form::select(
                     'jenis_perjalanan', [
-                        'dalam_kota' => 'Dalam Kota',
-                        'luar_kota' => 'Luar Kota'
+                        'luar_kota' => 'Luar Kota',
+                        'dalam_kota' => 'Dalam Kota'
                     ],
                     null,
                     ['class' => 'form-control']

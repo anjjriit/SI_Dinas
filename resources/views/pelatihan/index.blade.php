@@ -10,7 +10,12 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Pelatihan</h1>
+            <p>Data Pelatihan</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> List Pelatihan
+            </span>
         </section>
 
         <section class="content-filter">
@@ -115,7 +120,8 @@
                                     '<i class="fa fa-fw fa-times"></i> Clear Search',
                                     [
                                         'type' => 'submit',
-                                        'class' => 'btn btn-info'
+                                        'class' => 'btn btn-info',
+                                        'style' => 'margin-top: 1px;'
                                     ]
                                 ) !!}
                             </div>
@@ -145,7 +151,7 @@
                                             <th>Tanggal Mulai</th>
                                             <th>Tanggal Selesai</th>
                                             <th>Alamat</th>
-                                            <th class="col-md-2">Action</th>
+                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
 
@@ -160,16 +166,16 @@
                                                 {{ $pelatihan->nama_lembaga }}
                                             </td>
                                             <td>
-                                                {{ $pelatihan->tanggal_mulai }}
+                                                {{ date_format(date_create($pelatihan->tanggal_mulai), 'd/m/Y') }}
                                             </td>
                                             <td>
-                                                {{ $pelatihan->tanggal_selesai }}
+                                                {{ date_format(date_create($pelatihan->tanggal_selesai), 'd/m/Y') }}
                                             </td>
                                             <td>
                                                 {{ $pelatihan->alamat }}
                                             </td>
                                             <td>
-                                                <a href="/pelatihan/{{ $pelatihan->kode }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                <a href="/pelatihan/{{ $pelatihan->kode }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                 {!! Form::open(
                                                     [
                                                         'method' => 'DELETE',
@@ -179,7 +185,7 @@
                                                     ]
                                                 ) !!}
 
-                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
+                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
                                                     ) !!}
                                                 {!! Form::close() !!}
                                             </td>

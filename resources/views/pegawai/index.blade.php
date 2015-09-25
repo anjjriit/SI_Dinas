@@ -10,7 +10,12 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data User</h1>
+            <p>Data User</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> User
+            </span>
         </section>
 
         <section class="content-filter">
@@ -115,7 +120,8 @@
                                     '<i class="fa fa-fw fa-times"></i> Clear Search',
                                     [
                                         'type' => 'submit',
-                                        'class' => 'btn btn-info'
+                                        'class' => 'btn btn-info',
+                                        'style' => 'margin-top: 1px;'
                                     ]
                                 ) !!}
                             </div>
@@ -152,7 +158,7 @@
                                             <th>Role</th>
                                             <th>Status</th>
                                             <th>Last Login</th>
-                                            <th class="col-md-2">Action</th>
+                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
 
@@ -196,9 +202,9 @@
                                         </td>
                                         <td>
                                             @if ($pegawai->otherAdmin())
-                                                <button class="btn btn-sm" disabled data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></button>
+                                                <button class="btn btn-xs" disabled data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></button>
                                             @else
-                                                <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                             @endif
 
                                             {!! Form::open(
@@ -210,10 +216,10 @@
                                                 ]
                                             ) !!}
                                                 @if ($pegawai->otherAdmin())
-                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'disabled', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
+                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'disabled', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
                                                     ) !!}
                                                 @else
-                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
+                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
                                                     ) !!}
                                                 @endif
                                             {!! Form::close() !!}

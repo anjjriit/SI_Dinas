@@ -5,7 +5,14 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data User</h1>
+            <p>Data User</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Dashboard</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/user">List User</a>
+                <i class="fa fa-angle-right fa-fw"></i> {{ $pegawai->nama_lengkap }}
+                <i class="fa fa-angle-right fa-fw"></i> Edit
+            </span>
         </section>
 
         <section class="content">
@@ -15,6 +22,9 @@
                         <div class="box-header">
                             <h4>Form Edit User</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::model(
                             $pegawai,
                             [
