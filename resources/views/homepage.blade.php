@@ -18,7 +18,7 @@
 	<section class="content">
 		<div class="row">
 			<div class="col-md-12">
-				<h2>Data RPD</h2>
+				<h4>Data RPD</h4>
 				<div class="box box-widget">
 					<div class="box-body no-padding">
 						<table class="table">
@@ -34,7 +34,6 @@
     						</thead>
     						<tbody>
     							@foreach ($rpds as $rpd)
-    							<h1>skdj</h1>
 		    						<tr>
 		    							<td>
 		    								{{ $rpd->kode }}
@@ -126,9 +125,9 @@
     						</tbody>
 						</table>
 					</div>					
-				</div><!-- akhir box 
+				</div><!- akhir box -->
 			</div>
-		</div>-->
+		</div>
 		
 	</section>
 @endsection
