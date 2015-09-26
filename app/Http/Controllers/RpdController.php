@@ -318,7 +318,7 @@ class RpdController extends Controller
                 'id_rpd' => $rpd->id,
                 'nik' => Auth::user()->nik,
                 'action' => 'SUBMIT',
-                'comment' => null
+                'comment' => $request->input('keterangan')
             ];
 
             ActionHistoryRpd::create($action);
@@ -408,7 +408,7 @@ class RpdController extends Controller
             'id_rpd' => $rpd->id,
             'nik' => Auth::user()->nik,
             'action' => $rpd->status,
-            'comment' => $request->input('keterangan')
+            'comment' => $request->input('comment')
         ];
 
         ActionHistoryRpd::create($action);
@@ -443,7 +443,7 @@ class RpdController extends Controller
         $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
         if ($request->has('query')) {
-            $approvedRpds = Rpd::orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+            $approvedRpds = Rpd::with('pegawai')->orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
         } else {
             $approvedRpds = Rpd::orderBy($orderBy, $order)->paginate(15);
         }
