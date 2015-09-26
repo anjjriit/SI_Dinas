@@ -22,6 +22,9 @@
                         <div class="box-header">
                             <h4>Form Edit Transportasi</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::model(
                                 $transportasi,
                                 [

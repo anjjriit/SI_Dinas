@@ -20,6 +20,9 @@
                         <div class="box-header">
                             <h4>Form Edit Biaya Transportasi {{ $transportasi->nama_transportasi }}</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::model($biayaTransportasi, ['method' => 'PATCH', 'url' => '/transportasi/' . $transportasi->id . '/biaya/' . $biayaTransportasi->id]) !!}
                             <div class="box-body">
                                 @if ($errors->any())
