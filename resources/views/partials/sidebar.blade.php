@@ -120,7 +120,7 @@
                         </li>
                         <li{{ (Request::is('rpd/draft') ? ' class=item-active' : '')}}>
                             <a href="/rpd/draft">
-                                <i class="fa fa-fw fa-edit"></i> <span>RPD Drafts</span>
+                                <i class="fa fa-fw fa-edit"></i> <span>Draft RPD</span>
                             </a>
                         </li>
                         <li{{ (Request::is('rpd/submitted') ? ' class=item-active' : '')}}>
@@ -130,7 +130,7 @@
                         </li>
                         <li{{ (Request::is('rpd/log') ? ' class=item-active' : '') }}>
                             <a href="/rpd/log">
-                                <i class="fa fa-fw fa-history"></i> <span>Logs RPD</span>
+                                <i class="fa fa-fw fa-history"></i> <span>Log RPD</span>
                             </a>
                         </li>
                     </ul>
@@ -154,17 +154,17 @@
                     </li>
                     <li {{ (Request::is('lpd/draft') ? ' class=item-active' : '')}}>
                         <a href="/lpd/draft">
-                            <i class="fa fa-fw fa-edit"></i> <span>LPD Drafts</span>
+                            <i class="fa fa-fw fa-edit"></i> <span>Draft LPD</span>
                         </a>
                     </li>
                     <li {{ (Request::is('lpd/submitted') ? ' class=item-active' : '')}}>
                         <a href="/lpd/submitted">
-                            <i class="fa fa-fw fa-list"></i> <span>LPD Submitted</span>
+                            <i class="fa fa-fw fa-list"></i> <span>Submitted LPD</span>
                         </a>
                     </li>
                     <li {{ (Request::is('lpd/log') ? ' class=item-active' : '')}}>
                         <a href="/lpd/log">
-                            <i class="fa fa-fw fa-history"></i> <span>Logs LPD</span>
+                            <i class="fa fa-fw fa-history"></i> <span>Log LPD</span>
                         </a>
                     </li>
                 </ul>

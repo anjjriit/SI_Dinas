@@ -81,6 +81,7 @@
                             </table>
                         </div>
                     </div>
+                    <div class="page-header">Pengeluaran</div>
                     <table class="table table-condensed table-bordered">
                         <thead>
                             <tr class="active">
@@ -135,6 +136,30 @@
                                 <td colspan="5" class="text-center">Total</td>
                                 <td>Rp {{ number_format($lpd->pengeluaran->sum('biaya'), 0, ',', '.') }}</td>
                             </tr>
+                        </tbody>
+                    </table>
+
+                    <div class="page-header">Action History</div>
+                    <table class="table table-bordered table-condensed" width="100%">
+                        <thead>
+                            <tr class="active">
+                                <th width="25%">Date Time</th>
+                                <th width="30%">Nama</th>
+                                <th width="20%">Action Taken</th>
+                                <th width="25%">Comment</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach($lpd->actionHistory as $action)
+                                @if ($action->action != 'DRAFT')
+                                    <tr>
+                                        <td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
+                                        <td>{{ $action->pegawai->nama_lengkap }}</td>
+                                        <td>{{ ucwords(strtolower($action->action)) }}</td>
+                                        <td>{{ $action->comment }}</td>
+                                    </tr>
+                                @endif
+                            @endforeach
                         </tbody>
                     </table>
                 </div>

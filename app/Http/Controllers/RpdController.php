@@ -443,12 +443,10 @@ class RpdController extends Controller
         $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
         if ($request->has('query')) {
-            $approvedRpds = Rpd::with('pegawai')->orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+            $approvedRpds = Rpd::approved()->orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
         } else {
-            $approvedRpds = Rpd::orderBy($orderBy, $order)->paginate(15);
+            $approvedRpds = Rpd::approved()->orderBy($orderBy, $order)->paginate(15);
         }
-
-        $approvedRpds = Rpd::where('status', '=', 'APPROVED')->orderBy('kode', 'asc')->paginate(10);
 
         return view('rpd.approved', compact('approvedRpds', 'request'));
     }

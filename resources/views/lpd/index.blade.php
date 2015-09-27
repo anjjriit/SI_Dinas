@@ -55,25 +55,35 @@
         						</thead>
         						<tbody>
         							@foreach($approvedRpds as $rpd)
-    		    						<tr>
-    		    							<td>{{ $rpd->kode }}</td>
-    		    							<td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
-    										<td>{{ $rpd->kotaTujuan->nama_kota }}</td>
-    										<td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
-    										<td>
-    											@if($dataKategori == "Trip")
-    												{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
-    											@else
-    												{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
-    											@endif
-    										</td>
-    										<td>
-    											<button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
-    												<i class="fa fa-fw fa-share"></i>
-    											</button>
-    											<a href="/lpd/create/{{ $rpd->id }}" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" data-title="Buat LPD"><i class="fa fa-fw fa-copy"></i></a>
-    										</td>
-    		    						</tr>
+                                        @if (!is_null($rpd->lpd))
+                                            @if ($rpd->lpd->status == 'SUBMIT')
+                                                <?php continue; ?>
+                                            @endif
+                                        @endif
+        		    						<tr>
+        		    							<td>{{ $rpd->kode }}</td>
+        		    							<td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
+        										<td>{{ $rpd->kotaTujuan->nama_kota }}</td>
+        										<td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
+        										<td>
+        											@if($dataKategori == "Trip")
+        												{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
+        											@else
+        												{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
+        											@endif
+        										</td>
+        										<td>
+        											<button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
+        												<i class="fa fa-fw fa-share"></i>
+        											</button>
+
+                                                    @if (is_null($rpd->lpd))
+        											    <a href="/lpd/create/{{ $rpd->id }}" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" data-title="Buat LPD"><i class="fa fa-fw fa-copy"></i></a>
+                                                    @else
+                                                        <a href="/lpd/{{ $rpd->lpd->id }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit LPD"><i class="fa fa-fw fa-edit"></i></a>
+                                                    @endif
+        										</td>
+        		    						</tr>
     	    						@endforeach
         						</tbody>
         					</table>
@@ -90,7 +100,7 @@
 
     <!-- Bagian Modal Detail RPD-->
     @foreach ($approvedRpds as $rpd)
-	<div class="modal fade" id="detailRPD-{{ $rpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
+	   <div class="modal fade" id="detailRPD-{{ $rpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -198,7 +208,7 @@
                                             </td>
                                             <td>
                                                 @if ($kegiatan->kegiatan == 'UAT')
-                                                    'UAT'
+                                                    UAT
                                                 @else
                                                     {{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
                                                 @endif

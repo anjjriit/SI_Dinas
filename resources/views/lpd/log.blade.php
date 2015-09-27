@@ -1,46 +1,49 @@
 @extends('layouts.master')
 
-@section('page_title', 'Logs LPD')
+@section('page_title', 'Log LPD')
 
 @section('content')
 
-        @if (session('success'))
-            <div class="content">
-                <div class="row">
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                </div>
-            </div>
-        @endif
 
-        @if (session('error'))
-            <div class="content">
-                <div class="row">
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                </div>
-            </div>
-        @endif
 
         <section class="content-header">
-            <h1>Logs Laporan Perjalanan Dinas</h1>
-        </section>
+        <p>Log LPD</p>
+        <span class="bcumb">
+            <i class="fa fa-fw fa-bookmark"></i>
+            @if (Auth::user()->role == 'super_admin')
+                <a href="/dashboard">Dashboard</a>
+            @else
+                <a href="/homepage">Homepage</a>
+            @endif
+            <i class="fa fa-angle-right fa-fw"></i> Laporan Perjalanan Dinas
+            <i class="fa fa-angle-right fa-fw"></i> Log
+        </span>
+    </section>
 
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
                     @if ($lpdLogs->count() != 0)
                         <div class="box box-widget">
                             <div class="box-body no-padding">
                                 <table class="table table-responsive">
                                     <thead>
                                         <tr>
-                                            <th>Kode</th>
+                                            <th class="col-md-1">No. LPD</th>
                                             <th>Terakhir Diperbarui</th>
                                             <th>Status</th>
-                                            <th>Action</th>
+                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -56,8 +59,8 @@
                                                     {{ $lpdLog->status }}
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailLPD-{{ $lpdLog->id }}">
-                                                        <i class="fa fa-fw fa-share"></i>Detail
+                                                    <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailLPD-{{ $lpdLog->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
+                                                        <i class="fa fa-fw fa-share"></i>
                                                     </button>
                                                     @if ($lpdLog->status == 'BACK TO INITIATOR')
                                                         <a href="/lpd/{{ $lpdLog->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
@@ -84,4 +87,11 @@
             @include('lpd._modal_detail')
         @endforeach
 
+@endsection
+
+@section('script')
+    @parent
+    <script>
+        $('[data-toggle-alt="tooltip"]').tooltip();
+    </script>
 @endsection

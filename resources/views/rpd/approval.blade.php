@@ -26,6 +26,9 @@
                         <div class="box-header">
                             <h4>Form Approval RPD</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::open(['method' => 'POST', 'url' => '/rpd/' . $rpd->id . '/approval']) !!}
                             <div class="box-body">
                                 @if($errors->any())
@@ -80,98 +83,92 @@
             </div>
         </section>
 
-        <div class="modal fade" id="detailRPD" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
+        <div class="modal fade" id="detailRPD-{{ $rpd->id }}" tabindex="-1" role="dialog" aria-labelledby="detailRPDLabel">
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h4>
+                        <h4 class="modal-title"><strong>Rencana Perjalanan Dinas (RPD)</strong></h4>
                     </div>
                     <div class="modal-body">
                         <!-- Info basic dari RPD -->
-                        <table class="table table-modal table-responsive table-condensed">
+                        <div class="page-header"><strong>Detail</strong></div>
+                        <table class="table table-plain table-responsive">
                             <tbody>
                                 <tr>
-                                    <td class="col-md-4"><strong>Kode RPD</strong></td>
+                                    <td class="col-md-3">Nomor RPD</td>
                                     <td>{{ $rpd->kode }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"><strong>Penanggung Jawab</strong></td>
+                                    <td class="col-md-3">Penanggung Jawab</td>
                                     <td>{{ $rpd->pegawai->nama_lengkap }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4">Kategori</td>
+                                    <td class="col-md-3">Kategori</td>
                                     <td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4">Jenis</td>
+                                    <td class="col-md-3">Jenis</td>
                                     <td>{{ ucwords(str_replace('_', ' ', $rpd->jenis_perjalanan)) }}</td>
                                 </tr>
                                 <tr>
-                                    @if($dataKategori == "Trip")
-                                        <td class="col-md-4">Tanggal Mulai</td>
-                                    @else
-                                        <td class="col-md-4">Tanggal </td>
-                                    @endif
+                                    <td class="col-md-3">Tanggal Mulai</td>
                                     <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
                                 </tr>
-                                @if($dataKategori == "Trip")
-                                    <tr>
-                                        <td class="col-md-4">Tanggal Selesai</td>
-                                        <td>
-                                            {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
-                                        </td>
-                                    </tr>
-                                @endif
                                 <tr>
-                                    <td class="col-md-4"><strong>Jumlah Hari Dinas</strong></td>
+                                    <td class="col-md-3">Tanggal Selesai</td>
+                                    <td>
+                                        {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-3">Jumlah Hari Dinas</td>
                                     <td>
                                         {{ $rpd->lama_hari }} hari
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"><strong>Asal Kota</strong></td>
+                                    <td class="col-md-3">Asal Kota</td>
                                     <td>{{ $rpd->kotaAsal->nama_kota }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"><strong>Tujuan Kota</strong></td>
+                                    <td class="col-md-3">Tujuan Kota</td>
                                     <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"><strong>Sarana Transportasi</strong></td>
+                                    <td class="col-md-3" style="vertical-align: top;">Sarana Transportasi</td>
                                     <td>
-                                        <ul class="list-unstyled">
-                                            @foreach($rpd->saranaTransportasi as $saranaTransportasi)
-                                                <li>{{ $saranaTransportasi->nama_transportasi }}</li>
-                                            @endforeach
-                                        </ul>
+                                        @foreach($rpd->saranaTransportasi as $saranaTransportasi)
+                                            {{ $saranaTransportasi->nama_transportasi }}@if ($saranaTransportasi != $rpd->saranaTransportasi[$rpd->saranaTransportasi->count() - 1]), @endif
+                                        @endforeach
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="col-md-4"><strong>Sarana Penginapan</strong></td>
+                                    <td class="col-md-3">Sarana Penginapan</td>
                                     <td>{{ $rpd->saranaPenginapan->nama_penginapan }}</td>
                                 </tr>
                                 @if ($rpd->status == 'APPROVED' || auth()->user()->role == 'administration')
-                                    <tr>
-                                        <td class="col-md-4"><strong>Akomodasi Awal</strong></td>
-                                        <td>Rp {{ number_format($rpd->akomodasi_awal, 2, ',', '.') }}</td>
-                                    </tr>
+                                <tr>
+                                    <td class="col-md-3">Akomodasi Awal</td>
+                                    <td>Rp {{ number_format($rpd->akomodasi_awal, 2, ',', '.') }}</td>
+                                </tr>
                                 @endif
                                 <tr>
-                                    <td class="col-md-4"><strong>Status</strong></td>
-                                    <td style="text-transform : uppercase;">{{ $rpd->status }}</td>
+                                    <td class="col-md-3">Status</td>
+                                    <td>{{ $rpd->status }}</td>
                                 </tr>
                             </tbody>
                         </table>
-                        <br>
+
                         <!-- Daftar Peserta RPD-->
-                        <h4>Peserta dan Tujuan Kegiatan</h4>
-                        <table class="table table-bordered">
+                        <div class="page-header"><strong>Peserta &amp; Tujuan Kegiatan</strong></div>
+                        <table class="table table-bordered table-condensed" width="100%">
                             <thead>
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Judul Project/Prospek/Pelatihan</th>
-                                    <th>Kegiatan</th>
+                                <tr class="active">
+                                    <th width="25%">Nama</th>
+                                    <th width="30%">Judul Project/Prospek/Pelatihan</th>
+                                    <th width="20%">Kegiatan</th>
+                                    <th width="25%">Deskripsi</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -199,12 +196,19 @@
                                                     {{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
                                                 @endif
                                             </td>
+                                            <td>
+                                                @if ($kegiatan->deskripsi == '')
+                                                    -
+                                                @else
+                                                    {{ $kegiatan->deskripsi }}
+                                                @endif
+                                            </td>
                                         </tr>
                                     @endforeach
                                 @endforeach
                             </tbody>
                         </table>
-                        <br>
+
                         <!--Bagian Action History-->
                         <div class="page-header"><strong>Action History</strong></div>
                         <table class="table table-bordered table-condensed" width="100%">
@@ -235,6 +239,6 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> <!-- Akhir Bagian Modal detail RPD-->
 
 @endsection

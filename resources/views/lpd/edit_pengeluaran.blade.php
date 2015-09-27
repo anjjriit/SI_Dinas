@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Laporan Perjalanan Dinas')
+@section('page_title', 'Edit Pengeluaran')
 
 @section('stylesheet')
     @parent
@@ -11,8 +11,18 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Laporan Perjalanan Dinas (LPD)</h1>
-        </section>
+        <p>Edit Pengeluaran</p>
+        <span class="bcumb">
+            <i class="fa fa-fw fa-bookmark"></i>
+            @if (Auth::user()->role == 'super_admin')
+                <a href="/dashboard">Dashboard</a>
+            @else
+                <a href="/homepage">Homepage</a>
+            @endif
+            <i class="fa fa-angle-right fa-fw"></i> <a href="/lpd/{{ $lpd->id }}/edit">Laporan Perjalanan Dinas</a>
+            <i class="fa fa-angle-right fa-fw"></i> Edit Pengeluaran
+        </span>
+    </section>
 
         <section class="content">
             <div class="row">
@@ -21,6 +31,8 @@
                         <div class="box-header">
                             <h4>Form Edit Pengeluaran</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
 
                         {!! Form::model(
                             $pengeluaran,
@@ -31,7 +43,7 @@
                         ) !!}
                             <div class="box-body">
 
-                                <h5 class="page-header"><small>Pengeluaran</small></h5>
+                                <div class="page-header alt"><strong>Pengeluaran</strong></div>
                                 @if ($errors->any())
                                     <div class="alert alert-danger">
                                         @foreach ($errors->all() as $error)
