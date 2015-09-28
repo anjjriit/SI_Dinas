@@ -67,7 +67,7 @@
                                 <tbody>
                                     <tr>
                                         <td class="col-md-6 active"><strong>Akomodasi Awal</strong></td>
-                                        <td class="text-right">{{ 'Rp ' . number_format($lpd->rpd->akomodasi_awal, 0, ',', '.') }}</td>
+                                        <td class="text-right">Rp {{number_format($lpd->rpd->akomodasi_awal, 0, ',', '.') }}</td>
                                     </tr>
                                     <tr>
                                         <td class="active"><strong>Total Pengeluaran</strong></td>
