@@ -56,7 +56,7 @@
         						<tbody>
         							@foreach($approvedRpds as $rpd)
                                         @if (!is_null($rpd->lpd))
-                                            @if ($rpd->lpd->status == 'SUBMIT')
+                                            @if ($rpd->lpd->status != 'DRAFT')
                                                 <?php continue; ?>
                                             @endif
                                         @endif
@@ -80,7 +80,9 @@
                                                     @if (is_null($rpd->lpd))
         											    <a href="/lpd/create/{{ $rpd->id }}" class="btn btn-xs btn-primary" data-toggle="tooltip" data-placement="top" data-title="Buat LPD"><i class="fa fa-fw fa-copy"></i></a>
                                                     @else
-                                                        <a href="/lpd/{{ $rpd->lpd->id }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit LPD"><i class="fa fa-fw fa-edit"></i></a>
+                                                        @if ($rpd->lpd->status == 'DRAFT')
+                                                            <a href="/lpd/{{ $rpd->lpd->id }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit LPD"><i class="fa fa-fw fa-edit"></i></a>
+                                                        @endif
                                                     @endif
         										</td>
         		    						</tr>

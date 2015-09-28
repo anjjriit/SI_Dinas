@@ -78,7 +78,9 @@
                                                 <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
                                                     <i class="fa fa-fw fa-share"></i>
                                                 </button>
-                                                <a href="/lpd/create/{{ $rpd->id }}" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit LPD"><i class="fa fa-fw fa-edit"></i></a>
+                                                @if ($rpd->lpd->status == 'DRAFT')
+                                                    <a href="/lpd/{{ $rpd->lpd->id }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit LPD"><i class="fa fa-fw fa-edit"></i></a>
+                                                @endif
                                             </td>
                                         </tr>
                                     @endforeach

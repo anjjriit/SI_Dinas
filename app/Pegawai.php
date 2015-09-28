@@ -65,5 +65,10 @@ class Pegawai extends Model implements AuthenticatableContract
         return $this->hasMany('App\Rpd','nik');
     }
 
+    public function kegiatan()
+    {
+        return $this->hasMany('App\Kegiatan', 'nik_peserta');
+    }
+
 
 }

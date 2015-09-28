@@ -13,7 +13,7 @@ class AddForeignTipePengeluaran extends Migration
     public function up()
     {
         Schema::table('pengeluaran', function (Blueprint $table) {
-            $table->foreign('id_tipe')->references('id')->on('pengeluaran')->onUpdate('cascade');
+            $table->foreign('id_tipe')->references('id')->on('tipe_pengeluaran')->onUpdate('cascade');
         });
     }
 
@@ -25,7 +25,7 @@ class AddForeignTipePengeluaran extends Migration
     public function down()
     {
         Schema::table('pengeluaran', function (Blueprint $table) {
-            //
+            $table->dropForeign('pengeluaran_id_tipe_foreign');
         });
     }
 }
