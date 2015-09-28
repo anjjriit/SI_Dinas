@@ -143,13 +143,13 @@
                     @if ($data_pelatihan->count() != 0)
                         <div class="box box-widget">
                             <div class="box-body no-padding">
-                                <table class="table">
+                                <table class="table" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Nama Pelatihan</th>
-                                            <th>Nama Lembaga/Institusi</th>
-                                            <th>Tanggal Mulai</th>
-                                            <th>Tanggal Selesai</th>
+                                            <th width="22%">Nama Pelatihan</th>
+                                            <th width="18%">Nama Lembaga/Institusi</th>
+                                            <th width="15%">Tanggal Mulai</th>
+                                            <th width="15%">Tanggal Selesai</th>
                                             <th>Alamat</th>
                                             <th class="col-md-1">Action</th>
                                         </tr>

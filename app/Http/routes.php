@@ -101,6 +101,12 @@ Route::get('json/project', 'JsonController@project');
 Route::get('json/prospek', 'JsonController@prospek');
 Route::get('json/pelatihan', 'JsonController@pelatihan');
 
+Route::get('report/bulanan', 'ReportController@bulanan');
+Route::get('report/tahunan', 'ReportController@tahunan');
+Route::get('report/prospek', 'ReportController@prospek');
+Route::get('report/project', 'ReportController@project');
+Route::get('report/pelatihan', 'ReportController@pelatihan');
+
 //tes
 Route::get('cek', function () {
     dd(auth()->check());
