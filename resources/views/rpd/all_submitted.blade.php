@@ -23,6 +23,115 @@
         </span>
     </section>
 
+    <section class="content-filter">
+            <div class="row">
+                <div class="col-md-12">
+                    {!! Form::model($request, [
+                        'method' => 'GET',
+                        'url' => '/rpd/submitted/all',
+                        'class' => 'form-inline pull-right'
+                    ])!!}
+                        <div class="form-group">
+                            @if ($request->has('query'))
+                                {!! Form::hidden('searchBy') !!}
+                                {!! Form::hidden('query') !!}
+                            @endif
+
+                            {!! Form::select(
+                                'orderBy',
+                                [
+                                    'kode' => 'No. RPD',
+                                    'tanggal_mulai' => 'Tanggal Mulai',
+                                    'tanggal_selesai' => 'Tanggal Selesai'
+                                ],
+                                null,
+                                ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
+                            ) !!}
+
+                            {!! Form::select(
+                                'order',
+                                [
+                                    'asc' => 'Ascending',
+                                    'desc' => 'Descending'
+                                ],
+                                null,
+                                ['class' => 'form-control', 'required']
+                            ) !!}
+
+                            {!! Form::button(
+                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Sort',
+                                [
+                                    'type' => 'submit', 'class' => 'btn btn-success'
+                                ]
+                            ) !!}
+                        </div>
+                    {!! Form::close() !!}
+
+                    {!! Form::model($request,
+                        [
+                            'method' => 'GET',
+                            'url' => '/rpd/submitted/all',
+                            'class' => 'form-inline pull-left'
+                        ]
+                    )!!}
+                        <div class="form-group">
+                            @if ($request->has('orderBy'))
+                                {!! Form::hidden('orderBy') !!}
+                                {!! Form::hidden('order') !!}
+                            @endif
+
+                            {!! Form::select(
+                                'searchBy',
+                                [
+                                    'kode' => 'No. RPD',
+                                    'tanggal_mulai' => 'Tanggal Mulai',
+                                    'tanggal_selesai' => 'Tanggal Selesai'
+                                ],
+                                null,
+                                [
+                                    'class' => 'form-control',
+                                    'placeholder' => 'Search By',
+                                    'required'
+                                ]
+                            ) !!}
+                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Query...']) !!}
+                            {!! Form::button(
+                                '<i class="fa fa-fw fa-search"></i> Search',
+                                ['type' => 'submit', 'class' => 'btn btn-success', 'style' => 'margin-left: 3px;']
+                            ) !!}
+                        </div>
+                    {!! Form::close() !!}
+
+                    @if ($request->has('query'))
+                        {!! Form::model($request,
+                            [
+                                'method' => 'GET',
+                                'url' => '/rpd/submitted/all',
+                                'class' => 'form-inline pull-left',
+                                'style' => 'margin-left: 5px;'
+                            ]
+                        )!!}
+                            <div class="form-group">
+                                @if ($request->has('orderBy'))
+                                    {!! Form::hidden('orderBy') !!}
+                                    {!! Form::hidden('order') !!}
+                                @endif
+
+                                {!! Form::button(
+                                    '<i class="fa fa-fw fa-times"></i> Clear Search',
+                                    [
+                                        'type' => 'submit',
+                                        'class' => 'btn btn-info',
+                                        'style' => 'margin-top: 1px;'
+                                    ]
+                                ) !!}
+                            </div>
+                        {!! Form::close() !!}
+                    @endif
+                </div>
+            </div>
+        </section>
+
     <section class="content">
         <div class="row">
             <div class="col-md-12">
@@ -108,9 +217,15 @@
                         </div>
                     </div><!-- Akhir Bagian Box Table-->
                 @else
-                    <div class="alert alert-warning">
-                        Data RPD yang telah disubmit belum tersedia.
-                    </div>
+                    @if ($request->has('query'))
+                        <div class="alert alert-warning">
+                            Hasil tidak ditemukan untuk kata kunci "<strong>{{ $request->input('query') }}</strong>".
+                        </div>
+                    @else
+                        <div class="alert alert-warning">
+                            Data RPD yang telah disubmit belum tersedia.
+                        </div>
+                    @endif
                 @endif
 
                 {!! $submittedRpds->render() !!}

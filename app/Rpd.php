@@ -42,7 +42,7 @@ class Rpd extends Model
 
     public function scopeApproved($query)
     {
-        return $query->where('status', '!=', 'APPROVED');
+        return $query->where('status', '=', 'APPROVED');
     }
 
     public function scopeMine($query)

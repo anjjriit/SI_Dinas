@@ -318,7 +318,7 @@ class RpdController extends Controller
                 'id_rpd' => $rpd->id,
                 'nik' => Auth::user()->nik,
                 'action' => 'SUBMIT',
-                'comment' => null
+                'comment' => $request->input('keterangan')
             ];
 
             ActionHistoryRpd::create($action);
@@ -408,12 +408,12 @@ class RpdController extends Controller
             'id_rpd' => $rpd->id,
             'nik' => Auth::user()->nik,
             'action' => $rpd->status,
-            'comment' => $request->input('keterangan')
+            'comment' => $request->input('comment')
         ];
 
         ActionHistoryRpd::create($action);
 
-        return redirect('/rpd/submitted')->with('success', 'Status telah terupdate');
+        return redirect('/rpd/submitted/all')->with('success', 'Status telah terupdate');
     }
 
     public function draft()
@@ -430,11 +430,18 @@ class RpdController extends Controller
         return view('rpd.submitted', compact('submittedRpds'));
     }
 
-    public function submittedAll()
+    public function submittedAll(Request $request)
     {
-        $submittedRpds = Rpd::submitted()->orderBy('kode')->paginate(10);
+        $orderBy = ($request->has('orderBy')) ? $request->input('orderBy') : 'kode';
+        $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
-        return view('rpd.all_submitted', compact('submittedRpds'));
+        if ($request->has('query')) {
+           $submittedRpds = Rpd::submitted()->orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+        } else {
+            $submittedRpds = Rpd::submitted()->orderBy($orderBy, $order)->paginate(15);
+        }
+
+        return view('rpd.all_submitted', compact('submittedRpds', 'request'));
     }
 
     public function approved(Request $request)
@@ -443,12 +450,10 @@ class RpdController extends Controller
         $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
         if ($request->has('query')) {
-            $approvedRpds = Rpd::orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+           $approvedRpds = Rpd::approved()->orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
         } else {
-            $approvedRpds = Rpd::orderBy($orderBy, $order)->paginate(15);
+            $approvedRpds = Rpd::approved()->orderBy($orderBy, $order)->paginate(15);
         }
-
-        $approvedRpds = Rpd::where('status', '=', 'APPROVED')->orderBy('kode', 'asc')->paginate(10);
 
         return view('rpd.approved', compact('approvedRpds', 'request'));
     }
