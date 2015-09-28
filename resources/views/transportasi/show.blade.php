@@ -114,7 +114,8 @@
                                     '<i class="fa fa-fw fa-times"></i> Clear Search',
                                     [
                                         'type' => 'submit',
-                                        'class' => 'btn btn-info'
+                                        'class' => 'btn btn-info',
+                                        'style' => 'margin-top: 1px;'
                                     ]
                                 ) !!}
                             </div>
@@ -142,7 +143,7 @@
                                             <th>Kota Asal</th>
                                             <th>Kota Tujuan</th>
                                             <th>Biaya</th>
-                                            <th class="col-md-2">Action</th>
+                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
 
@@ -159,7 +160,7 @@
                                                 Rp{{ number_format($biaya->harga, 0, ',', '.') }}
                                             </td>
                                             <td>
-                                                <a href="/transportasi/{{ $transportasi->id }}/biaya/{{ $biaya->id }}/edit" class="btn btn-sm btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                <a href="/transportasi/{{ $transportasi->id }}/biaya/{{ $biaya->id }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
                                                 {!! Form::open(
                                                     [
                                                         'method' => 'DELETE',
@@ -169,7 +170,7 @@
                                                     ]
                                                 ) !!}
 
-                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-sm btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
+                                                    {!! Form::button('<i class="fa fa-fw fa-trash"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Hapus']
                                                     ) !!}
                                                 {!! Form::close() !!}
                                             </td>

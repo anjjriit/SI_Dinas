@@ -69,4 +69,9 @@ class Lpd extends Model
         return $this->hasMany('App\Pengeluaran', 'id_lpd');
     }
 
+    public function actionHistory()
+    {
+        return $this->hasMany('App\ActionHistoryLpd', 'id_lpd');
+    }
+
 }

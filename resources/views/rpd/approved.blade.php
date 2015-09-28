@@ -1,33 +1,24 @@
 @extends('layouts.master')
 
-@section('page_title', 'RPD Approved')
+@section('page_title', 'RPD Yang Telah Di Approve')
 
 @section('content')
-        
-         @if (session('success'))
-            <div class="content">
-                <div class="row">
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                </div>
-            </div>
-        @endif
 
-        @if (session('error'))
-            <div class="content">
-                <div class="row">
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                </div>
-            </div>
-        @endif
 
-        <div class="content-header">
-            <h1>Data Rencana Perjalanan Dinas</h1>
-            <label>Yang telah diapproved</label>
-        </div>
+
+        <section class="content-header">
+            <p>RPD Yang Telah Di Approve</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                @if (Auth::user()->role == 'super_admin')
+                    <a href="/dashboard">Dashboard</a>
+                @else
+                    <a href="/homepage">Homepage</a>
+                @endif
+                <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
+                <i class="fa fa-angle-right fa-fw"></i> Approved
+            </span>
+        </section>
 
         <section class="content-filter">
             <div class="row">
@@ -140,15 +131,26 @@
             <div class="row">
                 <div class="col-md-12">
                     @if ($approvedRpds->count() != 0)
+                        @if (session('success'))
+                            <div class="alert alert-success">
+                                {{ session('success') }}
+                            </div>
+                        @endif
+
+                        @if (session('error'))
+                            <div class="alert alert-danger">
+                                {{ session('error') }}
+                            </div>
+                        @endif
                         <div class="box box-widget">
                             <div class="box-body no-padding">
                                 <table class="table table-responsive">
                                     <thead>
                                         <tr>
-                                            <th>No. RPD</th>
+                                            <th class="col-md-1">No. RPD</th>
                                             <th>Pengaju</th>
                                             <th>Terakhir Diperbarui</th>
-                                            <th>Action</th>
+                                            <th class="col-md-1">Action</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -164,8 +166,8 @@
                                                     {{ date_format( date_create($approvedRpd->updated_at), 'd/m/Y H:i:s' ) }}
                                                 </td>
                                                 <td>
-                                                    <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailRPD-{{ $approvedRpd->id }}">
-                                                        <i class="fa fa-fw fa-share"></i>Detail
+                                                    <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailRPD-{{ $approvedRpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
+                                                        <i class="fa fa-fw fa-share"></i>
                                                     </button>
                                                 </td>
                                             </tr>
@@ -198,95 +200,88 @@
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                            <h4 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h4>
+                            <h4 class="modal-title"><strong>Rencana Perjalanan Dinas (RPD)</strong></h4>
                         </div>
                         <div class="modal-body">
                             <!-- Info basic dari RPD -->
-                            <table class="table table-modal table-responsive table-condensed">
+                            <div class="page-header"><strong>Detail</strong></div>
+                            <a href="/rpd/{{$rpd->id}}/pdf" class="btn btn-xs btn-primary pull-right" style="margin-top: 12px;" target="_blank"><i class="fa fa-fw fa-print"></i> Export PDF</a>
+                            <table class="table table-plain table-responsive">
                                 <tbody>
                                     <tr>
-                                        <tr>
-                                        <th class="col-md-4">No. RPD</th>
+                                        <td class="col-md-3">Nomor RPD</td>
                                         <td>{{ $rpd->kode }}</td>
                                     </tr>
                                     <tr>
-                                        <th class="col-md-4">Penanggung Jawab</th>
+                                        <td class="col-md-3">Penanggung Jawab</td>
                                         <td>{{ $rpd->pegawai->nama_lengkap }}</td>
                                     </tr>
                                     <tr>
-                                        <th class="col-md-4">Kategori</th>
+                                        <td class="col-md-3">Kategori</td>
                                         <td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
                                     </tr>
                                     <tr>
-                                        <th class="col-md-4">Jenis</th>
+                                        <td class="col-md-3">Jenis</td>
                                         <td>{{ ucwords(str_replace('_', ' ', $rpd->jenis_perjalanan)) }}</td>
                                     </tr>
                                     <tr>
-                                        <th class="col-md-4">Tanggal Mulai</th>
+                                        <td class="col-md-3">Tanggal Mulai</td>
                                         <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
                                     </tr>
-                                    @if($dataKategori == "Trip")
-                                        <tr>
-                                            <th class="col-md-4">Tanggal Selesai</th>
-                                            <td>
-                                                {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
-                                            </td>
-                                            @else
-                                            <th class="col-md-4">Tanggal Selesai</th>
-                                            <td>
-                                                {{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
-                                            </td>
-                                        </tr>
-                                    @endif
                                     <tr>
-                                        <th class="col-md-4">Jumlah Hari Dinas</th>
+                                        <td class="col-md-3">Tanggal Selesai</td>
+                                        <td>
+                                            {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td class="col-md-3">Jumlah Hari Dinas</td>
                                         <td>
                                             {{ $rpd->lama_hari }} hari
                                         </td>
                                     </tr>
                                     <tr>
-                                        <th class="col-md-4">Asal Kota</th>
+                                        <td class="col-md-3">Asal Kota</td>
                                         <td>{{ $rpd->kotaAsal->nama_kota }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-md-4"><strong>Tujuan Kota</strong></td>
+                                        <td class="col-md-3">Tujuan Kota</td>
                                         <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="col-md-4"><strong>Sarana Transportasi</strong></td>
+                                        <td class="col-md-3" style="vertical-align: top;">Sarana Transportasi</td>
                                         <td>
-                                            <ul style="margin-top: 10px;">
-                                                @foreach($rpd->saranaTransportasi as $saranaTransportasi)
-                                                    <li>{{ $saranaTransportasi->nama_transportasi }}</li>
-                                                @endforeach
-                                            </ul>
+                                            @foreach($rpd->saranaTransportasi as $saranaTransportasi)
+                                                {{ $saranaTransportasi->nama_transportasi }}@if ($saranaTransportasi != $rpd->saranaTransportasi[$rpd->saranaTransportasi->count() - 1]), @endif
+                                            @endforeach
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td class="col-md-4"><strong>Sarana Penginapan</strong></td>
+                                        <td class="col-md-3">Sarana Penginapan</td>
                                         <td>{{ $rpd->saranaPenginapan->nama_penginapan }}</td>
                                     </tr>
                                     @if ($rpd->status == 'APPROVED' || auth()->user()->role == 'administration')
                                     <tr>
-                                        <td class="col-md-4"><strong>Akomodasi Awal</strong></td>
+                                        <td class="col-md-3">Akomodasi Awal</td>
                                         <td>Rp {{ number_format($rpd->akomodasi_awal, 2, ',', '.') }}</td>
                                     </tr>
                                     @endif
                                     <tr>
-                                        <th class="col-md-4">Status</th>
-                                        <td style="text-transform : uppercase;">{{ $rpd->status }}</td>
+                                        <td class="col-md-3">Status</td>
+                                        <td>{{ $rpd->status }}</td>
                                     </tr>
                                 </tbody>
                             </table>
 
                             <!-- Daftar Peserta RPD-->
-                            <h4>Peserta dan Tujuan Kegiatan</h4>
-                            <table class="table table-bordered table-striped">
+                            <div class="page-header"><strong>Peserta &amp; Tujuan Kegiatan</strong></div>
+                            <table class="table table-bordered table-condensed" width="100%">
                                 <thead>
-                                    <tr>
-                                        <th>Nama</th>
-                                        <th>Judul Project/Prospek/Pelatihan</th>
-                                        <th>Kegiatan</th>
+                                    <tr class="active">
+                                        <th width="25%">Nama</th>
+                                        <th width="30%">Judul Project/Prospek/Pelatihan</th>
+                                        <th width="20%">Kegiatan</th>
+                                        <th width="25%">Deskripsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -309,9 +304,16 @@
                                                 </td>
                                                 <td>
                                                     @if ($kegiatan->kegiatan == 'UAT')
-                                                        'UAT'
+                                                        UAT
                                                     @else
                                                         {{ ucwords(strtolower(str_replace('_', ' ', $kegiatan->kegiatan))) }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if ($kegiatan->deskripsi == '')
+                                                        -
+                                                    @else
+                                                        {{ $kegiatan->deskripsi }}
                                                     @endif
                                                 </td>
                                             </tr>
@@ -353,4 +355,12 @@
             </div> <!-- Akhir Bagian Modal detail RPD-->
         @endforeach
 
+@endsection
+
+@section('script')
+    @parent
+
+    <script>
+        $('[data-toggle-alt="tooltip"]').tooltip();
+    </script>
 @endsection

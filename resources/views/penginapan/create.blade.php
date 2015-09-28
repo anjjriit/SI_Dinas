@@ -21,6 +21,9 @@
                         <div class="box-header">
                             <h4>Form Tambah Data Penginapan</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::open(['method' => 'POST', 'route' => 'penginapan.store']) !!}
                             <div class="box-body">
                                 @if($errors->any())

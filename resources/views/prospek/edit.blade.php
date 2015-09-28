@@ -9,7 +9,7 @@
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
                 <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/prospek">List Kota</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/prospek">List Prospek</a>
                 <i class="fa fa-angle-right fa-fw"></i> {{ $prospek->nama_prospek }}
                 <i class="fa fa-angle-right fa-fw"></i> Edit
             </span>
@@ -22,6 +22,9 @@
                         <div class="box-header">
                             <h4>Form Edit Prospek</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::model(
                             $prospek,
                             [

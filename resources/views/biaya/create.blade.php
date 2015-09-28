@@ -21,6 +21,9 @@
                         <div class="box-header">
                             <h4>Form Tambah Jenis Biaya Pengeluaran Standard</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::open(['method' => 'POST', 'route' => 'jenis-biaya.store']) !!}
                             <div class="box-body">
                                 @if ($errors->any())

@@ -20,6 +20,9 @@
                         <div class="box-header">
                             <h4>Form Tambah Biaya Transportasi {{ $transportasi->nama_transportasi }}</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::open(['method' => 'POST', 'url' => '/transportasi/' . $transportasi->id . '/biaya']) !!}
                             <div class="box-body">
                                 @if ($errors->any())

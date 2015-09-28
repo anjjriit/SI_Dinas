@@ -27,7 +27,7 @@ strong, th, label {
 }
 
 .table td {
-    font-size: 13px;
+    font-size: 14px;
 }
 
 .table > thead > tr > th,
@@ -455,4 +455,8 @@ strong, th, label {
 .table-condensed > tbody > tr > td,
 .table-condensed > tfoot > tr > td {
   padding: 6px 12px !important;
+}
+
+tr > td {
+    vertical-align: top !important;
 }

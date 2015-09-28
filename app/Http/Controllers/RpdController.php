@@ -450,7 +450,7 @@ class RpdController extends Controller
         $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
         if ($request->has('query')) {
-           $approvedRpds = Rpd::approved()->orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+            $approvedRpds = Rpd::approved()->orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
         } else {
             $approvedRpds = Rpd::approved()->orderBy($orderBy, $order)->paginate(15);
         }

@@ -105,3 +105,7 @@ Route::get('cek', function () {
 
     return;
 });
+
+Route::get('components/pdf/header.html', function () {
+    return view('rpd.pdf_header');
+});

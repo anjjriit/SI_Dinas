@@ -32,6 +32,8 @@
                 <h4>Form Pengajuan RPD</h4>
             </div>
 
+            <hr style="margin-top: 10px;">
+
             {!! Form::model($rpd, ['method' => 'PATCH', 'route' => ['rpd.update', $rpd->id]]) !!}
 
                 @include('rpd.partials.forms.edit')
