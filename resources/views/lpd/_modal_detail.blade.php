@@ -123,11 +123,9 @@
                                     <td style="vertical-align: top;">{{ $pengeluaran->keterangan }}</td>
                                     <td style="vertical-align: top;">{{ $pengeluaran->struk }}</td>
                                     <td style="vertical-align: top;">
-                                        <ul class="list-unstyled">
-                                            @foreach ($pengeluaran->personel as $personel)
-                                                <li>{{ $personel->nama_lengkap }}</li>
-                                            @endforeach
-                                        </ul>
+                                        @foreach ($pengeluaran->personel as $personel)
+                                            {{ $personel->nama_lengkap }}@if ($personel != $pengeluaran->personel[$pengeluaran->personel->count() - 1]), @endif
+                                        @endforeach
                                     </td>
                                     <td style="vertical-align: top;">Rp {{ number_format($pengeluaran->biaya, 0, '.', ',' ) }}</td>
                                 </tr>
