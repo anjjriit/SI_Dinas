@@ -47,6 +47,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('lpd/{lpd}/pengeluaran/{pengeluaran}', 'LpdController@updatePengeluaran');
     Route::delete('lpd/pengeluaran/{pengeluaran}', 'LpdController@deletePengeluaran');
 
+    Route::get('lpd/{lpd}/pdf', 'LpdController@toPdf');
+
     Route::get('lpd/{lpd}/approval', 'LpdController@approval');
     Route::post('lpd/{lpd}/approval', 'LpdController@submitApproval');
 });

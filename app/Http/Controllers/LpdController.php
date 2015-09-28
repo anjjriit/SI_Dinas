@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
+use PDF;
 use Auth;
 use App\Rpd;
 use App\Pengeluaran;
@@ -349,5 +350,14 @@ class LpdController extends Controller
 
             return $new;
         }
+    }
+
+    public function toPdf(Lpd $lpd)
+    {
+        $pdf = PDF::loadView('lpd.pdf', ['lpd' => $lpd]);
+
+        return $pdf->stream($lpd->kode . '.pdf');
+
+        //return view('lpd.pdf', compact('lpd'));
     }
 }
