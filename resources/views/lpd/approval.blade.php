@@ -115,20 +115,20 @@
                                     <table class="table table-bordered table-striped">
                                         <tbody>
                                             <tr>
-                                                <th class="col-md-5">Akomodasi Awal</th>
-                                                <td>Rp {{ number_format($lpd->rpd->akomodasi_awal, 2, ",", ".") }}</td>
+                                                <td class="col-md-6 active"><strong>Akomodasi Awal</strong></td>
+                                                <td class="text-right">Rp {{number_format($lpd->rpd->akomodasi_awal, 0, ',', '.') }}</td>
                                             </tr>
                                             <tr>
-                                                <th>Total Pengeluaran</th>
-                                                <td>Rp {{ number_format($lpd->total_pengeluaran, 2, ",", ".") }}</td>
+                                                <td class="active"><strong>Total Pengeluaran</strong></td>
+                                                <td class="text-right">Rp {{ number_format($lpd->pengeluaran->sum('biaya'), 0, ',', '.') }}</td>
                                             </tr>
                                             <tr>
                                                 @if ($lpd->reimburse)
-                                                    <th>Reimburse</th>
-                                                    <td>Rp {{ number_format($lpd->total_pengeluaran - $lpd->rpd->akomodasi_awal, 2, ",", ".") }}</td>
+                                                    <td class="active"><strong>Reimburse</strong></td>
+                                                    <td align="right">Rp {{ number_format($lpd->pengeluaran->sum('biaya') - $lpd->rpd->akomodasi_awal, 0, ",", ".") }}</td>
                                                 @else
-                                                    <th>Pengembalian</th>
-                                                    <td>Rp {{ number_format($lpd->rpd->akomodasi_awal - $lpd->total_pengeluaran, 2, ",", ".") }}</td>
+                                                    <td class="active"><strong>Pengembalian</strong></td>
+                                                    <td align="right">Rp {{ number_format($lpd->rpd->akomodasi_awal - $lpd->pengeluaran->sum('biaya'), 0, ",", ".") }}</td>
                                                 @endif
                                             </tr>
                                         </tbody>

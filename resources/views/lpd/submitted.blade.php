@@ -83,7 +83,7 @@
                                                     @endif
                                                 </td>
                                                 <td>
-                                                    Rp {{ number_format($lpd->total_pengeluaran, 0, ',', '.') }}
+                                                    Rp {{ number_format($lpd->pengeluaran->sum('biaya'), 0, ',', '.') }}
                                                 </td>
                                                 <td>
                                                     <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailLPD-{{ $lpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
