@@ -116,29 +116,29 @@
                                         <tbody>
                                             <tr>
                                                 <th class="col-md-5">Akomodasi Awal</th>
-                                                <td>{{ 'Rp ' . number_format($lpd->rpd->akomodasi_awal, 2, ",", ".") }}</td>
+                                                <td>Rp {{ number_format($lpd->rpd->akomodasi_awal, 2, ",", ".") }}</td>
                                             </tr>
                                             <tr>
                                                 <th>Total Pengeluaran</th>
-                                                <td>{{ 'Rp '. number_format($lpd->total_pengeluaran, 2, ",", ".") }}</td>
+                                                <td>Rp {{ number_format($lpd->total_pengeluaran, 2, ",", ".") }}</td>
                                             </tr>
                                             <tr>
                                                 @if ($lpd->reimburse)
                                                     <th>Reimburse</th>
-                                                    <td>{{ 'Rp '. number_format($lpd->total_pengeluaran - $lpd->rpd->akomodasi_awal, 2, ",", ".") }}</td>
+                                                    <td>Rp {{ number_format($lpd->total_pengeluaran - $lpd->rpd->akomodasi_awal, 2, ",", ".") }}</td>
                                                 @else
                                                     <th>Pengembalian</th>
-                                                    <td>{{ 'Rp '. number_format($lpd->rpd->akomodasi_awal - $lpd->total_pengeluaran, 2, ",", ".") }}</td>
+                                                    <td>Rp {{ number_format($lpd->rpd->akomodasi_awal - $lpd->total_pengeluaran, 2, ",", ".") }}</td>
                                                 @endif
                                             </tr>
                                         </tbody>
                                     </table>
                                 </div>
                             </div>
-                            <table class="table table-bordered table-striped">
-                                <tbody>
-                                    <tr>
-                                        <th>Hari</th>
+                            <div class="page-header">Pengeluaran</div>
+                            <table class="table table-condensed table-bordered">
+                                <thead>
+                                    <tr class="active">
                                         <th>Tanggal</th>
                                         <th>Tipe</th>
                                         <th>Keterangan</th>
@@ -146,40 +146,94 @@
                                         <th>Personel</th>
                                         <th>Biaya</th>
                                     </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach ($lpd->pengeluaran as $pengeluaran)
+                                        <tr>
+                                            <td style="vertical-align: top;">
+                                                <?php
+                                                    $hari = date_format(date_create($pengeluaran->tanggal), 'N');
+                                                ?>
+
+                                                @if ($hari == 1)
+                                                    {{ 'Senin, ' }}
+                                                @elseif($hari == 2)
+                                                    {{ 'Selasa, ' }}
+                                                @elseif($hari == 3)
+                                                    {{ 'Rabu, ' }}
+                                                @elseif($hari == 4)
+                                                    {{ 'Kamis, ' }}
+                                                @elseif($hari == 5)
+                                                    {{ 'Jum\'at, ' }}
+                                                @elseif($hari == 6)
+                                                    {{ 'Sabtu, ' }}
+                                                @else
+                                                    {{ 'Minggu, ' }}
+                                                @endif
+
+                                                {{ date_format(date_create($pengeluaran->tanggal), 'd/m/Y') }}
+                                            </td>
+                                            <td style="vertical-align: top;">{{ $pengeluaran->tipe->nama_kategori }}</td>
+                                            <td style="vertical-align: top;">{{ $pengeluaran->keterangan }}</td>
+                                            <td style="vertical-align: top;">{{ $pengeluaran->struk }}</td>
+                                            <td style="vertical-align: top;">
+                                                <ul class="list-unstyled">
+                                                    @foreach ($pengeluaran->personel as $personel)
+                                                        <li>{{ $personel->nama_lengkap }}</li>
+                                                    @endforeach
+                                                </ul>
+                                            </td>
+                                            <td style="vertical-align: top;">Rp {{ number_format($pengeluaran->biaya, 0, '.', ',' ) }}</td>
+                                        </tr>
+                                    @endforeach
                                     <tr>
-                                        <td>Jumat</td>
-                                        <td>25/09/2015</td>
-                                        <td>Makanan</td>
-                                        <td>Makan Pagi</td>
-                                        <td>Warung Nasi</td>
-                                        <td>Personel</td>
-                                        <td>Rp 10.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jumat</td>
-                                        <td>25/09/2015</td>
-                                        <td>Makanan</td>
-                                        <td>Makan Pagi</td>
-                                        <td>Warung Nasi</td>
-                                        <td>Personel</td>
-                                        <td>Rp 10.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td>Jumat</td>
-                                        <td>25/09/2015</td>
-                                        <td>Makanan</td>
-                                        <td>Makan Pagi</td>
-                                        <td>Warung Nasi</td>
-                                        <td>Personel</td>
-                                        <td>Rp 10.000</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="6" align="center">Total</td>
-                                        <td>Rp 30.000</td>
+                                        <td colspan="5" class="text-center">Total</td>
+                                        <td>Rp {{ number_format($lpd->pengeluaran->sum('biaya'), 0, ',', '.') }}</td>
                                     </tr>
                                 </tbody>
                             </table>
+
+                            <div class="page-header">Action History</div>
+                            <table class="table table-bordered table-condensed" width="100%">
+                                <thead>
+                                    <tr class="active">
+                                        <th width="25%">Date Time</th>
+                                        <th width="30%">Nama</th>
+                                        <th width="20%">Action Taken</th>
+                                        <th width="25%">Comment</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach($lpd->actionHistory as $action)
+                                        @if ($action->action != 'DRAFT')
+                                            <tr>
+                                                <td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
+                                                <td>{{ $action->pegawai->nama_lengkap }}</td>
+                                                <td>{{ ucwords(strtolower($action->action)) }}</td>
+                                                <td>{{ $action->comment }}</td>
+                                            </tr>
+                                        @endif
+                                    @endforeach
+                                </tbody>
+                            </table>
                         </div>
+                        @if (auth()->user()->role == 'finance')
+                            @if ($lpd->status == 'SUBMIT')
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="/lpd/{{ $lpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                                    </div>
+                                </div>
+                            @endif
+                        @elseif (auth()->user()->role == 'administration')
+                            @if ($lpd->status == 'PROCESS PAYMENT' || $lpd->status == 'TAKE PAYMENT')
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <a href="/lpd/{{ $lpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                                    </div>
+                                </div>
+                            @endif
+                        @endif
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
