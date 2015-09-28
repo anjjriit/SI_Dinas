@@ -201,6 +201,7 @@
                         <div class="modal-body">
                             <!-- Info basic dari RPD -->
                             <div class="page-header"><strong>Detail</strong></div>
+                            <a href="/rpd/{{$rpd->id}}/pdf" class="btn btn-xs btn-primary pull-right" style="margin-top: 12px;" target="_blank"><i class="fa fa-fw fa-print"></i> Export PDF</a>
                             <table class="table table-plain table-responsive">
                                 <tbody>
                                     <tr>

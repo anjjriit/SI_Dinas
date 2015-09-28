@@ -456,3 +456,7 @@ strong, th, label {
 .table-condensed > tfoot > tr > td {
   padding: 6px 12px !important;
 }
+
+tr > td {
+    vertical-align: top !important;
+}

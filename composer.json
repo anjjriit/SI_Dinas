@@ -8,7 +8,9 @@
         "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
         "laravelcollective/html": "5.1.*",
-        "barryvdh/laravel-dompdf": "0.6.*"
+        "barryvdh/laravel-snappy": "0.2.x",
+        "h4cc/wkhtmltopdf-i386": "0.12.x",
+        "h4cc/wkhtmltoimage-i386": "0.12.x"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

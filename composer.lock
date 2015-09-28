@@ -4,36 +4,37 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a0ba427efb25a36fe7891f53dcb62469",
+    "hash": "87eea22f46368a0a5bb3f881520221ff",
     "packages": [
         {
-            "name": "barryvdh/laravel-dompdf",
-            "version": "v0.6.0",
+            "name": "barryvdh/laravel-snappy",
+            "version": "v0.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/barryvdh/laravel-dompdf.git",
-                "reference": "6acded2b805cd1818dd31e47f971eedf51e15c30"
+                "url": "https://github.com/barryvdh/laravel-snappy.git",
+                "reference": "34c4419a34dac528aed022295bac5f8fe6b12e13"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/barryvdh/laravel-dompdf/zipball/6acded2b805cd1818dd31e47f971eedf51e15c30",
-                "reference": "6acded2b805cd1818dd31e47f971eedf51e15c30",
+                "url": "https://api.github.com/repos/barryvdh/laravel-snappy/zipball/34c4419a34dac528aed022295bac5f8fe6b12e13",
+                "reference": "34c4419a34dac528aed022295bac5f8fe6b12e13",
                 "shasum": ""
             },
             "require": {
-                "dompdf/dompdf": "0.6.*",
+                "illuminate/filesystem": "5.0.x|5.1.x",
                 "illuminate/support": "5.0.x|5.1.x",
+                "knplabs/knp-snappy": "*",
                 "php": ">=5.4.0"
             },
             "type": "library",
             "extra": {
                 "branch-alias": {
-                    "dev-master": "0.6-dev"
+                    "dev-master": "0.2-dev"
                 }
             },
             "autoload": {
                 "psr-4": {
-                    "Barryvdh\\DomPDF\\": "src"
+                    "Barryvdh\\Snappy\\": "src/"
                 }
             },
             "notification-url": "https://packagist.org/downloads/",
@@ -46,13 +47,16 @@
                     "email": "barryvdh@gmail.com"
                 }
             ],
-            "description": "A DOMPDF Wrapper for Laravel",
+            "description": "Snappy PDF/Image for Laravel 4",
             "keywords": [
-                "dompdf",
+                "image",
                 "laravel",
-                "pdf"
+                "pdf",
+                "snappy",
+                "wkhtmltoimage",
+                "wkhtmltopdf"
             ],
-            "time": "2015-06-11 12:54:07"
+            "time": "2015-06-04 13:43:34"
         },
         {
             "name": "classpreloader/classpreloader",
@@ -265,45 +269,84 @@
             "time": "2014-12-20 21:24:13"
         },
         {
-            "name": "dompdf/dompdf",
-            "version": "v0.6.1",
+            "name": "h4cc/wkhtmltoimage-i386",
+            "version": "0.12.2.1",
             "source": {
                 "type": "git",
-                "url": "https://github.com/dompdf/dompdf.git",
-                "reference": "cf7d8a0a27270418850cc7d7ea532159e5eeb3eb"
+                "url": "https://github.com/h4cc/wkhtmltoimage-i386.git",
+                "reference": "7353ee02a7170b3401b57273014c8ecf667bca6e"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/dompdf/dompdf/zipball/cf7d8a0a27270418850cc7d7ea532159e5eeb3eb",
-                "reference": "cf7d8a0a27270418850cc7d7ea532159e5eeb3eb",
+                "url": "https://api.github.com/repos/h4cc/wkhtmltoimage-i386/zipball/7353ee02a7170b3401b57273014c8ecf667bca6e",
+                "reference": "7353ee02a7170b3401b57273014c8ecf667bca6e",
                 "shasum": ""
             },
-            "require": {
-                "phenx/php-font-lib": "0.2.*"
-            },
+            "bin": [
+                "bin/wkhtmltoimage-i386"
+            ],
             "type": "library",
-            "autoload": {
-                "classmap": [
-                    "include/"
-                ]
-            },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
-                "LGPL"
+                "LGPL Version 3"
             ],
             "authors": [
                 {
-                    "name": "Fabien Ménager",
-                    "email": "fabien.menager@gmail.com"
-                },
-                {
-                    "name": "Brian Sweeney",
-                    "email": "eclecticgeek@gmail.com"
+                    "name": "Julius Beckmann",
+                    "email": "github@h4cc.de"
                 }
             ],
-            "description": "DOMPDF is a CSS 2.1 compliant HTML to PDF converter",
-            "homepage": "https://github.com/dompdf/dompdf",
-            "time": "2014-03-11 01:59:52"
+            "description": "Convert html to image using webkit (qtwebkit). Static linked linux binary for i386 systems.",
+            "homepage": "http://wkhtmltopdf.org/",
+            "keywords": [
+                "binary",
+                "convert",
+                "image",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltoimage"
+            ],
+            "time": "2015-01-22 08:00:16"
+        },
+        {
+            "name": "h4cc/wkhtmltopdf-i386",
+            "version": "0.12.2.1",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/h4cc/wkhtmltopdf-i386.git",
+                "reference": "9fac188d05e0893393e8c69c59a19caa8376f8ec"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/h4cc/wkhtmltopdf-i386/zipball/9fac188d05e0893393e8c69c59a19caa8376f8ec",
+                "reference": "9fac188d05e0893393e8c69c59a19caa8376f8ec",
+                "shasum": ""
+            },
+            "bin": [
+                "bin/wkhtmltopdf-i386"
+            ],
+            "type": "library",
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "LGPL Version 3"
+            ],
+            "authors": [
+                {
+                    "name": "Julius Beckmann",
+                    "email": "github@h4cc.de"
+                }
+            ],
+            "description": "Convert html to pdf using webkit (qtwebkit). Static linked linux binary for i386 systems.",
+            "homepage": "http://wkhtmltopdf.org/",
+            "keywords": [
+                "binary",
+                "convert",
+                "pdf",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltopdf"
+            ],
+            "time": "2015-01-22 07:59:36"
         },
         {
             "name": "jakub-onderka/php-console-color",
@@ -449,6 +492,69 @@
                 "tokenizer"
             ],
             "time": "2015-03-11 20:06:43"
+        },
+        {
+            "name": "knplabs/knp-snappy",
+            "version": "0.4.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/KnpLabs/snappy.git",
+                "reference": "99941b6f8475e2f02b8b89748504e5d471bded73"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/KnpLabs/snappy/zipball/99941b6f8475e2f02b8b89748504e5d471bded73",
+                "reference": "99941b6f8475e2f02b8b89748504e5d471bded73",
+                "shasum": ""
+            },
+            "require": {
+                "php": ">=5.3.3",
+                "symfony/process": "~2.1"
+            },
+            "require-dev": {
+                "phpunit/phpunit": "4.7.*"
+            },
+            "suggest": {
+                "h4cc/wkhtmltopdf-amd64": "Provides wkhtmltopdf-amd64 binary for Linux-compatible machines, use version `~0.12` as dependency",
+                "h4cc/wkhtmltopdf-i386": "Provides wkhtmltopdf-i386 binary for Linux-compatible machines, use version `~0.12` as dependency",
+                "wemersonjanuario/wkhtmltopdf-windows": "Provides wkhtmltopdf executable for Windows, use version `~0.12` as dependency"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.5.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-0": {
+                    "Knp\\Snappy": "src/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "KnpLabs Team",
+                    "homepage": "http://knplabs.com"
+                },
+                {
+                    "name": "Symfony Community",
+                    "homepage": "http://github.com/KnpLabs/snappy/contributors"
+                }
+            ],
+            "description": "PHP5 library allowing thumbnail, snapshot or PDF generation from a url or a html page. Wrapper for wkhtmltopdf/wkhtmltoimage.",
+            "homepage": "http://github.com/KnpLabs/snappy",
+            "keywords": [
+                "knp",
+                "knplabs",
+                "pdf",
+                "snapshot",
+                "thumbnail",
+                "wkhtmltopdf"
+            ],
+            "time": "2015-09-16 12:34:39"
         },
         {
             "name": "laravel/framework",
@@ -925,40 +1031,6 @@
             "time": "2015-09-19 14:15:08"
         },
         {
-            "name": "phenx/php-font-lib",
-            "version": "0.2.2",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/PhenX/php-font-lib.git",
-                "reference": "c30c7fc00a6b0d863e9bb4c5d5dd015298b2dc82"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/PhenX/php-font-lib/zipball/c30c7fc00a6b0d863e9bb4c5d5dd015298b2dc82",
-                "reference": "c30c7fc00a6b0d863e9bb4c5d5dd015298b2dc82",
-                "shasum": ""
-            },
-            "type": "library",
-            "autoload": {
-                "classmap": [
-                    "classes/"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "LGPL"
-            ],
-            "authors": [
-                {
-                    "name": "Fabien Ménager",
-                    "email": "fabien.menager@gmail.com"
-                }
-            ],
-            "description": "A library to read, parse, export and make subsets of different types of font files.",
-            "homepage": "https://github.com/PhenX/php-font-lib",
-            "time": "2014-02-01 15:22:28"
-        },
-        {
             "name": "psr/log",
             "version": "1.0.0",
             "source": {
@@ -1123,16 +1195,16 @@
         },
         {
             "name": "symfony/console",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Console.git",
-                "reference": "9ff9032151186bd66ecee727d728f1319f52d1d8"
+                "url": "https://github.com/symfony/console.git",
+                "reference": "06cb17c013a82f94a3d840682b49425cd00a2161"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Console/zipball/9ff9032151186bd66ecee727d728f1319f52d1d8",
-                "reference": "9ff9032151186bd66ecee727d728f1319f52d1d8",
+                "url": "https://api.github.com/repos/symfony/console/zipball/06cb17c013a82f94a3d840682b49425cd00a2161",
+                "reference": "06cb17c013a82f94a3d840682b49425cd00a2161",
                 "shasum": ""
             },
             "require": {
@@ -1176,20 +1248,20 @@
             ],
             "description": "Symfony Console Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-03 11:40:38"
+            "time": "2015-09-25 08:32:23"
         },
         {
             "name": "symfony/css-selector",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/CssSelector.git",
-                "reference": "ffb5f3b8a75f8d1b9801e74dc6789a0751a670ad"
+                "url": "https://github.com/symfony/css-selector.git",
+                "reference": "abe19cc0429a06be0c133056d1f9859854860970"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/CssSelector/zipball/ffb5f3b8a75f8d1b9801e74dc6789a0751a670ad",
-                "reference": "ffb5f3b8a75f8d1b9801e74dc6789a0751a670ad",
+                "url": "https://api.github.com/repos/symfony/css-selector/zipball/abe19cc0429a06be0c133056d1f9859854860970",
+                "reference": "abe19cc0429a06be0c133056d1f9859854860970",
                 "shasum": ""
             },
             "require": {
@@ -1229,20 +1301,20 @@
             ],
             "description": "Symfony CssSelector Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-24 07:13:45"
+            "time": "2015-09-22 13:49:29"
         },
         {
             "name": "symfony/debug",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Debug.git",
-                "reference": "726bf9651d29f53243281d0b6418cfaa5e318281"
+                "url": "https://github.com/symfony/debug.git",
+                "reference": "c79c361bca8e5ada6a47603875a3c964d03b67b1"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Debug/zipball/726bf9651d29f53243281d0b6418cfaa5e318281",
-                "reference": "726bf9651d29f53243281d0b6418cfaa5e318281",
+                "url": "https://api.github.com/repos/symfony/debug/zipball/c79c361bca8e5ada6a47603875a3c964d03b67b1",
+                "reference": "c79c361bca8e5ada6a47603875a3c964d03b67b1",
                 "shasum": ""
             },
             "require": {
@@ -1284,20 +1356,20 @@
             ],
             "description": "Symfony Debug Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-29 11:12:16"
+            "time": "2015-09-14 08:41:38"
         },
         {
             "name": "symfony/dom-crawler",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/DomCrawler.git",
-                "reference": "2a161e4ee2b2f33d4153be58df4f6f2a5506936e"
+                "url": "https://github.com/symfony/dom-crawler.git",
+                "reference": "2e185ca136399f902b948694987e62c80099c052"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/DomCrawler/zipball/2a161e4ee2b2f33d4153be58df4f6f2a5506936e",
-                "reference": "2a161e4ee2b2f33d4153be58df4f6f2a5506936e",
+                "url": "https://api.github.com/repos/symfony/dom-crawler/zipball/2e185ca136399f902b948694987e62c80099c052",
+                "reference": "2e185ca136399f902b948694987e62c80099c052",
                 "shasum": ""
             },
             "require": {
@@ -1337,20 +1409,20 @@
             ],
             "description": "Symfony DomCrawler Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-26 10:48:03"
+            "time": "2015-09-20 21:13:58"
         },
         {
             "name": "symfony/event-dispatcher",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/EventDispatcher.git",
-                "reference": "b58c916f1db03a611b72dd702564f30ad8fe83fa"
+                "url": "https://github.com/symfony/event-dispatcher.git",
+                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/EventDispatcher/zipball/b58c916f1db03a611b72dd702564f30ad8fe83fa",
-                "reference": "b58c916f1db03a611b72dd702564f30ad8fe83fa",
+                "url": "https://api.github.com/repos/symfony/event-dispatcher/zipball/ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
+                "reference": "ae4dcc2a8d3de98bd794167a3ccda1311597c5d9",
                 "shasum": ""
             },
             "require": {
@@ -1395,20 +1467,20 @@
             ],
             "description": "Symfony EventDispatcher Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-24 07:13:45"
+            "time": "2015-09-22 13:49:29"
         },
         {
             "name": "symfony/finder",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Finder.git",
-                "reference": "fff4b0c362640a0ab7355e2647b3d461608e9065"
+                "url": "https://github.com/symfony/finder.git",
+                "reference": "8262ab605973afbb3ef74b945daabf086f58366f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Finder/zipball/fff4b0c362640a0ab7355e2647b3d461608e9065",
-                "reference": "fff4b0c362640a0ab7355e2647b3d461608e9065",
+                "url": "https://api.github.com/repos/symfony/finder/zipball/8262ab605973afbb3ef74b945daabf086f58366f",
+                "reference": "8262ab605973afbb3ef74b945daabf086f58366f",
                 "shasum": ""
             },
             "require": {
@@ -1444,20 +1516,20 @@
             ],
             "description": "Symfony Finder Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-26 17:56:37"
+            "time": "2015-09-19 19:59:23"
         },
         {
             "name": "symfony/http-foundation",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/HttpFoundation.git",
-                "reference": "7253c2041652353e71560bbd300d6256d170ddaf"
+                "url": "https://github.com/symfony/http-foundation.git",
+                "reference": "e1509119f164a0d0a940d7d924d693a7a28a5470"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpFoundation/zipball/7253c2041652353e71560bbd300d6256d170ddaf",
-                "reference": "7253c2041652353e71560bbd300d6256d170ddaf",
+                "url": "https://api.github.com/repos/symfony/http-foundation/zipball/e1509119f164a0d0a940d7d924d693a7a28a5470",
+                "reference": "e1509119f164a0d0a940d7d924d693a7a28a5470",
                 "shasum": ""
             },
             "require": {
@@ -1497,20 +1569,20 @@
             ],
             "description": "Symfony HttpFoundation Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-27 06:45:45"
+            "time": "2015-09-22 13:49:29"
         },
         {
             "name": "symfony/http-kernel",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/HttpKernel.git",
-                "reference": "fd9c7af92c9e3ade1327cc3af10b17731eebc4a7"
+                "url": "https://github.com/symfony/http-kernel.git",
+                "reference": "353aa457424262d7d4e4289ea483145921cffcb5"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/HttpKernel/zipball/fd9c7af92c9e3ade1327cc3af10b17731eebc4a7",
-                "reference": "fd9c7af92c9e3ade1327cc3af10b17731eebc4a7",
+                "url": "https://api.github.com/repos/symfony/http-kernel/zipball/353aa457424262d7d4e4289ea483145921cffcb5",
+                "reference": "353aa457424262d7d4e4289ea483145921cffcb5",
                 "shasum": ""
             },
             "require": {
@@ -1577,20 +1649,20 @@
             ],
             "description": "Symfony HttpKernel Component",
             "homepage": "https://symfony.com",
-            "time": "2015-09-08 14:26:39"
+            "time": "2015-09-25 11:16:52"
         },
         {
             "name": "symfony/process",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Process.git",
-                "reference": "f7b3f73f70a7f8f49a1c838dc3debbf054732d8e"
+                "url": "https://github.com/symfony/process.git",
+                "reference": "b27c8e317922cd3cdd3600850273cf6b82b2e8e9"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Process/zipball/f7b3f73f70a7f8f49a1c838dc3debbf054732d8e",
-                "reference": "f7b3f73f70a7f8f49a1c838dc3debbf054732d8e",
+                "url": "https://api.github.com/repos/symfony/process/zipball/b27c8e317922cd3cdd3600850273cf6b82b2e8e9",
+                "reference": "b27c8e317922cd3cdd3600850273cf6b82b2e8e9",
                 "shasum": ""
             },
             "require": {
@@ -1626,20 +1698,20 @@
             ],
             "description": "Symfony Process Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-27 06:45:45"
+            "time": "2015-09-19 19:59:23"
         },
         {
             "name": "symfony/routing",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Routing.git",
-                "reference": "20b1378cb6efffb77ea0608232f18c8f0dd25109"
+                "url": "https://github.com/symfony/routing.git",
+                "reference": "6c5fae83efa20baf166fcf4582f57094e9f60f16"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Routing/zipball/20b1378cb6efffb77ea0608232f18c8f0dd25109",
-                "reference": "20b1378cb6efffb77ea0608232f18c8f0dd25109",
+                "url": "https://api.github.com/repos/symfony/routing/zipball/6c5fae83efa20baf166fcf4582f57094e9f60f16",
+                "reference": "6c5fae83efa20baf166fcf4582f57094e9f60f16",
                 "shasum": ""
             },
             "require": {
@@ -1697,19 +1769,19 @@
                 "uri",
                 "url"
             ],
-            "time": "2015-08-24 07:13:45"
+            "time": "2015-09-14 14:14:09"
         },
         {
             "name": "symfony/translation",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Translation.git",
+                "url": "https://github.com/symfony/translation.git",
                 "reference": "485877661835e188cd78345c6d4eef1290d17571"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Translation/zipball/485877661835e188cd78345c6d4eef1290d17571",
+                "url": "https://api.github.com/repos/symfony/translation/zipball/485877661835e188cd78345c6d4eef1290d17571",
                 "reference": "485877661835e188cd78345c6d4eef1290d17571",
                 "shasum": ""
             },
@@ -1762,16 +1834,16 @@
         },
         {
             "name": "symfony/var-dumper",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/symfony/var-dumper.git",
-                "reference": "b39221998ff5fc26ba63f96d2b833dfddc233d57"
+                "reference": "ba8c9a0edf18f70a7efcb8d3eb35323a10263338"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/b39221998ff5fc26ba63f96d2b833dfddc233d57",
-                "reference": "b39221998ff5fc26ba63f96d2b833dfddc233d57",
+                "url": "https://api.github.com/repos/symfony/var-dumper/zipball/ba8c9a0edf18f70a7efcb8d3eb35323a10263338",
+                "reference": "ba8c9a0edf18f70a7efcb8d3eb35323a10263338",
                 "shasum": ""
             },
             "require": {
@@ -1817,7 +1889,7 @@
                 "debug",
                 "dump"
             ],
-            "time": "2015-08-31 12:28:11"
+            "time": "2015-09-22 14:41:01"
         },
         {
             "name": "vlucas/phpdotenv",
@@ -3044,16 +3116,16 @@
         },
         {
             "name": "symfony/yaml",
-            "version": "v2.7.4",
+            "version": "v2.7.5",
             "source": {
                 "type": "git",
-                "url": "https://github.com/symfony/Yaml.git",
-                "reference": "2dc7b06c065df96cc686c66da2705e5e18aef661"
+                "url": "https://github.com/symfony/yaml.git",
+                "reference": "31cb2ad0155c95b88ee55fe12bc7ff92232c1770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/symfony/Yaml/zipball/2dc7b06c065df96cc686c66da2705e5e18aef661",
-                "reference": "2dc7b06c065df96cc686c66da2705e5e18aef661",
+                "url": "https://api.github.com/repos/symfony/yaml/zipball/31cb2ad0155c95b88ee55fe12bc7ff92232c1770",
+                "reference": "31cb2ad0155c95b88ee55fe12bc7ff92232c1770",
                 "shasum": ""
             },
             "require": {
@@ -3089,7 +3161,7 @@
             ],
             "description": "Symfony Yaml Component",
             "homepage": "https://symfony.com",
-            "time": "2015-08-24 07:13:45"
+            "time": "2015-09-14 14:14:09"
         }
     ],
     "aliases": [],
