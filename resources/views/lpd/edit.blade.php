@@ -19,7 +19,7 @@
                 @else
                     <a href="/homepage">Homepage</a>
                 @endif
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/lpd/draft">Laporan Perjalanan Dinas</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/lpd">Laporan Perjalanan Dinas</a>
                 <i class="fa fa-angle-right fa-fw"></i> Laporan <strong>{{ $lpd->rpd->kode }}</strong>
                 <i class="fa fa-angle-right fa-fw"></i> Edit
             </span>

@@ -41,7 +41,7 @@
                     <i class="fa fa-fw fa-list-alt"></i> <span>Approval RPD</span> <i class="fa fa-angle-down pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
-                    <li {{ (Request::is('rpd/submitted') ? ' class=item-active' : '')}}>
+                    <li {{ (Request::is('rpd/submitted/all') ? ' class=item-active' : '')}}>
                         <a href="/rpd/submitted/all">
                             <i class="fa fa-fw fa-list"></i> <span>Submitted RPD</span>
                         </a>

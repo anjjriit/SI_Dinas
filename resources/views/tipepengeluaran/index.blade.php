@@ -156,7 +156,7 @@
                                                         'method' => 'DELETE',
                                                         'route' => ['tipepengeluaran.destroy', $tipepengeluaran->id],
                                                         'style' => 'display: inline-block;',
-                                                        'data-nama' => $tipepengeluaran->nama_tipepengeluaran,
+                                                        'data-nama' => $tipepengeluaran->nama_kategori,
                                                     ]
                                                 ) !!}
 
@@ -177,7 +177,7 @@
                             </div>
                         @else
                             <div class="alert alert-warning">
-                                Data tipepengeluaran belum tersedia. Klik tombol Tambah tipepengeluaran untuk menambah tipepengeluaran.
+                                Data tipe pengeluaran belum tersedia. Klik tombol Tambah Tipe Pengeluaran untuk menambah tipe pengeluaran.
                             </div>
                         @endif
                     @endif
@@ -205,8 +205,8 @@
             var nama = element.attr('data-nama')
 
             $.confirm({
-                title: '<i class="fa fa-trash"></i> Hapus tipepengeluaran',
-                content: 'Apakah Anda yakin akan menghapus tipepengeluaran <strong>' + nama + '</strong>',
+                title: '<i class="fa fa-trash"></i> Hapus Tipe Pengeluaran',
+                content: 'Apakah Anda yakin akan menghapus tipe pengeluaran <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',

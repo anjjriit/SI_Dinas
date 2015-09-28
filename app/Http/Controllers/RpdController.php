@@ -413,7 +413,7 @@ class RpdController extends Controller
 
         ActionHistoryRpd::create($action);
 
-        return redirect('/rpd/submitted')->with('success', 'Status telah terupdate');
+        return redirect('/rpd/submitted/all')->with('success', 'Status telah terupdate');
     }
 
     public function draft()
@@ -430,11 +430,18 @@ class RpdController extends Controller
         return view('rpd.submitted', compact('submittedRpds'));
     }
 
-    public function submittedAll()
+    public function submittedAll(Request $request)
     {
-        $submittedRpds = Rpd::submitted()->orderBy('kode')->paginate(10);
+        $orderBy = ($request->has('orderBy')) ? $request->input('orderBy') : 'kode';
+        $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
-        return view('rpd.all_submitted', compact('submittedRpds'));
+        if ($request->has('query')) {
+           $submittedRpds = Rpd::submitted()->orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+        } else {
+            $submittedRpds = Rpd::submitted()->orderBy($orderBy, $order)->paginate(15);
+        }
+
+        return view('rpd.all_submitted', compact('submittedRpds', 'request'));
     }
 
     public function approved(Request $request)

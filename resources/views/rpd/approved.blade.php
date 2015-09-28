@@ -38,8 +38,7 @@
                                 'orderBy',
                                 [
                                     'kode' => 'No. RPD',
-                                    'rpd->pegawai->nama_lengkap' => 'Pengaju',
-                                    'updated_at' => 'Terakhir Diperbarui',
+                                    'updated_at' => 'Terakhir Diperbarui'
                                 ],
                                 null,
                                 ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
@@ -81,8 +80,7 @@
                                 'searchBy',
                                 [
                                     'kode' => 'No. RPD',
-                                    'nama_lengkap' => 'Pengaju',
-                                    'updated_at' => 'Terakhir Diperbarui',
+                                    'updated_at' => 'Terakhir Diperbarui'
                                 ],
                                 null,
                                 [
@@ -179,9 +177,15 @@
                             </div>
                         </div>
                     @else
-                        <div class="alert alert-warning">
-                            List RPD yang telah diapproved belum tersedia.
-                        </div>
+                        @if ($request->has('query'))
+                            <div class="alert alert-warning">
+                                Hasil tidak ditemukan untuk kata kunci "<strong>{{ $request->input('query') }}</strong>".
+                            </div>
+                        @else
+                            <div class="alert alert-warning">
+                                List RPD yang telah diapproved belum tersedia.
+                            </div>
+                        @endif
                     @endif
 
                     {!! $approvedRpds->render() !!}
