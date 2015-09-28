@@ -11,6 +11,6 @@ class ActionHistoryLpd extends Model
 
     public function pegawai()
     {
-        return $this->belongsTo('App\Pegawai', 'nik');
+        return $this->belongsTo('App\Pegawai', 'nik')->withTrashed();
     }
 }

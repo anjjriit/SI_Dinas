@@ -17,6 +17,6 @@ class Transportasi extends Model
 
     public function biaya()
     {
-        return $this->hasMany('App\BiayaTransportasi', 'id_transportasi', 'id');
+        return $this->hasMany('App\BiayaTransportasi', 'id_transportasi', 'id')->withTrashed();
     }
 }

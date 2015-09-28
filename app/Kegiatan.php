@@ -11,21 +11,21 @@ class Kegiatan extends Model
 
     public function project()
     {
-        return $this->hasOne('App\Project', 'kode', 'kode_kegiatan');
+        return $this->hasOne('App\Project', 'kode', 'kode_kegiatan')->withTrashed();
     }
 
     public function prospek()
     {
-        return $this->hasOne('App\Prospek', 'kode', 'kode_kegiatan');
+        return $this->hasOne('App\Prospek', 'kode', 'kode_kegiatan')->withTrashed();
     }
 
     public function pelatihan()
     {
-        return $this->hasOne('App\Pelatihan', 'kode', 'kode_kegiatan');
+        return $this->hasOne('App\Pelatihan', 'kode', 'kode_kegiatan')->withTrashed();
     }
 
     public function peserta()
     {
-        return $this->hasOne('App\Pegawai', 'nik', 'nik_peserta');
+        return $this->hasOne('App\Pegawai', 'nik', 'nik_peserta')->withTrashed();
     }
 }

@@ -16,11 +16,11 @@ class Pengeluaran extends Model
 
     public function personel()
     {
-        return $this->belongsToMany('App\Pegawai', 'personel_pengeluaran', 'id_pengeluaran', 'nik');
+        return $this->belongsToMany('App\Pegawai', 'personel_pengeluaran', 'id_pengeluaran', 'nik')->withTrashed();
     }
 
     public function tipe()
     {
-        return $this->belongsTo('App\TipePengeluaran', 'id_tipe');
+        return $this->belongsTo('App\TipePengeluaran', 'id_tipe')->withTrashed();
     }
 }

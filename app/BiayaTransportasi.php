@@ -16,12 +16,12 @@ class BiayaTransportasi extends Model
 
     public function kotaAsal()
     {
-        return $this->hasOne('App\Kota', 'kode', 'id_kota_asal');
+        return $this->hasOne('App\Kota', 'kode', 'id_kota_asal')->withTrashed();
     }
 
     public function kotaTujuan()
     {
-        return $this->hasOne('App\Kota', 'kode', 'id_kota_tujuan');
+        return $this->hasOne('App\Kota', 'kode', 'id_kota_tujuan')->withTrashed();
     }
 
 }

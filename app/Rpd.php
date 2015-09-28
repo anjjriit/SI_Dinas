@@ -51,7 +51,7 @@ class Rpd extends Model
     }
 
     public function peserta() {
-        return $this->belongsToMany('App\Pegawai', 'kegiatan', 'id_rpd', 'nik_peserta')->groupBy('nik_peserta');
+        return $this->belongsToMany('App\Pegawai', 'kegiatan', 'id_rpd', 'nik_peserta')->withTrashed()->groupBy('nik_peserta');
     }
 
     public function kegiatan() {
@@ -60,17 +60,17 @@ class Rpd extends Model
 
     public function kotaAsal()
     {
-        return $this->hasOne('App\Kota', 'kode', 'kode_kota_asal');
+        return $this->hasOne('App\Kota', 'kode', 'kode_kota_asal')->withTrashed();
     }
 
     public function kotaTujuan()
     {
-        return $this->hasOne('App\Kota', 'kode', 'kode_kota_tujuan');
+        return $this->hasOne('App\Kota', 'kode', 'kode_kota_tujuan')->withTrashed();
     }
 
     public function pegawai()
     {
-        return $this->belongsTo('App\Pegawai', 'nik');
+        return $this->belongsTo('App\Pegawai', 'nik')->withTrashed();
     }
 
     public function actionHistory() {
@@ -79,12 +79,12 @@ class Rpd extends Model
 
     public function saranaTransportasi()
     {
-        return $this->belongsToMany('App\Transportasi', 'sarana_transportasi', 'id_rpd', 'id_transportasi');
+        return $this->belongsToMany('App\Transportasi', 'sarana_transportasi', 'id_rpd', 'id_transportasi')->withTrashed();
     }
 
     public function saranaPenginapan()
     {
-        return $this->hasOne('App\Penginapan', 'id', 'id_penginapan');
+        return $this->hasOne('App\Penginapan', 'id', 'id_penginapan')->withTrashed();
     }
 
     public function lpd()
