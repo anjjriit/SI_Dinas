@@ -13,7 +13,6 @@ use App\Project;
 use App\Pelatihan;
 use App\Lpd;
 use Auth;
-use App\Http\Controllers\Auth\AuthController;
 
 class PagesController extends Controller
 {
@@ -22,21 +21,19 @@ class PagesController extends Controller
         $prospeks = Prospek::all();
         $projects = Project::all();
         $pelatihans = Pelatihan::all();
-        $rpds = Rpd::all();
+        $rpds = Rpd::orderBy('kode')->paginate(10);
         $users = Pegawai::all();
-        $lpds = Lpd::all();
+        $lpds = Lpd::orderBy('kode')->paginate(10);
 
         return view('dashboard', compact('prospeks', 'projects', 'pelatihans', 'rpds', 'users','lpds'));
     }
 
     public function homepage() {
-    	$user = Auth::user();
-        $userId = $user->nik;
-        $rpds = Rpd::mine()->paginate(10);
-        //$lpds = Lpd::where('nik','=', $userId)
-        //				->paginate(10);
+    	
+        $rpds = Rpd::mine()->backtoinitiator()->paginate(10);
+        $lpds = Lpd::mine()->processed()->paginate(10);
 
-        return view('homepage', compact('rpds'));
+        return view('homepage', compact('rpds','lpds'));
 
     }
 }

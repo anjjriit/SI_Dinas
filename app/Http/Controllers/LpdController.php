@@ -141,6 +141,9 @@ class LpdController extends Controller
             'personel' => 'required'
         ]);
 
+        $lpd->updated_at = \Carbon\Carbon::now();
+        $lpd->save();
+
         $input = $request->only(
             'tanggal',
             'id_tipe',
@@ -177,6 +180,9 @@ class LpdController extends Controller
             'biaya' => 'required|numeric',
             'personel' => 'required'
         ]);
+
+        $lpd->updated_at = \Carbon\Carbon::now();
+        $lpd->save();
 
         $input = $request->only(
             'tanggal',

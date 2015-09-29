@@ -25,6 +25,11 @@ class Rpd extends Model
         'akomodasi_awal'
     ];
 
+    public function scopeBacktoinitiator($query)
+    {
+        return $query->where('status','=','BACK TO INITIATOR');
+    }
+
     public function scopeSubmitted($query)
     {
         return $query->where('status', '=', 'SUBMIT');

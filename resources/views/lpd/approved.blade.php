@@ -4,28 +4,8 @@
 
 @section('content')
 
-         @if (session('success'))
-            <div class="content">
-                <div class="row">
-                    <div class="alert alert-success">
-                        {{ session('success') }}
-                    </div>
-                </div>
-            </div>
-        @endif
-
-        @if (session('error'))
-            <div class="content">
-                <div class="row">
-                    <div class="alert alert-danger">
-                        {{ session('error') }}
-                    </div>
-                </div>
-            </div>
-        @endif
-
-        <div class="content-header">
-            <p>LPD Yang Telah Di Approve</p>
+        <section class="content-header">
+        <p>LPD Yang Telah Di Approve</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
                 @if (Auth::user()->role == 'super_admin')
@@ -36,7 +16,7 @@
                 <i class="fa fa-angle-right fa-fw"></i> Laporan Perjalanan Dinas
                 <i class="fa fa-angle-right fa-fw"></i> Approved
             </span>
-        </div>
+        </section>
 
         <section class="content-filter">
             <div class="row">
@@ -148,6 +128,18 @@
         <section class="content">
             <div class="row">
                 <div class="col-md-12">
+                    @if (session('success'))
+                        <div class="alert alert-success">
+                            {{ session('success') }}
+                        </div>
+                    @endif
+
+                    @if (session('error'))
+                        <div class="alert alert-danger">
+                            {{ session('error') }}
+                        </div>
+                    @endif
+
                     @if ($approvedLpds->count() != 0)
                         <div class="box box-widget">
                             <div class="box-body no-padding">
@@ -207,4 +199,11 @@
         @endforeach
 
 
+@endsection
+
+@section('script')
+    @parent
+    <script>
+        $('[data-toggle-alt="tooltip"]').tooltip();
+    </script>
 @endsection

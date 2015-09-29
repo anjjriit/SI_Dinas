@@ -5,7 +5,7 @@
 @section('content')
 
     <section class="content-header">
-        <p>LPD Yang Telah Di Proses</p>
+    <p>LPD Yang Telah Di Proses</p>
         <span class="bcumb">
             <i class="fa fa-fw fa-bookmark"></i>
             @if (Auth::user()->role == 'super_admin')
@@ -147,10 +147,10 @@
                                 <thead>
                                     <tr>
                                         <th class="col-md-1"></th>
-                                        <th>No. LPD</th>
+                                        <th class="col-md-1">No. LPD</th>
                                         <th>Penanggung Jawab</th>
                                         <th>Tanggal Laporan</th>
-                                        <th>Action</th>
+                                        <th class="col-md-1">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -225,3 +225,10 @@
 
 @endsection
 
+
+@section('script')
+    @parent
+    <script>
+        $('[data-toggle-alt="tooltip"]').tooltip();
+    </script>
+@endsection
