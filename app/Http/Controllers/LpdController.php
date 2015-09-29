@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use PDF;
 use Auth;
+use App\Setting;
 use App\Rpd;
 use App\Pengeluaran;
 use App\Pegawai;
@@ -242,6 +243,8 @@ class LpdController extends Controller
         } elseif (($lpd->status == 'PROCESS PAYMENT' || $lpd->status == 'TAKE PAYMENT') && $user->role == 'administration') {
             return view('lpd.approval', compact('lpd'));
 
+        } else {
+            return redirect('/');
         }
     }
 
@@ -360,7 +363,8 @@ class LpdController extends Controller
 
     public function toPdf(Lpd $lpd)
     {
-        $pdf = PDF::loadView('lpd.pdf', ['lpd' => $lpd]);
+        $settings = Setting::lists('value', 'key')->all();
+        $pdf = PDF::loadView('lpd.pdf', ['lpd' => $lpd, 'settings' => $settings]);
 
         return $pdf->stream($lpd->kode . '.pdf');
 

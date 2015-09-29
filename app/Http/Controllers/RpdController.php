@@ -15,6 +15,7 @@ use App\Pelatihan;
 use App\ActionHistoryRpd;
 use App\Transportasi;
 use App\Penginapan;
+use App\Setting;
 use App\JenisBiaya;
 use App\Http\Requests;
 use App\Http\Requests\CreateRpdRequest;
@@ -467,7 +468,8 @@ class RpdController extends Controller
 
     public function toPdf(Rpd $rpd)
     {
-        $pdf = PDF::loadView('rpd.pdf', ['rpd' => $rpd]);
+        $settings = Setting::lists('value', 'key')->all();
+        $pdf = PDF::loadView('rpd.pdf', ['rpd' => $rpd, 'settings' => $settings]);
 
         return $pdf->stream($rpd->kode . '.pdf');
         //return view('rpd.pdf', compact('rpd'));

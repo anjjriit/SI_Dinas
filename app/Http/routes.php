@@ -28,7 +28,6 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('rpd/{rpd}/edit', 'RpdController@editRpd');
     Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
     Route::post('rpd/recall/{rpd}', 'RpdController@recall');
-    Route::get('rpd/{rpd}/pdf', 'RpdController@toPdf');
 
     // LPD
     Route::get('lpd', 'LpdController@index');
@@ -47,10 +46,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::patch('lpd/{lpd}/pengeluaran/{pengeluaran}', 'LpdController@updatePengeluaran');
     Route::delete('lpd/pengeluaran/{pengeluaran}', 'LpdController@deletePengeluaran');
 
-    Route::get('lpd/{lpd}/pdf', 'LpdController@toPdf');
-
     Route::get('lpd/{lpd}/approval', 'LpdController@approval');
     Route::post('lpd/{lpd}/approval', 'LpdController@submitApproval');
+
     Route::get('report/bulanan', 'ReportController@bulanan');
     Route::get('report/tahunan', 'ReportController@tahunan');
     Route::get('report/prospek', 'ReportController@prospek');
@@ -59,6 +57,8 @@ Route::group(['middleware' => 'auth'], function () {
 });
 
 Route::group(['middleware' => 'role:administration'], function () {
+    Route::get('rpd/{rpd}/pdf', 'RpdController@toPdf');
+    Route::get('lpd/{lpd}/pdf', 'LpdController@toPdf');
     Route::get('rpd/submitted/all', 'RpdController@submittedAll');
     Route::get('rpd/{rpd}/approval', 'RpdController@approval');
     Route::post('rpd/{rpd}/approval', 'RpdController@submitApproval');

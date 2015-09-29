@@ -24,7 +24,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Kota</h4>
+                            <h4>Form Edit Setting</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">
@@ -33,7 +33,7 @@
                                 $settings,
                                 [
                                     'method' => 'PATCH',
-                                    'url' => '/setting', $kota->kode
+                                    'url' => '/setting'
                                 ]
                             ) !!}
                             <div class="box-body">
@@ -52,49 +52,30 @@
                                             {!! Form::label('company_name', 'Nama Perusahaan') !!}
                                             {!! Form::text('company_name', null, ['class' => 'form-control', 'autofocus']) !!}
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
                                         <div class="form-group">
                                             {!! Form::label('address_line_1', 'Alamat (baris 1)') !!}
                                             {!! Form::text('address_line_1', null, ['class' => 'form-control']) !!}
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
                                         <div class="form-group">
                                             {!! Form::label('address_line_2', 'Alamat (baris 2)') !!}
                                             {!! Form::text('address_line_2', null, ['class' => 'form-control']) !!}
                                         </div>
                                     </div>
-                                </div>
-                                <div class="row">
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             {!! Form::label('phone_number', 'No. Telepon') !!}
                                             {!! Form::text('phone_number', null, ['class' => 'form-control']) !!}
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
                                         <div class="form-group">
                                             {!! Form::label('email', 'E-mail') !!}
                                             {!! Form::text('email', null, ['class' => 'form-control']) !!}
                                         </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6">
                                         <div class="form-group">
                                             {!! Form::label('website', 'Website') !!}
                                             {!! Form::text('website', null, ['class' => 'form-control']) !!}
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
                             <div class="box-footer">
                                 {!! Form::button('<i class="fa fa-fw fa-floppy-o"></i> Simpan', ['type' => 'submit', 'class' => 'btn btn-success']) !!}

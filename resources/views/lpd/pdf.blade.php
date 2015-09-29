@@ -13,17 +13,17 @@
     <table width="100%" class="kop">
         <tr>
             <td rowspan="4" width="25%" style="padding-top: 5px;text-align: center;"><img src="{{ base_path('public/images/logo-kop.png') }}"></td>
-            <td><h4 style="margin-top:5px;margin-bottom:5px;">JAVAN CIPTA SOLUSI</h4></td>
+            <td><h4 style="margin-top:5px;margin-bottom:5px;">{{ strtoupper($settings['company_name']) }}</h4></td>
         </tr>
         <tr>
-            <td>Terusan Jl. Jakarta Komplek Daichi No. 55</td>
+            <td>{{ $settings['address_line_1'] }}</td>
         </tr>
         <tr>
-            <td>Bandung 40282, Jawa Barat, Indonesia</td>
+            <td>{{ $settings['address_line_2'] }}</td>
         </tr>
         <tr>
             <td>
-                (022) 87831878 | info@javan.co.id | http://www.javan.co.id
+                {{ $settings['phone_number'] }} | {{ $settings['email'] }} | <a href="{{ $settings['website'] }}">{{ $settings['website'] }}</a>
             </td>
         </tr>
     </table>
