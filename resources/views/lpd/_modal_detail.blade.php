@@ -8,6 +8,13 @@
             <div class="modal-body">
                 <div class="content">
                     <div class="row">
+                        <div class="col-md-3 pull-right">
+                            <a href="/lpd/{{$lpd->id}}/pdf" class="btn btn-xs btn-primary pull-right" style="margin-top: -10px;" target="_blank"><i class="fa fa-fw fa-print"></i> Export PDF</a>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <br>
+                    <div class="row">
                         <div class="col-md-8 table-responsive">
                             <table class="table table-bordered table-condensed">
                                 <thead>
@@ -22,6 +29,20 @@
                                         <td>
                                             {{ date_format(date_create($lpd->tanggal_laporan), 'd/m/Y') }}
                                         </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="col-md-3 col-md-offset-1 table-responsive">
+                            <table class="table table-bordered table-condensed">
+                                <thead>
+                                    <tr class="active">
+                                        <th>No. RPD</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>{{ $lpd->rpd->kode }}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -136,7 +157,7 @@
                                 </tr>
                             @endforeach
                             <tr>
-                                <td colspan="5" class="text-center">Total</td>
+                                <td colspan="5" class="text-center active">Total</td>
                                 <td>Rp {{ number_format($lpd->pengeluaran->sum('biaya'), 0, ',', '.') }}</td>
                             </tr>
                         </tbody>

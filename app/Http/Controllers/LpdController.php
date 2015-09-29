@@ -141,6 +141,8 @@ class LpdController extends Controller
             'personel' => 'required'
         ]);
 
+        $lpd->save();
+
         $input = $request->only(
             'tanggal',
             'id_tipe',
@@ -177,6 +179,8 @@ class LpdController extends Controller
             'biaya' => 'required|numeric',
             'personel' => 'required'
         ]);
+
+        $lpd->save();
 
         $input = $request->only(
             'tanggal',
