@@ -74,8 +74,13 @@
                                         <td class="text-right">Rp {{ number_format($lpd->pengeluaran->sum('biaya'), 0, ',', '.') }}</td>
                                     </tr>
                                     <tr>
-                                        <td class="active"><strong>Pengembalian (Reimburse)</strong></td>
-                                        <td class="text-right">Rp {{ number_format($lpd->rpd->akomodasi_awal - $lpd->pengeluaran->sum('biaya'), 0, ',', '.') }}</td>
+                                        @if ($lpd->reimburse)
+                                            <td class="active"><strong>Reimburse</strong></td>
+                                            <td align="right">Rp {{ number_format($lpd->pengeluaran->sum('biaya') - $lpd->rpd->akomodasi_awal, 0, ",", ".") }}</td>
+                                        @else
+                                            <td class="active"><strong>Pengembalian</strong></td>
+                                            <td align="right">Rp {{ number_format($lpd->rpd->akomodasi_awal - $lpd->pengeluaran->sum('biaya'), 0, ",", ".") }}</td>
+                                        @endif
                                     </tr>
                                 </tbody>
                             </table>
