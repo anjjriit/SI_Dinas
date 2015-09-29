@@ -27,9 +27,13 @@
     							<tr>
     								<th>Kode</th>
                                     <th>Kategori</th>
+                                    <!--@if(auth()->user()->role == 'administration')
+                                        <th>Penanggung Jawab</th>
+                                    @endif-->
     								<th>Kota Tujuan</th>
     								<th>Tanggal Mulai</th>
     								<th>Tanggal Selesai</th>
+    								<th>Status</th>
     								<th>Action</th>
     							</tr>
     						</thead>
@@ -42,11 +46,11 @@
 		    							<td>
 		    								{{ $data = ucwords(str_replace('_', ' ', $rpd->kategori)) }}
 		    							</td>
-		    							@if(auth()->user()->role == 'administration')
+		    							<!--@if(auth()->user()->role == 'administration')
                                             <td>
                                                 {{ $rpd->pegawai->nama_lengkap }}
                                             </td>
-                                        @endif
+                                        @endif-->
 										<td>
 											{{ $rpd->kotaTujuan->nama_kota }}
 										</td>
@@ -55,6 +59,9 @@
 										</td>
 										<td>
 											{{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
+										</td>
+										<td>
+											{{ $rpd->status }}
 										</td>
 										<td>
 											<button type="button" class="btn btn-xs btn-success" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}">
