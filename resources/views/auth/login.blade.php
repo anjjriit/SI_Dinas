@@ -10,7 +10,7 @@
     @section('stylesheet')
     <link rel="stylesheet" href="/css/all.css">
     <link rel="stylesheet" href="/vendor/font-awesome/css/font-awesome.min.css">
-    <link rel="stylesheet" href="/vendor/adminLTE/css/adminLTE.css">
+    <link rel="stylesheet" href="/vendor/adminLTE/css/AdminLTE.css">
     <link rel="stylesheet" href="/vendor/adminLTE/css/skins/skin-black.css">
     <link rel="stylesheet" href="/style.css">
 

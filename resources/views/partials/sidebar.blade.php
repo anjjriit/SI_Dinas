@@ -148,7 +148,7 @@
                 </ul>
             </li>
 
-            @if (auth()->user()->role == 'administration' || auth()->user()->role == 'finance')
+            @if (auth()->user()->role == 'finance')
                 <li class="treeview">
                     <a href="#">
                         <i class="fa fa-fw fa-calendar"></i> <span>Reporting</span> <i class="fa fa-angle-down pull-right"></i>
