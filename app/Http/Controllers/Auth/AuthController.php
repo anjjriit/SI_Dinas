@@ -60,7 +60,7 @@ class AuthController extends Controller
             } elseif (auth()->user()->role == 'super_admin') {
                 return redirect('/dashboard');
             } else {
-                return redirect('/rpd/create');
+                return redirect('/homepage');
             }
         }
 

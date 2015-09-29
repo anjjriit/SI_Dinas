@@ -20,16 +20,13 @@
 			<div class="col-md-12">
 				<h2>Data RPD</h2>
 				<h4>Dengan Status Back To Initiator</h4>
+				@if($rpds->count() != 0)
 				<div class="box box-widget">
 					<div class="box-body no-padding">
 						<table class="table">
 							<thead>
     							<tr>
     								<th>Kode</th>
-                                    <th>Kategori</th>
-                                    <!--@if(auth()->user()->role == 'administration')
-                                        <th>Penanggung Jawab</th>
-                                    @endif-->
     								<th>Kota Tujuan</th>
     								<th>Tanggal Mulai</th>
     								<th>Tanggal Selesai</th>
@@ -43,14 +40,6 @@
 		    							<td>
 		    								{{ $rpd->kode }}
 		    							</td>
-		    							<td>
-		    								{{ $data = ucwords(str_replace('_', ' ', $rpd->kategori)) }}
-		    							</td>
-		    							<!--@if(auth()->user()->role == 'administration')
-                                            <td>
-                                                {{ $rpd->pegawai->nama_lengkap }}
-                                            </td>
-                                        @endif-->
 										<td>
 											{{ $rpd->kotaTujuan->nama_kota }}
 										</td>
@@ -75,6 +64,11 @@
 						</table>
 					</div>					
 				</div><!-- akhir box -->
+				@else
+    				<div class="alert alert-warning">
+                        Data RPD dengan status back to initiator belum tersedia.
+                    </div>
+    			@endif
 			</div> <!-- col 12-->
 		</div> <!-- row -->
 		<!-- awal data LPD-->
@@ -82,6 +76,7 @@
 			<div class="col-md-12">
 				<h2>Data LPD</h2>
 				<h4>Yang di Proses</h4>
+				@if($lpds->count() != 0)
 				<div class="box box-widget">
 					<div class="box-body no-padding">
 						<table class="table">
@@ -153,6 +148,11 @@
 						</table>
 					</div>					
 				</div><!-- akhir box -->
+				@else
+    				<div class="alert alert-warning">
+                        Data LPD yang telah diproses belum tersedia.
+                    </div>
+    			@endif
 			</div>
 		</div>
 		
@@ -307,6 +307,7 @@
     									<th>Date Time</th>
     									<th>Nama</th>
     									<th>Action Taken</th>
+    									<th>Keterangan</th>
     								</tr>
     							</thead>
     							<tbody>
@@ -315,6 +316,7 @@
     										<td>{{ date_format( date_create($action->created_at), 'd/m/Y H:i') }}</td>
     										<td>{{ $action->pegawai->nama_lengkap }}</td>
     										<td>{{ $action->action }}</td>
+    										<td>{{ $action->comment }}</td>
     									</tr>
     								@endforeach
     							</tbody>
