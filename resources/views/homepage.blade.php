@@ -69,6 +69,8 @@
                         Data RPD dengan status back to initiator belum tersedia.
                     </div>
     			@endif
+
+    			{!! $rpds->render() !!}
 			</div> <!-- col 12-->
 		</div> <!-- row -->
 		<!-- awal data LPD-->
@@ -153,6 +155,8 @@
                         Data LPD yang telah diproses belum tersedia.
                     </div>
     			@endif
+    			
+    			{!! $lpds->render() !!}
 			</div>
 		</div>
 		
@@ -566,5 +570,5 @@
 
         $('[data-toggle-alt="tooltip"]').tooltip();
     </script>
-    
+
 @endsection
