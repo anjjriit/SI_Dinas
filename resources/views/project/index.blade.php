@@ -143,13 +143,13 @@
                     @if ($data_project->count() != 0)
                         <div class="box box-widget">
                             <div class="box-body no-padding">
-                                <table class="table">
+                                <table class="table" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Nama Project</th>
-                                            <th>Nama Lembaga/Institusi</th>
-                                            <th>Tanggal Mulai</th>
-                                            <th>Tanggal Selesai</th>
+                                            <th width="22%">Nama Project</th>
+                                            <th width="18%">Nama Lembaga/Institusi</th>
+                                            <th width="15%">Tanggal Mulai</th>
+                                            <th width="15%">Tanggal Selesai</th>
                                             <th>Alamat</th>
                                             <th class="col-md-1">Action</th>
                                         </tr>
@@ -166,10 +166,10 @@
                                                 {{ $project->nama_lembaga }}
                                             </td>
                                             <td>
-                                                {{ $project->tanggal_mulai }}
+                                                {{ date_format(date_create($project->tanggal_mulai), 'd/m/Y') }}
                                             </td>
                                             <td>
-                                                {{ $project->tanggal_selesai }}
+                                                {{ date_format(date_create($project->tanggal_selesai), 'd/m/Y') }}
                                             </td>
                                             <td>
                                                 {{ $project->alamat }}

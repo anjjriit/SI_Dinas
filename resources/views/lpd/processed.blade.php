@@ -5,9 +5,18 @@
 @section('content')
 
     <section class="content-header">
-        <h1>Data Laporan Perjalanan Dinas</h1>
-        <label>Yang telah diproses</label>
-    </section>
+            <p>LPD Yang Telah Di Proses</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                @if (Auth::user()->role == 'super_admin')
+                    <a href="/dashboard">Dashboard</a>
+                @else
+                    <a href="/homepage">Homepage</a>
+                @endif
+                <i class="fa fa-angle-right fa-fw"></i> Laporan Perjalanan Dinas
+                <i class="fa fa-angle-right fa-fw"></i> Processed
+            </span>
+        </section>
 
     <section class="content">
         <div class="row">
@@ -31,10 +40,10 @@
                                 <thead>
                                     <tr>
                                         <th class="col-md-1"></th>
-                                        <th>No. LPD</th>
+                                        <th class="col-md-1">No. LPD</th>
                                         <th>Penanggung Jawab</th>
                                         <th>Tanggal Laporan</th>
-                                        <th>Action</th>
+                                        <th class="col-md-1">Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -76,8 +85,8 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailLPD-{{ $lpd->id }}">
-                                                    <i class="fa fa-fw fa-share"></i> Detail
+                                                <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailLPD-{{ $lpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
+                                                    <i class="fa fa-fw fa-share"></i>
                                                 </button>
                                             </td>
                                         </tr>
@@ -103,3 +112,10 @@
 
 @endsection
 
+
+@section('script')
+    @parent
+    <script>
+        $('[data-toggle-alt="tooltip"]').tooltip();
+    </script>
+@endsection

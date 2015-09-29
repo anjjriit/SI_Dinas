@@ -51,6 +51,11 @@ Route::group(['middleware' => 'auth'], function () {
 
     Route::get('lpd/{lpd}/approval', 'LpdController@approval');
     Route::post('lpd/{lpd}/approval', 'LpdController@submitApproval');
+    Route::get('report/bulanan', 'ReportController@bulanan');
+    Route::get('report/tahunan', 'ReportController@tahunan');
+    Route::get('report/prospek', 'ReportController@prospek');
+    Route::get('report/project', 'ReportController@project');
+    Route::get('report/pelatihan', 'ReportController@pelatihan');
 });
 
 Route::group(['middleware' => 'role:administration'], function () {
@@ -93,6 +98,9 @@ Route::group(['middleware' => 'role:super_admin'], function () {
     });
     //CRUD pengeluaran
     Route::resource('tipepengeluaran','TipePengeluaranController',['except' => 'show']);
+
+    Route::get('setting', 'SettingController@edit');
+    Route::patch('setting', 'SettingController@update');
 });
 
 // JSON Output

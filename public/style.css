@@ -460,3 +460,50 @@ strong, th, label {
 tr > td {
     vertical-align: top !important;
 }
+
+.label {
+    font-weight: 500;
+}
+
+.small-box {
+    background-color: #fff;
+}
+
+.small-box:hover {
+    color: #333;
+}
+
+.small-box > .inner {
+    padding: 0;
+}
+
+.small-box-title {
+    font-size: 20px;
+    border-bottom: 1px solid #eee;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.small-box-number {
+    font-size: 36px;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    display: inline-block;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ddd;
+}
+
+.small-box > .small-box-footer {
+    background-color: #fafafa;
+    color: #333;
+    padding: 10px;
+}
+
+.small-box > .small-box-footer:hover {
+    background-color: #f6f6f6;
+    color: #333;
+}
+
+.small-box p {
+    padding-bottom: 15px;
+}
