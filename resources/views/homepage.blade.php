@@ -81,6 +81,7 @@
 		<div class="row">
 			<div class="col-md-12">
 				<h2>Data LPD</h2>
+				<h4>Yang di Proses</h4>
 				<div class="box box-widget">
 					<div class="box-body no-padding">
 						<table class="table">

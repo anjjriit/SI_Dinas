@@ -31,7 +31,7 @@ class PagesController extends Controller
     public function homepage() {
     	
         $rpds = Rpd::mine()->backtoinitiator()->paginate(10);
-        $lpds = Lpd::mine()->paginate(10);
+        $lpds = Lpd::mine()->processed()->paginate(10);
 
         return view('homepage', compact('rpds','lpds'));
 
