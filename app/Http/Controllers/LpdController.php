@@ -226,11 +226,18 @@ class LpdController extends Controller
         return view('lpd.all_submitted', compact('submittedLpds'));
     }
 
-    public function processed()
+    public function processed(Request $request)
     {
-        $processedLpds = Lpd::processed()->orderBy('kode', 'desc')->paginate(10);
+        $orderBy = ($request->has('orderBy')) ? $request->input('orderBy') : 'kode';
+        $order = ($request->has('order')) ? $request->input('order') : 'desc';
 
-        return view('lpd.processed', compact('processedLpds'));
+        if ($request->has('query')) {
+            $processedLpds = Lpd::processed()->orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+        } else {
+            $processedLpds = Lpd::processed()->orderBy($orderBy, $order)->paginate(15);
+        }
+
+        return view('lpd.processed', compact('processedLpds', 'request'));
     }
 
     public function approval(Lpd $lpd)
@@ -300,11 +307,18 @@ class LpdController extends Controller
         }
     }
 
-    public function approved()
+    public function approved(Request $request)
     {
-        $approvedLpds = Lpd::where('status', '=', 'PAID')->orWhere('status', '=', 'PAYMENT RECEIVED')->paginate(10);
+        $orderBy = ($request->has('orderBy')) ? $request->input('orderBy') : 'kode';
+        $order = ($request->has('order')) ? $request->input('order') : 'asc';
 
-        return view('lpd.approved', compact('approvedLpds'));
+        if ($request->has('query')) {
+            $approvedLpds = Lpd::approved()->orderBy($orderBy, $order)->where($request->input('searchBy'), 'like', '%' . $request->input('query') . '%')->paginate(15);
+        } else {
+            $approvedLpds = Lpd::approved()->orderBy($orderBy, $order)->paginate(15);
+        }
+
+        return view('lpd.approved', compact('approvedLpds', 'request'));
     }
 
     public function submitted()
