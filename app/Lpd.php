@@ -32,21 +32,22 @@ class Lpd extends Model
     public function scopeProcessed($query)
     {
         if (Auth::user()->role == 'finance') {
-            return $query->where('status', 'PROCESS PAYMENT')
-                         ->orWhere('status', 'TAKE PAYMENT')
-                         ->orWhere('status', 'PAYMENT RECEIVED')
-                         ->orWhere('status', 'PAID');
+            return $query->whereRaw('(status = \'PROCESS PAYMENT\' OR status = \'TAKE PAYMENT\' OR status = \'PAYMENT RECEIVED\' OR status = \'PAID\')');
 
         } elseif (Auth::user()->role == 'administration') {
 
-            return $query->where('status', 'TAKE PAYMENT')
-                         ->orWhere('status', 'PROCESS PAYMENT');
+            return $query->whereRaw('(status = \'TAKE PAYMENT\' OR status = \'PROCESS PAYMENT\')');
         }
     }
 
     public function scopeDraft($query)
     {
         return $query->where('status', 'DRAFT');
+    }
+
+    public function scopeApproved($query)
+    {
+        return $query->whereRaw('(status = \'PAID\' OR status = \'PAYMENT RECEIVED\')');
     }
 
     public function scopeMine($query)

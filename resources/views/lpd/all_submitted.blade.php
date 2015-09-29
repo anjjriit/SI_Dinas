@@ -76,8 +76,8 @@
                                                 @endif
                                             </td>
                                             <td>
-                                                <button type="button" class="btn btn-sm btn-success" data-toggle="modal" data-target="#detailLPD-{{ $lpd->id }}">
-                                                    <i class="fa fa-fw fa-share"></i> Detail
+                                                <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailLPD-{{ $lpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
+                                                    <i class="fa fa-fw fa-share"></i>
                                                 </button>
                                             </td>
                                         </tr>

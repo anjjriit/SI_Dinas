@@ -5,7 +5,18 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Laporan Perjalanan Dinas</h1>
+            <p>Laporan Perjalanan Dinas</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                @if (Auth::user()->role == 'super_admin')
+                    <a href="/dashboard">Dashboard</a>
+                @else
+                    <a href="/homepage">Homepage</a>
+                @endif
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/lpd/processed">Processed LPD</a>
+                <i class="fa fa-angle-right fa-fw"></i> {{ $lpd->kode }}
+                <i class="fa fa-angle-right fa-fw"></i> Approval
+            </span>
         </section>
 
         <section class="content">
@@ -15,8 +26,19 @@
                         <div class="box-header">
                             <h4>Form Approval LPD</h4>
                         </div>
+
+                        <hr style="margin-top: 10px;">
+
                         {!! Form::open(['method' => 'POST', 'url' => '/lpd/' . $lpd->id . '/approval']) !!}
                             <div class="box-body">
+                                @if($errors->any())
+                                    <div class="alert alert-danger">
+                                        @foreach($errors->all() as $error)
+                                            <i class="fa fa-fw fa-exclamation"></i> {{ $error }}
+                                            <br>
+                                        @endforeach
+                                    </div>
+                                @endif
                                 <div class="row">
                                     <div class="col-md-6">
                                         <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#detailLPD">
