@@ -204,7 +204,13 @@
                         </li>
                     </ul>
                 </li>
+                <li>
+                    <a href="/setting">
+                        <i class="fa fa-fw fa-cog"></i> <span>Setting</span>
+                    </a>
+                </li>
             @endif
+
         </ul>
     </section>
 </aside>

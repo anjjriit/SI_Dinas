@@ -141,6 +141,7 @@ class LpdController extends Controller
             'personel' => 'required'
         ]);
 
+        $lpd->updated_at = \Carbon\Carbon::now();
         $lpd->save();
 
         $input = $request->only(
@@ -180,6 +181,7 @@ class LpdController extends Controller
             'personel' => 'required'
         ]);
 
+        $lpd->updated_at = \Carbon\Carbon::now();
         $lpd->save();
 
         $input = $request->only(

@@ -40,58 +40,81 @@
                     </div>
                 @endif
                 @if ($approvedRpds->count() != 0)
-                    <div class="box box-widget">
-                        <div class="box-body no-padding">
-                            <table class="table">
-                                <thead>
-                                    <tr>
-                                        <th class="col-md-1">No. RPD</th>
-                                        <th>Kategori</th>
-                                        <th>Kota Tujuan</th>
-                                        <th>Tanggal Mulai</th>
-                                        <th>Tanggal Selesai</th>
-                                        <th class="col-md-1">Action</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach($approvedRpds as $rpd)
-                                        @if (!is_null($rpd->lpd))
-                                            @if ($rpd->lpd->status != 'DRAFT')
+                    <?php $result = 0; ?>
+                    @foreach($approvedRpds as $rpd)
+                        @if (!is_null($rpd->lpd))
+                            @if ($rpd->lpd->status != 'DRAFT')
+                                <?php continue; ?>
+                            @endif
+                        @else
+                            <?php continue; ?>
+                        @endif
+                        <?php $result++; ?>
+                    @endforeach
+
+                    @if ($result > 0)
+                        <div class="box box-widget">
+                            <div class="box-body no-padding">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th class="col-md-1">No. RPD</th>
+                                            <th>Kategori</th>
+                                            <th>Kota Tujuan</th>
+                                            <th>Tanggal Mulai</th>
+                                            <th>Tanggal Selesai</th>
+                                            <th>Update Terakhir</th>
+                                            <th class="col-md-1">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($approvedRpds as $rpd)
+                                            @if (!is_null($rpd->lpd))
+                                                @if ($rpd->lpd->status != 'DRAFT')
+                                                    <?php continue; ?>
+                                                @endif
+                                            @else
                                                 <?php continue; ?>
                                             @endif
-                                        @else
-                                            <?php continue; ?>
-                                        @endif
-                                        <tr>
-                                            <td>{{ $rpd->kode }}</td>
-                                            <td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
-                                            <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
-                                            <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
-                                            <td>
-                                                @if($dataKategori == "Trip")
-                                                    {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
-                                                @else
-                                                    {{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
-                                                @endif
-                                            </td>
-                                            <td>
-                                                <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
-                                                    <i class="fa fa-fw fa-share"></i>
-                                                </button>
-                                                @if ($rpd->lpd->status == 'DRAFT')
-                                                    <a href="/lpd/{{ $rpd->lpd->id }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit LPD"><i class="fa fa-fw fa-edit"></i></a>
-                                                @endif
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
+                                            <tr>
+                                                <td>{{ $rpd->kode }}</td>
+                                                <td>{{ $dataKategori = ucwords(str_replace('_', ' ', $rpd->kategori)) }}</td>
+                                                <td>{{ $rpd->kotaTujuan->nama_kota }}</td>
+                                                <td>{{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}</td>
+                                                <td>
+                                                    @if($dataKategori == "Trip")
+                                                        {{ date_format( date_create($rpd->tanggal_selesai), 'd/m/Y') }}
+                                                    @else
+                                                        {{ date_format( date_create($rpd->tanggal_mulai), 'd/m/Y') }}
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    {{ date_format( date_create($rpd->lpd->updated_at), 'd/m/Y H:i') }}
+                                                </td>
+                                                <td>
+                                                    <button type="button" class="btn btn-xs btn-default" data-toggle="modal" data-target="#detailRPD-{{ $rpd->id }}" data-toggle-alt="tooltip" data-placement="top" data-title="Detail">
+                                                        <i class="fa fa-fw fa-share"></i>
+                                                    </button>
+                                                    @if ($rpd->lpd->status == 'DRAFT')
+                                                        <a href="/lpd/{{ $rpd->lpd->id }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit LPD"><i class="fa fa-fw fa-edit"></i></a>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     @else
                         <div class="alert alert-warning">
                             Tidak ada laporan yang tersimpan sebagai draft.
                         </div>
                     @endif
+                @else
+                    <div class="alert alert-warning">
+                        Tidak ada laporan yang tersimpan sebagai draft.
+                    </div>
+                @endif
                 </div>
             </div><!-- Akhir Bagian Box Table-->
         </div>
