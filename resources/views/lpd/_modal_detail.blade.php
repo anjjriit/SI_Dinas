@@ -7,7 +7,7 @@
             </div>
             <div class="modal-body">
                 <div class="content">
-                    @if (auth()->user()->role == 'administration' && $lpd->status == 'APPROVED')
+                    @if (auth()->user()->role == 'administration' && ($lpd->status == 'PAYMENT RECEIVED' || $lpd->status == 'PAID'))
                         <div class="row">
                             <div class="col-md-3 pull-right">
                                 <a href="/lpd/{{$lpd->id}}/pdf" class="btn btn-xs btn-primary pull-right" style="margin-top: -10px;" target="_blank"><i class="fa fa-fw fa-print"></i> Export PDF</a>
