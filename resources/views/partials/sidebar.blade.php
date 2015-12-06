@@ -5,13 +5,13 @@
                 <p>{{ auth()->user()->nama_lengkap }}</p>
 
                 @if (auth()->user()->role == 'super_admin')
-                    <span class="role">Super Admin</span>
+                    <span class="role">Administrator</span>
                 @elseif (auth()->user()->role == 'finance')
                     <span class="role">Finance</span>
                 @elseif (auth()->user()->role == 'administration')
-                    <span class="role">Administration</span>
+                    <span class="role">Pegawai Administrasi</span>
                 @else
-                    <span class="role">Employee</span>
+                    <span class="role">Pegawai</span>
                 @endif
             </div>
         </div>

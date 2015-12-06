@@ -106,7 +106,6 @@
                             <div class="small-box-number">{{ count($biayaPelatihan) }}</div class="small-box-number">
                             <p>
                                 Total akomodasi: <strong>Rp {{ number_format(array_sum($biayaPelatihan), 0, ',', '.') }}</strong>
-                                }
                             </p>
                         </div>
 

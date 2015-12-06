@@ -12,45 +12,53 @@
 @section('content')
 
 	<section class="content-header">
-		<h1>Dashboard</h1>		
+		<p>Dashboard</p>
 	</section>
 
 	<section class="content">
 		<div class="row">
-			<div class="col-md-4">
+			<div class="col-md-3 col-xs-12">
 				<div class="box box-info">
 					<div class="box-header with-border text-center">
-						<h3 class="box-title">Prospek</h3>
+						<h3 class="box-title">Project</h3>
 					</div>
-					<div class="box-body">
-						
-	                    <h1><font style="font-size: 100px;">{{ $prospeks->count() }}</font> prospek</h1>
-					</div>
+                    <div class="inner text-center">
+                        <div class="small-box-number">{{ $projects->count() }}</div class="small-box-number">
+                    </div>
 				</div>
 			</div>
-			<div class="col-md-4">
-				<div class="box box-info">
-					<div class="box-header with-border text-center">
-						<h3 class="box-title">Proyek dan Pelatihan</h3>
-					</div>
-					<div class="box-body">
-						<h1><font style="font-size: 100px;">{{ $projects->count() }}</font> project</h1>
-	                    <h1>pelatihan <font style="font-size: 100px;">{{ $pelatihans->count() }}</font></h1>
-					</div>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="box box-info">
-					<div class="box-header with-border text-center">
-						<h3 class="box-title">User</h3>
-					</div>
-					<div class="box-body">
-						<h1><font style="font-size: 100px;">{{ $users->count() }}</font> user</h1>                  
-					</div>
-				</div>
-			</div>
-		</div>
-		
+            <div class="col-md-3 col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header with-border text-center">
+                        <h3 class="box-title">Prospek</h3>
+                    </div>
+                    <div class="inner text-center">
+                        <div class="small-box-number">{{ $prospeks->count() }}</div class="small-box-number">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header with-border text-center">
+                        <h3 class="box-title">Pelatihan</h3>
+                    </div>
+                    <div class="inner text-center">
+                        <div class="small-box-number">{{ $pelatihans->count() }}</div class="small-box-number">
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-xs-12">
+                <div class="box box-info">
+                    <div class="box-header with-border text-center">
+                        <h3 class="box-title">User</h3>
+                    </div>
+                    <div class="inner text-center">
+                        <div class="small-box-number">{{ $users->count() }}</div class="small-box-number">
+                    </div>
+                </div>
+            </div>
+        </div>
+
 		<div class="row">
 			<div class="col-md-12">
 				<div role="tabpanel" class="nav-tabs-custom" style="cursor: move">
@@ -115,7 +123,7 @@
                                         <th>No. Laporan</th>
                                         <th>Tanggal Laporan</th>
                                         <th>Total Pengeluaran</th>
-                                        <th class="col-md-1">Action</th>
+                                        <th>Action</th>
 	    							</tr>
 	    						</thead>
 	    						<tbody>
@@ -179,7 +187,7 @@
                         {!! $lpds->render() !!}
 					</div>
 				</div>
-			</div>			
+			</div>
 		</div>
 
 	</section>
@@ -191,7 +199,7 @@
     			<div class="modal-content">
     				<div class="modal-header">
     					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-    					<h4 class="modal-title" id="myModalLabel">Rencana Perjalanan Dinas (RPD)</h4>
+    					<h4 class="modal-title">Rencana Perjalanan Dinas (RPD)</h4>
     				</div>
     				<div class="modal-body">
     						<!-- Info basic dari RPD -->
@@ -370,7 +378,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title" id="myModalLabel">Laporan Perjalanan Dinas (LPD)</h4>
+                        <h4 class="modal-title">Laporan Perjalanan Dinas (LPD)</h4>
                     </div>
                     <div class="modal-body">
                         <div class="content">
