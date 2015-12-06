@@ -19,6 +19,7 @@ class AuthController extends Controller
     protected $loginPath = '/login';
     protected $redirectAfterLogout = '/login';
 
+    public $username = 'nik';
     /**
      * Create a new authentication controller instance.
      *
@@ -38,15 +39,15 @@ class AuthController extends Controller
     public function postLogin(Request $request)
     {
         $this->validate($request, [
-            'email' => 'required|email',
+            'nik' => 'required|numeric',
             'password' => 'required',
         ]);
 
-        $email = $request->input('email');
+        $nik = $request->input('nik');
         $password = $request->input('password');
 
         // Cek apakah user aktif
-        if(Auth::attempt(['email' => $email, 'password' => $password, 'active' => 1])) {
+        if(Auth::attempt(['nik' => $nik, 'password' => $password, 'active' => 1])) {
             $user = Auth::user();
 
             $first_login = is_null($user->last_login);
@@ -65,7 +66,7 @@ class AuthController extends Controller
         }
 
         // Cek apakah user tidak aktif
-        elseif (Auth::attempt(['email' => $email, 'password' => $password, 'active' => 0])) {
+        elseif (Auth::attempt(['nik' => $nik, 'password' => $password, 'active' => 0])) {
             Auth::logout();
 
             return redirect('login')->with('warning', 'Status akun Anda non-aktif, silahkan hubungi administrator untuk keterangan lebih lanjut.');

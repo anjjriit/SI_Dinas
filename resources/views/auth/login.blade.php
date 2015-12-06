@@ -40,12 +40,12 @@
             @endif
             {!! Form::open(['method' => 'POST', 'route' => 'user.login']) !!}
                 <div class="form-group has-feedback">
-                    {!! Form::label('email', 'E-mail') !!}
-                    {!! Form::input('email', 'email', null, ['placeholder' => 'name@domain.com', 'class' => 'form-control', 'autofocus']) !!}
+                    {!! Form::label('nik', 'Nomor Induk') !!}
+                    {!! Form::input('text', 'nik', null, ['class' => 'form-control', 'autofocus']) !!}
                 </div>
                 <div class="form-group has-feedback">
                     {!! Form::label('password', 'Password') !!}
-                    {!! Form::input('password', 'password', null, ['placeholder' => 'password', 'class' => 'form-control']) !!}
+                    {!! Form::input('password', 'password', null, ['class' => 'form-control']) !!}
                 </div>
                 <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-fw fa-sign-in"></i> Login</button>
             {!! Form::close() !!}

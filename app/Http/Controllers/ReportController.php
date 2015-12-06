@@ -229,7 +229,6 @@ class ReportController extends Controller
                             } else {
                                 $biayaPerKegiatan = 0;
                             }
-
                             // Hitung biaya per project
                             foreach ($bobotProject as $id => $bobot) {
                                 if (array_key_exists($id, $biayaProject)) {
@@ -238,10 +237,9 @@ class ReportController extends Controller
                                     $biayaProject[$id] = $bobot * $biayaPerKegiatan;
                                 }
                             }
-
                             // Hitung biaya per prospek
                             foreach ($bobotProspek as $id => $bobot) {
-                                if (array_key_exists($id, $biayaProject)) {
+                                if (array_key_exists($id, $biayaProspek)) {
                                     $biayaProspek[$id] += $bobot * $biayaPerKegiatan;
                                 } else {
                                     $biayaProspek[$id] = $bobot * $biayaPerKegiatan;

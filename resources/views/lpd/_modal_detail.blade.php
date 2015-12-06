@@ -7,13 +7,15 @@
             </div>
             <div class="modal-body">
                 <div class="content">
-                    <div class="row">
-                        <div class="col-md-3 pull-right">
-                            <a href="/lpd/{{$lpd->id}}/pdf" class="btn btn-xs btn-primary pull-right" style="margin-top: -10px;" target="_blank"><i class="fa fa-fw fa-print"></i> Export PDF</a>
+                    @if (auth()->user()->role == 'administration' && $lpd->status == 'APPROVED')
+                        <div class="row">
+                            <div class="col-md-3 pull-right">
+                                <a href="/lpd/{{$lpd->id}}/pdf" class="btn btn-xs btn-primary pull-right" style="margin-top: -10px;" target="_blank"><i class="fa fa-fw fa-print"></i> Export PDF</a>
+                            </div>
                         </div>
-                    </div>
-                    <div class="clearfix"></div>
-                    <br>
+                        <div class="clearfix"></div>
+                        <br>
+                    @endif
                     <div class="row">
                         <div class="col-md-8 table-responsive">
                             <table class="table table-bordered table-condensed">
