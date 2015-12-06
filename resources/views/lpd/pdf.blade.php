@@ -27,7 +27,7 @@
             </td>
         </tr>
     </table>
-    <h4>LAPORAN PERJALANAN DINAS (RPD)</h4>
+    <h4>LAPORAN PERJALANAN DINAS (LPD)</h4>
     <br>
     <table class="table table-bordered" width="60%" style="float: left;">
         <thead>
