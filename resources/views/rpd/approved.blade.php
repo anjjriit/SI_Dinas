@@ -1,22 +1,22 @@
 @extends('layouts.master')
 
-@section('page_title', 'RPD Yang Telah Di Approve')
+@section('page_title', 'RPD yang Disetujui')
 
 @section('content')
 
 
 
         <section class="content-header">
-            <p>RPD Yang Telah Di Approve</p>
+            <p>RPD yang Disetujui</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
                 @if (Auth::user()->role == 'super_admin')
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/dashboard">Halaman Utama</a>
                 @else
-                    <a href="/homepage">Homepage</a>
+                    <a href="/homepage">Halaman Utama</a>
                 @endif
                 <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
-                <i class="fa fa-angle-right fa-fw"></i> Approved
+                <i class="fa fa-angle-right fa-fw"></i> Setujui
             </span>
         </section>
 
@@ -41,21 +41,21 @@
                                     'updated_at' => 'Terakhir Diperbarui'
                                 ],
                                 null,
-                                ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
+                                ['class' => 'form-control', 'placeholder' => 'Kategori', 'required']
                             ) !!}
 
                             {!! Form::select(
                                 'order',
                                 [
-                                    'asc' => 'Ascending',
-                                    'desc' => 'Descending'
+                                    'asc' => 'Menaik',
+                                    'desc' => 'Menurun'
                                 ],
                                 null,
                                 ['class' => 'form-control', 'required']
                             ) !!}
 
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Sort',
+                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Urutkan',
                                 [
                                     'type' => 'submit', 'class' => 'btn btn-success'
                                 ]
@@ -85,13 +85,13 @@
                                 null,
                                 [
                                     'class' => 'form-control',
-                                    'placeholder' => 'Search By',
+                                    'placeholder' => 'Kategori',
                                     'required'
                                 ]
                             ) !!}
-                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Query...']) !!}
+                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Kata Kunci...']) !!}
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-search"></i> Search',
+                                '<i class="fa fa-fw fa-search"></i> Cari',
                                 ['type' => 'submit', 'class' => 'btn btn-success', 'style' => 'margin-left: 3px;']
                             ) !!}
                         </div>
@@ -113,7 +113,7 @@
                                 @endif
 
                                 {!! Form::button(
-                                    '<i class="fa fa-fw fa-times"></i> Clear Search',
+                                    '<i class="fa fa-fw fa-times"></i> Kosongkan Pencarian',
                                     [
                                         'type' => 'submit',
                                         'class' => 'btn btn-info',
@@ -150,7 +150,7 @@
                                             <th class="col-md-1">No. RPD</th>
                                             <th>Pengaju</th>
                                             <th>Terakhir Diperbarui</th>
-                                            <th class="col-md-1">Action</th>
+                                            <th class="col-md-1">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -183,7 +183,7 @@
                             </div>
                         @else
                             <div class="alert alert-warning">
-                                List RPD yang telah diapproved belum tersedia.
+                                List RPD yang telah disetujui belum tersedia.
                             </div>
                         @endif
                     @endif
@@ -205,7 +205,7 @@
                         <div class="modal-body">
                             <!-- Info basic dari RPD -->
                             <div class="page-header"><strong>Detail</strong></div>
-                            <a href="/rpd/{{$rpd->id}}/pdf" class="btn btn-xs btn-primary pull-right" style="margin-top: 12px;" target="_blank"><i class="fa fa-fw fa-print"></i> Export PDF</a>
+                            <a href="/rpd/{{$rpd->id}}/pdf" class="btn btn-xs btn-primary pull-right" style="margin-top: 12px;" target="_blank"><i class="fa fa-fw fa-print"></i> Ekspor PDF</a>
                             <table class="table table-plain table-responsive">
                                 <tbody>
                                     <tr>
@@ -279,7 +279,7 @@
                                 <thead>
                                     <tr class="active">
                                         <th width="25%">Nama</th>
-                                        <th width="30%">Judul Project/Prospek/Pelatihan</th>
+                                        <th width="30%">Judul Proyek/Prospek/Pelatihan</th>
                                         <th width="20%">Kegiatan</th>
                                         <th width="25%">Deskripsi</th>
                                     </tr>
@@ -323,14 +323,14 @@
                             </table>
 
                             <!--Bagian Action History-->
-                            <div class="page-header"><strong>Action History</strong></div>
+                            <div class="page-header"><strong>Histori</strong></div>
                             <table class="table table-bordered table-condensed" width="100%">
                                 <thead>
                                     <tr class="active">
-                                        <th width="25%">Date Time</th>
+                                        <th width="25%">Tanggal & Waktu</th>
                                         <th width="30%">Nama</th>
-                                        <th width="20%">Action Taken</th>
-                                        <th width="25%">Comment</th>
+                                        <th width="20%">Keterangan</th>
+                                        <th width="25%">Komentar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -348,7 +348,7 @@
                             </table>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Tutup</button>
                         </div>
                     </div>
                 </div>

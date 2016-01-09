@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Kota')
+@section('page_title', 'Ubah Kota')
 
 @section('content')
 
         <section class="content-header">
-            <p>Edit Kota</p>
+            <p>Ubah Kota</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/kota">List Kota</a>
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/kota">Data Kota</a>
                 <i class="fa fa-angle-right fa-fw"></i> {{ $kota->nama_kota }}
-                <i class="fa fa-angle-right fa-fw"></i> Edit
+                <i class="fa fa-angle-right fa-fw"></i> Ubah
             </span>
         </section>
 
@@ -20,7 +20,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Kota</h4>
+                            <h4>Formulir Ubah Kota</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

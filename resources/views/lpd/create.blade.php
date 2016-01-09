@@ -35,7 +35,7 @@
                                     <table>
                                         <tr>
                                             <td>
-                                                <label>Kode RPD </label>
+                                                <label>No. RPD </label>
                                             </td>
                                             <td> : </td>
                                             <td>{{ $rpd->kode }}</td>

@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Pengeluaran')
+@section('page_title', 'Ubah Pengeluaran')
 
 @section('stylesheet')
     @parent
@@ -11,16 +11,16 @@
 @section('content')
 
         <section class="content-header">
-        <p>Edit Pengeluaran</p>
+        <p>Ubah Pengeluaran</p>
         <span class="bcumb">
             <i class="fa fa-fw fa-bookmark"></i>
             @if (Auth::user()->role == 'super_admin')
-                <a href="/dashboard">Dashboard</a>
+                <a href="/dashboard">Halaman Utama</a>
             @else
-                <a href="/homepage">Homepage</a>
+                <a href="/homepage">Halaman Utama</a>
             @endif
             <i class="fa fa-angle-right fa-fw"></i> <a href="/lpd/{{ $lpd->id }}/edit">Laporan Perjalanan Dinas</a>
-            <i class="fa fa-angle-right fa-fw"></i> Edit Pengeluaran
+            <i class="fa fa-angle-right fa-fw"></i> Ubah Pengeluaran
         </span>
     </section>
 
@@ -29,7 +29,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Pengeluaran</h4>
+                            <h4>Formulir Ubah Pengeluaran</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">
@@ -60,7 +60,7 @@
                                 @include('lpd._form_pengeluaran')
                             </div>
                             <div class="box-footer text-right">
-                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Update', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Perbarui', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                             </div>
                         {!! Form::close() !!}
                     </div>

@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Data Penginapan')
+@section('page_title', 'Ubah Data Penginapan')
 
 @section('content')
 
         <section class="content-header">
-            <p>Edit Penginapan</p>
+            <p>Ubah Penginapan</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/penginapan">List Penginapan</a>
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/penginapan">Data Penginapan</a>
                 <i class="fa fa-angle-right fa-fw"></i> {{ $penginapan->nama_penginapan }}
-                <i class="fa fa-angle-right fa-fw"></i> Edit
+                <i class="fa fa-angle-right fa-fw"></i> Ubah
             </span>
         </section>
 
@@ -20,7 +20,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Data Penginapan</h4>
+                            <h4>Formulir Ubah Data Penginapan</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

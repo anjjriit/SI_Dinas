@@ -1,20 +1,20 @@
 @extends('layouts.master')
 
-@section('page_title', 'Draft RPD')
+@section('page_title', 'Draf RPD')
 
 @section('content')
 
         <section class="content-header">
-            <p>Draft RPD</p>
+            <p>Draf RPD</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
                 @if (Auth::user()->role == 'super_admin')
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/dashboard">Halaman Utama</a>
                 @else
-                    <a href="/homepage">Homepage</a>
+                    <a href="/homepage">Halaman Utama</a>
                 @endif
                 <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
-                <i class="fa fa-angle-right fa-fw"></i> Draft
+                <i class="fa fa-angle-right fa-fw"></i> Draf
             </span>
         </section>
 
@@ -36,7 +36,7 @@
                                             <th class="col-md-1">No.</th>
                                             <th>Tanggal Dibuat</th>
                                             <th>Terakhir Diperbarui</th>
-                                            <th class="col-md-1">Action</th>
+                                            <th class="col-md-1">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -48,7 +48,7 @@
                                                 <td>{{ date_format( date_create($draftRpd->created_at), 'd/m/Y' ) }}</td>
                                                 <td>{{ date_format( date_create($draftRpd->updated_at), 'd/m/Y H:i' ) }}</td>
                                                 <td>
-                                                    <a href="/rpd/{{ $draftRpd->id }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                    <a href="/rpd/{{ $draftRpd->id }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Ubah"><i class="fa fa-fw fa-edit"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -58,7 +58,7 @@
                         </div>
                     @else
                         <div class="alert alert-warning">
-                            Tidak ada draft RPD yang tersimpan. Dengan menyimpan draft, Anda dapat menyimpan RPD sebelum disubmit.
+                            Tidak ada draf RPD yang tersimpan. Dengan menyimpan draf, Anda dapat menyimpan RPD sebelum diajukan.
                         </div>
                     @endif
                 </div>

@@ -1,16 +1,16 @@
 @extends('layouts.master')
 
-@section('page_title', 'Tambah User')
+@section('page_title', 'Tambah Pegawai')
 
 @section('content')
 
         <section class="content-header">
-            <p>Tambah User</p>
+            <p>Tambah Pegawai</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/user">List User</a>
-                <i class="fa fa-angle-right fa-fw"></i> Add
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/user">Data Pegawai</a>
+                <i class="fa fa-angle-right fa-fw"></i> Tambah
             </span>
         </section>
 
@@ -19,7 +19,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Tambah User</h4>
+                            <h4>Formulir Tambah Pegawai</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

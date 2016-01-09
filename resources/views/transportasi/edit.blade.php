@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Transportasi')
+@section('page_title', 'Ubah Transportasi')
 
 @section('content')
 
         <section class="content-header">
-            <p>Edit Transportasi</p>
+            <p>Ubah Transportasi</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/transportasi">List Transportasi</a>
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/transportasi">Data Transportasi</a>
                 <i class="fa fa-angle-right fa-fw"></i> {{ $transportasi->nama_transportasi }}
-                <i class="fa fa-angle-right fa-fw"></i> Edit
+                <i class="fa fa-angle-right fa-fw"></i> Ubah
             </span>
         </section>
 
@@ -20,7 +20,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Transportasi</h4>
+                            <h4>Formulir Ubah Transportasi</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

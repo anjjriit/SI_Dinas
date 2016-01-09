@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Log RPD')
+@section('page_title', 'Catatan RPD')
 
 @section('content')
 
@@ -25,16 +25,16 @@
         @endif
 
         <section class="content-header">
-            <p>Log Rencana Perjalanan Dinas</p>
+            <p>Catatan RPD</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
                 @if (Auth::user()->role == 'super_admin')
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/dashboard">Halaman Utama</a>
                 @else
-                    <a href="/homepage">Homepage</a>
+                    <a href="/homepage">Halaman Utama</a>
                 @endif
                 <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
-                <i class="fa fa-angle-right fa-fw"></i> Log
+                <i class="fa fa-angle-right fa-fw"></i> Catatan
             </span>
         </section>
 
@@ -52,7 +52,7 @@
                                             <th>Kota Tujuan</th>
                                             <th>Terakhir Diperbarui</th>
                                             <th>Status</th>
-                                            <th class="col-md-1">Action</th>
+                                            <th class="col-md-1">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -78,7 +78,7 @@
                                                         <i class="fa fa-share"></i>
                                                     </button>
                                                     @if ($rpdLog->status == 'BACK TO INITIATOR')
-                                                        <a href="/rpd/{{ $rpdLog->id }}/edit" class="btn btn-xs btn-default" data-toggle-alt="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                        <a href="/rpd/{{ $rpdLog->id }}/edit" class="btn btn-xs btn-default" data-toggle-alt="tooltip" data-placement="top" data-title="Ubah"><i class="fa fa-fw fa-edit"></i></a>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -89,7 +89,7 @@
                         </div>
                     @else
                         <div class="alert alert-warning">
-                            Logs RPD belum tersedia.
+                            Catatan RPD belum tersedia.
                         </div>
                     @endif
                 </div>
@@ -181,7 +181,7 @@
                             <thead>
                                 <tr class="active">
                                     <th width="25%">Nama</th>
-                                    <th width="30%">Judul Project/Prospek/Pelatihan</th>
+                                    <th width="30%">Judul Proyek/Prospek/Pelatihan</th>
                                     <th width="20%">Kegiatan</th>
                                     <th width="25%">Deskripsi</th>
                                 </tr>
@@ -225,14 +225,14 @@
                         </table>
 
                        <!--Bagian Action History-->
-                        <div class="page-header"><strong>Action History</strong></div>
+                        <div class="page-header"><strong>Histori</strong></div>
                         <table class="table table-bordered table-condensed" width="100%">
                             <thead>
                                 <tr class="active">
-                                    <th width="25%">Date Time</th>
+                                    <th width="25%">Tanggal & Waktu</th>
                                     <th width="30%">Nama</th>
-                                    <th width="20%">Action Taken</th>
-                                    <th width="25%">Comment</th>
+                                    <th width="20%">Keterangan</th>
+                                    <th width="25%">Komentar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -250,7 +250,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Tutup</button>
                     </div>
                 </div>
             </div>

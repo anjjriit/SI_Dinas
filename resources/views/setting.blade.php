@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Setting')
+@section('page_title', 'Ubah Pengaturan')
 
 @section('stylesheet')
     @parent
@@ -10,12 +10,12 @@
 @section('content')
 
         <section class="content-header">
-            <p>Edit Setting</p>
+            <p>Ubah Pengaturan</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> Setting
-                <i class="fa fa-angle-right fa-fw"></i> Edit
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> Pengaturan
+                <i class="fa fa-angle-right fa-fw"></i> Ubah
             </span>
         </section>
 
@@ -24,7 +24,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Setting</h4>
+                            <h4>Formulir Ubah Pengaturan</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

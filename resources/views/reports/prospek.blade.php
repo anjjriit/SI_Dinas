@@ -13,8 +13,8 @@
             <p>Akomodasi Per Prospek</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> Report
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> Laporan
                 <i class="fa fa-angle-right fa-fw"></i> Akomodasi Per Prospek
             </span>
         </section>
@@ -62,7 +62,7 @@
                             ) !!}
 
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-file-text-o"></i> View Report',
+                                '<i class="fa fa-fw fa-file-text-o"></i> Lihat Laporan',
                                 [
                                     'type' => 'submit', 'class' => 'btn btn-success'
                                 ]

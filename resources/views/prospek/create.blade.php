@@ -8,9 +8,9 @@
             <p>Tambah Prospek</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/prospek">List Prospek</a>
-                <i class="fa fa-angle-right fa-fw"></i> Add
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/prospek">Data Prospek</a>
+                <i class="fa fa-angle-right fa-fw"></i> Tambah
             </span>
         </section>
 
@@ -19,7 +19,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Tambah Prospek</h4>
+                            <h4>Formulir Tambah Prospek</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

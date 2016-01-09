@@ -11,10 +11,10 @@
                     <p class="navbar-text">Selamat datang, <strong>{{ auth()->user()->nama_lengkap }}</strong></p>
                 </li>
                 <li>
-                    <a href="/user/password"><i class="fa fa-fw fa-lock"></i> Ubah Password</a>
+                    <a href="/user/password"><i class="fa fa-fw fa-lock"></i> Ubah Kata Sandi</a>
                 </li>
                 <li>
-                    <a href="/logout"><i class="fa fa-fw fa-sign-out"></i> Logout</a>
+                    <a href="/logout"><i class="fa fa-fw fa-sign-out"></i> Keluar</a>
                 </li>
             </ul>
         </div>

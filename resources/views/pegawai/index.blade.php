@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Data User')
+@section('page_title', 'Data Pegawai')
 
 @section('stylesheet')
     @parent
@@ -10,11 +10,11 @@
 @section('content')
 
         <section class="content-header">
-            <p>Data User</p>
+            <p>Data Pegawai</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> User
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> Pegawai
             </span>
         </section>
 
@@ -38,26 +38,26 @@
                                     'nik' => 'NIK',
                                     'nama_lengkap' => 'Nama Lengkap',
                                     'email' => 'E-mail',
-                                    'role' => 'Role',
+                                    'role' => 'Peran',
                                     'active' => 'Status',
-                                    'last_login' => 'Last Login'
+                                    'last_login' => 'Terakhir Masuk'
                                 ],
                                 null,
-                                ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
+                                ['class' => 'form-control', 'placeholder' => 'Kategori', 'required']
                             ) !!}
 
                             {!! Form::select(
                                 'order',
                                 [
-                                    'asc' => 'Ascending',
-                                    'desc' => 'Descending'
+                                    'asc' => 'Menaik',
+                                    'desc' => 'Menurun'
                                 ],
                                 null,
                                 ['class' => 'form-control', 'required']
                             ) !!}
 
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Sort',
+                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Urutkan',
                                 [
                                     'type' => 'submit', 'class' => 'btn btn-success'
                                 ]
@@ -84,18 +84,18 @@
                                     'nik' => 'NIK',
                                     'nama_lengkap' => 'Nama Lengkap',
                                     'email' => 'E-mail',
-                                    'role' => 'Role',
+                                    'role' => 'Peran',
                                 ],
                                 null,
                                 [
                                     'class' => 'form-control',
-                                    'placeholder' => 'Search By',
+                                    'placeholder' => 'Kategori',
                                     'required'
                                 ]
                             ) !!}
-                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Query...']) !!}
+                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Kata Kunci...']) !!}
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-search"></i> Search',
+                                '<i class="fa fa-fw fa-search"></i> Cari',
                                 ['type' => 'submit', 'class' => 'btn btn-success', 'style' => 'margin-left: 3px;']
                             ) !!}
                         </div>
@@ -117,7 +117,7 @@
                                 @endif
 
                                 {!! Form::button(
-                                    '<i class="fa fa-fw fa-times"></i> Clear Search',
+                                    '<i class="fa fa-fw fa-times"></i> Kosongkan Pencarian',
                                     [
                                         'type' => 'submit',
                                         'class' => 'btn btn-info',
@@ -155,10 +155,10 @@
                                             <th>NIK</th>
                                             <th>Nama Lengkap</th>
                                             <th>E-mail</th>
-                                            <th>Role</th>
+                                            <th>Peran</th>
                                             <th>Status</th>
-                                            <th>Last Login</th>
-                                            <th class="col-md-1">Action</th>
+                                            <th>Terakhir Masuk</th>
+                                            <th class="col-md-1">Aksi</th>
                                         </tr>
                                     </thead>
 
@@ -202,9 +202,9 @@
                                         </td>
                                         <td>
                                             @if ($pegawai->otherAdmin())
-                                                <button class="btn btn-xs" disabled data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></button>
+                                                <button class="btn btn-xs" disabled data-toggle="tooltip" data-placement="top" data-title="Ubah"><i class="fa fa-fw fa-edit"></i></button>
                                             @else
-                                                <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                <a href="/user/{{ $pegawai->nik }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Ubah"><i class="fa fa-fw fa-edit"></i></a>
                                             @endif
 
                                             {!! Form::open(
@@ -238,14 +238,14 @@
                             </div>
                         @else
                             <div class="alert alert-warning">
-                                Data user belum tersedia. Klik tombol Tambah User untuk menambah user.
+                                Data pegawai belum tersedia. Klik tombol Tambah Pegawai untuk menambah pegawai.
                             </div>
                         @endif
                     @endif
 
                     {!! $data_pegawai->render() !!}
 
-                    <a href="/user/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah User</a>
+                    <a href="/user/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah Pegawai</a>
                 </div>
             </div>
         </section>
@@ -265,12 +265,12 @@
             var nama = element.attr('data-nama')
 
             $.confirm({
-                title: '<i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus User',
-                content: 'Apakah Anda yakin akan menghapus user dengan nama <strong>' + nama + '</strong>',
+                title: '<i class="fa fa-trash"></i>&nbsp;&nbsp;Hapus Pegawai',
+                content: 'Apakah Anda yakin akan menghapus pegawai dengan nama <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',
-                confirmButton: 'Ya, Hapus',
+                confirmButton: 'Ya',
                 animation: 'top',
                 animationSpeed: 300,
                 animationBounce: 1,

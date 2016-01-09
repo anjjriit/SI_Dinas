@@ -1,20 +1,20 @@
 @extends('layouts.master')
 
-@section('page_title', 'Submitted LPD')
+@section('page_title', 'LPD yang Diajukan')
 
 @section('content')
 
     <section class="content-header">
-        <p>LPD Yang Di Submit</p>
+        <p>LPD yang Diajukan</p>
         <span class="bcumb">
             <i class="fa fa-fw fa-bookmark"></i>
             @if (Auth::user()->role == 'super_admin')
-                <a href="/dashboard">Dashboard</a>
+                <a href="/dashboard">Halaman Utama</a>
             @else
-                <a href="/homepage">Homepage</a>
+                <a href="/homepage">Halaman Utama</a>
             @endif
             <i class="fa fa-angle-right fa-fw"></i> Laporan Perjalanan Dinas
-            <i class="fa fa-angle-right fa-fw"></i> Submitted
+            <i class="fa fa-angle-right fa-fw"></i> Ajukan
         </span>
     </section>
 
@@ -40,10 +40,10 @@
                                 <thead>
                                     <tr>
                                         <th class="col-md-1"></th>
-                                        <th>Kode LPD</th>
+                                        <th>No. LPD</th>
                                         <th>Penanggung Jawab</th>
                                         <th>Tanggal Laporan</th>
-                                        <th>Action</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -97,7 +97,7 @@
                     </div>
                 @else
                     <div class="alert alert-warning">
-                        Data LPD yang telah disubmit belum tersedia.
+                        Data LPD yang telah diajukan belum tersedia.
                     </div>
                 @endif
 

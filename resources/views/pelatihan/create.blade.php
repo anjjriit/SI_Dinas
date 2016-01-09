@@ -13,9 +13,9 @@
             <p>Tambah Pelatihan</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/pelatihan">List Pelatihan</a>
-                <i class="fa fa-fw fa-angle-right"></i> Add
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/pelatihan">Data Pelatihan</a>
+                <i class="fa fa-fw fa-angle-right"></i> Tambah
             </span>
         </section>
 
@@ -24,7 +24,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Tambah Pelatihan</h4>
+                            <h4>Formulir Tambah Pelatihan</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

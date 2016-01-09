@@ -14,19 +14,19 @@
         <span class="bcumb">
             <i class="fa fa-fw fa-bookmark"></i>
             @if (Auth::user()->role == 'super_admin')
-                <a href="/dashboard">Dashboard</a>
+                <a href="/dashboard">Halaman Utama</a>
             @else
-                <a href="/homepage">Homepage</a>
+                <a href="/homepage">Halaman Utama</a>
             @endif
             <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
-            <i class="fa fa-angle-right fa-fw"></i> Create
+            <i class="fa fa-angle-right fa-fw"></i> Buat
         </span>
     </section>
 
     <section class="content">
         <div class="box box-widget">
             <div class="box-header">
-                <h4>Form Pengajuan RPD</h4>
+                <h4>Formulir Pengajuan RPD</h4>
             </div>
 
             <hr style="margin-top: 10px;">

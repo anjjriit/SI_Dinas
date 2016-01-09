@@ -19,13 +19,13 @@
             @if(auth()->user()->role == 'super_admin')
                 <li>
                     <a href="/dashboard">
-                        <i class="fa fa-fw fa-th"></i> <span>Dashboard</span>
+                        <i class="fa fa-fw fa-th"></i> <span>Halaman Utama</span>
                     </a>
                 </li>
             @else
                 <li>
                     <a href="/homepage">
-                        <i class="fa fa-fw fa-home"></i> <span>Homepage</span>
+                        <i class="fa fa-fw fa-home"></i> <span>Halaman Utama</span>
                     </a>
                 </li>
             @endif
@@ -34,17 +34,17 @@
             @if(auth()->user()->role == 'administration')
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-fw fa-list-alt"></i> <span>Approval RPD</span> <i class="fa fa-angle-down pull-right"></i>
+                    <i class="fa fa-fw fa-list-alt"></i> <span>Persetujuan RPD</span> <i class="fa fa-angle-down pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li>
                         <a href="/rpd/submitted/all">
-                            <i class="fa fa-fw fa-list"></i> <span>Submitted RPD</span>
+                            <i class="fa fa-fw fa-list"></i> <span>RPD yang Diajukan</span>
                         </a>
                     </li>
                     <li>
                         <a href="/rpd/approved">
-                            <i class="fa fa-fw fa-list"></i> <span>Approved RPD</span>
+                            <i class="fa fa-fw fa-list"></i> <span>RPD yang Disetujui</span>
                         </a>
                     </li>
                 </ul>
@@ -52,17 +52,17 @@
 
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-fw fa-files-o"></i> <span>Approval LPD</span> <i class="fa fa-angle-down pull-right"></i>
+                    <i class="fa fa-fw fa-files-o"></i> <span>Persetujuan LPD</span> <i class="fa fa-angle-down pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li>
                         <a href="/lpd/processed">
-                            <i class="fa fa-fw fa-list"></i> <span>Processed LPD</span>
+                            <i class="fa fa-fw fa-list"></i> <span>LPD yang Diproses</span>
                         </a>
                     </li>
                     <li>
                         <a href="/lpd/approved">
-                            <i class="fa fa-fw fa-list"></i> <span>Approved LPD</span>
+                            <i class="fa fa-fw fa-list"></i> <span>LPD yang Disetujui</span>
                         </a>
                     </li>
                 </ul>
@@ -73,17 +73,17 @@
             @if(auth()->user()->role == 'finance')
             <li class="treeview">
                 <a href="#">
-                    <i class="fa fa-fw fa-files-o"></i> <span>Approval LPD</span> <i class="fa fa-angle-down pull-right"></i>
+                    <i class="fa fa-fw fa-files-o"></i> <span>Persetujuan LPD</span> <i class="fa fa-angle-down pull-right"></i>
                 </a>
                 <ul class="treeview-menu" style="display: none;">
                     <li>
                         <a href="/lpd/submitted/all">
-                            <i class="fa fa-fw fa-list"></i> <span>Submitted LPD</span>
+                            <i class="fa fa-fw fa-list"></i> <span>LPD yang Diajukan</span>
                         </a>
                     </li>
                     <li>
                         <a href="/lpd/processed">
-                            <i class="fa fa-fw fa-list"></i> <span>Processed LPD</span>
+                            <i class="fa fa-fw fa-list"></i> <span>LPD yang Diproses</span>
                         </a>
                     </li>
                 </ul>
@@ -98,22 +98,22 @@
                     <ul class="treeview-menu" style="display: none;">
                         <li>
                             <a href="/rpd/create">
-                                <i class="fa fa-fw fa-file-text"></i> <span>Create RPD</span>
+                                <i class="fa fa-fw fa-file-text"></i> <span>Buat RPD</span>
                             </a>
                         </li>
                         <li>
                             <a href="/rpd/draft">
-                                <i class="fa fa-fw fa-edit"></i> <span>Draft RPD</span>
+                                <i class="fa fa-fw fa-edit"></i> <span>Draf RPD</span>
                             </a>
                         </li>
                         <li>
                             <a href="/rpd/submitted">
-                                <i class="fa fa-fw fa-list"></i> <span>Submitted RPD</span>
+                                <i class="fa fa-fw fa-list"></i> <span>RPD yang Diajukan</span>
                             </a>
                         </li>
                         <li>
                             <a href="/rpd/log">
-                                <i class="fa fa-fw fa-history"></i> <span>Log RPD</span>
+                                <i class="fa fa-fw fa-history"></i> <span>Catatan RPD</span>
                             </a>
                         </li>
                     </ul>
@@ -127,22 +127,22 @@
                 <ul class="treeview-menu" style="display: none;">
                     <li>
                         <a href="/lpd">
-                            <i class="fa fa-fw fa-file-text"></i> <span>Create LPD</span>
+                            <i class="fa fa-fw fa-file-text"></i> <span>Buat LPD</span>
                         </a>
                     </li>
                     <li>
                         <a href="/lpd/draft">
-                            <i class="fa fa-fw fa-edit"></i> <span>Draft LPD</span>
+                            <i class="fa fa-fw fa-edit"></i> <span>Draf LPD</span>
                         </a>
                     </li>
                     <li>
                         <a href="/lpd/submitted">
-                            <i class="fa fa-fw fa-list"></i> <span>Submitted LPD</span>
+                            <i class="fa fa-fw fa-list"></i> <span>LPD yang Diajukan</span>
                         </a>
                     </li>
                     <li>
                         <a href="/lpd/log">
-                            <i class="fa fa-fw fa-history"></i> <span>Log LPD</span>
+                            <i class="fa fa-fw fa-history"></i> <span>Catatan LPD</span>
                         </a>
                     </li>
                 </ul>
@@ -151,7 +151,7 @@
             @if (auth()->user()->role == 'finance')
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-fw fa-calendar"></i> <span>Reporting</span> <i class="fa fa-angle-down pull-right"></i>
+                        <i class="fa fa-fw fa-calendar"></i> <span>Laporan</span> <i class="fa fa-angle-down pull-right"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
                         <li>
@@ -172,11 +172,11 @@
             @if (auth()->user()->role == 'super_admin')
                 <li class="treeview">
                     <a href="#">
-                        <i class="fa fa-fw fa-database"></i> <span>Manage Data</span> <i class="fa fa-angle-down pull-right"></i>
+                        <i class="fa fa-fw fa-database"></i> <span>Manajemen Data</span> <i class="fa fa-angle-down pull-right"></i>
                     </a>
                     <ul class="treeview-menu" style="display: none;">
                         <li>
-                            <a href="/user"><i class="fa fa-fw"></i>Data User</a>
+                            <a href="/user"><i class="fa fa-fw"></i>Data Pegawai</a>
                         </li>
                         <li>
                             <a href="/kota"><i class="fa fa-fw"></i>Data Kota</a>
@@ -185,7 +185,7 @@
                             <a href="/prospek"><i class="fa fa-fw"></i>Data Prospek</a>
                         </li>
                         <li>
-                            <a href="/project"><i class="fa fa-fw"></i>Data Project</a>
+                            <a href="/project"><i class="fa fa-fw"></i>Data Proyek</a>
                         </li>
                          <li>
                             <a href="/pelatihan"><i class="fa fa-fw"></i>Data Pelatihan</a>
@@ -206,7 +206,7 @@
                 </li>
                 <li>
                     <a href="/setting">
-                        <i class="fa fa-fw fa-cog"></i> <span>Setting</span>
+                        <i class="fa fa-fw fa-cog"></i> <span>Pengaturan</span>
                     </a>
                 </li>
             @endif

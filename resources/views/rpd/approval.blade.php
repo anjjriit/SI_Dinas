@@ -1,21 +1,21 @@
 @extends('layouts.master')
 
-@section('page_title', 'Approval RPD')
+@section('page_title', 'Persetujuan RPD')
 
 @section('content')
 
         <section class="content-header">
-            <p>Approval RPD</p>
+            <p>Persetujuan RPD</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
                 @if (Auth::user()->role == 'super_admin')
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/dashboard">Halaman Utama</a>
                 @else
-                    <a href="/homepage">Homepage</a>
+                    <a href="/homepage">Halaman Utama</a>
                 @endif
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/rpd/submitted/all">Submitted RPD</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/rpd/submitted/all">Persetujuan RPD</a>
                 <i class="fa fa-angle-right fa-fw"></i> {{ $rpd->kode }}
-                <i class="fa fa-angle-right fa-fw"></i> Approval
+                <i class="fa fa-angle-right fa-fw"></i> Persetujuan
             </span>
         </section>
 
@@ -24,7 +24,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Approval RPD</h4>
+                            <h4>Formulir Persetujuan RPD</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">
@@ -75,7 +75,7 @@
                                 </div>
                             </div>
                             <div class="box-footer">
-                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Submit', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Setujui', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                             </div>
                         {!! Form::close() !!}
                     </div>
@@ -166,7 +166,7 @@
                             <thead>
                                 <tr class="active">
                                     <th width="25%">Nama</th>
-                                    <th width="30%">Judul Project/Prospek/Pelatihan</th>
+                                    <th width="30%">Judul Proyek/Prospek/Pelatihan</th>
                                     <th width="20%">Kegiatan</th>
                                     <th width="25%">Deskripsi</th>
                                 </tr>
@@ -210,14 +210,14 @@
                         </table>
 
                         <!--Bagian Action History-->
-                        <div class="page-header"><strong>Action History</strong></div>
+                        <div class="page-header"><strong>Histori</strong></div>
                         <table class="table table-bordered table-condensed" width="100%">
                             <thead>
                                 <tr class="active">
-                                    <th width="25%">Date Time</th>
+                                    <th width="25%">Tanggal & Waktu</th>
                                     <th width="30%">Nama</th>
-                                    <th width="20%">Action Taken</th>
-                                    <th width="25%">Comment</th>
+                                    <th width="20%">Keterangan</th>
+                                    <th width="25%">Komentar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -235,7 +235,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Tutup</button>
                     </div>
                 </div>
             </div>

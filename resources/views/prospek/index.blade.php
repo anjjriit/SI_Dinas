@@ -13,7 +13,7 @@
             <p>Data Prospek</p>
             <span class="bcumb">
             <i class="fa fa-fw fa-bookmark"></i>
-            <a href="/dashboard">Dashboard</a>
+            <a href="/dashboard">Halaman Utama</a>
             <i class="fa fa-angle-right fa-fw"></i> Prospek
         </span>
         </section>
@@ -40,21 +40,21 @@
                                     'alamat' => 'Alamat',
                                 ],
                                 null,
-                                ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
+                                ['class' => 'form-control', 'placeholder' => 'Kategori', 'required']
                             ) !!}
 
                             {!! Form::select(
                                 'order',
                                 [
-                                    'asc' => 'Ascending',
-                                    'desc' => 'Descending'
+                                    'asc' => 'Menaik',
+                                    'desc' => 'Menurun'
                                 ],
                                 null,
                                 ['class' => 'form-control', 'required']
                             ) !!}
 
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Sort',
+                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Urutkan',
                                 [
                                     'type' => 'submit', 'class' => 'btn btn-success'
                                 ]
@@ -85,13 +85,13 @@
                                 null,
                                 [
                                     'class' => 'form-control',
-                                    'placeholder' => 'Search By',
+                                    'placeholder' => 'Kategori',
                                     'required'
                                 ]
                             ) !!}
-                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Query...']) !!}
+                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Kata Kunci...']) !!}
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-search"></i> Search',
+                                '<i class="fa fa-fw fa-search"></i> Cari',
                                 ['type' => 'submit', 'class' => 'btn btn-success', 'style' => 'margin-left: 3px;']
                             ) !!}
                         </div>
@@ -113,7 +113,7 @@
                                 @endif
 
                                 {!! Form::button(
-                                    '<i class="fa fa-fw fa-times"></i> Clear Search',
+                                    '<i class="fa fa-fw fa-times"></i> Kosongkan Pencarian',
                                     [
                                         'type' => 'submit',
                                         'class' => 'btn btn-info',
@@ -145,7 +145,7 @@
                                             <th>Nama Prospek</th>
                                             <th>Nama Lembaga</th>
                                             <th>Alamat</th>
-                                            <th class="col-md-1">Action</th>
+                                            <th class="col-md-1">Aksi</th>
                                         </tr>
                                     </thead>
 
@@ -163,7 +163,7 @@
                                                 {{ $prospek->alamat }}
                                             </td>
                                             <td>
-                                                <a href="/prospek/{{ $prospek->kode }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                <a href="/prospek/{{ $prospek->kode }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Ubah"><i class="fa fa-fw fa-edit"></i></a>
                                                 {!! Form::open(
                                                     [
                                                         'method' => 'DELETE',
@@ -191,7 +191,7 @@
                             </div>
                         @else
                             <div class="alert alert-warning">
-                                Data prospek belum tersedia. Klik tombol Tambah Prospek untuk menambah prospek.
+                                Data prospek belum tersedia. Klik tombol Tambah Prospek untuk menambah data prospek.
                             </div>
                         @endif
                     @endif
@@ -223,7 +223,7 @@
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',
-                confirmButton: 'Ya, Hapus',
+                confirmButton: 'Ya',
                 animation: 'top',
                 animationSpeed: 300,
                 animationBounce: 1,

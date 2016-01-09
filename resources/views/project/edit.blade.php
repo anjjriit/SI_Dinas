@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Project')
+@section('page_title', 'Ubah Proyek')
 
 @section('stylesheet')
     @parent
@@ -10,13 +10,13 @@
 @section('content')
 
         <section class="content-header">
-            <p>Edit Project</p>
+            <p>Ubah Proyek</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/project">List Project</a>
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/project">Data Proyek</a>
                 <i class="fa fa-angle-right fa-fw"></i> {{ $project->nama_project }}
-                <i class="fa fa-angle-right fa-fw"></i> Edit
+                <i class="fa fa-angle-right fa-fw"></i> Ubah
             </span>
         </section>
 
@@ -25,7 +25,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Project</h4>
+                            <h4>Formulir Ubah Proyek</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

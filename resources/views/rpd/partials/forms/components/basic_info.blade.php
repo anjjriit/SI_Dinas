@@ -39,7 +39,7 @@
 <ul class="list-inline text-right">
     <li>
         {!! Form::button(
-            'Next <i class="fa fa-fw fa-angle-right"></i>',
+            'Selanjutnya <i class="fa fa-fw fa-angle-right"></i>',
             [
                 'type' => 'button',
                 'class' => 'btn btn-success next-step'

@@ -23,7 +23,7 @@
                 {!! Form::select(
                     'list_tujuan_kegiatan',
                     [
-                        'project' => 'Project',
+                        'project' => 'Proyek',
                         'prospek' => 'Prospek',
                         'pelatihan' => 'Pelatihan'
                     ],
@@ -62,7 +62,7 @@
                             {!! Form::hidden('id_peserta[]', $peserta['nik']) !!}
                             {!! Form::hidden('tujuan_kegiatan[]', $kegiatan->jenis_kegiatan) !!}
                             <div class="form-group">
-                                <label for="kode_kegiatan">Nama Project</label>
+                                <label for="kode_kegiatan">Nama Proyek</label>
                                 <select name="kode_kegiatan[]" id="kode_kegiatan" class="form-control">
                                     @foreach ($list_project as $project)
                                         <option value="{{ $project->kode }}"{{ ($project->kode == $kegiatan->kode_kegiatan) ? ' selected' : '' }}> {{ $project->nama_project . ' (' . $project->nama_lembaga . ')' }}</option>

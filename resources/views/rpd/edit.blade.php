@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Pengajuan RPD')
+@section('page_title', 'Ubah RPD')
 
 @section('stylesheet')
     @parent
@@ -10,26 +10,26 @@
 
 @section('content')
     <section class="content-header">
-        <p>Edit Pengajuan RPD</p>
+        <p>Ubah RPD</p>
         <span class="bcumb">
             <i class="fa fa-fw fa-bookmark"></i>
             @if (Auth::user()->role == 'super_admin')
-                <a href="/dashboard">Dashboard</a>
+                <a href="/dashboard">Halaman Utama</a>
             @else
-                <a href="/homepage">Homepage</a>
+                <a href="/homepage">Halaman Utama</a>
             @endif
             <i class="fa fa-angle-right fa-fw"></i> <a href="/rpd/submitted/all">Rencana Perjalanan Dinas</a>
             @if ($rpd->status == 'SUBMIT')
                 <i class="fa fa-angle-right fa-fw"></i> {{ $rpd->kode}}
             @endif
-            <i class="fa fa-angle-right fa-fw"></i> Edit
+            <i class="fa fa-angle-right fa-fw"></i> Ubah
         </span>
     </section>
 
     <section class="content">
         <div class="box box-widget">
             <div class="box-header">
-                <h4>Form Pengajuan RPD</h4>
+                <h4>Formulir Pengajuan RPD</h4>
             </div>
 
             <hr style="margin-top: 10px;">

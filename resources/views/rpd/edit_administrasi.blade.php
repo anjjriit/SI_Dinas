@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Pengajuan RPD')
+@section('page_title', 'Ubah RPD')
 
 @section('stylesheet')
     @parent
@@ -16,7 +16,7 @@
     <section class="content">
         <div class="box box-widget">
             <div class="box-header">
-                <h4>Form Pengajuan RPD</h4>
+                <h4>Formulir Pengajuan RPD</h4>
             </div>
 
             {!! Form::model($rpd, ['method' => 'PATCH', 'url' => ['/administrasi/rpd/' . $rpd->id]]) !!}

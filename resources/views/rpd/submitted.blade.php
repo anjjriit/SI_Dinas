@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'RPD Yang Di Submit')
+@section('page_title', 'RPD yang Diajukan')
 
 @section('stylesheet')
 	@parent
@@ -10,16 +10,16 @@
 @section('content')
 
 	<section class="content-header">
-        <p>RPD Yang Di Submit</p>
+        <p>RPD yang Diajukan</p>
         <span class="bcumb">
             <i class="fa fa-fw fa-bookmark"></i>
             @if (Auth::user()->role == 'super_admin')
-                <a href="/dashboard">Dashboard</a>
+                <a href="/dashboard">Halaman Utama</a>
             @else
-                <a href="/homepage">Homepage</a>
+                <a href="/homepage">Halaman Utama</a>
             @endif
             <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
-            <i class="fa fa-angle-right fa-fw"></i> Submitted
+            <i class="fa fa-angle-right fa-fw"></i> Ajukan
         </span>
     </section>
 
@@ -53,7 +53,7 @@
                                         <th>Kota Tujuan</th>
 	    								<th>Tanggal Mulai</th>
 	    								<th>Tanggal Selesai</th>
-	    								<th class="col-md-1">Action</th>
+	    								<th class="col-md-1">Aksi</th>
 	    							</tr>
 	    						</thead>
 	    						<tbody>
@@ -96,7 +96,7 @@
                                                         ]
                                                     ) !!}
 
-                                                        {!! Form::button('<i class="fa fa-fw fa-refresh"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Recall']
+                                                        {!! Form::button('<i class="fa fa-fw fa-refresh"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Tarik Kembali']
                                                         ) !!}
                                                     {!! Form::close() !!}
                                                 @endif
@@ -109,7 +109,7 @@
 	    			</div><!-- Akhir Bagian Box Table-->
     			@else
     				<div class="alert alert-warning">
-                        Data RPD yang telah disubmit belum tersedia.
+                        Data RPD yang telah diajukan belum tersedia.
                     </div>
     			@endif
 
@@ -204,7 +204,7 @@
                             <thead>
                                 <tr class="active">
                                     <th width="25%">Nama</th>
-                                    <th width="30%">Judul Project/Prospek/Pelatihan</th>
+                                    <th width="30%">Judul Proyek/Prospek/Pelatihan</th>
                                     <th width="20%">Kegiatan</th>
                                     <th width="25%">Deskripsi</th>
                                 </tr>
@@ -248,14 +248,14 @@
                         </table>
 
                         <!--Bagian Action History-->
-                        <div class="page-header"><strong>Action History</strong></div>
+                        <div class="page-header"><strong>Histori</strong></div>
                         <table class="table table-bordered table-condensed" width="100%">
                             <thead>
                                 <tr class="active">
-                                    <th width="25%">Date Time</th>
+                                    <th width="25%">Tanggal & Waktu </th>
                                     <th width="30%">Nama</th>
-                                    <th width="20%">Action Taken</th>
-                                    <th width="25%">Comment</th>
+                                    <th width="20%">Keterangan</th>
+                                    <th width="25%">Komentar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -273,7 +273,7 @@
                         </table>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Tutup</button>
                     </div>
                 </div>
             </div>
@@ -295,12 +295,12 @@
             var nama = element.attr('data-nama')
 
             $.confirm({
-                title: '<i class="fa fa-refresh"></i> Recall RPD',
-                content: 'Apakah Anda yakin akan merecall RPD dengan kode <strong>' + nama + '</strong>',
+                title: '<i class="fa fa-refresh"></i> Tarik Kembali RPD',
+                content: 'Apakah Anda yakin akan menarik kembali RPD dengan kode <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',
-                confirmButton: 'Ya, Recall',
+                confirmButton: 'Ya',
                 animation: 'top',
                 animationSpeed: 300,
                 animationBounce: 1,

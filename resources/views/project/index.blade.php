@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Data Project')
+@section('page_title', 'Data Proyek')
 
 @section('stylesheet')
     @parent
@@ -10,11 +10,11 @@
 @section('content')
 
         <section class="content-header">
-            <p>Data Project</p>
+            <p>Data Proyek</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> Project
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> Proyek
             </span>
         </section>
 
@@ -35,28 +35,28 @@
                             {!! Form::select(
                                 'orderBy',
                                 [
-                                    'nama_project' => 'Nama Project',
+                                    'nama_project' => 'Nama Proyek',
                                     'nama_lembaga' => 'Nama Lembaga/Institusi',
                                     'tanggal_mulai' => 'Tanggal Mulai',
                                     'tanggal_selesai' => 'Tanggal Selesai',
                                     'alamat' => 'Alamat',
                                 ],
                                 null,
-                                ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
+                                ['class' => 'form-control', 'placeholder' => 'Kategori', 'required']
                             ) !!}
 
                             {!! Form::select(
                                 'order',
                                 [
-                                    'asc' => 'Ascending',
-                                    'desc' => 'Descending'
+                                    'asc' => 'Menaik',
+                                    'desc' => 'Menurun'
                                 ],
                                 null,
                                 ['class' => 'form-control', 'required']
                             ) !!}
 
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Sort',
+                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Urutkan',
                                 [
                                     'type' => 'submit', 'class' => 'btn btn-success'
                                 ]
@@ -80,7 +80,7 @@
                             {!! Form::select(
                                 'searchBy',
                                 [
-                                    'nama_project' => 'Nama Project',
+                                    'nama_project' => 'Nama Proyek',
                                     'nama_lembaga' => 'Nama Lembaga/Institusi',
                                     'tanggal_mulai' => 'Tanggal Mulai',
                                     'tanggal_selesai' => 'Tanggal Selesai',
@@ -89,13 +89,13 @@
                                 null,
                                 [
                                     'class' => 'form-control',
-                                    'placeholder' => 'Search By',
+                                    'placeholder' => 'Kategori',
                                     'required'
                                 ]
                             ) !!}
-                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Query...']) !!}
+                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Kata Kunci...']) !!}
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-search"></i> Search',
+                                '<i class="fa fa-fw fa-search"></i> Cari',
                                 ['type' => 'submit', 'class' => 'btn btn-success', 'style' => 'margin-left: 3px;']
                             ) !!}
                         </div>
@@ -117,7 +117,7 @@
                                 @endif
 
                                 {!! Form::button(
-                                    '<i class="fa fa-fw fa-times"></i> Clear Search',
+                                    '<i class="fa fa-fw fa-times"></i> Kosongkan Pencarian',
                                     [
                                         'type' => 'submit',
                                         'class' => 'btn btn-info',
@@ -146,12 +146,12 @@
                                 <table class="table" width="100%">
                                     <thead>
                                         <tr>
-                                            <th width="22%">Nama Project</th>
+                                            <th width="22%">Nama Proyek</th>
                                             <th width="18%">Nama Lembaga/Institusi</th>
                                             <th width="15%">Tanggal Mulai</th>
                                             <th width="15%">Tanggal Selesai</th>
                                             <th>Alamat</th>
-                                            <th class="col-md-1">Action</th>
+                                            <th class="col-md-1">Aksi</th>
                                         </tr>
                                     </thead>
 
@@ -175,7 +175,7 @@
                                                 {{ $project->alamat }}
                                             </td>
                                             <td>
-                                                <a href="/project/{{ $project->kode }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Edit"><i class="fa fa-fw fa-edit"></i></a>
+                                                <a href="/project/{{ $project->kode }}/edit" class="btn btn-xs btn-default" data-toggle="tooltip" data-placement="top" data-title="Ubah"><i class="fa fa-fw fa-edit"></i></a>
                                                 {!! Form::open(
                                                     [
                                                         'method' => 'DELETE',
@@ -203,14 +203,14 @@
                             </div>
                         @else
                             <div class="alert alert-warning">
-                                Data project belum tersedia. Klik tombol Tambah Project untuk menambah project.
+                                Data proyek belum tersedia. Klik tombol Tambah Proyek untuk menambah data proyek.
                             </div>
                         @endif
                     @endif
 
                     {!! $data_project->render() !!}
 
-                    <a href="/project/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah Project</a>
+                    <a href="/project/create" class="btn btn-success pull-right"><i class="fa fa-fw fa-plus"></i> Tambah Proyek</a>
                 </div>
             </div>
         </section>
@@ -230,12 +230,12 @@
             var nama = element.attr('data-nama')
 
             $.confirm({
-                title: '<i class="fa fa-trash"></i> Hapus Project',
-                content: 'Apakah Anda yakin akan menghapus project dengan nama <strong>' + nama + '</strong>',
+                title: '<i class="fa fa-trash"></i> Hapus Proyek',
+                content: 'Apakah Anda yakin akan menghapus proyek dengan nama <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',
-                confirmButton: 'Ya, Hapus',
+                confirmButton: 'Ya',
                 animation: 'top',
                 animationSpeed: 300,
                 animationBounce: 1,

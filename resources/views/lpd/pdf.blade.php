@@ -64,7 +64,7 @@
     <table class="table table-bordered" width="60%">
         <thead>
             <tr class="active">
-                <th width="50%">Personel</th>
+                <th width="50%">Personil</th>
                 <th width="50%">Proyek / Keperluan Lainnya</th>
             </tr>
         </thead>
@@ -119,7 +119,7 @@
                 <th>Tipe</th>
                 <th>Keterangan</th>
                 <th>Struk</th>
-                <th>Personel</th>
+                <th>Personil</th>
                 <th>Biaya</th>
             </tr>
         </thead>
@@ -169,14 +169,14 @@
     </table>
 
     <br>
-    <h4>Action History</h4>
+    <h4>Histori</h4>
     <table class="table table-bordered" width="100%">
         <thead>
             <tr class="active">
-                <th width="25%">Date Time</th>
+                <th width="25%">Tanggal & Waktu</th>
                 <th width="30%">Nama</th>
-                <th width="20%">Action Taken</th>
-                <th width="25%">Comment</th>
+                <th width="20%">Keterangan</th>
+                <th width="25%">Komentar</th>
             </tr>
         </thead>
         <tbody>

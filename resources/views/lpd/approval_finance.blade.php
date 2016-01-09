@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Approval LPD')
+@section('page_title', 'Persetujuan LPD')
 
 @section('content')
 
@@ -9,13 +9,13 @@
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
                 @if (Auth::user()->role == 'super_admin')
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/dashboard">Halaman Utama</a>
                 @else
-                    <a href="/homepage">Homepage</a>
+                    <a href="/homepage">Halaman Utama</a>
                 @endif
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/lpd/submitted/all">Submitted LPD</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/lpd/submitted/all">LPD yang Diajukan</a>
                 <i class="fa fa-angle-right fa-fw"></i> {{ $lpd->kode }}
-                <i class="fa fa-angle-right fa-fw"></i> Approval
+                <i class="fa fa-angle-right fa-fw"></i> Persetujuan
             </span>
         </section>
 
@@ -24,7 +24,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Approval LPD</h4>
+                            <h4>Formulir Persetujuan LPD</h4>
                         </div>
                         {!! Form::open(['method' => 'POST', 'url' => '/lpd/' . $lpd->id . '/approval']) !!}
                             <div class="box-body">
@@ -86,7 +86,7 @@
                                 </div>
                             </div>
                             <div class="box-footer">
-                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Submit', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Setujui', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                             </div>
                         {!! Form::close() !!}
                     </div>
@@ -190,7 +190,7 @@
                                         <th>Tipe</th>
                                         <th>Keterangan</th>
                                         <th>Struk</th>
-                                        <th>Personel</th>
+                                        <th>Personil</th>
                                         <th>Biaya</th>
                                     </tr>
                                 </thead>
@@ -238,14 +238,14 @@
                                 </tbody>
                             </table>
 
-                            <div class="page-header">Action History</div>
+                            <div class="page-header">Histori</div>
                             <table class="table table-bordered table-condensed" width="100%">
                                 <thead>
                                     <tr class="active">
-                                        <th width="25%">Date Time</th>
+                                        <th width="25%">Tanggal & Waktu</th>
                                         <th width="30%">Nama</th>
-                                        <th width="20%">Action Taken</th>
-                                        <th width="25%">Comment</th>
+                                        <th width="20%">Keterangan</th>
+                                        <th width="25%">Komentar</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -262,9 +262,9 @@
                                 </tbody>
                             </table>
                         </div>
-                        
+
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
+                            <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Tutup</button>
                         </div>
                     </div>
                 </div>

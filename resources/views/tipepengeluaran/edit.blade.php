@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Tipe Pengeluaran')
+@section('page_title', 'Ubah Tipe Pengeluaran')
 
 @section('content')
 
         <section class="content-header">
-            <p>Edit Tipe Pengeluaran</p>
+            <p>Ubah Tipe Pengeluaran</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/tipepengeluaran">List Tipe Pengeluaran</a>
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/tipepengeluaran">Data Tipe Pengeluaran</a>
                 <i class="fa fa-angle-right fa-fw"></i> {{ $tipepengeluaran->nama_kategori }}
-                <i class="fa fa-angle-right fa-fw"></i> Edit
+                <i class="fa fa-angle-right fa-fw"></i> Ubah
             </span>
         </section>
 
@@ -20,7 +20,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Tipe Pengeluaran</h4>
+                            <h4>Formulir Ubah Tipe Pengeluaran</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

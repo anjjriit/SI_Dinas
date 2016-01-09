@@ -21,17 +21,17 @@ class PagesController extends Controller
         $prospeks = Prospek::all();
         $projects = Project::all();
         $pelatihans = Pelatihan::all();
-        $rpds = Rpd::orderBy('kode')->paginate(10);
+        $rpds = Rpd::mine()->where('status', 'BACK TO INITIATOR')->orWhere('status', 'SUBMIT')->orderBy('kode')->paginate(10);
         $users = Pegawai::all();
-        $lpds = Lpd::orderBy('kode')->paginate(10);
+        $lpds = Lpd::mine()->where('status', 'BACK TO INITIATOR')->orWhere('status', 'SUBMIT')->orWhere('status', 'TAKE PAYMENT')->where('status', 'BACK TO INITIATOR')->orWhere('status', 'PROCESS PAYMENT')->orderBy('kode')->paginate(10);
 
         return view('dashboard', compact('prospeks', 'projects', 'pelatihans', 'rpds', 'users','lpds'));
     }
 
     public function homepage() {
-    	
-        $rpds = Rpd::mine()->backtoinitiator()->paginate(10);
-        $lpds = Lpd::mine()->processed()->paginate(10);
+
+        $rpds = Rpd::mine()->where('status', 'BACK TO INITIATOR')->orWhere('status', 'SUBMIT')->paginate(10);
+        $lpds = Lpd::mine()->where('status', 'BACK TO INITIATOR')->orWhere('status', 'SUBMIT')->orWhere('status', 'TAKE PAYMENT')->where('status', 'BACK TO INITIATOR')->orWhere('status', 'PROCESS PAYMENT')->paginate(10);
 
         return view('homepage', compact('rpds','lpds'));
 

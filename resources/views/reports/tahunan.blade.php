@@ -1,16 +1,16 @@
 @extends('layouts.master')
 
-@section('page_title', 'Akomodasi Per Bulan')
+@section('page_title', 'Akomodasi Per Tahun')
 
 @section('content')
 
         <section class="content-header">
-            <p>Akomodasi Per Bulan</p>
+            <p>Akomodasi Per Tahun</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> Report
-                <i class="fa fa-angle-right fa-fw"></i> Akomodasi Per Bulan
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> Laporan
+                <i class="fa fa-angle-right fa-fw"></i> Akomodasi Per Tahun
             </span>
         </section>
 
@@ -37,7 +37,7 @@
                             ) !!}
 
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-file-text-o"></i> View Report',
+                                '<i class="fa fa-fw fa-file-text-o"></i> Lihat Laporan',
                                 [
                                     'type' => 'submit', 'class' => 'btn btn-success'
                                 ]
@@ -54,7 +54,7 @@
                 <div class="col-md-4 col-xs-12">
                     <div class="small-box">
                         <div class="inner text-center">
-                            <div class="small-box-title">Project</div>
+                            <div class="small-box-title">Proyek</div>
                             <div class="small-box-number">{{ count($biayaProject) }}</div class="small-box-number">
                             <p>
                                 Total akomodasi: <strong>Rp {{ number_format(array_sum($biayaProject), 0, ',', '.') }}</strong>

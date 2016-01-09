@@ -1,11 +1,11 @@
 @extends('layouts.master')
 
-@section('page_title', 'Ubah Password')
+@section('page_title', 'Ubah Kata Sandi')
 
 @section('content')
 
         <section class="content-header">
-            <h1>Ubah Password</h1>
+            <h1>Ubah Kata Sandi</h1>
         </section>
 
         <section class="content">
@@ -38,7 +38,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            {!! Form::label('password', 'Password Baru') !!}
+                                            {!! Form::label('password', 'Kata Sandi Baru') !!}
                                             {!! Form::input('password', 'password', null, ['class' => 'form-control', 'autofocus']) !!}
                                         </div>
                                     </div>
@@ -47,7 +47,7 @@
                                 <div class="form-group">
                                     <div class="row">
                                         <div class="col-md-6">
-                                            {!! Form::label('password_confirmation', 'Konfirmasi Password Baru') !!}
+                                            {!! Form::label('password_confirmation', 'Konfirmasi Kata Sandi Baru') !!}
                                             {!! Form::input('password', 'password_confirmation', null, ['class' => 'form-control']) !!}
                                         </div>
                                     </div>

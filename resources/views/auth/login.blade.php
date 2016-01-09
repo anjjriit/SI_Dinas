@@ -44,10 +44,10 @@
                     {!! Form::input('text', 'nik', null, ['class' => 'form-control', 'autofocus']) !!}
                 </div>
                 <div class="form-group has-feedback">
-                    {!! Form::label('password', 'Password') !!}
+                    {!! Form::label('password', 'Kata Sandi') !!}
                     {!! Form::input('password', 'password', null, ['class' => 'form-control']) !!}
                 </div>
-                <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-fw fa-sign-in"></i> Login</button>
+                <button type="submit" class="btn btn-primary btn-block"><i class="fa fa-fw fa-sign-in"></i> Masuk</button>
             {!! Form::close() !!}
 
         </div>

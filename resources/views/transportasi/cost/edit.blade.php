@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Biaya Transportasi')
+@section('page_title', 'Ubah Biaya Transportasi')
 
 @section('stylesheet')
     @parent
@@ -10,7 +10,14 @@
 @section('content')
 
         <section class="content-header">
-            <h1>Data Transportasi</h1>
+            <p>Ubah Biaya Transportasi {{ $transportasi->nama_transportasi }}</p>
+            <span class="bcumb">
+                <i class="fa fa-fw fa-bookmark"></i>
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/tipepengeluaran">Data Transportasi</a>
+                <i class="fa fa-angle-right fa-fw"></i> Data Biaya {{ $transportasi->nama_transportasi }}</a>
+                <i class="fa fa-angle-right fa-fw"></i> Ubah
+            </span>
         </section>
 
         <section class="content">
@@ -18,7 +25,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Biaya Transportasi {{ $transportasi->nama_transportasi }}</h4>
+                            <h4>Formulir Ubah Biaya Transportasi {{ $transportasi->nama_transportasi }}</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

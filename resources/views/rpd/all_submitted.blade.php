@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'RPD Yang Di Submit')
+@section('page_title', 'RPD yang Diajukan')
 
 @section('stylesheet')
     @parent
@@ -10,16 +10,16 @@
 @section('content')
 
     <section class="content-header">
-        <p>RPD Yang Di Submit</p>
+        <p>RPD yang Diajukan</p>
         <span class="bcumb">
             <i class="fa fa-fw fa-bookmark"></i>
             @if (Auth::user()->role == 'super_admin')
-                <a href="/dashboard">Dashboard</a>
+                <a href="/dashboard">Halaman Utama</a>
             @else
-                <a href="/homepage">Homepage</a>
+                <a href="/homepage">Halaman Utama</a>
             @endif
             <i class="fa fa-angle-right fa-fw"></i> Rencana Perjalanan Dinas
-            <i class="fa fa-angle-right fa-fw"></i> Submitted
+            <i class="fa fa-angle-right fa-fw"></i> Ajukan
         </span>
     </section>
 
@@ -45,21 +45,21 @@
                                     'tanggal_selesai' => 'Tanggal Selesai'
                                 ],
                                 null,
-                                ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
+                                ['class' => 'form-control', 'placeholder' => 'Kategori', 'required']
                             ) !!}
 
                             {!! Form::select(
                                 'order',
                                 [
-                                    'asc' => 'Ascending',
-                                    'desc' => 'Descending'
+                                    'asc' => 'Menaik',
+                                    'desc' => 'Menurun'
                                 ],
                                 null,
                                 ['class' => 'form-control', 'required']
                             ) !!}
 
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Sort',
+                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Urutkan',
                                 [
                                     'type' => 'submit', 'class' => 'btn btn-success'
                                 ]
@@ -90,13 +90,13 @@
                                 null,
                                 [
                                     'class' => 'form-control',
-                                    'placeholder' => 'Search By',
+                                    'placeholder' => 'Kategori',
                                     'required'
                                 ]
                             ) !!}
-                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Query...']) !!}
+                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Kata Kunci...']) !!}
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-search"></i> Search',
+                                '<i class="fa fa-fw fa-search"></i> Cari',
                                 ['type' => 'submit', 'class' => 'btn btn-success', 'style' => 'margin-left: 3px;']
                             ) !!}
                         </div>
@@ -118,7 +118,7 @@
                                 @endif
 
                                 {!! Form::button(
-                                    '<i class="fa fa-fw fa-times"></i> Clear Search',
+                                    '<i class="fa fa-fw fa-times"></i> Kosongkan Pencarian',
                                     [
                                         'type' => 'submit',
                                         'class' => 'btn btn-info',
@@ -205,7 +205,7 @@
                                                         ]
                                                     ) !!}
 
-                                                        {!! Form::button('<i class="fa fa-fw fa-refresh"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Recall']
+                                                        {!! Form::button('<i class="fa fa-fw fa-refresh"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Tarik Kembali']
                                                         ) !!}
                                                     {!! Form::close() !!}
                                                 @endif
@@ -223,7 +223,7 @@
                         </div>
                     @else
                         <div class="alert alert-warning">
-                            Data RPD yang telah disubmit belum tersedia.
+                            Data RPD yang telah diajukan belum tersedia.
                         </div>
                     @endif
                 @endif
@@ -319,7 +319,7 @@
                             <thead>
                                 <tr class="active">
                                     <th width="25%">Nama</th>
-                                    <th width="30%">Judul Project/Prospek/Pelatihan</th>
+                                    <th width="30%">Judul Proyek/Prospek/Pelatihan</th>
                                     <th width="20%">Kegiatan</th>
                                     <th width="25%">Deskripsi</th>
                                 </tr>
@@ -363,14 +363,14 @@
                         </table>
 
                        <!--Bagian Action History-->
-                        <div class="page-header"><strong>Action History</strong></div>
+                        <div class="page-header"><strong>Histori</strong></div>
                         <table class="table table-bordered table-condensed" width="100%">
                             <thead>
                                 <tr class="active">
-                                    <th width="25%">Date Time</th>
+                                    <th width="25%">Tanggal & Waktu</th>
                                     <th width="30%">Nama</th>
-                                    <th width="20%">Action Taken</th>
-                                    <th width="25%">Comment</th>
+                                    <th width="20%">Keterangan</th>
+                                    <th width="25%">Komentar</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -390,14 +390,14 @@
                         @if (auth()->user()->role == 'administration')
                             <div class="row">
                                 <div class="col-md-12">
-                                    <a href="/rpd/{{ $rpd->id }}/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-check-square-o"></i> Edit</a>
-                                    <a href="/rpd/{{ $rpd->id }}/approval" class="btn btn-sm btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                                    <a href="/rpd/{{ $rpd->id }}/edit" class="btn btn-sm btn-default"><i class="fa fa-fw fa-check-square-o"></i> Ubah</a>
+                                    <a href="/rpd/{{ $rpd->id }}/approval" class="btn btn-sm btn-success"><i class="fa fa-fw fa-check-square-o"></i> Setujui</a>
                                 </div>
                             </div>
                         @endif
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
+                        <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Tutup</button>
                     </div>
                 </div>
             </div>
@@ -419,12 +419,12 @@
             var nama = element.attr('data-nama')
 
             $.confirm({
-                title: '<i class="fa fa-refresh"></i> Recall RPD',
-                content: 'Apakah Anda yakin akan merecall RPD dengan kode <strong>' + nama + '</strong>',
+                title: '<i class="fa fa-refresh"></i> Tarik Kembali RPD',
+                content: 'Apakah Anda yakin akan menarik kembali RPD dengan kode <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',
-                confirmButton: 'Ya, Recall',
+                confirmButton: 'Ya',
                 animation: 'top',
                 animationSpeed: 300,
                 animationBounce: 1,

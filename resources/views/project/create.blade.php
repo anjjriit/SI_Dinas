@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Tambah Project')
+@section('page_title', 'Tambah Proyek')
 
 @section('stylesheet')
     @parent
@@ -10,12 +10,12 @@
 @section('content')
 
         <section class="content-header">
-            <p>Tambah Project</p>
+            <p>Tambah Proyek</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/project">List Project</a>
-                <i class="fa fa-angle-right fa-fw"></i> Add
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/project">Data Proyek</a>
+                <i class="fa fa-angle-right fa-fw"></i> Tambah
             </span>
         </section>
 
@@ -24,7 +24,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Tambah Project</h4>
+                            <h4>Formulir Tambah Proyek</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

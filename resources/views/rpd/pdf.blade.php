@@ -104,7 +104,7 @@
         <thead>
             <tr>
                 <th width="25%">Nama</th>
-                <th width="30%">Judul Project/Prospek/Pelatihan</th>
+                <th width="30%">Judul Proyek/Prospek/Pelatihan</th>
                 <th width="20%">Kegiatan</th>
                 <th width="25%">Deskripsi</th>
             </tr>
@@ -145,13 +145,13 @@
 
     <br>
     <!--Bagian Action History-->
-    <h4>Action History</h4>
+    <h4>History</h4>
     <table class="table table-bordered" width="100%">
         <thead>
             <tr>
-                <th width="25%">Date Time</th>
+                <th width="25%">Tanggal & Waktu</th>
                 <th width="30%">Nama</th>
-                <th width="20%">Action Taken</th>
+                <th width="20%">Keterangan</th>
                 <th width="25%">Komentar</th>
             </tr>
         </thead>

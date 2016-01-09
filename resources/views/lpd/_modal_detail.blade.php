@@ -10,7 +10,7 @@
                     @if (auth()->user()->role == 'administration' && ($lpd->status == 'PAYMENT RECEIVED' || $lpd->status == 'PAID'))
                         <div class="row">
                             <div class="col-md-3 pull-right">
-                                <a href="/lpd/{{$lpd->id}}/pdf" class="btn btn-xs btn-primary pull-right" style="margin-top: -10px;" target="_blank"><i class="fa fa-fw fa-print"></i> Export PDF</a>
+                                <a href="/lpd/{{$lpd->id}}/pdf" class="btn btn-xs btn-primary pull-right" style="margin-top: -10px;" target="_blank"><i class="fa fa-fw fa-print"></i> Ekspor PDF</a>
                             </div>
                         </div>
                         <div class="clearfix"></div>
@@ -55,7 +55,7 @@
                             <table class="table table-bordered table-condensed">
                                 <thead>
                                     <tr class="active">
-                                        <th class="col-md-6">Personel</th>
+                                        <th class="col-md-6">Personil</th>
                                         <th class="col-md-6">Proyek / Keperluan Lainnya</th>
                                     </tr>
                                 </thead>
@@ -165,14 +165,14 @@
                         </tbody>
                     </table>
 
-                    <div class="page-header">Action History</div>
+                    <div class="page-header">Histori</div>
                     <table class="table table-bordered table-condensed" width="100%">
                         <thead>
                             <tr class="active">
-                                <th width="25%">Date Time</th>
+                                <th width="25%">Tanggal & Waktu</th>
                                 <th width="30%">Nama</th>
-                                <th width="20%">Action Taken</th>
-                                <th width="25%">Comment</th>
+                                <th width="20%">Keterangan</th>
+                                <th width="25%">Komentar</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -193,7 +193,7 @@
                     @if ($lpd->status == 'SUBMIT')
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="/lpd/{{ $lpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                                <a href="/lpd/{{ $lpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Setujui</a>
                             </div>
                         </div>
                     @endif
@@ -201,14 +201,14 @@
                     @if ($lpd->status == 'PROCESS PAYMENT' || $lpd->status == 'TAKE PAYMENT')
                         <div class="row">
                             <div class="col-md-12">
-                                <a href="/lpd/{{ $lpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Approval</a>
+                                <a href="/lpd/{{ $lpd->id }}/approval" class="btn btn-success"><i class="fa fa-fw fa-check-square-o"></i> Setujui</a>
                             </div>
                         </div>
                     @endif
                 @endif
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Close</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa fa-fw fa-times"></i> Tutup</button>
             </div>
         </div>
     </div>

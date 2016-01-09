@@ -1,16 +1,16 @@
 @extends('layouts.master')
 
-@section('page_title', 'Tambah Jenis Biaya Pengeluaran Standard')
+@section('page_title', 'Tambah Jenis Biaya Pengeluaran Standar')
 
 @section('content')
 
         <section class="content-header">
-            <p>Tambah Jenis Biaya Pengeluaran Standard</p>
+            <p>Tambah Jenis Biaya Pengeluaran Standar</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/jenis-biaya">List Jenis Biaya</a>
-                <i class="fa fa-angle-right fa-fw"></i> Add
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/jenis-biaya">Data Jenis Biaya</a>
+                <i class="fa fa-angle-right fa-fw"></i> Tambah
             </span>
         </section>
 
@@ -19,7 +19,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Tambah Jenis Biaya Pengeluaran Standard</h4>
+                            <h4>Formulir Tambah Jenis Biaya Pengeluaran Standar</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

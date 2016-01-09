@@ -28,7 +28,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
-                                {!! Form::label('password', 'Password') !!}
+                                {!! Form::label('password', 'Kata Sandi') !!}
                                 {!! Form::input('password', 'password', null, ['class' => 'form-control']) !!}
                             </div>
                         </div>
@@ -38,14 +38,14 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-3">
-                                {!! Form::label('role', 'Role') !!}
+                                {!! Form::label('role', 'Peran') !!}
                                 {!! Form::select(
                                     'role',
                                     [
-                                        'employee' => 'Employee',
+                                        'employee' => 'Pegawai',
                                         'finance' => 'Finance',
-                                        'administration' => 'Administration',
-                                        'super_admin' => 'Super Admin'
+                                        'administration' => 'Administrasi',
+                                        'super_admin' => 'Administrator'
                                     ],
                                     null,
                                     ['class' => 'form-control']
@@ -62,12 +62,12 @@
                                 <div class="row">
                                     <div class="col-md-3">
                                         <label style="font-weight: normal;">
-                                            {!! Form::radio('active', 1) !!} Active
+                                            {!! Form::radio('active', 1) !!} Aktif
                                         </label>
                                     </div>
                                     <div class="col-md-3">
                                         <label style="font-weight: normal;">
-                                            {!! Form::radio('active', 0, null, ['class' => 'text-right']) !!} Non-active
+                                            {!! Form::radio('active', 0, null, ['class' => 'text-right']) !!} Non-aktif
                                         </label>
                                     </div>
                                 </div>
@@ -78,9 +78,9 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
-                                {!! Form::label('password', 'Password') !!}
+                                {!! Form::label('password', 'Kata Sandi') !!}
                                 {!! Form::input('password', 'password', null, ['class' => 'form-control']) !!}
-                                <small><span class="text-muted"><i class="fa fa-fw fa-info-circle"></i> Hanya isi kolom ini jika ingin mengubah password.</span></small>
+                                <small><span class="text-muted"><i class="fa fa-fw fa-info-circle"></i> Hanya isi kolom ini jika ingin mengubah kata sandi.</span></small>
                             </div>
                         </div>
                     </div>

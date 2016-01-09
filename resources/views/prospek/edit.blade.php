@@ -1,17 +1,17 @@
 @extends('layouts.master')
 
-@section('page_title', 'Edit Prospek')
+@section('page_title', 'Ubah Prospek')
 
 @section('content')
 
         <section class="content-header">
-            <p>Edit Prospek</p>
+            <p>Ubah Prospek</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/prospek">List Prospek</a>
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/prospek">Data Prospek</a>
                 <i class="fa fa-angle-right fa-fw"></i> {{ $prospek->nama_prospek }}
-                <i class="fa fa-angle-right fa-fw"></i> Edit
+                <i class="fa fa-angle-right fa-fw"></i> Ubah
             </span>
         </section>
 
@@ -20,7 +20,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Edit Prospek</h4>
+                            <h4>Formulir Ubah Prospek</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">

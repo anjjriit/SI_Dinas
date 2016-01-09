@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Approval LPD')
+@section('page_title', 'Persetujuan LPD')
 
 @section('content')
 
@@ -9,13 +9,13 @@
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
                 @if (Auth::user()->role == 'super_admin')
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/dashboard">Halaman Utama</a>
                 @else
-                    <a href="/homepage">Homepage</a>
+                    <a href="/homepage">Halaman Utama</a>
                 @endif
-                <i class="fa fa-angle-right fa-fw"></i> <a href="/lpd/processed">Processed LPD</a>
+                <i class="fa fa-angle-right fa-fw"></i> <a href="/lpd/processed"> Pemprosesan LPD</a>
                 <i class="fa fa-angle-right fa-fw"></i> {{ $lpd->kode }}
-                <i class="fa fa-angle-right fa-fw"></i> Approval
+                <i class="fa fa-angle-right fa-fw"></i> Persetujuan
             </span>
         </section>
 
@@ -24,7 +24,7 @@
                 <div class="col-md-12">
                     <div class="box box-widget">
                         <div class="box-header">
-                            <h4>Form Approval LPD</h4>
+                            <h4>Formulir Persetujuan LPD</h4>
                         </div>
 
                         <hr style="margin-top: 10px;">
@@ -41,7 +41,7 @@
                                 @endif
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#detailLPD">
+                                        <button type="button" class="btn btn-sm btn-default" data-toggle="modal" data-target="#detailLPD-{{ $lpd->id }}">
                                             <i class="fa fa-fw fa-share"></i> Detail LPD
                                         </button>
                                     </div>
@@ -59,9 +59,9 @@
                             </div>
                             <div class="box-footer">
                                 @if ($lpd->reimburse)
-                                    {!! Form::button('<i class="fa fa-fw fa-check"></i> Paid', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                                    {!! Form::button('<i class="fa fa-fw fa-check"></i> Sudah Dibayarkan', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                                 @else
-                                    {!! Form::button('<i class="fa fa-fw fa-check"></i> Take Payment', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
+                                    {!! Form::button('<i class="fa fa-fw fa-check"></i> Ambil Pembayaran', ['type' => 'submit', 'class' => 'btn btn-success']) !!}
                                 @endif
                             </div>
                         {!! Form::close() !!}

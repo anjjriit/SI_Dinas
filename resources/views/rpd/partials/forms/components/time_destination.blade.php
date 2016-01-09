@@ -67,7 +67,7 @@
 <ul class="list-inline text-right">
     <li>
         {!! Form::button(
-            '<i class="fa fa-fw fa-angle-left"></i> Prev',
+            '<i class="fa fa-fw fa-angle-left"></i> Sebelumnya',
             [
                 'type' => 'button',
                 'class' => 'btn btn-default prev-step'
@@ -76,7 +76,7 @@
     </li>
     <li>
         {!! Form::button(
-            'Next <i class="fa fa-fw fa-angle-right"></i>',
+            'Selanjutnya <i class="fa fa-fw fa-angle-right"></i>',
             [
                 'type' => 'button',
                 'class' => 'btn btn-success next-step'

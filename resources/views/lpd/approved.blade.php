@@ -1,20 +1,20 @@
 @extends('layouts.master')
 
-@section('page_title', 'LPD Yang Telah Di Approve')
+@section('page_title', 'LPD yang Disetujui')
 
 @section('content')
 
         <section class="content-header">
-        <p>LPD Yang Telah Di Approve</p>
+        <p>LPD yang Disetujui</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
                 @if (Auth::user()->role == 'super_admin')
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/dashboard">Halaman Utama</a>
                 @else
-                    <a href="/homepage">Homepage</a>
+                    <a href="/homepage">Halaman Utama</a>
                 @endif
                 <i class="fa fa-angle-right fa-fw"></i> Laporan Perjalanan Dinas
-                <i class="fa fa-angle-right fa-fw"></i> Approved
+                <i class="fa fa-angle-right fa-fw"></i> Setujui
             </span>
         </section>
 
@@ -39,21 +39,21 @@
                                     'updated_at' => 'Terakhir Diperbarui'
                                 ],
                                 null,
-                                ['class' => 'form-control', 'placeholder' => 'Order by', 'required']
+                                ['class' => 'form-control', 'placeholder' => 'Kategori', 'required']
                             ) !!}
 
                             {!! Form::select(
                                 'order',
                                 [
-                                    'asc' => 'Ascending',
-                                    'desc' => 'Descending'
+                                    'asc' => 'Menaik',
+                                    'desc' => 'Menurun'
                                 ],
                                 null,
                                 ['class' => 'form-control', 'required']
                             ) !!}
 
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Sort',
+                                '<i class="fa fa-fw fa-sort-amount-asc"></i> Urutkan',
                                 [
                                     'type' => 'submit', 'class' => 'btn btn-success'
                                 ]
@@ -83,13 +83,13 @@
                                 null,
                                 [
                                     'class' => 'form-control',
-                                    'placeholder' => 'Search By',
+                                    'placeholder' => 'Kategori',
                                     'required'
                                 ]
                             ) !!}
-                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Query...']) !!}
+                            {!! Form::text('query', null, ['class' => 'form-control', 'placeholder' => 'Kata Kunci...']) !!}
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-search"></i> Search',
+                                '<i class="fa fa-fw fa-search"></i> Cari',
                                 ['type' => 'submit', 'class' => 'btn btn-success', 'style' => 'margin-left: 3px;']
                             ) !!}
                         </div>
@@ -111,7 +111,7 @@
                                 @endif
 
                                 {!! Form::button(
-                                    '<i class="fa fa-fw fa-times"></i> Clear Search',
+                                    '<i class="fa fa-fw fa-times"></i> Kosongkan Pencarian',
                                     [
                                         'type' => 'submit',
                                         'class' => 'btn btn-info',
@@ -150,7 +150,7 @@
                                             <th>Pengaju</th>
                                             <th>Status</th>
                                             <th>Terakhir Diperbarui</th>
-                                            <th>Action</th>
+                                            <th>Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -186,7 +186,7 @@
                             </div>
                         @else
                             <div class="alert alert-warning">
-                                List LPD yang telah diapproved belum tersedia.
+                                Data LPD yang telah disetujui belum tersedia.
                             </div>
                         @endif
                     @endif

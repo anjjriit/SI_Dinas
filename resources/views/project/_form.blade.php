@@ -2,7 +2,7 @@
                     <div class="form-group">
                         <div class="row">
                             <div class="col-md-6">
-                                {!! Form::label('nama_project', 'Nama Project') !!}
+                                {!! Form::label('nama_project', 'Nama Proyek') !!}
                                 {!! Form::text('nama_project', null, ['class' => 'form-control', 'autofocus']) !!}
                             </div>
                         </div>

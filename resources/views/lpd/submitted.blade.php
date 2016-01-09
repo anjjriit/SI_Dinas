@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'LPD Submitted')
+@section('page_title', 'LPD yang Diajukan')
 
 @section('stylesheet')
     @parent
@@ -10,16 +10,16 @@
 @section('content')
 
         <section class="content-header">
-            <p>LPD Yang Di Submit</p>
+            <p>LPD yang Diajukan</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
                 @if (Auth::user()->role == 'super_admin')
-                    <a href="/dashboard">Dashboard</a>
+                    <a href="/dashboard">Halaman Utama</a>
                 @else
-                    <a href="/homepage">Homepage</a>
+                    <a href="/homepage">Halaman Utama</a>
                 @endif
                 <i class="fa fa-angle-right fa-fw"></i> Laporan Perjalanan Dinas
-                <i class="fa fa-angle-right fa-fw"></i> Submitted
+                <i class="fa fa-angle-right fa-fw"></i> Ajukan
             </span>
         </section>
 
@@ -45,10 +45,10 @@
                                     <thead>
                                         <tr>
                                             <th>No. RPD</th>
-                                            <th>No. Laporan</th>
+                                            <th>No. LPD</th>
                                             <th>Tanggal Laporan</th>
                                             <th>Total Pengeluaran</th>
-                                            <th class="col-md-1">Action</th>
+                                            <th class="col-md-1">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -99,7 +99,7 @@
                                                             ]
                                                         ) !!}
 
-                                                            {!! Form::button('<i class="fa fa-fw fa-refresh"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Recall']
+                                                            {!! Form::button('<i class="fa fa-fw fa-refresh"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Tarik Kembali']
                                                             ) !!}
                                                         {!! Form::close() !!}
                                                     @endif
@@ -112,7 +112,7 @@
                         </div>
                     @else
                         <div class="alert alert-warning">
-                            Data LPD yang telah disubmit belum tersedia.
+                            Data LPD yang telah diajukan belum tersedia.
                         </div>
                     @endif
 
@@ -140,12 +140,12 @@
             var nama = element.attr('data-nama')
 
             $.confirm({
-                title: '<i class="fa fa-refresh"></i> Recall LPD',
-                content: 'Apakah Anda yakin akan merecall LPD dengan kode <strong>' + nama + '</strong>',
+                title: '<i class="fa fa-refresh"></i> Tarik Kembali LPD',
+                content: 'Apakah Anda yakin akan menarik kembali LPD dengan kode <strong>' + nama + '</strong>',
                 confirmButtonClass: 'btn-danger',
                 cancelButtonClass: 'btn-default',
                 cancelButton: 'Tidak',
-                confirmButton: 'Ya, Recall',
+                confirmButton: 'Ya',
                 animation: 'top',
                 animationSpeed: 300,
                 animationBounce: 1,

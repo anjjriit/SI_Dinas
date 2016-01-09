@@ -1,22 +1,22 @@
 @extends('layouts.master')
 
-@section('page_title', 'Log LPD')
+@section('page_title', 'Catatan LPD')
 
 @section('content')
 
 
 
         <section class="content-header">
-        <p>Log LPD</p>
+        <p>Catatan LPD</p>
         <span class="bcumb">
             <i class="fa fa-fw fa-bookmark"></i>
             @if (Auth::user()->role == 'super_admin')
-                <a href="/dashboard">Dashboard</a>
+                <a href="/dashboard">Halaman Utama</a>
             @else
-                <a href="/homepage">Homepage</a>
+                <a href="/homepage">Halaman Utama</a>
             @endif
             <i class="fa fa-angle-right fa-fw"></i> Laporan Perjalanan Dinas
-            <i class="fa fa-angle-right fa-fw"></i> Log
+            <i class="fa fa-angle-right fa-fw"></i> Catatan
         </span>
     </section>
 
@@ -43,7 +43,7 @@
                                             <th class="col-md-1">No. LPD</th>
                                             <th>Terakhir Diperbarui</th>
                                             <th>Status</th>
-                                            <th class="col-md-1">Action</th>
+                                            <th class="col-md-1">Aksi</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -63,7 +63,7 @@
                                                         <i class="fa fa-fw fa-share"></i>
                                                     </button>
                                                     @if ($lpdLog->status == 'BACK TO INITIATOR')
-                                                        <a href="/lpd/{{ $lpdLog->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Edit</a>
+                                                        <a href="/lpd/{{ $lpdLog->id }}/edit" class="btn btn-default"><i class="fa fa-fw fa-edit"></i> Ubah</a>
                                                     @endif
                                                 </td>
                                             </tr>
@@ -74,7 +74,7 @@
                         </div>
                     @else
                         <div class="alert alert-warning">
-                            Logs LPD belum tersedia.
+                            Catatan LPD belum tersedia.
                         </div>
                     @endif
 

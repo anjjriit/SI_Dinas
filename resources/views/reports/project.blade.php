@@ -1,6 +1,6 @@
 @extends('layouts.master')
 
-@section('page_title', 'Akomodasi Per Project')
+@section('page_title', 'Akomodasi Per Proyek')
 
 @section('stylesheet')
     @parent
@@ -10,12 +10,12 @@
 @section('content')
 
         <section class="content-header">
-            <p>Akomodasi Per Project</p>
+            <p>Akomodasi Per Proyek</p>
             <span class="bcumb">
                 <i class="fa fa-fw fa-bookmark"></i>
-                <a href="/dashboard">Dashboard</a>
-                <i class="fa fa-angle-right fa-fw"></i> Report
-                <i class="fa fa-angle-right fa-fw"></i> Akomodasi Per Project
+                <a href="/dashboard">Halaman Utama</a>
+                <i class="fa fa-angle-right fa-fw"></i> Laporan
+                <i class="fa fa-angle-right fa-fw"></i> Akomodasi Per Proyek
             </span>
         </section>
 
@@ -62,7 +62,7 @@
                             ) !!}
 
                             {!! Form::button(
-                                '<i class="fa fa-fw fa-file-text-o"></i> View Report',
+                                '<i class="fa fa-fw fa-file-text-o"></i> Lihat Laporan',
                                 [
                                     'type' => 'submit', 'class' => 'btn btn-success'
                                 ]
@@ -89,7 +89,7 @@
                                 <table class="table" width="100%">
                                     <thead>
                                         <tr>
-                                            <th>Nama Project</th>
+                                            <th>Nama Proyek</th>
                                             <th>Nama Lembaga/Institusi</th>
                                             <th>Akomodasi</th>
                                         </tr>

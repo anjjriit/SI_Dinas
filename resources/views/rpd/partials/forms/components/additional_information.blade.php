@@ -25,7 +25,7 @@
 <ul class="list-inline text-right">
     <li>
         {!! Form::button(
-            '<i class="fa fa-fw fa-angle-left"></i> Prev',
+            '<i class="fa fa-fw fa-angle-left"></i> Sebelumnya',
             [
                 'type' => 'button',
                 'class' => 'btn btn-default prev-step'
@@ -36,7 +36,7 @@
     @if (!isset($rpd) || (isset($rpd) && $rpd->status == 'DRAFT'))
         <li>
             {!! Form::button(
-                '<i class="fa fa-fw fa-floppy-o"></i> Save as Draft',
+                '<i class="fa fa-fw fa-floppy-o"></i> Simpan Sebagai Draf',
                 [
                     'type' => 'submit',
                     'class' => 'btn btn-default',
@@ -50,7 +50,7 @@
     @if (isset($rpd) && $rpd->status == 'SUBMIT' && auth()->user()->role == 'administration')
         <li>
             {!! Form::button(
-                '<i class="fa fa-fw fa-check"></i> Update',
+                '<i class="fa fa-fw fa-check"></i> Perbarui',
                 [
                     'type' => 'submit',
                     'class' => 'btn btn-success',
@@ -62,7 +62,7 @@
     @else
         <li>
             {!! Form::button(
-                '<i class="fa fa-fw fa-check"></i> Submit',
+                '<i class="fa fa-fw fa-check"></i> Ajukan',
                 [
                     'type' => 'submit',
                     'class' => 'btn btn-success',

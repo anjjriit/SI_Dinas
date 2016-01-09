@@ -19,7 +19,7 @@
             {!! Form::select(
                 'list_tujuan_kegiatan',
                 [
-                    'project' => 'Project',
+                    'project' => 'Proyek',
                     'prospek' => 'Prospek',
                     'pelatihan' => 'Pelatihan'
                 ],

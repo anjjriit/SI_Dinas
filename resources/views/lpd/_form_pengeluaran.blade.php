@@ -28,7 +28,7 @@
         <div class="form-group">
             <div class="row">
                 <div class="col-md-12">
-                    {!! Form::label('personel', 'Personel') !!}
+                    {!! Form::label('personel', 'Personil') !!}
                     <div class="row" style="margin-top: 5px;">
                         <div class="col-md-12">
                             <div class="row">
