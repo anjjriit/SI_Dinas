@@ -151,7 +151,7 @@
                                     'url' => '/lpd/' . $lpd->id
                                 ]
                             ) !!}
-                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Submit', ['type' => 'submit', 'class' => 'btn btn-success', 'value' => 'submit', 'name' => 'action']) !!}
+                                {!! Form::button('<i class="fa fa-fw fa-check"></i> Ajukan', ['type' => 'submit', 'class' => 'btn btn-success', 'value' => 'submit', 'name' => 'action']) !!}
                             {!! Form::close() !!}
                         </div>
                     </div>
