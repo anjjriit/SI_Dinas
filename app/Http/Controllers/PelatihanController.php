@@ -5,9 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 
 use App\Pelatihan;
-use App\Http\Requests;
-use App\Http\Requests\CreatePelatihanRequest;
-use App\Http\Requests\UpdatePelatihanRequest;
 use App\Http\Controllers\Controller;
 
 class PelatihanController extends Controller
@@ -45,11 +42,18 @@ class PelatihanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\CreatePelatihanRequest  $request
+     * @param  App\Http\Requests\Request  $request
      * @return Response
      */
-    public function store(CreatePelatihanRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_pelatihan' => 'required',
+            'nama_lembaga' => 'required',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after:' . Request::input('tanggal_mulai'),
+            'alamat' => 'required'
+        ]);
         $input = $request->all();
 
         Pelatihan::create($input);
@@ -60,11 +64,18 @@ class PelatihanController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\CreateProspekRequest  $request
+     * @param  App\Http\Requests\Request  $request
      * @return Response
      */
-    public function ajaxStore(CreatePelatihanRequest $request)
+    public function ajaxStore(Request $request)
     {
+        $this->validate($request, [
+            'nama_pelatihan' => 'required',
+            'nama_lembaga' => 'required',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after:' . Request::input('tanggal_mulai'),
+            'alamat' => 'required'
+        ]);
         $input = $request->all();
 
         Pelatihan::create($input);
@@ -99,12 +110,18 @@ class PelatihanController extends Controller
      * Update the specified resource in storage.
      *
      * @param  Request $request
-     * @param  UpdatePelatihanRequest  $request
      * @param  App\Pelatihan  $pelatihan
      * @return Response
      */
-    public function update(UpdatePelatihanRequest $request, Pelatihan $pelatihan)
+    public function update(Request $request, Pelatihan $pelatihan)
     {
+        $this->validate($request, [
+            'nama_pelatihan' => 'required',
+            'nama_lembaga' => 'required',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after:' . Request::input('tanggal_mulai'),
+            'alamat' => 'required'
+        ]);
         $input = $request->all();
 
         $pelatihan->fill($input)->save();

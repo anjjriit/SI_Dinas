@@ -18,7 +18,6 @@ use App\Penginapan;
 use App\Setting;
 use App\JenisBiaya;
 use App\Http\Requests;
-use App\Http\Requests\CreateRpdRequest;
 use App\Http\Controllers\Controller;
 use App\Http\Controllers\Auth\AuthController;
 

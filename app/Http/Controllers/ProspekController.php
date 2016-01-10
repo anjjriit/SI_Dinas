@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Prospek;
 use App\Http\Requests;
-use App\Http\Requests\CreateProspekRequest;
-use App\Http\Requests\UpdateProspekRequest;
 use App\Http\Controllers\Controller;
 
 class ProspekController extends Controller
@@ -45,11 +43,16 @@ class ProspekController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\CreateProspekRequest  $request
+     * @param  App\Http\Requests\Request  $request
      * @return Response
      */
-    public function store(CreateProspekRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_prospek' => 'required',
+            'nama_lembaga' => 'required',
+            'alamat' => 'required'
+        ]);
         $input = $request->all();
 
         Prospek::create($input);
@@ -60,11 +63,16 @@ class ProspekController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\CreateProspekRequest  $request
+     * @param  App\Http\Requests\Request  $request
      * @return Response
      */
-    public function ajaxStore(CreateProspekRequest $request)
+    public function ajaxStore(Request $request)
     {
+        $this->validate($request, [
+            'nama_prospek' => 'required',
+            'nama_lembaga' => 'required',
+            'alamat' => 'required'
+        ]);
         $input = $request->all();
 
         Prospek::create($input);
@@ -98,12 +106,16 @@ class ProspekController extends Controller
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  App\Http\Requests\UpdateProspekRequest
      * @param  App\Prospek $prospek
      * @return Response
      */
-    public function update(UpdateProspekRequest $request, Prospek $prospek)
+    public function update(Request $request, Prospek $prospek)
     {
+        $this->validate($request, [
+            'nama_prospek' => 'required',
+            'nama_lembaga' => 'required',
+            'alamat' => 'required'
+        ]);
         $input = $request->all();
 
         $prospek->fill($input)->save();
