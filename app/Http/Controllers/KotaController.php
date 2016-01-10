@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Kota;
 use App\Http\Requests;
-use App\Http\Requests\CreateKotaRequest;
-use App\Http\Requests\UpdateKotaRequest;
 use App\Http\Controllers\Controller;
 
 class KotaController extends Controller

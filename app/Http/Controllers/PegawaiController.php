@@ -7,8 +7,6 @@ use Illuminate\Http\Request;
 use Auth;
 use App\Pegawai;
 use App\Http\Requests;
-use App\Http\Requests\CreatePegawaiRequest;
-use App\Http\Requests\UpdatePegawaiRequest;
 use App\Http\Controllers\Controller;
 
 class PegawaiController extends Controller
@@ -48,11 +46,18 @@ class PegawaiController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\CreatePegawaiRequest  $request
+     * @param  App\Http\Requests\Request  $request
      * @return Response
      */
-    public function store(CreatePegawaiRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'nik' => 'required|unique:pegawai,nik,' . $pegawai->nik . ',nik',
+            'nama_lengkap' => 'required',
+            'email' => 'required|unique:pegawai,email,' . $pegawai->nik . ',nik',
+            'active'       => 'required|in:0,1',
+            'role' => 'required|in:employee,finance,administration,super_admin',
+        ]);
         $input = $request->all();
         $input['password'] = bcrypt($input['password']);
 
@@ -94,8 +99,15 @@ class PegawaiController extends Controller
      * @param  App\Pegawai $pegawai
      * @return Response
      */
-    public function update(UpdatePegawaiRequest $request, Pegawai $pegawai)
+    public function update(Request $request, Pegawai $pegawai)
     {
+        $this->validate($request, [
+            'nik' => 'required|unique:pegawai,nik,' . $pegawai->nik . ',nik',
+            'nama_lengkap' => 'required',
+            'email' => 'required|unique:pegawai,email,' . $pegawai->nik . ',nik',
+            'active'       => 'required|in:0,1',
+            'role' => 'required|in:employee,finance,administration,super_admin',
+        ]);
         if($request->has('password')) {
             $input = $request->all();
             $input['password'] = bcrypt($input['password']);

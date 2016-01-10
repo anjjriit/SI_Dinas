@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use App\JenisBiaya;
 use App\Http\Requests;
-use App\Http\Requests\CreateJenisBiayaRequest;
-use App\Http\Requests\UpdateJenisBiayaRequest;
 use App\Http\Controllers\Controller;
 
 class JenisBiayaController extends Controller
@@ -49,11 +47,15 @@ class JenisBiayaController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\CreateJenisBiaya $request
+     * @param  App\Http\Requests\Request $request
      * @return Response
      */
-    public function store(CreateJenisBiayaRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_jenis' => 'required',
+            'biaya' => 'required'
+        ]);
         $input = $request->all();
 
         JenisBiaya::create($input);
@@ -86,12 +88,16 @@ class JenisBiayaController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  App\Http\Requests\UpdateJenisBiaya
+     * @param  App\Http\Requests\Request
      * @param  App\JenisBiaya $jenisBiaya
      * @return Response
      */
-    public function update(UpdateJenisBiayaRequest $request, JenisBiaya $jenisBiaya)
+    public function update(Request $request, JenisBiaya $jenisBiaya)
     {
+        $this->validate($request, [
+            'nama_jenis' => 'required',
+            'biaya' => 'required'
+        ]);
         $input = $request->all();
 
         $jenisBiaya->fill($input)->save();

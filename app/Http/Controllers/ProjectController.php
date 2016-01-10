@@ -6,8 +6,6 @@ use Illuminate\Http\Request;
 
 use App\Project;
 use App\Http\Requests;
-use App\Http\Requests\CreateProjectRequest;
-use App\Http\Requests\UpdateProjectRequest;
 use App\Http\Controllers\Controller;
 
 class ProjectController extends Controller
@@ -45,11 +43,18 @@ class ProjectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  App\Http\Requests\CreateProjectRequest  $request
+     * @param  App\Http\Requests\Request  $request
      * @return Response
      */
-    public function store(CreateProjectRequest $request)
+    public function store(Request $request)
     {
+        $this->validate($request, [
+            'nama_project' => 'required',
+            'nama_lembaga' => 'required',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after:' . $request->input('tanggal_mulai'),
+            'alamat' => 'required'
+        ]);
         $input = $request->all();
 
         Project::create($input);
@@ -83,12 +88,19 @@ class ProjectController extends Controller
      * Update the specified resource in storage.
      *
      * @param  Request  $request
-     * @param  App\Http\Request\UpdateProjectRequest
+     * @param  App\Http\Request\Request
      * @param  App\Project $project
      * @return Response
      */
-    public function update(UpdateProjectRequest $request, Project $project)
+    public function update(Request $request, Project $project)
     {
+        $this->validate($request, [
+            'nama_project' => 'required',
+            'nama_lembaga' => 'required',
+            'tanggal_mulai' => 'required|date',
+            'tanggal_selesai' => 'required|date|after:' . $request->input('tanggal_mulai'),
+            'alamat' => 'required'
+        ]);
         $input = $request->all();
 
         $project->fill($input)->save();
