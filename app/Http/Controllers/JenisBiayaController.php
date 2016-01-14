@@ -60,7 +60,7 @@ class JenisBiayaController extends Controller
 
         JenisBiaya::create($input);
 
-        return redirect('/jenis-biaya')->with('success', 'Sukses menambah jenis biaya pengeluaran standard ' . $input['nama_jenis'] . '.');
+        return redirect('/jenis-biaya')->with('success', 'Sukses menambah jenis biaya pengeluaran standar ' . $input['nama_jenis'] . '.');
     }
 
     /**
@@ -102,7 +102,7 @@ class JenisBiayaController extends Controller
 
         $jenisBiaya->fill($input)->save();
 
-        return redirect('/jenis-biaya')->with('success', 'Sukses memperbarui jenis biaya pengeluaran standard ' . $input['nama_jenis'] . '.');
+        return redirect('/jenis-biaya')->with('success', 'Sukses memperbarui jenis biaya pengeluaran standar ' . $input['nama_jenis'] . '.');
     }
 
     /**
@@ -115,7 +115,7 @@ class JenisBiayaController extends Controller
     {
         $jenisBiaya->delete();
 
-        return redirect('/jenis-biaya')->with('success', 'Sukses menghapus jenis biaya pengeluaran standard ' . $jenisBiaya->nama_jenis . '.');
+        return redirect('/jenis-biaya')->with('success', 'Sukses menghapus jenis biaya pengeluaran standar ' . $jenisBiaya->nama_jenis . '.');
     }
 
 }

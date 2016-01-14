@@ -70,11 +70,11 @@ class LpdController extends Controller
         if ($request->input('action') == 'submit') {
             $this->updateSubmit($request, $lpd);
 
-            return redirect('/lpd/submitted')->with('success', 'LPD berhasil di submit.');
+            return redirect('/lpd/submitted')->with('success', 'LPD berhasil diajukan.');
         } elseif ($request->input('action') == 'draft') {
             $this->updateDraft($request, $lpd);
 
-            return redirect('/lpd/draft')->with('success', 'LPD berhasil di simpan sebagai draft.');
+            return redirect('/lpd/draft')->with('success', 'LPD berhasil disimpan sebagai draf.');
         }
     }
 
@@ -201,7 +201,7 @@ class LpdController extends Controller
             $pengeluaran->personel()->attach($personel);
         }
 
-        return redirect('/lpd/' . $pengeluaran->id_lpd . '/edit')->with('success', 'Pengeluaran berhasil diedit');
+        return redirect('/lpd/' . $pengeluaran->id_lpd . '/edit')->with('success', 'Pengeluaran berhasil diperbarui');
     }
 
     public function deletePengeluaran(Pengeluaran $pengeluaran)
@@ -265,7 +265,7 @@ class LpdController extends Controller
 
         if ($user->role == 'finance') {
             if ($lpd->status != 'SUBMIT') {
-                return redirect('/lpd/submitted/all')->with('error', 'Anda tidak dapat melakukan approval terhadap LPD tersebut.');
+                return redirect('/lpd/submitted/all')->with('error', 'Anda tidak dapat melakukan persetujuan terhadap LPD tersebut.');
             }
 
             $lpd->status = $request->input('status');
@@ -279,11 +279,11 @@ class LpdController extends Controller
             ];
 
             ActionHistoryLpd::create($action);
-            return redirect('/lpd/submitted/all')->with('success', 'Status telah terupdate');
+            return redirect('/lpd/submitted/all')->with('success', 'Status telah terbarui');
 
         } elseif ($user->role == 'administration') {
             if ($lpd->status != 'PROCESS PAYMENT' && $lpd->status != 'TAKE PAYMENT') {
-                return redirect('/lpd/submitted/all')->with('error', 'Anda tidak dapat melakukan approval terhadap LPD tersebut.');
+                return redirect('/lpd/submitted/all')->with('error', 'Anda tidak dapat melakukan persetujuan terhadap LPD tersebut.');
             }
 
             if ($lpd->reimburse) {
@@ -303,7 +303,7 @@ class LpdController extends Controller
 
             ActionHistoryLpd::create($action);
 
-            return redirect('/lpd/processed')->with('success', 'Status telah terupdate');
+            return redirect('/lpd/processed')->with('success', 'Status telah terbarui');
         }
     }
 
@@ -351,7 +351,7 @@ class LpdController extends Controller
 
         ActionHistoryLpd::create($action);
 
-        return redirect('/lpd/submitted')->with('success', 'Sukses merecall LPD dengan kode ' . $lpd->kode . '.');
+        return redirect('/lpd/submitted')->with('success', 'Sukses menarik kembali LPD dengan kode ' . $lpd->kode . '.');
     }
 
     public function store(Request $request){

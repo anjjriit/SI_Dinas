@@ -46,11 +46,11 @@ class RpdController extends Controller
         if ($request->input('action') == 'submit') {
             $this->submit($request);
 
-            return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil di submit.');
+            return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil diajukan.');
         } elseif ($request->input('action') == 'draft') {
             $this->saveAsDraft($request);
 
-            return redirect('/rpd/draft')->with('success', 'Pengajuan RPD berhasil di simpan sebagai draft.');
+            return redirect('/rpd/draft')->with('success', 'Pengajuan RPD berhasil disimpan sebagai draf.');
         }
     }
 
@@ -228,14 +228,14 @@ class RpdController extends Controller
             $this->updateSubmit($request, $rpd);
 
             if ($user->role == 'administration' && $rpd->status == 'SUBMIT') {
-                return redirect('/rpd/submitted/all')->with('success', 'Pengajuan RPD berhasil di update.');
+                return redirect('/rpd/submitted/all')->with('success', 'Pengajuan RPD berhasil diperbarui.');
             } else {
-                return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil di submit.');
+                return redirect('/rpd/submitted')->with('success', 'Pengajuan RPD berhasil diajukan.');
             }
         } elseif ($request->input('action') == 'draft') {
             $this->updateDraft($request, $rpd);
 
-            return redirect('/rpd/draft')->with('success', 'Pengajuan RPD berhasil di simpan sebagai draft.');
+            return redirect('/rpd/draft')->with('success', 'Pengajuan RPD berhasil disimpan sebagai draf.');
         }
     }
 
@@ -386,7 +386,7 @@ class RpdController extends Controller
 
         ActionHistoryRpd::create($action);
 
-        return redirect('/rpd/submitted')->with('success', 'Sukses merecall RPD dengan kode ' . $rpd->kode . '.');
+        return redirect('/rpd/submitted')->with('success', 'Sukses menarik kembali RPD dengan kode ' . $rpd->kode . '.');
     }
 
     public function approval(Rpd $rpd)

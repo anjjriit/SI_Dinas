@@ -164,6 +164,6 @@ class PegawaiController extends Controller
         $pegawai->password = bcrypt($request->input('password'));
         $pegawai->save();
 
-        return redirect('/user/password')->with('success', 'Password berhasil diubah.');
+        return redirect('/user/password')->with('success', 'Kata sandi berhasil diubah.');
     }
 }
