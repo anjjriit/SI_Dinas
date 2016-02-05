@@ -9,7 +9,6 @@ use Auth;
 use App\Setting;
 use App\Rpd;
 use App\Pengeluaran;
-use App\Pegawai;
 use App\Lpd;
 use App\ActionHistoryLpd;
 use App\TipePengeluaran;
@@ -131,7 +130,7 @@ class LpdController extends Controller
         ActionHistoryLpd::create($action);
     }
 
-    public function addPengeluaran(Request $request, Lpd $lpd)
+    public function addExpense(Request $request, Lpd $lpd)
     {
         $this->validate($request, [
             'tanggal' => 'required|date',
@@ -164,14 +163,14 @@ class LpdController extends Controller
         return redirect('/lpd/' . $lpd->id . '/edit')->with('success', 'Pengeluaran telah ditambahkan.');
     }
 
-    public function editPengeluaran(Lpd $lpd, Pengeluaran $pengeluaran)
+    public function editExpense(Lpd $lpd, Pengeluaran $pengeluaran)
     {
         $list_tipe = TipePengeluaran::orderBy('nama_kategori', 'asc')->lists('nama_kategori', 'id');
 
         return view('lpd.edit_pengeluaran', compact('lpd', 'pengeluaran', 'list_tipe'));
     }
 
-    public function updatePengeluaran(Request $request, Lpd $lpd, Pengeluaran $pengeluaran)
+    public function updateExpense(Request $request, Lpd $lpd, Pengeluaran $pengeluaran)
     {
         $this->validate($request, [
             'tanggal' => 'required|date',
@@ -204,7 +203,7 @@ class LpdController extends Controller
         return redirect('/lpd/' . $pengeluaran->id_lpd . '/edit')->with('success', 'Pengeluaran berhasil diedit');
     }
 
-    public function deletePengeluaran(Pengeluaran $pengeluaran)
+    public function deleteExpense(Pengeluaran $pengeluaran)
     {
         $pengeluaran->delete();
 

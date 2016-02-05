@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use Auth;
-use App\User;
+use App\Pegawai;
 use Validator;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
