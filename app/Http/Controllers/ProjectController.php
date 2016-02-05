@@ -59,7 +59,7 @@ class ProjectController extends Controller
 
         Project::create($input);
 
-        return redirect('/project')->with('success', 'Sukses menambah project ' . $input['nama_project'] . '.');
+        return redirect('/project')->with('success', 'Sukses menambah proyek ' . $input['nama_project'] . '.');
     }
 
     /**
@@ -105,7 +105,7 @@ class ProjectController extends Controller
 
         $project->fill($input)->save();
 
-        return redirect('/project')->with('success', 'Sukses memperbarui project ' . $input['nama_project'] . '.');
+        return redirect('/project')->with('success', 'Sukses memperbarui proyek ' . $input['nama_project'] . '.');
     }
 
     /**
@@ -118,6 +118,6 @@ class ProjectController extends Controller
     {
         $project->delete();
 
-        return redirect('/project')->with('success', 'Sukses menghapus project ' . $project->nama_project . '.');
+        return redirect('/project')->with('success', 'Sukses menghapus proyek ' . $project->nama_project . '.');
     }
 }

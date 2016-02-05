@@ -103,7 +103,7 @@ class TransportasiController extends Controller
         $input = $request->all();
         $transportasi->fill($input)->save();
 
-        return redirect('/transportasi')->with('success', 'Sukses mengupdate ' . $transportasi->nama_transportasi);
+        return redirect('/transportasi')->with('success', 'Sukses memperbarui ' . $transportasi->nama_transportasi);
     }
 
     public function updateCost(Request $request, Transportasi $transportasi, BiayaTransportasi $biayaTransportasi)
@@ -119,7 +119,7 @@ class TransportasiController extends Controller
 
         $biayaTransportasi->fill($input)->save();
 
-        return redirect('/transportasi/' . $transportasi->id)->with('success', 'Sukses mengupdate biaya ' . $transportasi->nama_transportasi . ' dari ' . $biayaTransportasi->kotaAsal->nama_kota . ' ke ' . $biayaTransportasi->kotaTujuan->nama_kota);
+        return redirect('/transportasi/' . $transportasi->id)->with('success', 'Sukses memperbarui biaya ' . $transportasi->nama_transportasi . ' dari ' . $biayaTransportasi->kotaAsal->nama_kota . ' ke ' . $biayaTransportasi->kotaTujuan->nama_kota);
     }
 
     public function deleteTransportation(Transportasi $transportasi)

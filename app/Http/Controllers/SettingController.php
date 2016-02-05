@@ -25,6 +25,6 @@ class SettingController extends Controller
             $set->fill(['value' => $value])->save();
         }
 
-        return redirect('/setting')->with('success', 'Sukses memperbarui setting');
+        return redirect('/setting')->with('success', 'Sukses memperbarui pengaturan');
     }
 }
