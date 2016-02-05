@@ -274,7 +274,7 @@
                 <div class="modal-content">
                     <div class="modal-header">
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                        <h4 class="modal-title">Traik Kembali {{ $rpd->kode }}</h4>
+                        <h4 class="modal-title">Tarik Kembali {{ $rpd->kode }}</h4>
                     </div>
 
                     {!! Form::open(

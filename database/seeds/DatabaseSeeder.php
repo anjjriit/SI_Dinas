@@ -23,6 +23,7 @@ class DatabaseSeeder extends Seeder
         //$this->call(RpdSeeder::class);
         $this->call(PenginapanTableSeeder::class);
         $this->call(TransportasiTableSeeder::class);
+        $this->call(SettingTableSeeder::class);
 
         Model::reguard();
     }
