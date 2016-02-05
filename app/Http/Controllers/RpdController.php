@@ -372,7 +372,7 @@ class RpdController extends Controller
         }
     }
 
-    public function recall(Rpd $rpd)
+    public function recall(Request $request, Rpd $rpd)
     {
         $rpd->status = 'RECALL';
         $rpd->save();
@@ -381,7 +381,7 @@ class RpdController extends Controller
             'id_rpd' => $rpd->id,
             'nik' => Auth::user()->nik,
             'action' => 'RECALL',
-            'comment' => null
+            'comment' => $request->input('comment')
         ];
 
         ActionHistoryRpd::create($action);

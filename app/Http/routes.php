@@ -27,7 +27,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('rpd/create', 'RpdController@create');
     Route::get('rpd/{rpd}/edit', 'RpdController@editRpd');
     Route::patch('rpd/{rpd}/update', ['as' => 'rpd.update', 'uses' => 'RpdController@updateAction']);
-    Route::post('rpd/recall/{rpd}', 'RpdController@recall');
+    Route::post('rpd/recall/{rpd}', ['as' => 'rpd.recall', 'uses' => 'RpdController@recall']);
 
     // LPD
     Route::get('lpd', 'LpdController@index');
@@ -39,12 +39,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('lpd/submitted', 'LpdController@submitted');
 
     Route::get('lpd/create/{rpd}', 'LpdController@create');
+    Route::post('lpd/recall/{id}', 'LpdController@recall');
     Route::get('lpd/{lpd}/edit', 'LpdController@edit');
     Route::post('lpd/{lpd}', 'LpdController@updateAction');
-    Route::post('lpd/{lpd}/pengeluaran/add', 'LpdController@addPengeluaran');
-    Route::get('lpd/{lpd}/pengeluaran/{pengeluaran}/edit', 'LpdController@editPengeluaran');
-    Route::patch('lpd/{lpd}/pengeluaran/{pengeluaran}', 'LpdController@updatePengeluaran');
-    Route::delete('lpd/pengeluaran/{pengeluaran}', 'LpdController@deletePengeluaran');
+    Route::post('lpd/{lpd}/pengeluaran/add', 'LpdController@addExpense');
+    Route::get('lpd/{lpd}/pengeluaran/{pengeluaran}/edit', 'LpdController@editExpense');
+    Route::patch('lpd/{lpd}/pengeluaran/{pengeluaran}', 'LpdController@updateExpense');
+    Route::delete('lpd/pengeluaran/{pengeluaran}', 'LpdController@deleteExpense');
 
     Route::get('lpd/{lpd}/approval', 'LpdController@approval');
     Route::post('lpd/{lpd}/approval', 'LpdController@submitApproval');

@@ -87,18 +87,8 @@
                                                         <i class="fa fa-share"></i>
                                                     </button>
                                                 @if ($rpd->nik == auth()->user()->nik)
-                                                    {!! Form::open(
-                                                        [
-                                                            'method' => 'POST',
-                                                            'url' => '/rpd/recall/' . $rpd->id,
-                                                            'style' => 'display: inline-block;',
-                                                            'data-nama' => $rpd->kode,
-                                                        ]
+                                                    {!! Form::button('<i class="fa fa-fw fa-refresh"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle-alt' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Tarik Kembali', 'data-toggle' => 'modal', 'data-target' => '#modal-recall-' . $rpd->id]
                                                     ) !!}
-
-                                                        {!! Form::button('<i class="fa fa-fw fa-refresh"></i>', ['type' => 'submit', 'class' => 'btn btn-xs btn-danger delete-button', 'data-toggle' => 'tooltip', 'data-placement' => 'top', 'data-title' => 'Tarik Kembali']
-                                                        ) !!}
-                                                    {!! Form::close() !!}
                                                 @endif
 											</td>
 			    						</tr>
@@ -277,8 +267,44 @@
                     </div>
                 </div>
             </div>
-        </div> <!-- Akhir Bagian Modal detail RPD-->
+        </div>
+
+        <div class="modal fade" id="modal-recall-{{ $rpd->id }}" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                        <h4 class="modal-title">Traik Kembali {{ $rpd->kode }}</h4>
+                    </div>
+
+                    {!! Form::open(
+                        [
+                            'method' => 'POST',
+                            'url' => '/rpd/recall/' . $rpd->id,
+                            'data-nama' => $rpd->kode,
+                        ]
+                    ) !!}
+                        <div class="modal-body">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="form-group">
+                                        {!! Form::label('comment', 'Alasan') !!}
+                                        {!! Form::textarea('comment', null, ['class' => 'form-control', 'rows' => 3]) !!}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Batal</button>
+                            <button type="submit" class="btn btn-danger">Tarik Kembali</button>
+                        </div>
+                    {!! Form::close() !!}
+                </div>
+            </div>
+        </div>
 	@endforeach
+
 
 @endsection
 
@@ -287,33 +313,6 @@
     <script src="/vendor/jquery-confirm/js/jquery-confirm.min.js"></script>
 
     <script>
-        $('.delete-button').on('click', function(event) {
-            event.preventDefault();
-
-            var element = $(this).parent()
-
-            var nama = element.attr('data-nama')
-
-            $.confirm({
-                title: '<i class="fa fa-refresh"></i> Tarik Kembali RPD',
-                content: 'Apakah Anda yakin akan menarik kembali RPD dengan kode <strong>' + nama + '</strong>',
-                confirmButtonClass: 'btn-danger',
-                cancelButtonClass: 'btn-default',
-                cancelButton: 'Tidak',
-                confirmButton: 'Ya',
-                animation: 'top',
-                animationSpeed: 300,
-                animationBounce: 1,
-
-                confirm: function(){
-                    return element.submit()
-                },
-                cancel: function(event){
-                    return;
-                }
-            });
-        })
-
         $('[data-toggle-alt="tooltip"]').tooltip();
     </script>
 

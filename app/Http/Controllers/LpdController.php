@@ -334,18 +334,18 @@ class LpdController extends Controller
         return view('lpd.draft', compact('approvedRpds'));
     }
 
-    public function recall($id)
+    public function recall(Request $request, $id)
     {
-        $lpd = Rpd::findOrFail($id);
+        $lpd = Lpd::findOrFail($id);
 
         $lpd->status = 'RECALL';
         $lpd->save();
 
         $action = [
-            'id_rpd' => $lpd->id,
+            'id_lpd' => $lpd->id,
             'nik' => Auth::user()->nik,
             'action' => 'RECALL',
-            'comment' => null
+            'comment' => $request->input('comment')
         ];
 
         ActionHistoryLpd::create($action);
